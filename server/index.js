@@ -4,12 +4,12 @@ const fs = require('fs');
 const SERVER_PORT = 3002;
 
 const server = http.createServer((req, res) => {
-    
+
   const {url} = req;
   console.log(`Запрошенный адрес: ${url}`);
 
     const filePath = (url === '/') ? '/index.html' : url;
-    fs.readFile(`${__dirname}/../public${filePath}.html`, function(error, data){
+    fs.readFile(`${__dirname}/../public${filePath}`, function(error, data){
               
         if(error){
             res.statusCode = 404;
