@@ -1,0 +1,16 @@
+{
+  "name": "2024_2_therewilibename",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server"
+  },
+  "repository": "git+https://github.com/frontend-park-mail-ru/2024_2_ThereWilIBeName.git",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "debug": "^4.3.7"
+  }
+}
