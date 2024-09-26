@@ -1,4 +1,17 @@
 a {
     display: inline-block;
     margin: 10px;
+    text-decoration: none;
+    color: #555;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+input {
+    display: block;
+    margin: 10px;
+}
+
+.active {
+    font-weight: bold;
+    color: black;
 }
