@@ -4,7 +4,6 @@ export default class Router {
     rootElement = document.body;
     routes = null;
     currentPage = null;
-    rootURL = null;
 
     // Конструктор роутера, в который мы передаём ВСЕ ПУТИ и КОРНЕВОЙ ЭЛЕМЕНТ,
     // относительно которого нужно рисовать
@@ -14,12 +13,9 @@ export default class Router {
         }
         this.routes = routes;
 
-        this.rootPath = window.location.pathname;
-        console.log(this.rootPath);
+        const rootPath = location.pathname;
 
-        this.rootURL = window.location.origin + window.location.pathname;
-
-        this.goto('/home');
+        this.goto(rootPath);
     }
 
     /* Интересная функция, с помощью которой мы ждём, пока всё прогрузится.
@@ -40,6 +36,9 @@ export default class Router {
             this.currentPage.unmount();
         }
         const page = this.routes.find(route => route.path.test(url));
+        if (!page) {
+            throw TypeError('Unknown URL');
+        }
         this.rootElement.innerHTML = page.html;
         await this.#waitForPageLoad();
         page.mount(this);
@@ -47,7 +46,7 @@ export default class Router {
 
         document.getElementById('css-file').href = page.cssPath;
         document.title = page.title;
-        const newUrl = this.rootURL.slice(0,-1) + url;
+        const newUrl = location.origin + url;
         history.pushState(null, null, newUrl);
 
     }

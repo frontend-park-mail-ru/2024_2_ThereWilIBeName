@@ -1,11 +1,12 @@
 import PageHome from './pages/home.js';
 import PageSignIn from './pages/signin.js';
 import PageSignUp from './pages/signup.js';
+import Page404 from './pages/404.js';
 
 // Это просто список всех путей с присущими им свойствами и методами
 const routes = [
     {
-        path: /^\/home/,
+        path: /^(|\/|\/home)$/,
         title: 'ДОСТОПРИМЕЧАТЕЛЬНОСТИ',
         html: PageHome.html,
         mount: PageHome.mount,
@@ -27,7 +28,15 @@ const routes = [
         mount: PageSignUp.mount,
         unmount: PageSignUp.unmount,
         cssPath: 'src/styles/registration.css',
-    }
+    },
+    {
+        path: /.*/,
+        title: '404',
+        html: Page404.html,
+        mount: Page404.mount,
+        unmount: Page404.unmount,
+        cssPath: 'src/styles/registration.css',
+    },
 ];
 
 export default routes;
