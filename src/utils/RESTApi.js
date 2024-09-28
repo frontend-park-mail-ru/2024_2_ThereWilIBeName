@@ -1,14 +1,28 @@
-function request(method, url, body = undefined) {
-    return fetch(url, {
+
+async function request(method, url, body = undefined) {
+    const req = await fetch(url, {
         method: method,
         body: body,
         headers: {
             'Content-Type': 'application/json',
         },
     });
+
+    let data;
+
+    try {
+        data = await req.json();
+    } catch (error) {
+        console.error('Ошибка при парсинге JSON:', error);
+        data = {};
+    }
+
+    return {
+        data: data,
+        status: req.status,
+        ok: req.ok,
+    };
 }
-
-
 
 export default {
 
@@ -20,11 +34,11 @@ export default {
         return request('POST', url, body);
     },
 
-    put(url) {
-        return request('PUT', url);
+    put(url, body) {
+        return request('PUT', url, body);
     },
 
-    delete(url) {
-        return request('DELETE', url);
+    delete(url, body) {
+        return request('DELETE', url, body);
     }
-}
+};
