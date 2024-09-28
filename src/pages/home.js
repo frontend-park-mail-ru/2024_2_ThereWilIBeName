@@ -9,7 +9,7 @@ export default {
                 <button class="login-button" id="signin-button">вход</button>
             </div>
         </header>
-        <body>
+        <main>
             <div class="headline">
                 <h1>Достопримечательности</h1>
             </div>
@@ -38,7 +38,7 @@ export default {
                     <img src="logo.png" alt="Описание изображения 4">
                     <p>Подпись к изображению 4</p>
                 </div>
-        </body>`,
+        </main>`,
 
     mount(router) {
         document.getElementById('signin-button').addEventListener('click', () => {

@@ -10,7 +10,7 @@ export default {
                 <button class="login-button" id="signin-button">вход</button>
             </div>
         </header>
-        <body>
+        <main>
         <div class="reg-block">
             <h2 class="auth_title">Регистрация</h2>
             <form>
@@ -24,7 +24,7 @@ export default {
             </form>
         </div>
         
-        </body>
+        </main>
     `,
 
     mount(router) {
