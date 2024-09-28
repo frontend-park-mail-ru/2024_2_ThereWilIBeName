@@ -4,13 +4,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server"
+    "start": "node server",
+    "lint": "eslint **/*.js --fix"
   },
   "repository": "git+https://github.com/frontend-park-mail-ru/2024_2_ThereWilIBeName.git",
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
-    "debug": "^4.3.7"
+  "devDependencies": {
+    "@eslint/js": "^9.11.1",
+    "eslint": "^9.11.1",
+    "globals": "^15.9.0",
+    "express": "^4.21.0"
   }
 }
