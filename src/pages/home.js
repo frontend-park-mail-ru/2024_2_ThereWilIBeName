@@ -22,8 +22,8 @@ export default {
         <script id="gallery-item-template" type="text/x-handlebars-template">
             {{#each attractions}}
                 <div class="gallery-item">
-                    <img src="{{path}}" alt="{{title}}">
-                    <p>{{title}}</p>
+                    <img src="{{path}}" alt="{{name}}">
+                    <p>{{name}}</p>
                 </div>
             {{/each}}
         </script>`,
@@ -34,7 +34,7 @@ export default {
         });
 
         const attractionsResponse = await Api.getAttractions();
-        const attractions = attractionsResponse.data.images;
+        const attractions = attractionsResponse.data;
 
         const templateSource = document.getElementById('gallery-item-template').innerHTML;
         const template = Handlebars.compile(templateSource);
