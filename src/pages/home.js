@@ -22,7 +22,7 @@ export default {
         <script id="gallery-item-template" type="text/x-handlebars-template">
             {{#each attractions}}
                 <div class="gallery-item">
-                    <img src="{{path}}" alt="{{name}}">
+                    <img src="{{images}}" alt="{{name}}">
                     <p>{{name}}</p>
                 </div>
             {{/each}}

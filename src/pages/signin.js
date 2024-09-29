@@ -23,7 +23,7 @@ export default {
                     <label class="remember-me">Запомнить меня</label>
                 </div>
                 <button class="auth-button">Войти</button>
-            <div class="auth-title" id="signupButton" style="font-size: 18px; margin-top: 15px;">СОЗДАТЬ АККАУНТ</div>
+                <div class="auth-title" id="signupButton" style="font-size: 18px; margin-top: 15px;">СОЗДАТЬ АККАУНТ</div>
             </form>
         </div>
     </main>
@@ -57,7 +57,7 @@ export default {
 
             const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
             if (!passwordRegex.test(formPassword)) {
-                errorMessage.textContent = 'Пароль должен включать как минимум 1 букву и символ'
+                errorMessage.textContent = 'Должна быть как минимум 1 буква и цифра';
                 errorMessage.style.opacity = 1;
                 return;
             }
