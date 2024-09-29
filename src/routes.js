@@ -4,7 +4,7 @@ import PageSignUp from './pages/signup.js';
 import Page404 from './pages/404.js';
 
 // Это просто список всех путей с присущими им свойствами и методами
-const routes = [
+export default [
     {
         path: /^(|\/|\/home)$/,
         title: 'ДОСТОПРИМЕЧАТЕЛЬНОСТИ',
@@ -38,5 +38,3 @@ const routes = [
         cssPath: 'src/styles/registration.css',
     },
 ];
-
-export default routes;

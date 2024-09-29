@@ -46,7 +46,6 @@ export default {
             const formUsername = document.getElementById('login').value;
             const formPassword = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
-            errorMessage.style.opacity = 0;
             errorMessage.textContent = '';
 
             if (formPassword.length < 8) {
@@ -63,7 +62,7 @@ export default {
             }
 
             const jsonData = JSON.stringify({
-                username: formUsername,
+                login: formUsername,
                 password: formPassword,
             });
 

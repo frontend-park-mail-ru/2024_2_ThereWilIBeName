@@ -1,4 +1,4 @@
-import Api from "../utils/Api.js";
+import Api from '../utils/Api.js';
 
 export default {
     html:
@@ -42,7 +42,6 @@ export default {
             const formPassword = document.getElementById('password').value;
             const formConfirmPassword = document.getElementById('confirm-password').value;
             const errorMessage = document.getElementById('error-message');
-            errorMessage.style.opacity = 0;
             errorMessage.textContent = '';
 
             if (formPassword.length < 8) {
@@ -65,7 +64,7 @@ export default {
             }
 
             const jsonData = JSON.stringify({
-                username: formUsername,
+                login: formUsername,
                 password: formPassword,
             });
 

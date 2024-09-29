@@ -1,13 +1,11 @@
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 
-
 export default [
-    {languageOptions:{
-
-        globals: {...globals.browser},
-
-    }},
+    {
+        languageOptions: {
+            globals: {...globals.browser},
+        }},
     pluginJs.configs.recommended,
     {
         ignores: ['server/*']
@@ -38,6 +36,8 @@ export default [
             'quotes': ['error', 'single'],
             //пробел перед блоком кода функций
             'space-before-blocks': ['error', 'always'],
+            //пустая строка
+            'eol-last': ['error', 'always'],
         }
     }
 ];
