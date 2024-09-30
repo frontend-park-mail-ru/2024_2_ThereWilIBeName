@@ -23,16 +23,7 @@ export default {
             <ul class="gallery" id="gallery">
                 
             </ul>
-             
-        </main>
-        <script id="gallery-item-template" type="text/x-handlebars-template">
-            {{#each attractions}}
-                <li class="gallery-item">
-                    <img src="{{image}}" alt="{{name}}">
-                    <p>{{name}}</p>
-                </li>
-            {{/each}}
-        </script>`,
+        </main>`,
 
     /**
      * Функция для монтирования страницы и привязки логики к элементам.
@@ -51,7 +42,13 @@ export default {
         const attractionsResponse = await Api.getAttractions();
         const attractions = attractionsResponse.data;
 
-        const templateSource = document.getElementById('gallery-item-template').innerHTML;
+        const templateSource = `
+            {{#each attractions}}
+                <li class="gallery-item">
+                    <img src="{{image}}" alt="{{name}}">
+                    <p>{{name}}</p>
+                </li>
+            {{/each}}`;
         const template = Handlebars.compile(templateSource);
 
         document.getElementById('gallery').innerHTML = template({attractions});

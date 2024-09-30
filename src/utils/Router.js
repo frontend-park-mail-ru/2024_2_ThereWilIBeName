@@ -64,6 +64,5 @@ export default class Router {
         document.title = page.title;
         const newUrl = location.origin + url;
         history.pushState(null, null, newUrl);
-
     }
 }
