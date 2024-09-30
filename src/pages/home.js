@@ -12,19 +12,19 @@ export default {
         </header>
         <main>
             <div class="headline">
-                <h1>Достопримечательности</h1>
+                Достопримечательности
             </div>
-            <div class="gallery" id="gallery">
+            <ul class="gallery" id="gallery">
                 
-            </div>
+            </ul>
              
         </main>
         <script id="gallery-item-template" type="text/x-handlebars-template">
             {{#each attractions}}
-                <div class="gallery-item">
+                <il class="gallery-item">
                     <img src="{{image}}" alt="{{name}}">
                     <p>{{name}}</p>
-                </div>
+                </il>
             {{/each}}
         </script>`,
 

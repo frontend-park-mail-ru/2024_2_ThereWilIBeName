@@ -11,7 +11,7 @@ export default {
         <main>
         <div class="reg-block">
             <div class="auth-text" id ="backButton">←</div>
-            <h2 class="auth-title">Регистрация</h2>
+            <div class="auth-title">Регистрация</div>
             <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
             <form id="signupForm">
                 <label class="auth-text" for="login">Логин</label>

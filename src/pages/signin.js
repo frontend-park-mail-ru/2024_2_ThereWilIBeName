@@ -11,7 +11,7 @@ export default {
     <main>
         <div class="auth-block">
             <div class="back-button" id="backButton">←</div>
-            <h2 class="auth-title">Вход</h2>
+            <div class="auth-title">Вход</div>
             <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
             <form id="signinForm">
                 <label class="auth-text" for="login">Логин</label>
