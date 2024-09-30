@@ -16,6 +16,8 @@ async function request(method, url, body = undefined) {
             headers: {
                 'Content-Type': 'application/json',
             },
+            mode: 'cors',
+            credentials: 'include',
         });
     } catch (error) {
         console.error('Ошибка fetch:', error);

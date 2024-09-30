@@ -1,7 +1,6 @@
 import RESTApi from './RESTApi.js';
 
 export default {
-
     /**
      * Асинхронная функция для получения списка достопримечательностей с сервера.
      *
@@ -14,7 +13,6 @@ export default {
             status: res.status,
             ok: res.ok,
         };
-
     },
 
     getUser() {
