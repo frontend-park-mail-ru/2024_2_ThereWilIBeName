@@ -1,6 +1,12 @@
 import Api from '../utils/Api.js';
 
 export default {
+    /**
+     * HTML-шаблон для страницы входа (авторизации) с формой ввода логина и пароля,
+     * кнопкой для регистрации и навигационными элементами.
+     *
+     * @type {string}
+     */
     html:
         `
     <header class="header">
@@ -10,13 +16,13 @@ export default {
     </header>
     <main>
         <div class="auth-block">
-            <div class="back-button" id="backButton">←</div>
-            <h2 class="auth-title">Вход</h2>
+            <div class="back-button" id="back-button">←</div>
+            <div class="auth-title">Вход</div>
             <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
-            <form id="signinForm">
-                <label class="auth-text" for="login">Логин</label>
+            <form id="signin-form">
+                <label class="auth-text">Логин</label>
                 <input class="border" id="login" name="login" required>
-                <label class="auth-text" for="password">Пароль</label>
+                <label class="auth-text">Пароль</label>
                 <input class="border" type = "password" id="password" name="password" required>
                 <div class="remember-me-container">
                     <input class="custom-check-icon" type="checkbox" id="remember-me" name="remember-me">
@@ -29,6 +35,13 @@ export default {
     </main>
     `,
 
+    /**
+     * Функция для монтирования страницы авторизации, привязки событий
+     * к элементам страницы и обработки формы входа.
+     *
+     * @param {Router} router - Экземпляр роутера для управления переходами между страницами.
+     * @returns {Promise<void>} Промис, который выполняется после монтирования страницы.
+     */
     async mount(router) {
         document.getElementById('signupButton').addEventListener('click', () => {
             router.goto('/signup');
@@ -36,11 +49,11 @@ export default {
         document.getElementById('homeLogo').addEventListener('click', () => {
             router.goto('/home');
         });
-        document.getElementById('backButton').addEventListener('click', () => {
+        document.getElementById('back-button').addEventListener('click', () => {
             router.goto('/home');
         });
 
-        document.getElementById('signinForm').addEventListener('submit', async (event) => {
+        document.getElementById('signin-form').addEventListener('submit', async (event) => {
             event.preventDefault();
 
             const formUsername = document.getElementById('login').value;
@@ -64,6 +77,10 @@ export default {
         });
     },
 
+    /**
+     * Функция размонтирования страницы.
+     * Используется для очистки состояния или удаления обработчиков событий при переходе на другую страницу.
+     */
     unmount() {
 
     },

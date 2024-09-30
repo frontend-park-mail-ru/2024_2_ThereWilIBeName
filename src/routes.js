@@ -3,7 +3,22 @@ import PageSignIn from './pages/signin.js';
 import PageSignUp from './pages/signup.js';
 import Page404 from './pages/404.js';
 
-// Это просто список всех путей с присущими им свойствами и методами
+/**
+ * @typedef {Object} Route
+ * @property {RegExp} path - Регулярное выражение, соответствующее пути URL.
+ * @property {string} title - Название страницы, которое будет отображаться в заголовке вкладки браузера.
+ * @property {function(): string} html - Функция, возвращающая HTML-контент, который будет вставлен на страницу.
+ * @property {function(): void} mount - Функция, выполняемая при монтировании страницы.
+ * @property {function(): void} unmount - Функция, выполняемая при размонтировании страницы.
+ * @property {string} cssPath - Путь к файлу CSS-стилей, которые применяются к данной странице.
+ */
+/**
+ * Это массив маршрутов для приложения.
+ * Каждый объект в массиве описывает маршрут, включающий путь, заголовок страницы, HTML-контент,
+ * функции монтирования и размонтирования, а также путь к соответствующему CSS-файлу.
+ *
+ * @type {Route[]}
+ */
 export default [
     {
         path: /^(|\/|\/home)$/,
@@ -11,7 +26,7 @@ export default [
         html: PageHome.html,
         mount: PageHome.mount,
         unmount: PageHome.unmount,
-        cssPath: 'src/styles/index.css',
+        cssPath: '',
     },
     {
         path: /^\/signin/,
@@ -35,6 +50,6 @@ export default [
         html: Page404.html,
         mount: Page404.mount,
         unmount: Page404.unmount,
-        cssPath: 'src/styles/registration.css',
+        cssPath: 'src/styles/404.css',
     },
 ];

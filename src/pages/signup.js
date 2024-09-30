@@ -1,6 +1,12 @@
 import Api from '../utils/Api.js';
 
 export default {
+    /**
+     * HTML-шаблон для страницы регистрации, содержащий форму ввода логина, пароля и подтверждения пароля,
+     * а также навигационные элементы для перехода на другие страницы.
+     *
+     * @type {string}
+     */
     html:
         `
         <header class="header">
@@ -10,15 +16,15 @@ export default {
         </header>
         <main>
         <div class="reg-block">
-            <div class="auth-text" id ="backButton">←</div>
-            <h2 class="auth-title">Регистрация</h2>
+            <div class="back-button" id ="back-button">←</div>
+            <div class="auth-title">Регистрация</div>
             <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
-            <form id="signupForm">
-                <label class="auth-text" for="login">Логин</label>
+            <form id="signup-form">
+                <label class="auth-text">Логин</label>
                 <input class="border" id="login" name="login" >
-                <label class="auth-text" for="password">Пароль</label>
+                <label class="auth-text">Пароль</label>
                 <input class="border" type="password" id="password" name="password">
-                <label class="auth-text" for="confirm-password">Подтверждение пароля</label>
+                <label class="auth-text">Подтверждение пароля</label>
                 <input class="border" type="password" id="confirm-password" name="confirm-password">
                 <button class="auth-button">Зарегистрироваться</button>
             </form>
@@ -27,15 +33,22 @@ export default {
         </main>
     `,
 
+    /**
+     * Функция для монтирования страницы регистрации, которая связывает элементы интерфейса
+     * с обработчиками событий и обрабатывает процесс регистрации пользователя.
+     *
+     * @param {Router} router - Экземпляр роутера для управления навигацией между страницами.
+     * @returns {Promise<void>} Промис, который выполняется после монтирования страницы.
+     */
     async mount(router) {
-        document.getElementById('backButton').addEventListener('click', () => {
+        document.getElementById('back-button').addEventListener('click', () => {
             router.goto('/signin');
         });
         document.getElementById('home-logo').addEventListener('click', () => {
             router.goto('/home');
         });
 
-        document.getElementById('signupForm').addEventListener('submit', async (event) => {
+        document.getElementById('signup-form').addEventListener('submit', async (event) => {
             event.preventDefault();
 
             const formUsername = document.getElementById('login').value;
@@ -67,6 +80,10 @@ export default {
         });
     },
 
+    /**
+     * Функция размонтирования страницы.
+     * Используется для очистки состояния или удаления обработчиков событий при переходе на другую страницу.
+     */
     unmount() {
 
     },
