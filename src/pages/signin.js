@@ -63,17 +63,22 @@ export default {
             if (formPassword.length < 8) {
                 errorMessage.textContent = 'Пароль должен быть не короче 8 символов';
                 errorMessage.classList.add('visible');
-                return;
             }
 
             const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
             if (!passwordRegex.test(formPassword)) {
                 errorMessage.textContent = 'Должна быть как минимум 1 буква и цифра';
                 errorMessage.classList.add('visible');
-                return;
             }
 
-            await Api.postSignin(formUsername, formPassword);
+            const res = await Api.postSignin(formUsername, formPassword);
+
+            if (!res.ok) {
+                errorMessage.textContent = 'Неверный логин или пароль';
+                errorMessage.classList.add('visible');
+            } else {
+                router.goto('/home');
+            }
         });
     },
 

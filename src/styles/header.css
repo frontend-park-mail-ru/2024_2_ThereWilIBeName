@@ -6,6 +6,7 @@
 }
 .logo-image {
     height: 80px;
+    cursor: pointer;
 }
 .auth {
     display: flex;

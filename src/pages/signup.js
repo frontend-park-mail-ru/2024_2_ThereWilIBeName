@@ -75,8 +75,14 @@ export default {
                 return;
             }
 
-            await Api.postSignup(formUsername, formPassword);
-            router.goto('/signin');
+            const res = await Api.postSignup(formUsername, formPassword);
+
+            if (!res.ok) {
+                errorMessage.textContent = 'Логин уже занят';
+                errorMessage.classList.add('visible');
+            } else {
+                router.goto('/signin');
+            }
         });
     },
 
