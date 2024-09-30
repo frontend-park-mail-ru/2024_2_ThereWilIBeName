@@ -1,0 +1,11 @@
+.warning {
+    padding: 7px 25px;
+    color: #F4F4F4;
+    font-family: 'IBM Plex Mono', sans-serif;
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.warn-message {
+    text-align: center;
+}
