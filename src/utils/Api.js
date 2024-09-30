@@ -17,6 +17,16 @@ export default {
 
     },
 
+    getUser() {
+        let ok = false;
+        if (document.cookie) {
+            ok = true;
+        }
+        return {
+            ok
+        };
+    },
+
     /**
      * Асинхронная функция для авторизации пользователя (входа в систему).
      *

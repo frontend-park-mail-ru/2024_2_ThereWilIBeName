@@ -47,7 +47,7 @@ export default {
         document.getElementById('signin-button').addEventListener('click', () => {
             router.goto('/signin');
         });
-        if (localStorage.getItem('token')) {
+        if (Api.getUser()) {
             document.getElementById('signin-button').textContent = 'Сменить пользователя';
         }
 
