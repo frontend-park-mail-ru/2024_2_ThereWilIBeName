@@ -1,49 +1,45 @@
+import Api from '../utils/Api.js';
 
 export default {
     html:
         `<header class="header">
             <div class="logo" >
-                <img src="./src/static/logo.png" alt="Логотип" class="logo-image">
+                <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
             </div>
             <div class="auth">
-                <button class="login-button" id="signin-button">вход</button>
+                <button class="login-button" id="signinButton">вход</button>
             </div>
         </header>
         <main>
             <div class="headline">
                 <h1>Достопримечательности</h1>
             </div>
-            <div class="gallery">
+            <div class="gallery" id="gallery">
+                
+            </div>
+             
+        </main>
+        <script id="gallery-item-template" type="text/x-handlebars-template">
+            {{#each attractions}}
                 <div class="gallery-item">
-                    <img src="logo.png" alt="Описание изображения 1">
-                    <p>Подпись к изображению 1</p>
+                    <img src="{{image}}" alt="{{name}}">
+                    <p>{{name}}</p>
                 </div>
-                <div class="gallery-item">
-                    <img src="logo.png" alt="Описание изображения 2">
-                    <p>Подпись к изображению 2</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="logo.png" alt="Описание изображения 3">
-                    <p>Подпись к изображению 3</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="logo.png" alt="Описание изображения 4">
-                    <p>Подпись к изображению 4</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="logo.png" alt="Описание изображения 4">
-                    <p>Подпись к изображению 4</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="logo.png" alt="Описание изображения 4">
-                    <p>Подпись к изображению 4</p>
-                </div>
-        </main>`,
+            {{/each}}
+        </script>`,
 
-    mount(router) {
-        document.getElementById('signin-button').addEventListener('click', () => {
+    async mount(router) {
+        document.getElementById('signinButton').addEventListener('click', () => {
             router.goto('/signin');
         });
+
+        const attractionsResponse = await Api.getAttractions();
+        const attractions = attractionsResponse.data;
+
+        const templateSource = document.getElementById('gallery-item-template').innerHTML;
+        const template = Handlebars.compile(templateSource);
+
+        document.getElementById('gallery').innerHTML = template({attractions});
     },
 
     unmount() {

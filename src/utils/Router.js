@@ -2,7 +2,7 @@
 // Роутер, с помощью которого мы путешествуем по миру ссылок
 export default class Router {
     rootElement = document.body;
-    routes = null;
+    routes = [];
     currentPage = null;
 
     // Конструктор роутера, в который мы передаём ВСЕ ПУТИ и КОРНЕВОЙ ЭЛЕМЕНТ,
@@ -35,6 +35,7 @@ export default class Router {
         if (this.currentPage) {
             this.currentPage.unmount();
         }
+        // Отрисовка страницы
         const page = this.routes.find(route => route.path.test(url));
         if (!page) {
             throw TypeError('Unknown URL');
@@ -44,6 +45,7 @@ export default class Router {
         page.mount(this);
         this.currentPage = page;
 
+        // Изменение url
         document.getElementById('css-file').href = page.cssPath;
         document.title = page.title;
         const newUrl = location.origin + url;

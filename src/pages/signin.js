@@ -1,36 +1,66 @@
+import Api from '../utils/Api.js';
 
 export default {
     html:
         `
     <header class="header">
         <div class="logo">
-            <img src="logo.png" alt="Логотип" class="logo-image">
-        </div>
-        <div class="auth">
-            <button class="login-button" id="signup-button">регистрация</button>
+            <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="homeLogo">
         </div>
     </header>
     <main>
         <div class="auth-block">
-            <h2 class="auth_title">Авторизация</h2>
-            <form>
+            <div class="back-button" id="backButton">←</div>
+            <h2 class="auth-title">Вход</h2>
+            <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
+            <form id="signinForm">
                 <label class="auth-text" for="login">Логин</label>
-                <input class="border" id="login" name="login" placeholder="Введите логин">
+                <input class="border" id="login" name="login" required>
                 <label class="auth-text" for="password">Пароль</label>
-                <input  class="border" id="password" name="password" placeholder="Введите пароль">
+                <input class="border" type = "password" id="password" name="password" required>
                 <div class="remember-me-container">
                     <input class="custom-check-icon" type="checkbox" id="remember-me" name="remember-me">
                     <label class="remember-me">Запомнить меня</label>
                 </div>
                 <button class="auth-button">Войти</button>
+                <div class="auth-signup-button" id="signupButton">СОЗДАТЬ АККАУНТ</div>
             </form>
         </div>
     </main>
     `,
 
-    mount(router) {
-        document.getElementById('signup-button').addEventListener('click', () => {
+    async mount(router) {
+        document.getElementById('signupButton').addEventListener('click', () => {
             router.goto('/signup');
+        });
+        document.getElementById('homeLogo').addEventListener('click', () => {
+            router.goto('/home');
+        });
+        document.getElementById('backButton').addEventListener('click', () => {
+            router.goto('/home');
+        });
+
+        document.getElementById('signinForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formUsername = document.getElementById('login').value;
+            const formPassword = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            if (formPassword.length < 8) {
+                errorMessage.textContent = 'Пароль должен быть не короче 8 символов';
+                errorMessage.classList.add('visible');
+                return;
+            }
+
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            if (!passwordRegex.test(formPassword)) {
+                errorMessage.textContent = 'Должна быть как минимум 1 буква и цифра';
+                errorMessage.classList.add('visible');
+                return;
+            }
+
+            await Api.postSignin(formUsername, formPassword);
         });
     },
 

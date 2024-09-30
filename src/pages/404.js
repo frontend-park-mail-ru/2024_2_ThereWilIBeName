@@ -3,7 +3,7 @@ export default {
     html:
         `<header class="header">
             <div class="logo" >
-                <img src="./src/static/logo.png" alt="Логотип" class="logo-image">
+                <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
             </div>
             <div class="auth">
                 <button class="login-button" id="signin-button">вход</button>
