@@ -35,7 +35,7 @@ export default class Router {
         if (this.currentPage) {
             this.currentPage.unmount();
         }
-        //Отрисовка страницы
+        // Отрисовка страницы
         const page = this.routes.find(route => route.path.test(url));
         if (!page) {
             throw TypeError('Unknown URL');
@@ -45,7 +45,7 @@ export default class Router {
         page.mount(this);
         this.currentPage = page;
 
-        //Изменение url
+        // Изменение url
         document.getElementById('css-file').href = page.cssPath;
         document.title = page.title;
         const newUrl = location.origin + url;

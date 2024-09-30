@@ -12,7 +12,7 @@ export default {
         <div class="reg-block">
             <div class="auth-text" id ="backButton">←</div>
             <h2 class="auth-title">Регистрация</h2>
-            <div class="error-message" id="error-message"></div>
+            <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
             <form id="signupForm">
                 <label class="auth-text" for="login">Логин</label>
                 <input class="border" id="login" name="login" >
@@ -42,33 +42,27 @@ export default {
             const formPassword = document.getElementById('password').value;
             const formConfirmPassword = document.getElementById('confirm-password').value;
             const errorMessage = document.getElementById('error-message');
-            errorMessage.textContent = '';
 
             if (formPassword.length < 8) {
                 errorMessage.textContent = 'Пароль должен быть не короче 8 символов';
-                errorMessage.style.opacity = 1;
+                errorMessage.classList.add('visible');
                 return;
             }
 
             const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
             if (!passwordRegex.test(formPassword)) {
                 errorMessage.textContent = 'Должна быть как минимум 1 буква и цифра';
-                errorMessage.style.opacity = 1;
+                errorMessage.classList.add('visible');
                 return;
             }
 
             if (formPassword !== formConfirmPassword) {
                 errorMessage.textContent = 'Пароли не совпадают';
-                errorMessage.style.opacity = 1;
+                errorMessage.classList.add('visible');
                 return;
             }
 
-            const jsonData = JSON.stringify({
-                login: formUsername,
-                password: formPassword,
-            });
-
-            await Api.postSignup(jsonData);
+            await Api.postSignup(formUsername, formPassword);
             router.goto('/signin');
         });
     },

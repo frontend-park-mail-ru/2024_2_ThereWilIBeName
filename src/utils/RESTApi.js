@@ -1,17 +1,27 @@
-
 async function request(method, url, body = undefined) {
-    const req = await fetch(url, {
-        method: method,
-        body: body,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
+    let res;
+    try {
+        res = await fetch(url, {
+            method: method,
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    } catch (error) {
+        console.error('Ошибка fetch:', error);
+        return {
+            data: {},
+            status: -1,
+            ok: false,
+        };
+    }
+
 
     let data;
 
     try {
-        data = await req.json();
+        data = await res.json();
     } catch (error) {
         console.error('Ошибка при парсинге JSON:', error);
         data = {};
@@ -19,8 +29,8 @@ async function request(method, url, body = undefined) {
 
     return {
         data: data,
-        status: req.status,
-        ok: req.ok,
+        status: res.status,
+        ok: res.ok,
     };
 }
 

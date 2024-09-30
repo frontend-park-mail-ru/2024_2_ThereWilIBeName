@@ -58,6 +58,10 @@ body {
     font-size: 14px;
 }
 
+.error-message.visible {
+    opacity: 1;
+}
+
 .auth-block {
     background-color: #232323;
     overflow: hidden;

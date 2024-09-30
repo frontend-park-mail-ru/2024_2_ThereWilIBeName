@@ -2,6 +2,7 @@
     box-sizing: border-box;
 }
 body {
+    font-family: "IBM Plex Mono", sans-serif;
     margin: 0;
     height: 100%;
     min-height: 100vh;
@@ -50,6 +51,8 @@ body {
 
 .error-message {
     opacity: 0;
+    transition: opacity 0.3s;
+    visibility: hidden;
     background-color: rgba(179, 0, 0, 0.5);
     color: #f4f4f4;
     padding: 5px;
@@ -57,6 +60,11 @@ body {
     border-radius: 5px;
     text-align: center;
     font-size: 14px;
+}
+
+.error-message.visible {
+    opacity: 1;
+    visibility: visible;
 }
 
 .auth-block {
@@ -69,7 +77,7 @@ body {
     margin: 40px auto;
 }
 
-.auth-title {
+.auth-signup-button, .auth-title {
     margin-top: 0px;
     margin-bottom: 5px;
     font-weight: 900;
@@ -82,27 +90,52 @@ body {
     background-clip: text;
 }
 
+.auth-signup-button {
+    font-size: 18px;
+    margin-top: 15px;
+    cursor: pointer;
+    border-top: 2px solid #333;
+    padding: 15px;
+    display: block;
+    transition: letter-spacing 0.2s ease, background-position 0.3s ease;
+}
+
+.auth-signup-button:hover {
+    letter-spacing: 2px;
+    background-position: 0 0;
+}
+
 .auth-block label {
     display: block;
     margin-bottom: 10px;
 }
 
 .border {
-    all: unset;
     display: block;
+    color: #333;
+    letter-spacing: 1px;
     width: 90%;
     height: 30px;
     padding: 10px;
     border-radius: 15px;
     margin: 10px auto;
     background: linear-gradient(to bottom right, #F58080, #F2E2A9) 50% 50% / 100vw 100vh;
+    transition: background-position 0.3s ease;
 }
 
-.auth-text {
+.border:focus {
+    background-position: 0;
+}
+
+.auth-text, .back-button {
     color: white;
     font-family: "IBM Plex Mono", sans-serif;
     font-size: 17px;
     padding: 0px 20px;
+}
+
+.back-button {
+    cursor: pointer;
 }
 
 .remember-me-container {
@@ -140,6 +173,7 @@ body {
     border: 0px;
     margin-right: 8px;
     background-color: #575757;
+    cursor: pointer;
 }
 .custom-check-icon::after {
     position: absolute;

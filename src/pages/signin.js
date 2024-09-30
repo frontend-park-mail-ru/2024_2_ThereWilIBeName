@@ -10,9 +10,9 @@ export default {
     </header>
     <main>
         <div class="auth-block">
-            <div class="auth-text" id="backButton">←</div>
+            <div class="back-button" id="backButton">←</div>
             <h2 class="auth-title">Вход</h2>
-            <div class="error-message" id="error-message"></div>
+            <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
             <form id="signinForm">
                 <label class="auth-text" for="login">Логин</label>
                 <input class="border" id="login" name="login" required>
@@ -23,7 +23,7 @@ export default {
                     <label class="remember-me">Запомнить меня</label>
                 </div>
                 <button class="auth-button">Войти</button>
-                <div class="auth-title" id="signupButton" style="font-size: 18px; margin-top: 15px;">СОЗДАТЬ АККАУНТ</div>
+                <div class="auth-signup-button" id="signupButton">СОЗДАТЬ АККАУНТ</div>
             </form>
         </div>
     </main>
@@ -46,27 +46,21 @@ export default {
             const formUsername = document.getElementById('login').value;
             const formPassword = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
-            errorMessage.textContent = '';
 
             if (formPassword.length < 8) {
                 errorMessage.textContent = 'Пароль должен быть не короче 8 символов';
-                errorMessage.style.opacity = 1;
+                errorMessage.classList.add('visible');
                 return;
             }
 
             const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
             if (!passwordRegex.test(formPassword)) {
                 errorMessage.textContent = 'Должна быть как минимум 1 буква и цифра';
-                errorMessage.style.opacity = 1;
+                errorMessage.classList.add('visible');
                 return;
             }
 
-            const jsonData = JSON.stringify({
-                login: formUsername,
-                password: formPassword,
-            });
-
-            await Api.postSignin(jsonData);
+            await Api.postSignin(formUsername, formPassword);
         });
     },
 

@@ -74,19 +74,19 @@ export default {
         };
     },
 
-    async postSignin(body) {
-        const res = await RESTApi.post('/api/v1/auth/login', body);
+    async postSignin(username, password) {
+        const res = await RESTApi.post('/api/v1/auth/login', {login: username, password});
         return {
-            data: res.data,
+            data: {},
             status: res.status,
             ok: res.ok,
         };
     },
 
-    async postSignup(body) {
-        const res = await RESTApi.post('/api/v1/auth/signup', body);
+    async postSignup(username, password) {
+        const res = await RESTApi.post('/api/v1/auth/signup', {login: username, password});
         return {
-            data: res.data,
+            data: {},
             status: res.status,
             ok: res.ok,
         };
