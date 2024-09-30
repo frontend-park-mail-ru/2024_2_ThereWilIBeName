@@ -13,7 +13,7 @@ export default {
                 <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
             </div>
             <div class="auth">
-                <button class="login-button" id="signinButton">вход</button>
+                <button class="login-button" id="signin-button">вход</button>
             </div>
         </header>
         <main>
@@ -43,9 +43,13 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после успешного монтирования страницы.
      */
     async mount(router) {
-        document.getElementById('signinButton').addEventListener('click', () => {
+
+        document.getElementById('signin-button').addEventListener('click', () => {
             router.goto('/signin');
         });
+        if (localStorage.getItem('token')) {
+            document.getElementById('signin-button').textContent = 'Сменить пользователя';
+        }
 
         const attractionsResponse = await Api.getAttractions();
         const attractions = attractionsResponse.data;
