@@ -47,9 +47,6 @@ export default {
         document.getElementById('signin-button').addEventListener('click', () => {
             router.goto('/signin');
         });
-        if (Api.getUser()) {
-            document.getElementById('signin-button').textContent = 'Сменить пользователя';
-        }
 
         const attractionsResponse = await Api.getAttractions();
         const attractions = attractionsResponse.data;
@@ -58,6 +55,10 @@ export default {
         const template = Handlebars.compile(templateSource);
 
         document.getElementById('gallery').innerHTML = template({attractions});
+
+        if (Api.getUser()) {
+            document.getElementById('signin-button').textContent = 'Сменить пользователя';
+        }
     },
 
     /**
