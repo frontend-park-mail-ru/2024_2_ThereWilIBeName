@@ -60,17 +60,6 @@ export default {
             const formPassword = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
 
-            if (formPassword.length < 8) {
-                errorMessage.textContent = 'Пароль должен быть не короче 8 символов';
-                errorMessage.classList.add('visible');
-            }
-
-            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-            if (!passwordRegex.test(formPassword)) {
-                errorMessage.textContent = 'Должна быть как минимум 1 буква и цифра';
-                errorMessage.classList.add('visible');
-            }
-
             const res = await Api.postSignin(formUsername, formPassword);
 
             if (!res.ok) {
