@@ -15,13 +15,12 @@ export default {
         };
     },
 
-    getUser() {
-        let ok = false;
-        if (document.cookie) {
-            ok = true;
-        }
+    async getUser() {
+        const res = await RESTApi.get('/api/v1/users/me');
         return {
-            ok
+            data: res.data,
+            status: res.status,
+            ok: res.ok,
         };
     },
 

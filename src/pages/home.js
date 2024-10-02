@@ -1,4 +1,5 @@
 import Api from '../utils/Api.js';
+import User from '../utils/user.js';
 
 export default {
     /**
@@ -53,8 +54,15 @@ export default {
 
         document.getElementById('gallery').innerHTML = template({attractions});
 
-        if (Api.getUser()) {
-            document.getElementById('signin-button').textContent = 'Сменить пользователя';
+        const currentUser = await Api.getUser();
+
+        if (currentUser.data) {
+            User.setUsername(currentUser.data.login);
+            User.setId(currentUser.data.id);
+        }
+
+        if (User.getUsername() !== null) {
+            document.getElementById('signin-button').textContent = User.getUsername();
         }
     },
 
