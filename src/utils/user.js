@@ -4,27 +4,27 @@ class User {
             return User.instance;
         }
 
-        this.username = null;
-        this.id = null;
+        this._username = '';
+        this._id = '';
 
         User.instance = this;
         return this;
     }
 
-    getUsername() {
-        return this.username;
+    get username() {
+        return this._username;
     }
 
-    getId() {
-        return this.id;
+    get id() {
+        return this._id;
     }
 
-    setUsername(username) {
-        this.username = username;
+    set username(value) {
+        this._username = value;
     }
 
-    setId(id) {
-        this.password = id;
+    set id(value) {
+        this._id = value;
     }
 }
 

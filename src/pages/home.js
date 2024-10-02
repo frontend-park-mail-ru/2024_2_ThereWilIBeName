@@ -56,13 +56,13 @@ export default {
 
         const currentUser = await Api.getUser();
 
-        if (currentUser.data) {
-            User.setUsername(currentUser.data.login);
-            User.setId(currentUser.data.id);
+        if (currentUser.data.login) {
+            User.username = currentUser.data.login;
+            User.id = currentUser.data.id;
         }
 
-        if (User.getUsername() !== null) {
-            document.getElementById('signin-button').textContent = User.getUsername();
+        if (User.username !== '') {
+            document.getElementById('signin-button').textContent = User.username;
         }
     },
 
