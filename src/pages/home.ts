@@ -1,6 +1,7 @@
 import Api from '../utils/Api';
 import User from '../utils/user';
 import Router from '../utils/Router';
+import Handlebars from "handlebars";
 
 export default {
     /**
@@ -57,8 +58,8 @@ export default {
 
         const currentUser = await Api.getUser();
 
-        if (currentUser.data.login) {
-            User.username = currentUser.data.login;
+        if (currentUser.data.username) {
+            User.username = currentUser.data.username;
             User.id = currentUser.data.id;
         }
 

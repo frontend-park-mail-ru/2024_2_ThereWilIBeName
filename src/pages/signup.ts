@@ -73,9 +73,9 @@ export default {
                 return;
             }
 
-            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            const passwordRegex = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*_-]?).{8,}$/;
             if (!passwordRegex.test(formPassword)) {
-                errorMessage.textContent = 'Должна быть как минимум 1 буква и цифра';
+                errorMessage.textContent = 'Пароль должен включать букву, цифру и символ';
                 errorMessage.classList.add('visible');
                 return;
             }
