@@ -1,4 +1,5 @@
-import Api from '../utils/Api.js';
+import Api from '../utils/Api';
+import Router from '../utils/Router';
 
 export default {
     /**
@@ -40,21 +41,31 @@ export default {
      * @param {Router} router - Экземпляр роутера для управления навигацией между страницами.
      * @returns {Promise<void>} Промис, который выполняется после монтирования страницы.
      */
-    async mount(router) {
-        document.getElementById('back-button').addEventListener('click', () => {
+    async mount(router: Router): Promise<void> {
+        const backButton = document.getElementById('back-button') as HTMLButtonElement;
+        backButton.addEventListener('click', () => {
             router.goto('/signin');
         });
-        document.getElementById('home-logo').addEventListener('click', () => {
+        const homeLogo = document.getElementById('home-logo') as HTMLElement;
+        homeLogo.addEventListener('click', () => {
             router.goto('/home');
         });
+        const signupForm = document.getElementById('signup-form') as HTMLElement;
+        const errorMessage = document.getElementById('error-message') as HTMLElement;
 
-        document.getElementById('signup-form').addEventListener('submit', async (event) => {
+        signupForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formUsername = document.getElementById('login').value;
-            const formPassword = document.getElementById('password').value;
-            const formConfirmPassword = document.getElementById('confirm-password').value;
-            const errorMessage = document.getElementById('error-message');
+            const formUsername = (document.getElementById('login') as HTMLInputElement).value;
+            const formPassword = (document.getElementById('password') as HTMLInputElement).value;
+            const formConfirmPassword = (document.getElementById('confirm-password') as HTMLInputElement).value;
+
+            const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            if (!emailRegex.test(formUsername)) {
+                errorMessage.textContent = 'Неверный email';
+                errorMessage.classList.add('visible');
+                return;
+            }
 
             if (formPassword.length < 8) {
                 errorMessage.textContent = 'Пароль должен быть не короче 8 символов';

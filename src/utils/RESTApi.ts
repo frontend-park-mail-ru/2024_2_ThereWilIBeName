@@ -7,12 +7,12 @@
  * @param {Object} [body] - Тело запроса, которое будет преобразовано в JSON (для методов POST, PUT, DELETE).
  * @returns {Promise<{data: Object, status: number, ok: boolean}>} Объект с данными ответа, статусом и флагом успеха.
  */
-async function request(method, url, body = undefined) {
-    let res;
+async function request<T>(method: string, url: string, body: Record<string, any> | undefined = undefined): Promise<{ data: T; status: number; ok: boolean }> {
+    let res: Response;
     try {
         res = await fetch(url, {
             method: method,
-            body: JSON.stringify(body),
+            body: body ? JSON.stringify(body) : undefined,
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -22,20 +22,20 @@ async function request(method, url, body = undefined) {
     } catch (error) {
         console.error('Ошибка fetch:', error);
         return {
-            data: {},
+            data: {} as T,
             status: -1,
             ok: false,
         };
     }
 
 
-    let data;
+    let data: T;
 
     try {
         data = await res.json();
     } catch (error) {
         console.error('Ошибка при парсинге JSON:', error);
-        data = {};
+        data = {} as T;
     }
 
     return {
@@ -48,7 +48,7 @@ async function request(method, url, body = undefined) {
 /**
  * Объект с методами для выполнения HTTP-запросов: GET, POST, PUT, DELETE.
  */
-export default {
+const http = {
 
     /**
      * Выполняет GET-запрос
@@ -56,8 +56,8 @@ export default {
      * @param {string} url - URL, по которому нужно выполнить GET-запрос.
      * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ от сервера.
      */
-    get(url) {
-        return request('GET', url);
+    get<T>(url: string): Promise<{ data: T; status: number, ok: boolean }> {
+        return request<T>('GET', url);
     },
 
     /**
@@ -67,8 +67,8 @@ export default {
      * @param {Object} body - Данные для отправки в теле запроса.
      * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ от сервера.
      */
-    post(url, body) {
-        return request('POST', url, body);
+    post<T>(url: string, body: Record<string, any>): Promise<{ data: T; status: number; ok: boolean }> {
+        return request<T>('POST', url, body);
     },
 
     /**
@@ -78,8 +78,8 @@ export default {
      * @param {Object} body - Данные для отправки в теле запроса.
      * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ от сервера.
      */
-    put(url, body) {
-        return request('PUT', url, body);
+    put<T>(url: string, body: Record<string, any>): Promise<{ data: T; status: number; ok: boolean }> {
+        return request<T>('PUT', url, body);
     },
 
     /**
@@ -89,7 +89,9 @@ export default {
      * @param {Object} [body] - Данные для отправки в теле запроса (необязательно).
      * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ от сервера.
      */
-    delete(url, body) {
-        return request('DELETE', url, body);
+    delete<T>(url: string, body: Record<string, any>): Promise<{ data: T; status: number; ok: boolean }> {
+        return request<T>('DELETE', url, body);
     }
 };
+
+export default http;

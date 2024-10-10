@@ -1,4 +1,4 @@
-
+import Router from '../utils/Router'
 export default {
     /**
      * HTML-шаблон страницы ошибки 404, отображающей сообщение об ошибке и кнопку для перехода на главную страницу.
@@ -25,8 +25,9 @@ export default {
      *
      * @param {Router} router - Экземпляр роутера для управления навигацией.
      */
-    mount(router) {
-        document.getElementById('error-button').addEventListener('click', () => {
+    async mount(router: Router): Promise<void> {
+        const errorButton = document.getElementById('error-button')
+        errorButton!.addEventListener('click', () => {
             router.goto('/home');
         });
     },

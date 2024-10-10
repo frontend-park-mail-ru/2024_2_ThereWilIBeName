@@ -1,5 +1,6 @@
-import Api from '../utils/Api.js';
-import User from '../utils/user.js';
+import Api from '../utils/Api';
+import User from '../utils/user';
+import Router from '../utils/Router';
 
 export default {
     /**
@@ -34,10 +35,10 @@ export default {
      * @param {Router} router - Экземпляр роутера для управления навигацией между страницами.
      * @returns {Promise<void>} Промис, который выполняется после успешного монтирования страницы.
      */
-    async mount(router) {
-
-        document.getElementById('signin-button').addEventListener('click', () => {
-            router.goto('/signin');
+    async mount(router: Router): Promise<void> {
+        const signinButton = document.getElementById('signin-button')
+        signinButton!.addEventListener('click', () => {
+            router.goto('/signin')
         });
 
         const attractionsResponse = await Api.getAttractions();
@@ -52,7 +53,7 @@ export default {
             {{/each}}`;
         const template = Handlebars.compile(templateSource);
 
-        document.getElementById('gallery').innerHTML = template({attractions});
+        document.getElementById('gallery')!.innerHTML = template({attractions});
 
         const currentUser = await Api.getUser();
 
@@ -62,7 +63,7 @@ export default {
         }
 
         if (User.username !== '') {
-            document.getElementById('signin-button').textContent = User.username;
+            signinButton!.textContent = User.username;
         }
     },
 

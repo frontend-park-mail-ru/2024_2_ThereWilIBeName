@@ -1,4 +1,5 @@
-import Api from '../utils/Api.js';
+import Api from '../utils/Api';
+import Router from '../utils/Router'
 
 export default {
     /**
@@ -11,7 +12,7 @@ export default {
         `
     <header class="header">
         <div class="logo">
-            <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="homeLogo">
+            <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
         </div>
     </header>
     <main>
@@ -29,7 +30,7 @@ export default {
                     <label class="remember-me">Запомнить меня</label>
                 </div>
                 <button class="auth-button">Войти</button>
-                <div class="auth-signup-button" id="signupButton">СОЗДАТЬ АККАУНТ</div>
+                <div class="auth-signup-button" id="signup-button">СОЗДАТЬ АККАУНТ</div>
             </form>
         </div>
     </main>
@@ -42,23 +43,27 @@ export default {
      * @param {Router} router - Экземпляр роутера для управления переходами между страницами.
      * @returns {Promise<void>} Промис, который выполняется после монтирования страницы.
      */
-    async mount(router) {
-        document.getElementById('signupButton').addEventListener('click', () => {
+    async mount(router: Router): Promise<void> {
+        const signupButton = document.getElementById('signup-button') as HTMLButtonElement;
+        signupButton!.addEventListener('click', () => {
             router.goto('/signup');
         });
-        document.getElementById('homeLogo').addEventListener('click', () => {
+        const homeLogo = document.getElementById('home-logo') as HTMLElement;
+        homeLogo!.addEventListener('click', () => {
             router.goto('/home');
         });
-        document.getElementById('back-button').addEventListener('click', () => {
+        const backButton = document.getElementById('back-button') as HTMLButtonElement;
+        backButton!.addEventListener('click', () => {
             router.goto('/home');
         });
+        const signinForm = document.getElementById('signin-form') as HTMLElement;
+        const errorMessage = document.getElementById('error-message') as HTMLElement;
 
-        document.getElementById('signin-form').addEventListener('submit', async (event) => {
+        signinForm!.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formUsername = document.getElementById('login').value;
-            const formPassword = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
+            const formUsername = (document.getElementById('login') as HTMLInputElement).value;
+            const formPassword = (document.getElementById('password') as HTMLInputElement).value;
 
             const res = await Api.postSignin(formUsername, formPassword);
 

@@ -1,4 +1,4 @@
-import RESTApi from './RESTApi.js';
+import RESTApi from './RESTApi';
 
 export default {
     /**
@@ -6,8 +6,8 @@ export default {
      *
      * @returns {Promise<{data: Object[], status: number, ok: boolean}>} Ответ сервера с данными достопримечательностей, статусом и флагом успеха.
      */
-    async getAttractions() {
-        const res = await RESTApi.get('/api/v1/places');
+    async getAttractions(): Promise<{ data: Record<string, any>[]; status: number; ok: boolean }> {
+        const res = await RESTApi.get<Record<string, any>[]>('/api/v1/places');
         return {
             data: res.data,
             status: res.status,
@@ -15,8 +15,8 @@ export default {
         };
     },
 
-    async getUser() {
-        const res = await RESTApi.get('/api/v1/users/me');
+    async getUser(): Promise<{ data: Record<string, any>[]; status: number; ok: boolean }> {
+        const res = await RESTApi.get<Record<string, any>[]>('/api/v1/users/me');
         return {
             data: res.data,
             status: res.status,
@@ -31,10 +31,10 @@ export default {
      * @param {string} password - Пароль пользователя.
      * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ сервера с результатом авторизации, статусом и флагом успеха.
      */
-    async postSignin(username, password) {
+    async postSignin(username: string, password: string): Promise< { data: Record<string, any>[]; status: number; ok: boolean }> {
         const res = await RESTApi.post('/api/v1/auth/login', {login: username, password});
         return {
-            data: {},
+            data: {} as Record<string, any>[],
             status: res.status,
             ok: res.ok,
         };
@@ -47,10 +47,10 @@ export default {
      * @param {string} password - Пароль пользователя.
      * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ сервера с результатом регистрации, статусом и флагом успеха.
      */
-    async postSignup(username, password) {
+    async postSignup(username: string, password: string): Promise< { data: Record<string, any>[]; status: number; ok: boolean }> {
         const res = await RESTApi.post('/api/v1/auth/signup', {login: username, password});
         return {
-            data: {},
+            data: {} as Record<string, any>[],
             status: res.status,
             ok: res.ok,
         };

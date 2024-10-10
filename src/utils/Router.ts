@@ -1,11 +1,13 @@
+import { Route } from '../routes';
+
 /**
  * Класс Router управляет навигацией по приложению с использованием истории браузера и
  * монтированием/размонтированием страниц в зависимости от URL.
  */
 export default class Router {
-    rootElement = document.body;
-    routes = [];
-    currentPage = null;
+    private rootElement: HTMLElement = document.body;
+    private routes: Route[] = [];
+    private currentPage: Route | null = null;
 
     /**
      * Создает экземпляр роутера.
@@ -13,14 +15,11 @@ export default class Router {
      * @param {Route[]} routes - Массив объектов маршрутов, которые определяют, какие страницы показывать для каких путей.
      * @param {string} [rootElementId] - Опциональный ID корневого элемента, куда будут рендериться страницы. По умолчанию используется `document.body`.
      */
-    constructor(routes, rootElementId = undefined) {
-        if (rootElementId) {
-            this.rootElement = document.getElementById(rootElementId);
-        }
+    constructor(routes: Route[], rootElementId?: string) {
+        this.rootElement = rootElementId ? document.getElementById(rootElementId) as HTMLElement : document.body;
         this.routes = routes;
 
         const rootPath = location.pathname;
-
         this.goto(rootPath);
     }
 
@@ -31,7 +30,7 @@ export default class Router {
      *
      * @returns {Promise<void>} Промис, который выполняется, когда страница готова к дальнейшим действиям.
      */
-    #waitForPageLoad() {
+    #waitForPageLoad(): Promise<void> {
         return new Promise(resolve => {
             requestAnimationFrame(() => resolve());
         });
@@ -45,7 +44,7 @@ export default class Router {
      * @returns {Promise<void>} Промис, который выполняется, когда страница завершила монтирование.
      * @throws {TypeError} Если URL не соответствует ни одному маршруту.
      */
-    async goto(url) {
+    async goto(url: string): Promise<void> {
         if (this.currentPage) {
             this.currentPage.unmount();
         }
@@ -60,9 +59,10 @@ export default class Router {
         this.currentPage = page;
 
         // Изменение url
-        document.getElementById('css-file').href = page.cssPath;
+        const cssFileElement = document.getElementById('css-file') as HTMLLinkElement;
+        cssFileElement.href = page.cssPath;
         document.title = page.title;
         const newUrl = location.origin + url;
-        history.pushState(null, null, newUrl);
+        history.pushState(null, '', newUrl);
     }
 }
