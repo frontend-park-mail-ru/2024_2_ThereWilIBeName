@@ -1,4 +1,4 @@
-import RESTApi from './RESTApi';
+import RESTApi from './RESTApi.js';
 
 type JsonResponse<T> = {
     data: T,
@@ -75,13 +75,12 @@ export default {
     /**
      * Асинхронная функция для авторизации пользователя (входа в систему).
      *
-     * @param {string} username - Имя пользователя для авторизации.
      * @param {string} email - Email пользователя.
      * @param {string} password - Пароль пользователя.
      * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ сервера с результатом авторизации, статусом и флагом успеха.
      */
-    async postSignin(username: string, email: string, password: string): Promise<JsonResponse<Login>> {
-        const res = await RESTApi.post('/api/v1/auth/login', {login: username, email, password});
+    async postSignin(email: string, password: string): Promise<JsonResponse<Login>> {
+        const res = await RESTApi.post('/api/v1/auth/login', {email, password});
         return {
             data: {
                 //что-то возвращают

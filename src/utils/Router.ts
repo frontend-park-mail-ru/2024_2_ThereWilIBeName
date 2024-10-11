@@ -1,4 +1,4 @@
-import { Route } from '../routes';
+import { Route } from '../routes.js';
 
 /**
  * Класс Router управляет навигацией по приложению с использованием истории браузера и

@@ -1,8 +1,8 @@
-import PageHome from './pages/home';
-import PageSignIn from './pages/signin';
-import PageSignUp from './pages/signup';
-import Page404 from './pages/404';
-import Router from './utils/Router'
+import PageHome from './pages/home.js';
+import PageSignIn from './pages/signin.js';
+import PageSignUp from './pages/signup.js';
+import Page404 from './pages/404.js';
+import Router from './utils/Router.js'
 
 export interface Route {
     path: RegExp;

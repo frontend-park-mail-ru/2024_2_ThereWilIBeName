@@ -1,5 +1,5 @@
-import Api from '../utils/Api';
-import Router from '../utils/Router';
+import Api from '../utils/Api.js';
+import Router from '../utils/Router.js';
 
 export default {
     /**
@@ -23,6 +23,8 @@ export default {
             <form id="signup-form">
                 <label class="auth-text">Логин</label>
                 <input class="border" id="login" name="login" >
+                <label class="auth-text">Логин</label>
+                <input class="border" id="email" name="email" >
                 <label class="auth-text">Пароль</label>
                 <input class="border" type="password" id="password" name="password">
                 <label class="auth-text">Подтверждение пароля</label>
@@ -57,11 +59,12 @@ export default {
             event.preventDefault();
 
             const formUsername = (document.getElementById('login') as HTMLInputElement).value;
+            const formEmail = (document.getElementById('email') as HTMLInputElement).value;
             const formPassword = (document.getElementById('password') as HTMLInputElement).value;
             const formConfirmPassword = (document.getElementById('confirm-password') as HTMLInputElement).value;
 
             const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-            if (!emailRegex.test(formUsername)) {
+            if (!emailRegex.test(formEmail)) {
                 errorMessage.textContent = 'Неверный email';
                 errorMessage.classList.add('visible');
                 return;
@@ -86,7 +89,7 @@ export default {
                 return;
             }
 
-            const res = await Api.postSignup(formUsername, formPassword);
+            const res = await Api.postSignup(formUsername, formEmail, formPassword);
 
             if (!res.ok) {
                 errorMessage.textContent = 'Логин уже занят';

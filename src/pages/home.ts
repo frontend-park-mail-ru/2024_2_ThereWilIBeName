@@ -1,7 +1,6 @@
-import Api from '../utils/Api';
-import User from '../utils/user';
-import Router from '../utils/Router';
-import Handlebars from "handlebars";
+import Api from '../utils/Api.js';
+import User from '../utils/user.js';
+import Router from '../utils/Router.js';
 
 export default {
     /**

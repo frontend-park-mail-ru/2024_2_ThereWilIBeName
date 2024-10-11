@@ -1,4 +1,4 @@
-import Router from '../utils/Router'
+import Router from '../utils/Router.js'
 export default {
     /**
      * HTML-шаблон страницы ошибки 404, отображающей сообщение об ошибке и кнопку для перехода на главную страницу.

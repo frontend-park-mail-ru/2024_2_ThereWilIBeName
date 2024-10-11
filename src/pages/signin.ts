@@ -1,5 +1,5 @@
-import Api from '../utils/Api';
-import Router from '../utils/Router'
+import Api from '../utils/Api.js';
+import Router from '../utils/Router.js'
 
 export default {
     /**
@@ -21,8 +21,8 @@ export default {
             <div class="auth-title">Вход</div>
             <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
             <form id="signin-form">
-                <label class="auth-text">Логин</label>
-                <input class="border" id="login" name="login" required>
+                <label class="auth-text">Email</label>
+                <input class="border" id="email" name="email" required>
                 <label class="auth-text">Пароль</label>
                 <input class="border" type = "password" id="password" name="password" required>
                 <div class="remember-me-container">
@@ -62,13 +62,13 @@ export default {
         signinForm!.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formUsername = (document.getElementById('login') as HTMLInputElement).value;
+            const formEmail = (document.getElementById('email') as HTMLInputElement).value;
             const formPassword = (document.getElementById('password') as HTMLInputElement).value;
 
-            const res = await Api.postSignin(formUsername, formPassword);
+            const res = await Api.postSignin(formEmail, formPassword);
 
             if (!res.ok) {
-                errorMessage.textContent = 'Неверный логин или пароль';
+                errorMessage.textContent = 'Неверный email или пароль';
                 errorMessage.classList.add('visible');
             } else {
                 router.goto('/home');
