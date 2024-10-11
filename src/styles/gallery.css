@@ -47,16 +47,6 @@
     width: 100%;
 }
 
-.auth-block {
-    background-color: #232323;
-    overflow: hidden;
-    padding: 20px;
-    border-radius: 30px;
-    width: 500px;
-    height: 400px;
-    margin: 40px auto;
-}
-
 .auth_title {
     margin-top: 0;
     font-weight: bold;
@@ -77,31 +67,6 @@
     color: white;
     font-size: 20px;
     padding: 0px 40px;
-}
-
-.remember-me-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    color: white;
-    padding: 0px 32px;
-}
-
-.remember-me {
-    margin: 10px 8px;
-    font-size: 17px;
-}
-
-.auth-button {
-    display: block;
-    margin: 15px auto;
-    background-color: #575757;
-    color: #fff;
-    padding: 10px 35px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 25px;
 }
 
 .custom-check-icon {
@@ -126,12 +91,14 @@
     opacity: 1;
 }
 
-.reg-block {
-    background-color: #232323;
-    overflow: hidden;
-    padding: 20px;
-    border-radius: 30px;
-    width: 500px;
-    height: 445px;
-    margin: 40px auto;
+.profile-button {
+    display: block;
+    margin: 15px auto;
+    background-color: #00000090;
+    color: #fff;
+    padding: 10px 35px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 25px;
 }

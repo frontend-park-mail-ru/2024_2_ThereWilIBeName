@@ -16,6 +16,13 @@ export default {
             </div>
             <div class="auth">
                 <button class="login-button" id="signin-button">вход</button>
+                <div class="user-menu" id="user-menu" style="display: none;">
+                    <button class="profile-button" id="user-button"></button>
+                    <div class="dropdown" id="dropdown" style="display: none;">
+                        <button id="profile-button">Профиль</button>
+                        <button id="logout-button">Выход</button>
+                    </div>
+                </div>
             </div>
         </header>
         <main>
@@ -36,6 +43,29 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после успешного монтирования страницы.
      */
     async mount(router: Router): Promise<void> {
+        const userMenu = document.getElementById('user-menu')!;
+        const userButton = document.getElementById('user-button')!;
+        const dropdown = document.getElementById('dropdown')!;
+        const profileButton = document.getElementById('profile-button')!;
+        const logoutButton = document.getElementById('logout-button')!;
+
+        // Обработчик клика по кнопке с именем пользователя для открытия меню
+        userButton.addEventListener('click', () => {
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Переход на страницу профиля
+        profileButton.addEventListener('click', () => {
+            router.goto('/profile');
+        });
+
+        // Обработчик для выхода из аккаунта
+        logoutButton.addEventListener('click', async () => {
+            // await Api.logout(); // Логика выхода
+            location.reload();  // Перезагрузить страницу после выхода
+        });
+
+
         const signinButton = document.getElementById('signin-button')
         signinButton!.addEventListener('click', () => {
             router.goto('/signin')
@@ -55,7 +85,13 @@ export default {
 
         document.getElementById('gallery')!.innerHTML = template({attractions});
 
-        const currentUser = await Api.getUser();
+        // const currentUser = await Api.getUser();
+        const currentUser = {
+            data: {
+                username: 'test',
+                id: '0',
+            }
+        }
 
         if (currentUser.data.username) {
             User.username = currentUser.data.username;
@@ -63,7 +99,9 @@ export default {
         }
 
         if (User.username !== '') {
-            signinButton!.textContent = User.username;
+            signinButton!.textContent = 'Сменить пользователя';
+            userButton.textContent = User.username;
+            userMenu.style.display = 'block';
         }
     },
 
