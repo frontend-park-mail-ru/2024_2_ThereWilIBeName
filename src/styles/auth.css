@@ -4,7 +4,7 @@
     padding: 20px;
     border-radius: 30px;
     width: 400px;
-    height: 480px;
+    height: fit-content;
     margin: 40px auto;
 }
 

@@ -23,7 +23,7 @@ export default {
             <form id="signup-form">
                 <label class="auth-text">Логин</label>
                 <input class="border" id="login" name="login" >
-                <label class="auth-text">Логин</label>
+                <label class="auth-text">Email</label>
                 <input class="border" id="email" name="email" >
                 <label class="auth-text">Пароль</label>
                 <input class="border" type="password" id="password" name="password">
