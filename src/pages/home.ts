@@ -78,16 +78,15 @@ export default {
 
         const currentUser = await Api.getUser();
 
-        if (currentUser.data.username) {
-            User.username = currentUser.data.username;
-            User.id = currentUser.data.id;
+        if (!currentUser.ok) {
+            return;
         }
 
-        if (User.username !== '') {
-            signinButton.textContent = 'Сменить пользователя';
-            userButton.textContent = User.username;
-            userNameDiv.textContent = User.username;
-        }
+        User.username = currentUser.data.username;
+        User.id = currentUser.data.id;
+        signinButton.textContent = 'Сменить пользователя';
+        userButton.textContent = User.username;
+        userNameDiv.textContent = User.username;
     },
 
     unmount() {
