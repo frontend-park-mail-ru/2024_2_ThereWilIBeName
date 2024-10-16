@@ -31,12 +31,6 @@
     margin: 20px 0;
 }
 
-.side-menu ul li a {
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
-}
-
 .user-name {
     padding: 7px;
     color: #F4F4F4;
@@ -57,4 +51,34 @@
 
 .side-menu.open {
     right: 0;
+}
+
+.background-menu {
+    position: fixed;
+    pointer-events: none;
+    inset: 0;
+    background-color: #00000070;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.side-menu.open .background-menu {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.user-button {
+    padding: 7px 0px;
+    margin-right: 15px;
+    background-color: #232323;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.user-button.show {
+    padding: 7px 25px;
 }
