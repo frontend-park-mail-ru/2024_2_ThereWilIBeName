@@ -42,18 +42,20 @@ export default {
     async getAttractions(): Promise<JsonResponse<Attraction>> {
         const res = await RESTApi.get('/api/v1/places');
         return {
-            data: {
-                id: String(res.data.id),
-                name: String(res.data.name),
-                image: String(res.data.image),
-                description: String(res.data.description),
-                rating: Number(res.data.rating),
-                numberOfReviews: Number(res.data.numberOfReviews),
-                address: String(res.data.address),
-                city: String(res.data.city),
-                phoneNumber: String(res.data.phoneNumber),
-                category: String(res.data.category),
-            },
+            data: res.data.map( (attraction: any) =>
+                ({
+                    id: String(attraction.id),
+                    name: String(attraction.name),
+                    image: String(attraction.image),
+                    description: String(attraction.description),
+                    rating: Number(attraction.rating),
+                    numberOfReviews: Number(attraction.numberOfReviews),
+                    address: String(attraction.address),
+                    city: String(attraction.city),
+                    phoneNumber: String(attraction.phoneNumber),
+                    category: String(attraction.category),
+                })
+            ),
             status: res.status,
             ok: res.ok,
         };
