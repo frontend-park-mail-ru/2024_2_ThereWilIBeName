@@ -25,10 +25,10 @@ export default {
                 <input class="border" id="email" name="email" required>
                 <label class="auth-text">Пароль</label>
                 <input class="border" type = "password" id="password" name="password" required>
-                <div class="remember-me-container">
-                    <input class="custom-check-icon" type="checkbox" id="remember-me" name="remember-me">
-                    <label class="remember-me">Запомнить меня</label>
-                </div>
+<!--                <div class="remember-me-container">-->
+<!--                    <input class="custom-check-icon" type="checkbox" id="remember-me" name="remember-me">-->
+<!--                    <label class="remember-me">Запомнить меня</label>-->
+<!--                </div>-->
                 <button class="auth-button">Войти</button>
                 <div class="auth-signup-button" id="signup-button">СОЗДАТЬ АККАУНТ</div>
             </form>
@@ -70,9 +70,9 @@ export default {
             if (!res.ok) {
                 errorMessage.textContent = 'Неверный email или пароль';
                 errorMessage.classList.add('visible');
-            } else {
-                router.goto('/home');
+                return;
             }
+            router.goto('/home');
         });
     },
 

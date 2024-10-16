@@ -94,9 +94,16 @@ export default {
             if (!res.ok) {
                 errorMessage.textContent = 'Логин уже занят';
                 errorMessage.classList.add('visible');
-            } else {
-                router.goto('/signin');
+                return;
             }
+
+            const resSignIn = await Api.postSignin(formEmail, formPassword);
+
+            if (!resSignIn.ok) {
+                router.goto('/signin');
+                return;
+            }
+            router.goto('/home');
         });
     },
 
