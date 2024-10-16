@@ -2,24 +2,23 @@ import PageHome from './pages/home.js';
 import PageSignIn from './pages/signin.js';
 import PageSignUp from './pages/signup.js';
 import Page404 from './pages/404.js';
+import Router from './utils/Router.js'
+
+export interface Route {
+    path: RegExp;
+    title: string;
+    html: string;
+    mount: (router: Router) => Promise<void>;
+    unmount: () => void;
+    cssPath: string;
+}
 
 /**
- * @typedef {Object} Route
- * @property {RegExp} path - Регулярное выражение, соответствующее пути URL.
- * @property {string} title - Название страницы, которое будет отображаться в заголовке вкладки браузера.
- * @property {function(): string} html - Функция, возвращающая HTML-контент, который будет вставлен на страницу.
- * @property {function(): void} mount - Функция, выполняемая при монтировании страницы.
- * @property {function(): void} unmount - Функция, выполняемая при размонтировании страницы.
- * @property {string} cssPath - Путь к файлу CSS-стилей, которые применяются к данной странице.
- */
-/**
- * Это массив маршрутов для приложения.
- * Каждый объект в массиве описывает маршрут, включающий путь, заголовок страницы, HTML-контент,
+ * Массив маршрутов для приложения.
+ * Каждый объект описывает маршрут, включающий путь, заголовок страницы, HTML-контент,
  * функции монтирования и размонтирования, а также путь к соответствующему CSS-файлу.
- *
- * @type {Route[]}
  */
-export default [
+const routes: Route[] = [
     {
         path: /^(|\/|\/home)$/,
         title: 'ДОСТОПРИМЕЧАТЕЛЬНОСТИ',
@@ -53,3 +52,5 @@ export default [
         cssPath: 'src/styles/404.css',
     },
 ];
+
+export default routes;

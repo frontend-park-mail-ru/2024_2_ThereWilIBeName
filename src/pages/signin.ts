@@ -1,4 +1,5 @@
 import Api from '../utils/Api.js';
+import Router from '../utils/Router.js'
 
 export default {
     /**
@@ -11,7 +12,7 @@ export default {
         `
     <header class="header">
         <div class="logo">
-            <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="homeLogo">
+            <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
         </div>
     </header>
     <main>
@@ -20,16 +21,16 @@ export default {
             <div class="auth-title">Вход</div>
             <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
             <form id="signin-form">
-                <label class="auth-text">Логин</label>
-                <input class="border" id="login" name="login" required>
+                <label class="auth-text">Email</label>
+                <input class="border" id="email" name="email" required>
                 <label class="auth-text">Пароль</label>
                 <input class="border" type = "password" id="password" name="password" required>
-                <div class="remember-me-container">
-                    <input class="custom-check-icon" type="checkbox" id="remember-me" name="remember-me">
-                    <label class="remember-me">Запомнить меня</label>
-                </div>
+<!--                <div class="remember-me-container">-->
+<!--                    <input class="custom-check-icon" type="checkbox" id="remember-me" name="remember-me">-->
+<!--                    <label class="remember-me">Запомнить меня</label>-->
+<!--                </div>-->
                 <button class="auth-button">Войти</button>
-                <div class="auth-signup-button" id="signupButton">СОЗДАТЬ АККАУНТ</div>
+                <div class="auth-signup-button" id="signup-button">СОЗДАТЬ АККАУНТ</div>
             </form>
         </div>
     </main>
@@ -42,43 +43,36 @@ export default {
      * @param {Router} router - Экземпляр роутера для управления переходами между страницами.
      * @returns {Promise<void>} Промис, который выполняется после монтирования страницы.
      */
-    async mount(router) {
-        document.getElementById('signupButton').addEventListener('click', () => {
+    async mount(router: Router): Promise<void> {
+        const signupButton = document.getElementById('signup-button') as HTMLButtonElement;
+        signupButton!.addEventListener('click', () => {
             router.goto('/signup');
         });
-        document.getElementById('homeLogo').addEventListener('click', () => {
+        const homeLogo = document.getElementById('home-logo') as HTMLElement;
+        homeLogo!.addEventListener('click', () => {
             router.goto('/home');
         });
-        document.getElementById('back-button').addEventListener('click', () => {
+        const backButton = document.getElementById('back-button') as HTMLButtonElement;
+        backButton!.addEventListener('click', () => {
             router.goto('/home');
         });
+        const signinForm = document.getElementById('signin-form') as HTMLElement;
+        const errorMessage = document.getElementById('error-message') as HTMLElement;
 
-        document.getElementById('signin-form').addEventListener('submit', async (event) => {
+        signinForm!.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formUsername = document.getElementById('login').value;
-            const formPassword = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
+            const formEmail = (document.getElementById('email') as HTMLInputElement).value;
+            const formPassword = (document.getElementById('password') as HTMLInputElement).value;
 
-            if (formPassword.length < 8) {
-                errorMessage.textContent = 'Пароль должен быть не короче 8 символов';
-                errorMessage.classList.add('visible');
-            }
-
-            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-            if (!passwordRegex.test(formPassword)) {
-                errorMessage.textContent = 'Должна быть как минимум 1 буква и цифра';
-                errorMessage.classList.add('visible');
-            }
-
-            const res = await Api.postSignin(formUsername, formPassword);
+            const res = await Api.postSignin(formEmail, formPassword);
 
             if (!res.ok) {
-                errorMessage.textContent = 'Неверный логин или пароль';
+                errorMessage.textContent = 'Неверный email или пароль';
                 errorMessage.classList.add('visible');
-            } else {
-                router.goto('/home');
+                return;
             }
+            router.goto('/home');
         });
     },
 

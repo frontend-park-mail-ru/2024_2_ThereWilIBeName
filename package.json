@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "lint": "eslint **/*.js --fix"
+    "lint": "eslint **/*.js --fix",
+    "build": "tsc"
   },
   "repository": "git+https://github.com/frontend-park-mail-ru/2024_2_ThereWilIBeName.git",
   "author": "",

@@ -1,13 +1,3 @@
-.auth-block {
-    background-color: #232323;
-    overflow: hidden;
-    padding: 20px;
-    border-radius: 30px;
-    width: 400px;
-    height: 800px;
-    margin: 40px auto;
-}
-
 .auth-title {
     margin-top: 0;
     margin-bottom: 0px;
@@ -53,6 +43,6 @@
     padding: 20px;
     border-radius: 30px;
     width: 500px;
-    height: 445px;
+    height: fit-content;
     margin: 40px auto;
 }

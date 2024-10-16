@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES6",                                  /* Совместимость с современными браузерами */
+    "lib": ["DOM", "ES6"],                            /* Библиотеки DOM для работы с браузером и ES6 */
+
+    /* Modules */
+    "module": "ES6",                                  /* Модули ES6 для поддержки импорта/экспорта в браузере */
+    "moduleResolution": "classic",                    /* Разрешение модулей без использования Node.js */
+    "rootDir": "./src",                               /* Корневая директория исходных файлов */
+    "outDir": "./build",                               /* Директория для скомпилированных файлов */
+
+    /* Emit */
+    "sourceMap": true,                                /* Создание source maps для отладки в браузере */
+    "esModuleInterop": true,                          /* Для поддержки CommonJS модулей в ES-модулях */
+    "strict": true,                                   /* Включить строгий режим для TypeScript */
+    "noImplicitAny": true,                            /* Запрет на использование 'any', если тип не указан */
+
+    /* Type Checking */
+    "strictNullChecks": true,                         /* Проверка на null/undefined */
+    "skipLibCheck": true                              /* Пропустить проверку типов в библиотеках для ускорения компиляции */
+  },
+  "include": ["src/**/*.ts"],                         /* Включить все TypeScript файлы в src */
+  "exclude": ["node_modules"],                        /* Исключить папку node_modules */
+  "watchOptions": {
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriority",
+    "synchronousWatchDirectory": true,
+    "excludeDirectories": ["node_modules", "build"]
+  }
+}

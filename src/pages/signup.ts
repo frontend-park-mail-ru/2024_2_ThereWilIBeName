@@ -1,4 +1,5 @@
 import Api from '../utils/Api.js';
+import Router from '../utils/Router.js';
 
 export default {
     /**
@@ -22,6 +23,8 @@ export default {
             <form id="signup-form">
                 <label class="auth-text">Логин</label>
                 <input class="border" id="login" name="login" >
+                <label class="auth-text">Email</label>
+                <input class="border" id="email" name="email" >
                 <label class="auth-text">Пароль</label>
                 <input class="border" type="password" id="password" name="password">
                 <label class="auth-text">Подтверждение пароля</label>
@@ -40,21 +43,32 @@ export default {
      * @param {Router} router - Экземпляр роутера для управления навигацией между страницами.
      * @returns {Promise<void>} Промис, который выполняется после монтирования страницы.
      */
-    async mount(router) {
-        document.getElementById('back-button').addEventListener('click', () => {
+    async mount(router: Router): Promise<void> {
+        const backButton = document.getElementById('back-button') as HTMLButtonElement;
+        backButton.addEventListener('click', () => {
             router.goto('/signin');
         });
-        document.getElementById('home-logo').addEventListener('click', () => {
+        const homeLogo = document.getElementById('home-logo') as HTMLElement;
+        homeLogo.addEventListener('click', () => {
             router.goto('/home');
         });
+        const signupForm = document.getElementById('signup-form') as HTMLElement;
+        const errorMessage = document.getElementById('error-message') as HTMLElement;
 
-        document.getElementById('signup-form').addEventListener('submit', async (event) => {
+        signupForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formUsername = document.getElementById('login').value;
-            const formPassword = document.getElementById('password').value;
-            const formConfirmPassword = document.getElementById('confirm-password').value;
-            const errorMessage = document.getElementById('error-message');
+            const formUsername = (document.getElementById('login') as HTMLInputElement).value;
+            const formEmail = (document.getElementById('email') as HTMLInputElement).value;
+            const formPassword = (document.getElementById('password') as HTMLInputElement).value;
+            const formConfirmPassword = (document.getElementById('confirm-password') as HTMLInputElement).value;
+
+            const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            if (!emailRegex.test(formEmail)) {
+                errorMessage.textContent = 'Неверный email';
+                errorMessage.classList.add('visible');
+                return;
+            }
 
             if (formPassword.length < 8) {
                 errorMessage.textContent = 'Пароль должен быть не короче 8 символов';
@@ -62,9 +76,9 @@ export default {
                 return;
             }
 
-            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            const passwordRegex = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*_-]?).{8,}$/;
             if (!passwordRegex.test(formPassword)) {
-                errorMessage.textContent = 'Должна быть как минимум 1 буква и цифра';
+                errorMessage.textContent = 'Пароль должен включать букву, цифру и символ';
                 errorMessage.classList.add('visible');
                 return;
             }
@@ -75,14 +89,21 @@ export default {
                 return;
             }
 
-            const res = await Api.postSignup(formUsername, formPassword);
+            const res = await Api.postSignup(formUsername, formEmail, formPassword);
 
             if (!res.ok) {
                 errorMessage.textContent = 'Логин уже занят';
                 errorMessage.classList.add('visible');
-            } else {
-                router.goto('/signin');
+                return;
             }
+
+            const resSignIn = await Api.postSignin(formEmail, formPassword);
+
+            if (!resSignIn.ok) {
+                router.goto('/signin');
+                return;
+            }
+            router.goto('/home');
         });
     },
 

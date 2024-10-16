@@ -7,12 +7,12 @@
  * @param {Object} [body] - Тело запроса, которое будет преобразовано в JSON (для методов POST, PUT, DELETE).
  * @returns {Promise<{data: Object, status: number, ok: boolean}>} Объект с данными ответа, статусом и флагом успеха.
  */
-async function request(method, url, body = undefined) {
-    let res;
+async function request(method: string, url: string, body: Record<string, any> | undefined = undefined): Promise<{ data: any; status: number; ok: boolean }> {
+    let res: Response;
     try {
         res = await fetch(url, {
             method: method,
-            body: JSON.stringify(body),
+            body: body ? JSON.stringify(body) : undefined,
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -29,7 +29,7 @@ async function request(method, url, body = undefined) {
     }
 
 
-    let data;
+    let data: any;
 
     try {
         data = await res.json();
@@ -48,7 +48,7 @@ async function request(method, url, body = undefined) {
 /**
  * Объект с методами для выполнения HTTP-запросов: GET, POST, PUT, DELETE.
  */
-export default {
+const http = {
 
     /**
      * Выполняет GET-запрос
@@ -56,7 +56,7 @@ export default {
      * @param {string} url - URL, по которому нужно выполнить GET-запрос.
      * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ от сервера.
      */
-    get(url) {
+    get(url: string): Promise<{ data: any; status: number, ok: boolean }> {
         return request('GET', url);
     },
 
@@ -67,7 +67,7 @@ export default {
      * @param {Object} body - Данные для отправки в теле запроса.
      * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ от сервера.
      */
-    post(url, body) {
+    post(url: string, body: Record<string, any>): Promise<{ data: any; status: number, ok: boolean }> {
         return request('POST', url, body);
     },
 
@@ -78,7 +78,7 @@ export default {
      * @param {Object} body - Данные для отправки в теле запроса.
      * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ от сервера.
      */
-    put(url, body) {
+    put(url: string, body: Record<string, any>): Promise<{ data: any; status: number, ok: boolean }> {
         return request('PUT', url, body);
     },
 
@@ -89,7 +89,9 @@ export default {
      * @param {Object} [body] - Данные для отправки в теле запроса (необязательно).
      * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ от сервера.
      */
-    delete(url, body) {
+    delete(url: string, body: Record<string, any>): Promise<{ data: any; status: number, ok: boolean }> {
         return request('DELETE', url, body);
     }
 };
+
+export default http;
