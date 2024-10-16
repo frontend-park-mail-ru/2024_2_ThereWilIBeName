@@ -78,15 +78,6 @@ export default {
 
         const currentUser = await Api.getUser();
 
-        // Для тестирования
-
-        // const currentUser = {
-        //     data: {
-        //         username: 'test',
-        //         id: '0',
-        //     }
-        // };
-
         if (currentUser.data.username) {
             User.username = currentUser.data.username;
             User.id = currentUser.data.id;
