@@ -3,72 +3,64 @@ import User from '../utils/user.js';
 import Router from '../utils/Router.js';
 
 export default {
-    /**
-     * HTML-шаблон для отображения страницы с заголовком и галереей достопримечательностей.
-     * Включает заголовок, кнопку для авторизации и место для динамически загружаемых данных.
-     *
-     * @type {string}
-     */
-    html:
-        `<header class="header">
-            <div class="logo" >
+    html: `
+        <header class="header">
+            <div class="logo">
                 <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
             </div>
             <div class="auth">
                 <button class="login-button" id="signin-button">вход</button>
-                <div class="user-menu" id="user-menu" style="display: none;">
-                    <button class="profile-button" id="user-button"></button>
-                    <div class="dropdown" id="dropdown" style="display: none;">
-                        <button id="profile-button">Профиль</button>
-                        <button id="logout-button">Выход</button>
-                    </div>
+                <button class="login-button" id="user-button"></button>
+                
+                <div id="side-menu" class="side-menu">
+                    <div class="user-name" id="user-name"></div>
+                    <ul>
+                        <li><button class="menu-button" id="profile-button">Профиль</button></li>
+                        <li><button class="menu-button" id="logout-button">Выйти</button></li>
+                    </ul>
+                    <button id="close-button" class="close-button">Закрыть</button>
                 </div>
+                
             </div>
         </header>
         <main>
-            <div class="headline">
-                Достопримечательности
-            </div>
-            <ul class="gallery" id="gallery">
-                
-            </ul>
+            <div class="headline">Достопримечательности</div>
+            <ul class="gallery" id="gallery"></ul>
         </main>`,
 
-    /**
-     * Функция для монтирования страницы и привязки логики к элементам.
-     * Добавляет обработчик клика для перехода на страницу входа и загружает данные
-     * о достопримечательностях для отображения в галерее с использованием Handlebars-шаблона.
-     *
-     * @param {Router} router - Экземпляр роутера для управления навигацией между страницами.
-     * @returns {Promise<void>} Промис, который выполняется после успешного монтирования страницы.
-     */
     async mount(router: Router): Promise<void> {
-        const userMenu = document.getElementById('user-menu')!;
-        const userButton = document.getElementById('user-button')!;
-        const dropdown = document.getElementById('dropdown')!;
         const profileButton = document.getElementById('profile-button')!;
         const logoutButton = document.getElementById('logout-button')!;
+        const signinButton = document.getElementById('signin-button')!;
 
-        // Обработчик клика по кнопке с именем пользователя для открытия меню
+        const userNameDiv = document.getElementById('user-name')!;
+        const userButton = document.getElementById('user-button')!;
+        const sideMenu = document.getElementById('side-menu')!;
+        const closeButton = document.getElementById('close-button')!;
+
+        // Открытие меню при клике на кнопку
         userButton.addEventListener('click', () => {
-            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            sideMenu.classList.add('open');
         });
 
-        // Переход на страницу профиля
+        closeButton.addEventListener('click', () => {
+            sideMenu.classList.remove('open');
+        });
+
         profileButton.addEventListener('click', () => {
             router.goto('/profile');
         });
 
-        // Обработчик для выхода из аккаунта
         logoutButton.addEventListener('click', async () => {
-            // await Api.logout(); // Логика выхода
-            location.reload();  // Перезагрузить страницу после выхода
+            await Api.deleteUser(User.username, User.id);
+            User.username = '';
+            User.id = '';
+            User.email = '';
+            location.reload(); // Перезагрузка страницы после выхода
         });
 
-
-        const signinButton = document.getElementById('signin-button')
-        signinButton!.addEventListener('click', () => {
-            router.goto('/signin')
+        signinButton.addEventListener('click', () => {
+            router.goto('/signin');
         });
 
         const attractionsResponse = await Api.getAttractions();
@@ -82,16 +74,18 @@ export default {
                 </li>
             {{/each}}`;
         const template = Handlebars.compile(templateSource);
+        document.getElementById('gallery')!.innerHTML = template({ attractions });
 
-        document.getElementById('gallery')!.innerHTML = template({attractions});
+        const currentUser = await Api.getUser();
 
-        // const currentUser = await Api.getUser();
-        const currentUser = {
-            data: {
-                username: 'test',
-                id: '0',
-            }
-        }
+        // Для тестирования
+
+        // const currentUser = {
+        //     data: {
+        //         username: 'test',
+        //         id: '0',
+        //     }
+        // };
 
         if (currentUser.data.username) {
             User.username = currentUser.data.username;
@@ -99,17 +93,12 @@ export default {
         }
 
         if (User.username !== '') {
-            signinButton!.textContent = 'Сменить пользователя';
+            signinButton.textContent = 'Сменить пользователя';
             userButton.textContent = User.username;
-            userMenu.style.display = 'block';
+            userNameDiv.textContent = User.username;
         }
     },
 
-    /**
-     * Функция размонтирования страницы.
-     * Используется для удаления обработчиков событий и очистки состояния при переходе на другую страницу.
-     */
     unmount() {
-
     },
 };

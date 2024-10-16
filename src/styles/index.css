@@ -1,6 +1,7 @@
 @import "header.css";
 @import "gallery.css";
 @import "error.css";
+@import "menu.css";
 
 * {
     box-sizing: border-box;

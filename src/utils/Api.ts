@@ -26,11 +26,11 @@ type User = {
 }
 
 type Login = {
-    //что-то возвращают
+    // что-то начнут возвращать
 }
 
 type Logout = {
-    //что-то возвращает
+    // что-то начнут возвращать
 }
 
 export default {
@@ -72,6 +72,17 @@ export default {
         };
     },
 
+    async deleteUser(username: string, id: string): Promise<JsonResponse<any>> {
+        const res = await RESTApi.delete('/api/v1/users/me', {username, id});
+        return {
+            data: {
+                // что-то начнут возвращать
+            },
+            status: res.status,
+            ok: res.ok,
+        }
+    },
+
     /**
      * Асинхронная функция для авторизации пользователя (входа в систему).
      *
@@ -83,7 +94,7 @@ export default {
         const res = await RESTApi.post('/api/v1/auth/login', {email, password});
         return {
             data: {
-                //что-то возвращают
+                // что-то начнут возвращать
             },
             status: res.status,
             ok: res.ok,
@@ -102,7 +113,7 @@ export default {
         const res = await RESTApi.post('/api/v1/auth/signup', {login: username, email, password});
         return {
             data: {
-                //что-то возвращает
+                // что-то начнут возвращать
             },
             status: res.status,
             ok: res.ok,
