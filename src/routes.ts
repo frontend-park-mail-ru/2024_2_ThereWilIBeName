@@ -58,7 +58,7 @@ const routes: Route[] = [
         html: Page404.html,
         mount: Page404.mount,
         unmount: Page404.unmount,
-        cssClass: '404-page',
+        cssClass: 'unknown-page',
     },
 ];
 

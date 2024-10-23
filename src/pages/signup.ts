@@ -21,13 +21,13 @@ export default {
             <div class="auth-title">Регистрация</div>
             <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
             <form id="signup-form">
-                <label class="auth-text">Логин</label>
+                <label class="reg-text">Логин</label>
                 <input class="border" id="login" name="login" >
-                <label class="auth-text">Email</label>
+                <label class="reg-text">Email</label>
                 <input class="border" id="email" name="email" >
-                <label class="auth-text">Пароль</label>
+                <label class="reg-text">Пароль</label>
                 <input class="border" type="password" id="password" name="password">
-                <label class="auth-text">Подтверждение пароля</label>
+                <label class="reg-text">Подтверждение пароля</label>
                 <input class="border" type="password" id="confirm-password" name="confirm-password">
                 <button class="auth-button">Зарегистрироваться</button>
             </form>

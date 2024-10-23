@@ -1,13 +1,3 @@
-headerButton()
-    margin-right 15px
-    background-color myBlack
-    color white
-    border none
-    border-radius 15px
-    cursor pointer
-    font-size 17px
-    font-weight: bold;
-
 .header
     display flex
     justify-content space-between
@@ -23,12 +13,11 @@ headerButton()
     align-items center
 
 .header-button
-    padding 7px 25px
-    headerButton()
+    simpleButton(my-black, my-white)
 
 .user-button
-    padding: 7px 0;
-    headerButton()
+    simpleButton(my-black, my-white)
+    padding: 7px 0
 
 .user-button.show
     padding 7px 25px

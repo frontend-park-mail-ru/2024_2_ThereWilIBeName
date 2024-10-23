@@ -10,13 +10,10 @@ export default {
             <div class="logo" >
                 <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
             </div>
-            <div class="auth">
-                <button class="login-button" id="signin-button">вход</button>
-            </div>
         </header>
         <main class="warn-message">
-            <div class="warning">Ошибка 404</div>
-            <button class="login-button" id="error-button">На главную</button>
+            <div class="warning">Упс, такой страницы нет...</div>
+            <button class="unknown-page-button" id="error-button">На главную</button>
         </main>`,
 
     /**
