@@ -28,4 +28,4 @@ server.use(express.static(__dirname + '/../'));
  * Выводит сообщение в консоль при успешном запуске.
  */
 server.listen(SERVER_PORT, () => {})
-console.log(`SERVER LISTENING ON PORT ${SERVER_PORT}`);
+console.log(`SERVER RUNNING ON:  localhost:${SERVER_PORT}`);

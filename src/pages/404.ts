@@ -1,4 +1,4 @@
-
+import Router from '../utils/Router'
 export default {
     /**
      * HTML-шаблон страницы ошибки 404, отображающей сообщение об ошибке и кнопку для перехода на главную страницу.
@@ -10,13 +10,10 @@ export default {
             <div class="logo" >
                 <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
             </div>
-            <div class="auth">
-                <button class="login-button" id="signin-button">вход</button>
-            </div>
         </header>
         <main class="warn-message">
-            <div class="warning">Ошибка 404</div>
-            <button class="login-button" id="error-button">На главную</button>
+            <div class="warning">Упс, такой страницы нет...</div>
+            <button class="unknown-page-button" id="error-button">На главную</button>
         </main>`,
 
     /**
@@ -25,8 +22,9 @@ export default {
      *
      * @param {Router} router - Экземпляр роутера для управления навигацией.
      */
-    mount(router) {
-        document.getElementById('error-button').addEventListener('click', () => {
+    async mount(router: Router): Promise<void> {
+        const errorButton = document.getElementById('error-button')
+        errorButton!.addEventListener('click', () => {
             router.goto('/home');
         });
     },
