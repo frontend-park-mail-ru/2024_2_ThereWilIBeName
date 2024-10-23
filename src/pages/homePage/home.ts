@@ -74,17 +74,17 @@ export default {
 
         document.getElementById('gallery')!.innerHTML = galleryTemplate({ attractions });
 
-        // const currentUser = await Api.getUser();
+        const currentUser = await Api.getUser();
 
-        const currentUser = {
-            data: {
-                username: 'test',
-                email: 'test@mail.com',
-                id: '0',
-            },
-            status: 200,
-            ok: true,
-        }
+        // const currentUser = {
+        //     data: {
+        //         username: 'test',
+        //         email: 'test@mail.com',
+        //         id: '0',
+        //     },
+        //     status: 200,
+        //     ok: true,
+        // }
 
         if (!currentUser.ok) {
             return;
