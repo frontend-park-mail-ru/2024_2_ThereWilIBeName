@@ -8,7 +8,7 @@ export default [
         }},
     pluginJs.configs.recommended,
     {
-        ignores: ['server/*']
+        ignores: ['server/*', 'webpack.config.js', 'build/*'],
     },
 
     {

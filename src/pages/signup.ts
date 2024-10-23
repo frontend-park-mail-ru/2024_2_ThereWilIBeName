@@ -1,5 +1,5 @@
-import Api from '../utils/Api.js';
-import Router from '../utils/Router.js';
+import Api from '../utils/Api';
+import Router from '../utils/Router';
 
 export default {
     /**

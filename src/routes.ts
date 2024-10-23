@@ -1,8 +1,9 @@
-import PageHome from './pages/home.js';
-import PageSignIn from './pages/signin.js';
-import PageSignUp from './pages/signup.js';
-import Page404 from './pages/404.js';
-import Router from './utils/Router.js'
+import PageHome from './pages/homePage/home';
+import PageSignIn from './pages/signin';
+import PageSignUp from './pages/signup';
+import Page404 from './pages/404';
+import PageProfile from './pages/profile';
+import Router from './utils/Router'
 
 export interface Route {
     path: RegExp;
@@ -10,7 +11,7 @@ export interface Route {
     html: string;
     mount: (router: Router) => Promise<void>;
     unmount: () => void;
-    cssPath: string;
+    cssClass: string;
 }
 
 /**
@@ -25,7 +26,15 @@ const routes: Route[] = [
         html: PageHome.html,
         mount: PageHome.mount,
         unmount: PageHome.unmount,
-        cssPath: '',
+        cssClass: 'home-page',
+    },
+    {
+        path: /^(|\/|\/profile)$/,
+        title: 'ПРОФИЛЬ',
+        html: PageProfile.html,
+        mount: PageProfile.mount,
+        unmount: PageProfile.unmount,
+        cssClass: 'profile-page',
     },
     {
         path: /^\/signin/,
@@ -33,7 +42,7 @@ const routes: Route[] = [
         html: PageSignIn.html,
         mount: PageSignIn.mount,
         unmount: PageSignIn.unmount,
-        cssPath: 'src/styles/auth.css',
+        cssClass: 'auth-page',
     },
     {
         path: /^\/signup/,
@@ -41,7 +50,7 @@ const routes: Route[] = [
         html: PageSignUp.html,
         mount: PageSignUp.mount,
         unmount: PageSignUp.unmount,
-        cssPath: 'src/styles/registration.css',
+        cssClass: 'registration-page',
     },
     {
         path: /.*/,
@@ -49,7 +58,7 @@ const routes: Route[] = [
         html: Page404.html,
         mount: Page404.mount,
         unmount: Page404.unmount,
-        cssPath: 'src/styles/404.css',
+        cssClass: '404-page',
     },
 ];
 

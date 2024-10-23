@@ -1,3 +1,4 @@
-declare var Handlebars: {
-    compile(template: string): (context: any) => string;
+declare module '*.hbs' {
+    const content: (context: any) => string;
+    export default content;
 }

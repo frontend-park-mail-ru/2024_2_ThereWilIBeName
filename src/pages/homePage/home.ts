@@ -1,6 +1,7 @@
-import Api from '../utils/Api.js';
-import User from '../utils/user.js';
-import Router from '../utils/Router.js';
+import Api from '../../utils/Api';
+import User from '../../utils/user';
+import Router from '../../utils/Router';
+import galleryTemplate from './home.hbs';
 
 export default {
     html: `
@@ -8,8 +9,8 @@ export default {
             <div class="logo">
                 <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
             </div>
-            <div class="auth">
-                <button class="login-button" id="signin-button">вход</button>
+            <div class="header-menu">
+                <button class="header-button" id="signin-button">вход</button>
                 <button class="user-button" id="user-button"></button>
                 
                 <div id="side-menu" class="side-menu">
@@ -71,17 +72,19 @@ export default {
         const attractionsResponse = await Api.getAttractions();
         const attractions = attractionsResponse.data;
 
-        const templateSource = `
-            {{#each attractions}}
-                <li class="gallery-item">
-                    <img src="{{image}}" alt="{{name}}">
-                    <p>{{name}}</p>
-                </li>
-            {{/each}}`;
-        const template = Handlebars.compile(templateSource);
-        document.getElementById('gallery')!.innerHTML = template({ attractions });
+        document.getElementById('gallery')!.innerHTML = galleryTemplate({ attractions });
 
-        const currentUser = await Api.getUser();
+        // const currentUser = await Api.getUser();
+
+        const currentUser = {
+            data: {
+                username: 'test',
+                email: 'test@mail.com',
+                id: '0',
+            },
+            status: 200,
+            ok: true,
+        }
 
         if (!currentUser.ok) {
             return;

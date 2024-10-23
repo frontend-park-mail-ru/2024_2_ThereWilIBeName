@@ -1,4 +1,4 @@
-import { Route } from '../routes.js';
+import { Route } from '../routes';
 
 /**
  * Класс Router управляет навигацией по приложению с использованием истории браузера и
@@ -8,6 +8,7 @@ export default class Router {
     private rootElement: HTMLElement = document.body;
     private routes: Route[] = [];
     private currentPage: Route | null = null;
+    private lastCssClass: string = '';
 
     /**
      * Создает экземпляр роутера.
@@ -18,7 +19,6 @@ export default class Router {
     constructor(routes: Route[], rootElementId?: string) {
         this.rootElement = rootElementId ? document.getElementById(rootElementId) as HTMLElement : document.body;
         this.routes = routes;
-
         const rootPath = location.pathname;
         this.goto(rootPath);
     }
@@ -59,10 +59,17 @@ export default class Router {
         this.currentPage = page;
 
         // Изменение url
-        const cssFileElement = document.getElementById('css-file') as HTMLLinkElement;
-        cssFileElement.href = page.cssPath;
         document.title = page.title;
         const newUrl = location.origin + url;
         history.pushState(null, '', newUrl);
+
+        // Изменение css
+        if (this.lastCssClass === '') {
+            this.rootElement.classList.add(page.cssClass)
+        }
+        else {
+            this.rootElement.classList.replace(this.lastCssClass, page.cssClass)
+        }
+        this.lastCssClass = page.cssClass;
     }
 }

@@ -67,18 +67,3 @@
     opacity: 1;
     pointer-events: auto;
 }
-
-.user-button {
-    padding: 7px 0px;
-    margin-right: 15px;
-    background-color: #232323;
-    color: white;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    font-size: 17px;
-}
-
-.user-button.show {
-    padding: 7px 25px;
-}

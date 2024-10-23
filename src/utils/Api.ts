@@ -1,4 +1,4 @@
-import RESTApi from './RESTApi.js';
+import RESTApi from './RESTApi';
 
 type JsonResponse<T> = {
     data: T,
