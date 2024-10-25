@@ -62,7 +62,7 @@ export default {
             User.username = '';
             User.id = '';
             User.email = '';
-            location.reload(); // Перезагрузка страницы после выхода
+            location.reload();
         });
 
         signinButton.addEventListener('click', () => {

@@ -98,7 +98,7 @@ export default {
     },
 
     async deleteUser(username: string, id: string): Promise<JsonResponse<any>> {
-        const res = await RESTApi.delete('/api/v1/users/me', {username, id});
+        const res = await RESTApi.delete('/api/v1/auth/logout', {username, id});
         return {
             data: {},
             status: res.status,
