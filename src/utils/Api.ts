@@ -9,8 +9,7 @@ type JsonResponse<T> = {
 type Attraction = {
     id: string,
     name: string,
-    image: string,
-    // imagePath: string,
+    imagePath: string,
     description: string,
     rating: number,
     numberOfReviews: number,
@@ -50,8 +49,7 @@ export default {
                 ({
                     id: String(attraction.id),
                     name: String(attraction.name),
-                    image: String(attraction.image),
-                    // imagePath: String(attraction.imagePath),
+                    imagePath: String(attraction.imagePath),
                     description: String(attraction.description),
                     rating: Number(attraction.rating),
                     numberOfReviews: Number(attraction.numberOfReviews),
@@ -72,8 +70,7 @@ export default {
             data: {
                 id: String(res.data.id),
                 name: String(res.data.name),
-                image: String(res.data.image),
-                // imagePath: String(attraction.imagePath),
+                imagePath: String(res.data.imagePath),
                 description: String(res.data.description),
                 rating: Number(res.data.rating),
                 numberOfReviews: Number(res.data.numberOfReviews),
