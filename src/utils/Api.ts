@@ -9,14 +9,14 @@ type JsonResponse<T> = {
 type Attraction = {
     id: string,
     name: string,
-    image: string,
+    imagePath: string,
     description: string,
     rating: number,
     numberOfReviews: number,
     address: string,
-    city: string,
+    cityID: number,
     phoneNumber: string,
-    category: string,
+    categoriesId: number[],
 }
 
 type User = {
@@ -46,16 +46,36 @@ export default {
                 ({
                     id: String(attraction.id),
                     name: String(attraction.name),
-                    image: String(attraction.image),
+                    imagePath: String(attraction.imagePath),
                     description: String(attraction.description),
                     rating: Number(attraction.rating),
                     numberOfReviews: Number(attraction.numberOfReviews),
                     address: String(attraction.address),
-                    city: String(attraction.city),
+                    cityID: Number(attraction.cityID),
                     phoneNumber: String(attraction.phoneNumber),
-                    category: String(attraction.category),
+                    categoriesId: attraction.categoriesId as number[],
                 })
             ),
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async getAttraction(id: number): Promise<JsonResponse<Attraction>> {
+        const res = await RESTApi.get(`/api/v1/places/${id}`);
+        return {
+            data: {
+                id: String(res.data.id),
+                name: String(res.data.name),
+                imagePath: String(res.data.imagePath),
+                description: String(res.data.description),
+                rating: Number(res.data.rating),
+                numberOfReviews: Number(res.data.numberOfReviews),
+                address: String(res.data.address),
+                cityID: Number(res.data.cityID),
+                phoneNumber: String(res.data.phoneNumber),
+                categoriesId: res.data.categoriesId as number[],
+            },
             status: res.status,
             ok: res.ok,
         };
