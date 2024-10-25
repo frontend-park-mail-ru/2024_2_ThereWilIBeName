@@ -17,8 +17,8 @@ export default {
                     <div class="background-menu" id="background-menu"></div>
                     <div class="user-name" id="user-name"></div>
                     <ul>
-                        <li><button class="menu-button" id="profile-button">Профиль</button></li>
                         <li><button class="menu-button" id="change-user-button">Сменить пользователя</button></li>
+                        <li><button class="menu-button" id="profile-button">Профиль</button></li>
                         <li><button class="menu-button" id="logout-button">Выйти</button></li>
                     </ul>
                     <button id="close-button" class="close-button">Закрыть</button>
@@ -80,7 +80,6 @@ export default {
         if (!currentUser.ok) {
             return;
         }
-        User.username = currentUser.data.username;
         User.id = currentUser.data.id;
         signinButton.textContent = 'Сменить пользователя';
         userButton.textContent = User.username;
