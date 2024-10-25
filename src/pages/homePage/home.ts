@@ -18,6 +18,7 @@ export default {
                     <div class="user-name" id="user-name"></div>
                     <ul>
                         <li><button class="menu-button" id="profile-button">Профиль</button></li>
+                        <li><button class="menu-button" id="change-user-button">Сменить пользователя</button></li>
                         <li><button class="menu-button" id="logout-button">Выйти</button></li>
                     </ul>
                     <button id="close-button" class="close-button">Закрыть</button>
@@ -32,6 +33,7 @@ export default {
 
     async mount(router: Router): Promise<void> {
         const profileButton = document.getElementById('profile-button')!;
+        const changeUserButton = document.getElementById('change-user-button')!;
         const logoutButton = document.getElementById('logout-button')!;
         const signinButton = document.getElementById('signin-button')!;
 
@@ -57,6 +59,10 @@ export default {
             router.goto('/profile');
         });
 
+        changeUserButton.addEventListener('click', () => {
+            router.goto('/signin');
+        });
+
         logoutButton.addEventListener('click', async () => {
             await Api.postLogout(User.username, User.id);
             User.username = '';
@@ -80,6 +86,7 @@ export default {
         userButton.textContent = User.username;
         userNameDiv.textContent = User.username;
         userButton.classList.add('show');
+        signinButton.classList.add('hidden');
 
         const attractionsResponse = await Api.getAttractions();
         const attractions = attractionsResponse.data;
