@@ -13,7 +13,10 @@ export default {
         </main>`,
 
     async mount(router: Router): Promise<void> {
-
+        const errorButton = document.getElementById('error-button')
+        errorButton!.addEventListener('click', () => {
+            router.goto('/home');
+        });
     },
 
     unmount() {
