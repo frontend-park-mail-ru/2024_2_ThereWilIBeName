@@ -80,6 +80,7 @@ export default {
         if (!currentUser.ok) {
             return;
         }
+        User.username = currentUser.data.username;
         User.id = currentUser.data.id;
         signinButton.textContent = 'Сменить пользователя';
         userButton.textContent = User.username;
