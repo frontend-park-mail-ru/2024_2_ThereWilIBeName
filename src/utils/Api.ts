@@ -43,7 +43,8 @@ export default {
      * @returns {Promise<{data: Object[], status: number, ok: boolean}>} Ответ сервера с данными достопримечательностей, статусом и флагом успеха.
      */
     async getAttractions(): Promise<JsonResponse<Attraction>> {
-        const res = await RESTApi.get('/api/v1/places');
+        const getAttractionsUrl = '/api/v1/places?limit=20&offset=0';
+        const res = await RESTApi.get(getAttractionsUrl);
         return {
             data: res.data.map( (attraction: any) =>
                 ({
