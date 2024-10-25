@@ -58,7 +58,7 @@ export default {
         });
 
         logoutButton.addEventListener('click', async () => {
-            await Api.deleteUser(User.username, User.id);
+            await Api.postLogout(User.username, User.id);
             User.username = '';
             User.id = '';
             User.email = '';
