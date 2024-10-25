@@ -27,7 +27,10 @@ type User = {
 }
 
 type Login = {
-    // что-то начнут возвращать
+    id: string,
+    login: string,
+    email: string,
+    created_at: string,
 }
 
 type Logout = {
@@ -117,7 +120,10 @@ export default {
         const res = await RESTApi.post('/api/v1/auth/login', {email, password});
         return {
             data: {
-                // что-то начнут возвращать
+                id: String(res.data.id),
+                login: String(res.data.login),
+                email: String(res.data.email),
+                created_at: String(res.data.created_at),
             },
             status: res.status,
             ok: res.ok,
@@ -132,11 +138,14 @@ export default {
      * @param {string} password - Пароль пользователя.
      * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ сервера с результатом регистрации, статусом и флагом успеха.
      */
-    async postSignup(username: string, email: string, password: string): Promise<JsonResponse<Logout>> {
+    async postSignup(username: string, email: string, password: string): Promise<JsonResponse<Login>> {
         const res = await RESTApi.post('/api/v1/auth/signup', {login: username, email, password});
         return {
             data: {
-                // что-то начнут возвращать
+                id: String(res.data.id),
+                login: String(res.data.login),
+                email: String(res.data.email),
+                created_at: String(res.data.created_at),
             },
             status: res.status,
             ok: res.ok,

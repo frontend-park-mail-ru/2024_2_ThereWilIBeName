@@ -97,12 +97,6 @@ export default {
                 return;
             }
 
-            const resSignIn = await Api.postSignin(formEmail, formPassword);
-
-            if (!resSignIn.ok) {
-                router.goto('/signin');
-                return;
-            }
             router.goto('/home');
         });
     },

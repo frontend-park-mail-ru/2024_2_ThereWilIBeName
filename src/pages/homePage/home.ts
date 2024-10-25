@@ -69,33 +69,21 @@ export default {
             router.goto('/signin');
         });
 
-        const attractionsResponse = await Api.getAttractions();
-        const attractions = attractionsResponse.data;
-
-        document.getElementById('gallery')!.innerHTML = galleryTemplate({ attractions });
-
         const currentUser = await Api.getUser();
-
-        // const currentUser = {
-        //     data: {
-        //         username: 'test',
-        //         email: 'test@mail.com',
-        //         id: '0',
-        //     },
-        //     status: 200,
-        //     ok: true,
-        // }
 
         if (!currentUser.ok) {
             return;
         }
-
         User.username = currentUser.data.username;
         User.id = currentUser.data.id;
         signinButton.textContent = 'Сменить пользователя';
         userButton.textContent = User.username;
         userNameDiv.textContent = User.username;
         userButton.classList.add('show');
+
+        const attractionsResponse = await Api.getAttractions();
+        const attractions = attractionsResponse.data;
+        document.getElementById('gallery')!.innerHTML = galleryTemplate({ attractions });
     },
 
     unmount() {
