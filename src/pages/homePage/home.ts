@@ -75,6 +75,10 @@ export default {
             router.goto('/signin');
         });
 
+        const attractionsResponse = await Api.getAttractions();
+        const attractions = attractionsResponse.data;
+        document.getElementById('gallery')!.innerHTML = galleryTemplate({ attractions });
+
         const currentUser = await Api.getUser();
 
         if (!currentUser.ok) {
@@ -87,10 +91,6 @@ export default {
         userNameDiv.textContent = User.username;
         userButton.classList.add('show');
         signinButton.classList.add('hidden');
-
-        const attractionsResponse = await Api.getAttractions();
-        const attractions = attractionsResponse.data;
-        document.getElementById('gallery')!.innerHTML = galleryTemplate({ attractions });
     },
 
     unmount() {
