@@ -1,10 +1,10 @@
 import Api from '../utils/Api';
-import Router from '../utils/Router'
+import Router from '../utils/Router';
 
 export default {
     /**
-     * HTML-шаблон для страницы входа (авторизации) с формой ввода логина и пароля,
-     * кнопкой для регистрации и навигационными элементами.
+     * HTML-шаблон для страницы входа (авторизации) с формой для ввода email и пароля,
+     * кнопкой для создания аккаунта и навигационными элементами для перехода на другие страницы.
      *
      * @type {string}
      */
@@ -24,11 +24,7 @@ export default {
                 <label class="auth-text">Email</label>
                 <input class="border" id="email" name="email" required>
                 <label class="auth-text">Пароль</label>
-                <input class="border" type = "password" id="password" name="password" required>
-<!--                <div class="remember-me-container">-->
-<!--                    <input class="custom-check-icon" type="checkbox" id="remember-me" name="remember-me">-->
-<!--                    <label class="remember-me">Запомнить меня</label>-->
-<!--                </div>-->
+                <input class="border" type="password" id="password" name="password" required>
                 <button class="auth-button">Войти</button>
                 <div class="auth-signup-button" id="signup-button">СОЗДАТЬ АККАУНТ</div>
             </form>
@@ -37,29 +33,33 @@ export default {
     `,
 
     /**
-     * Функция для монтирования страницы авторизации, привязки событий
-     * к элементам страницы и обработки формы входа.
+     * Функция для монтирования страницы авторизации, которая добавляет обработчики событий
+     * для элементов интерфейса и обрабатывает вход пользователя.
      *
-     * @param {Router} router - Экземпляр роутера для управления переходами между страницами.
-     * @returns {Promise<void>} Промис, который выполняется после монтирования страницы.
+     * @async
+     * @param {Router} router - Экземпляр класса Router для управления навигацией между страницами.
+     * @returns {Promise<void>} Промис, который выполняется после установки всех обработчиков событий на странице.
      */
     async mount(router: Router): Promise<void> {
         const signupButton = document.getElementById('signup-button') as HTMLButtonElement;
-        signupButton!.addEventListener('click', () => {
+        signupButton.addEventListener('click', () => {
             router.goto('/signup');
         });
+
         const homeLogo = document.getElementById('home-logo') as HTMLElement;
-        homeLogo!.addEventListener('click', () => {
+        homeLogo.addEventListener('click', () => {
             router.goto('/home');
         });
+
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
-        backButton!.addEventListener('click', () => {
+        backButton.addEventListener('click', () => {
             router.goto('/home');
         });
+
         const signinForm = document.getElementById('signin-form') as HTMLElement;
         const errorMessage = document.getElementById('error-message') as HTMLElement;
 
-        signinForm!.addEventListener('submit', async (event) => {
+        signinForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
             const formEmail = (document.getElementById('email') as HTMLInputElement).value;
@@ -72,15 +72,17 @@ export default {
                 errorMessage.classList.add('visible');
                 return;
             }
+
             router.goto('/home');
         });
     },
 
     /**
-     * Функция размонтирования страницы.
-     * Используется для очистки состояния или удаления обработчиков событий при переходе на другую страницу.
+     * Функция для размонтирования страницы авторизации.
+     * Используется для очистки состояния страницы или удаления обработчиков событий
+     * при переходе на другую страницу.
      */
     unmount() {
-
+        // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };

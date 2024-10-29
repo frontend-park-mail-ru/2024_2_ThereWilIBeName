@@ -4,10 +4,14 @@
  *
  * @param {string} method - HTTP-метод (GET, POST, PUT, DELETE и т.д.).
  * @param {string} url - URL, по которому нужно отправить запрос.
- * @param {Object} [body] - Тело запроса, которое будет преобразовано в JSON (для методов POST, PUT, DELETE).
- * @returns {Promise<{data: Object, status: number, ok: boolean}>} Объект с данными ответа, статусом и флагом успеха.
+ * @param {Record<string, any>} [body] - Тело запроса, преобразуемое в JSON (для методов POST, PUT, DELETE).
+ * @returns {Promise<{data: any, status: number, ok: boolean}>} Объект с данными ответа, статусом и флагом успеха.
  */
-async function request(method: string, url: string, body: Record<string, any> | undefined = undefined): Promise<{ data: any; status: number; ok: boolean }> {
+async function request(
+    method: string,
+    url: string,
+    body: Record<string, any> | undefined = undefined
+): Promise<{ data: any; status: number; ok: boolean }> {
     let res: Response;
     try {
         res = await fetch(url, {
@@ -28,9 +32,7 @@ async function request(method: string, url: string, body: Record<string, any> | 
         };
     }
 
-
     let data: any;
-
     try {
         data = await res.json();
     } catch (error) {
@@ -51,45 +53,45 @@ async function request(method: string, url: string, body: Record<string, any> | 
 const http = {
 
     /**
-     * Выполняет GET-запрос
+     * Выполняет GET-запрос.
      *
      * @param {string} url - URL, по которому нужно выполнить GET-запрос.
-     * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ от сервера.
+     * @returns {Promise<{data: any, status: number, ok: boolean}>} Ответ от сервера.
      */
-    get(url: string): Promise<{ data: any; status: number, ok: boolean }> {
+    get(url: string): Promise<{ data: any; status: number; ok: boolean }> {
         return request('GET', url);
     },
 
     /**
-     * Выполняет POST-запрос
+     * Выполняет POST-запрос.
      *
      * @param {string} url - URL, по которому нужно выполнить POST-запрос.
-     * @param {Object} body - Данные для отправки в теле запроса.
-     * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ от сервера.
+     * @param {Record<string, any>} body - Данные для отправки в теле запроса.
+     * @returns {Promise<{data: any, status: number, ok: boolean}>} Ответ от сервера.
      */
-    post(url: string, body: Record<string, any>): Promise<{ data: any; status: number, ok: boolean }> {
+    post(url: string, body: Record<string, any>): Promise<{ data: any; status: number; ok: boolean }> {
         return request('POST', url, body);
     },
 
     /**
-     * Выполняет PUT-запрос
+     * Выполняет PUT-запрос.
      *
      * @param {string} url - URL, по которому нужно выполнить PUT-запрос.
-     * @param {Object} body - Данные для отправки в теле запроса.
-     * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ от сервера.
+     * @param {Record<string, any>} body - Данные для отправки в теле запроса.
+     * @returns {Promise<{data: any, status: number, ok: boolean}>} Ответ от сервера.
      */
-    put(url: string, body: Record<string, any>): Promise<{ data: any; status: number, ok: boolean }> {
+    put(url: string, body: Record<string, any>): Promise<{ data: any; status: number; ok: boolean }> {
         return request('PUT', url, body);
     },
 
     /**
-     * Выполняет DELETE-запрос
+     * Выполняет DELETE-запрос.
      *
      * @param {string} url - URL, по которому нужно выполнить DELETE-запрос.
-     * @param {Object} [body] - Данные для отправки в теле запроса (необязательно).
-     * @returns {Promise<{data: Object, status: number, ok: boolean}>} Ответ от сервера.
+     * @param {Record<string, any>} [body] - Данные для отправки в теле запроса (необязательно).
+     * @returns {Promise<{data: any, status: number, ok: boolean}>} Ответ от сервера.
      */
-    delete(url: string, body: Record<string, any>): Promise<{ data: any; status: number, ok: boolean }> {
+    delete(url: string, body?: Record<string, any>): Promise<{ data: any; status: number; ok: boolean }> {
         return request('DELETE', url, body);
     }
 };

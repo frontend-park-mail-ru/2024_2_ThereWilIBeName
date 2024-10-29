@@ -98,7 +98,7 @@ export default {
         };
     },
 
-    async postLogout(username: string, id: string): Promise<JsonResponse<any>> {
+    async postLogout(username: string, id: string): Promise<JsonResponse<Logout>> {
         const res = await RESTApi.post('/api/v1/auth/logout', {username, id});
         return {
             data: {},

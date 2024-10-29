@@ -4,6 +4,11 @@ import Router from '../../utils/Router';
 import galleryTemplate from './home.hbs';
 
 export default {
+    /**
+     * HTML-шаблон главной страницы, отображающей заголовок, меню пользователя и галерею достопримечательностей.
+     *
+     * @type {string}
+     */
     html: `
         <header class="header">
             <div class="logo">
@@ -23,7 +28,6 @@ export default {
                     </ul>
                     <button id="close-button" class="close-button">Закрыть</button>
                 </div>
-                
             </div>
         </header>
         <main>
@@ -31,6 +35,14 @@ export default {
             <ul class="gallery" id="gallery"></ul>
         </main>`,
 
+    /**
+     * Функция монтирования главной страницы.
+     * Устанавливает обработчики событий для кнопок, загружает достопримечательности и информацию о текущем пользователе.
+     *
+     * @async
+     * @param {Router} router - Экземпляр класса Router для управления навигацией между страницами.
+     * @returns {Promise<void>} Промис, который выполняется после завершения монтирования страницы.
+     */
     async mount(router: Router): Promise<void> {
         const profileButton = document.getElementById('profile-button')!;
         const changeUserButton = document.getElementById('change-user-button')!;
@@ -75,10 +87,12 @@ export default {
             router.goto('/signin');
         });
 
+        // Загрузка достопримечательностей
         const attractionsResponse = await Api.getAttractions();
         const attractions = attractionsResponse.data;
         document.getElementById('gallery')!.innerHTML = galleryTemplate({ attractions });
 
+        // Получение информации о текущем пользователе
         const currentUser = await Api.getUser();
 
         if (!currentUser.ok) {
@@ -93,6 +107,11 @@ export default {
         signinButton.classList.add('hidden');
     },
 
+    /**
+     * Функция размонтирования главной страницы.
+     * Используется для очистки состояния или удаления обработчиков событий при переходе на другую страницу.
+     */
     unmount() {
+        // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };

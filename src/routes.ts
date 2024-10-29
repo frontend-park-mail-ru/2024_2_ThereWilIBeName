@@ -5,6 +5,16 @@ import Page404 from './pages/404';
 import PageProfile from './pages/profile';
 import Router from './utils/Router'
 
+/**
+ * Интерфейс, описывающий структуру маршрута в приложении.
+ * @interface Route
+ * @property {RegExp} path - Регулярное выражение для сопоставления с URL.
+ * @property {string} title - Заголовок страницы.
+ * @property {string} html - HTML-содержимое страницы.
+ * @property {(router: Router) => Promise<void>} mount - Функция, которая монтирует компонент страницы.
+ * @property {() => void} unmount - Функция, которая размонтирует компонент страницы.
+ * @property {string} cssClass - CSS-класс, применяемый к странице.
+ */
 export interface Route {
     path: RegExp;
     title: string;
@@ -16,8 +26,9 @@ export interface Route {
 
 /**
  * Массив маршрутов для приложения.
- * Каждый объект описывает маршрут, включающий путь, заголовок страницы, HTML-контент,
- * функции монтирования и размонтирования, а также путь к соответствующему CSS-файлу.
+ * Каждый маршрут включает путь, заголовок страницы, HTML-содержимое,
+ * функции монтирования и размонтирования, а также соответствующий CSS-класс.
+ * @type {Route[]}
  */
 const routes: Route[] = [
     {

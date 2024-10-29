@@ -3,8 +3,8 @@ import Router from '../utils/Router';
 
 export default {
     /**
-     * HTML-шаблон для страницы регистрации, содержащий форму ввода логина, пароля и подтверждения пароля,
-     * а также навигационные элементы для перехода на другие страницы.
+     * HTML-шаблон для страницы регистрации, содержащий форму для ввода логина, email, пароля
+     * и подтверждения пароля, а также элементы для навигации на другие страницы.
      *
      * @type {string}
      */
@@ -32,26 +32,28 @@ export default {
                 <button class="auth-button">Зарегистрироваться</button>
             </form>
         </div>
-        
         </main>
     `,
 
     /**
-     * Функция для монтирования страницы регистрации, которая связывает элементы интерфейса
-     * с обработчиками событий и обрабатывает процесс регистрации пользователя.
+     * Функция для монтирования страницы регистрации.
+     * Подключает обработчики событий для элементов страницы и обрабатывает логику регистрации.
      *
-     * @param {Router} router - Экземпляр роутера для управления навигацией между страницами.
-     * @returns {Promise<void>} Промис, который выполняется после монтирования страницы.
+     * @async
+     * @param {Router} router - Экземпляр класса Router для навигации между страницами.
+     * @returns {Promise<void>} Промис, который выполняется после установки всех обработчиков событий на странице.
      */
     async mount(router: Router): Promise<void> {
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         backButton.addEventListener('click', () => {
             router.goto('/signin');
         });
+
         const homeLogo = document.getElementById('home-logo') as HTMLElement;
         homeLogo.addEventListener('click', () => {
             router.goto('/home');
         });
+
         const signupForm = document.getElementById('signup-form') as HTMLElement;
         const errorMessage = document.getElementById('error-message') as HTMLElement;
 
@@ -102,10 +104,11 @@ export default {
     },
 
     /**
-     * Функция размонтирования страницы.
-     * Используется для очистки состояния или удаления обработчиков событий при переходе на другую страницу.
+     * Функция для размонтирования страницы регистрации.
+     * Используется для очистки состояния страницы или удаления обработчиков событий
+     * при переходе на другую страницу.
      */
     unmount() {
-
+        // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };
