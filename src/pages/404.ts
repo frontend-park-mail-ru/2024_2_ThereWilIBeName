@@ -1,6 +1,7 @@
 import Router from '../utils/Router';
+import Page from './Page';
 
-export default {
+const ErrorPage: Page = {
     /**
      * HTML-шаблон страницы ошибки 404, отображающий сообщение об ошибке и кнопку
      * для перехода на главную страницу.
@@ -41,3 +42,6 @@ export default {
         // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };
+
+
+export default ErrorPage;

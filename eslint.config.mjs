@@ -1,17 +1,24 @@
 import globals from 'globals';
-import pluginJs from '@eslint/js';
 
 export default [
     {
         languageOptions: {
             globals: {...globals.browser},
         }},
-    pluginJs.configs.recommended,
     {
         ignores: ['server/*', 'webpack.config.js', 'build/*'],
     },
-
     {
+        files: ['*.styl'],
+        rules: {
+            // Точки с запятой
+            semi: ['error', 'never'],
+            // Пустая строка
+            'eol-last': ['error', 'always'],
+        },
+    },
+    {
+        files: ['*.ts'],
         rules: {
             // Точки с запятой
             semi: ['error', 'always'],

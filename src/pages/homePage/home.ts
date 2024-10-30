@@ -2,8 +2,9 @@ import Api from '../../utils/Api';
 import User from '../../utils/user';
 import Router from '../../utils/Router';
 import galleryTemplate from './home.hbs';
+import Page from '../Page'
 
-export default {
+const HomePage: Page = {
     /**
      * HTML-шаблон главной страницы, отображающей заголовок, меню пользователя и галерею достопримечательностей.
      *
@@ -44,16 +45,16 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после завершения монтирования страницы.
      */
     async mount(router: Router): Promise<void> {
-        const profileButton = document.getElementById('profile-button')!;
-        const changeUserButton = document.getElementById('change-user-button')!;
-        const logoutButton = document.getElementById('logout-button')!;
-        const signinButton = document.getElementById('signin-button')!;
+        const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
+        const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
+        const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
+        const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
 
-        const userNameDiv = document.getElementById('user-name')!;
-        const userButton = document.getElementById('user-button')!;
-        const sideMenu = document.getElementById('side-menu')!;
-        const closeButton = document.getElementById('close-button')!;
-        const backgroundMenu = document.getElementById('background-menu')!;
+        const userNameDiv = document.getElementById('user-name') as HTMLElement;
+        const userButton = document.getElementById('user-button') as HTMLButtonElement;
+        const sideMenu = document.getElementById('side-menu') as HTMLElement;
+        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
+        const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
 
         // Открытие меню при клике на кнопку
         userButton.addEventListener('click', () => {
@@ -76,11 +77,14 @@ export default {
         });
 
         logoutButton.addEventListener('click', async () => {
-            await Api.postLogout(User.username, User.id);
-            User.username = '';
-            User.id = '';
-            User.email = '';
-            location.reload();
+            const resLogout = await Api.postLogout(User.username, User.id);
+            if (resLogout.ok) {
+                User.username = '';
+                User.id = '';
+                User.email = '';
+                userButton.classList.remove('show');
+                signinButton.classList.remove('hidden');
+            }
         });
 
         signinButton.addEventListener('click', () => {
@@ -90,12 +94,14 @@ export default {
         // Загрузка достопримечательностей
         const attractionsResponse = await Api.getAttractions();
         const attractions = attractionsResponse.data;
-        document.getElementById('gallery')!.innerHTML = galleryTemplate({ attractions });
+        const galleryElement = document.getElementById('gallery') as HTMLElement;
+        galleryElement.innerHTML = galleryTemplate({ attractions });
 
         // Получение информации о текущем пользователе
         const currentUser = await Api.getUser();
 
         if (!currentUser.ok) {
+            console.log('Пользователь не авторизован')
             return;
         }
         User.username = currentUser.data.username;
@@ -115,3 +121,5 @@ export default {
         // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };
+
+export default HomePage;

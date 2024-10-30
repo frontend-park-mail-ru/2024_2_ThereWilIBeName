@@ -1,7 +1,8 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
+import Page from './Page';
 
-export default {
+const SignUpPage: Page = {
     /**
      * HTML-шаблон для страницы регистрации, содержащий форму для ввода логина, email, пароля
      * и подтверждения пароля, а также элементы для навигации на другие страницы.
@@ -16,22 +17,22 @@ export default {
             </div>
         </header>
         <main>
-        <div class="reg-block">
-            <div class="back-button" id ="back-button">←</div>
-            <div class="auth-title">Регистрация</div>
-            <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
-            <form id="signup-form">
-                <label class="reg-text">Логин</label>
-                <input class="border" id="login" name="login" >
-                <label class="reg-text">Email</label>
-                <input class="border" id="email" name="email" >
-                <label class="reg-text">Пароль</label>
-                <input class="border" type="password" id="password" name="password">
-                <label class="reg-text">Подтверждение пароля</label>
-                <input class="border" type="password" id="confirm-password" name="confirm-password">
-                <button class="auth-button">Зарегистрироваться</button>
-            </form>
-        </div>
+            <div class="reg-block">
+                <div class="back-button" id ="back-button">←</div>
+                <div class="auth-title">Регистрация</div>
+                <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
+                <form id="signup-form">
+                    <label class="reg-text">Логин</label>
+                    <input class="border" id="login" name="login" >
+                    <label class="reg-text">Email</label>
+                    <input class="border" id="email" name="email" >
+                    <label class="reg-text">Пароль</label>
+                    <input class="border" type="password" id="password" name="password">
+                    <label class="reg-text">Подтверждение пароля</label>
+                    <input class="border" type="password" id="confirm-password" name="confirm-password">
+                    <button class="auth-button">Зарегистрироваться</button>
+                </form>
+            </div>
         </main>
     `,
 
@@ -112,3 +113,5 @@ export default {
         // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };
+
+export default SignUpPage;

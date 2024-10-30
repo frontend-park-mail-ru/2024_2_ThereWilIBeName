@@ -1,7 +1,8 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
+import Page from './Page';
 
-export default {
+const SignInPage: Page = {
     /**
      * HTML-шаблон для страницы входа (авторизации) с формой для ввода email и пароля,
      * кнопкой для создания аккаунта и навигационными элементами для перехода на другие страницы.
@@ -42,6 +43,9 @@ export default {
      */
     async mount(router: Router): Promise<void> {
         const signupButton = document.getElementById('signup-button') as HTMLButtonElement;
+        const formEmailElement = document.getElementById('email') as HTMLInputElement;
+        const formPasswordElement = document.getElementById('password') as HTMLInputElement;
+
         signupButton.addEventListener('click', () => {
             router.goto('/signup');
         });
@@ -62,8 +66,8 @@ export default {
         signinForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formEmail = (document.getElementById('email') as HTMLInputElement).value;
-            const formPassword = (document.getElementById('password') as HTMLInputElement).value;
+            const formEmail = (formEmailElement).value;
+            const formPassword = (formPasswordElement).value;
 
             const res = await Api.postSignin(formEmail, formPassword);
 
@@ -86,3 +90,5 @@ export default {
         // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };
+
+export default SignInPage;
