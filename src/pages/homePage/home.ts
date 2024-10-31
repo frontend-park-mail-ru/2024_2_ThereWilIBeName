@@ -2,9 +2,8 @@ import Api from '../../utils/Api';
 import User from '../../utils/user';
 import Router from '../../utils/Router';
 import galleryTemplate from './home.hbs';
-import Page from '../Page'
 
-const HomePage: Page = {
+export default {
     /**
      * HTML-шаблон главной страницы, отображающей заголовок, меню пользователя и галерею достопримечательностей.
      *
@@ -92,16 +91,22 @@ const HomePage: Page = {
         });
 
         // Загрузка достопримечательностей
-        const attractionsResponse = await Api.getAttractions();
-        const attractions = attractionsResponse.data;
-        const galleryElement = document.getElementById('gallery') as HTMLElement;
-        galleryElement.innerHTML = galleryTemplate({ attractions });
+        try {
+            const attractionsResponse = await Api.getAttractions();
+            const attractions = attractionsResponse.data;
+            const galleryElement = document.getElementById('gallery') as HTMLElement;
+            galleryElement.innerHTML = galleryTemplate({ attractions });
+        }
+        catch (error) {
+            console.error('Ошибка getAttractions:', error);
+            alert('Ошибка загрузки достопримечательностей');
+        }
 
         // Получение информации о текущем пользователе
         const currentUser = await Api.getUser();
 
         if (!currentUser.ok) {
-            console.log('Пользователь не авторизован')
+            console.log('Пользователь не авторизован');
             return;
         }
         User.username = currentUser.data.username;
@@ -121,5 +126,3 @@ const HomePage: Page = {
         // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };
-
-export default HomePage;

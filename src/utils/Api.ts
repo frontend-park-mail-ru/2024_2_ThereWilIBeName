@@ -29,7 +29,7 @@ type Login = {
     id: string,
     login: string,
     email: string,
-    created_at: string,
+    createdAt: string,
 }
 
 type Logout = {
@@ -104,7 +104,7 @@ export default {
             data: {},
             status: res.status,
             ok: res.ok,
-        }
+        };
     },
 
     /**
@@ -121,7 +121,7 @@ export default {
                 id: String(res.data.id),
                 login: String(res.data.login),
                 email: String(res.data.email),
-                created_at: String(res.data.created_at),
+                createdAt: String(res.data.created_at),
             },
             status: res.status,
             ok: res.ok,
@@ -143,7 +143,7 @@ export default {
                 id: String(res.data.id),
                 login: String(res.data.login),
                 email: String(res.data.email),
-                created_at: String(res.data.created_at),
+                createdAt: String(res.data.created_at),
             },
             status: res.status,
             ok: res.ok,

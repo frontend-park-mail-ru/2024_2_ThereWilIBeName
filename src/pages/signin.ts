@@ -1,8 +1,7 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
-import Page from './Page';
 
-const SignInPage: Page = {
+export default {
     /**
      * HTML-шаблон для страницы входа (авторизации) с формой для ввода email и пароля,
      * кнопкой для создания аккаунта и навигационными элементами для перехода на другие страницы.
@@ -90,5 +89,3 @@ const SignInPage: Page = {
         // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };
-
-export default SignInPage;

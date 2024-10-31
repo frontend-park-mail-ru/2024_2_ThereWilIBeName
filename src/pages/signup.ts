@@ -1,8 +1,9 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
-import Page from './Page';
+import {emailRegex} from './validation';
+import {passwordRegex} from './validation';
 
-const SignUpPage: Page = {
+export default {
     /**
      * HTML-шаблон для страницы регистрации, содержащий форму для ввода логина, email, пароля
      * и подтверждения пароля, а также элементы для навигации на другие страницы.
@@ -66,7 +67,6 @@ const SignUpPage: Page = {
             const formPassword = (document.getElementById('password') as HTMLInputElement).value;
             const formConfirmPassword = (document.getElementById('confirm-password') as HTMLInputElement).value;
 
-            const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
             if (!emailRegex.test(formEmail)) {
                 errorMessage.textContent = 'Неверный email';
                 errorMessage.classList.add('visible');
@@ -79,7 +79,6 @@ const SignUpPage: Page = {
                 return;
             }
 
-            const passwordRegex = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*_-]?).{8,}$/;
             if (!passwordRegex.test(formPassword)) {
                 errorMessage.textContent = 'Пароль должен включать букву, цифру и символ';
                 errorMessage.classList.add('visible');
@@ -113,5 +112,3 @@ const SignUpPage: Page = {
         // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };
-
-export default SignUpPage;

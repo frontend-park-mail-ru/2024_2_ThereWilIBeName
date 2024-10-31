@@ -5,15 +5,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "lint": "eslint **/*.{ts,styl} --fix",
+    "lint": "eslint **/*.ts --fix",
     "build": "webpack"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "repository": "git+https://github.com/frontend-park-mail-ru/2024_2_ThereWilIBeName.git",
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@eslint/js": "^9.11.1",
+    "@eslint/js": "^9.13.0",
     "@typescript-eslint/eslint-plugin": "^8.12.2",
     "@typescript-eslint/parser": "^8.12.2",
     "eslint": "^9.13.0",
@@ -23,14 +26,20 @@
   "dependencies": {
     "@babel/core": "^7.25.9",
     "@babel/preset-env": "^7.25.9",
+    "@eslint/compat": "^1.2.2",
+    "@eslint/eslintrc": "^3.1.0",
+    "@types/eslint__js": "^8.42.3",
     "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
     "handlebars": "^4.7.8",
     "handlebars-loader": "^1.7.3",
-    "lodash": "^4.17.21",
+    "pre-commit": "^1.2.2",
     "style-loader": "^4.0.0",
+    "stylus": "^0.64.0",
     "stylus-loader": "^8.1.1",
     "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.12.2",
     "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4"
   }

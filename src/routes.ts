@@ -3,7 +3,7 @@ import PageSignIn from './pages/signin';
 import PageSignUp from './pages/signup';
 import Page404 from './pages/404';
 import PageProfile from './pages/profile';
-import Router from './utils/Router'
+import Router from './utils/Router';
 
 /**
  * Интерфейс, описывающий структуру маршрута в приложении.

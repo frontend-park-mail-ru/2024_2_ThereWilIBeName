@@ -1,7 +1,6 @@
 import Router from '../utils/Router';
-import Page from './Page';
 
-const ProfilePage: Page = {
+export default {
     /**
      * HTML-шаблон для страницы профиля с предупреждающим сообщением и кнопкой
      * для перехода на главную страницу.
@@ -41,5 +40,3 @@ const ProfilePage: Page = {
         // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };
-
-export default ProfilePage;
