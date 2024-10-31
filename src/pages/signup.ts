@@ -62,8 +62,8 @@ export default {
         signupForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formUsername = (document.getElementById('login') as HTMLInputElement).value;
-            const formEmail = (document.getElementById('email') as HTMLInputElement).value;
+            const formUsername = (document.getElementById('login') as HTMLInputElement).value.trim();
+            const formEmail = (document.getElementById('email') as HTMLInputElement).value.trim().toLowerCase();
             const formPassword = (document.getElementById('password') as HTMLInputElement).value;
             const formConfirmPassword = (document.getElementById('confirm-password') as HTMLInputElement).value;
 
@@ -90,6 +90,8 @@ export default {
                 errorMessage.classList.add('visible');
                 return;
             }
+
+
 
             const res = await Api.postSignup(formUsername, formEmail, formPassword);
 
