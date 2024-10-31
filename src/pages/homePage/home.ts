@@ -91,16 +91,14 @@ export default {
         });
 
         // Загрузка достопримечательностей
-        try {
-            const attractionsResponse = await Api.getAttractions();
-            const attractions = attractionsResponse.data;
-            const galleryElement = document.getElementById('gallery') as HTMLElement;
-            galleryElement.innerHTML = galleryTemplate({ attractions });
-        }
-        catch (error) {
-            console.error('Ошибка getAttractions:', error);
+        const attractionsResponse = await Api.getAttractions();
+        if (attractionsResponse.ok!) {
+            console.log('Ошибка getAttractions');
             alert('Ошибка загрузки достопримечательностей');
         }
+        const attractions = attractionsResponse.data;
+        const galleryElement = document.getElementById('gallery') as HTMLElement;
+        galleryElement.innerHTML = galleryTemplate({ attractions });
 
         // Получение информации о текущем пользователе
         const currentUser = await Api.getUser();
