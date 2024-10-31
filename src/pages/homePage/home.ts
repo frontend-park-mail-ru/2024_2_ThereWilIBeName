@@ -12,7 +12,7 @@ export default {
     html: `
         <header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
+                <img src="/logo.png" alt="Логотип" class="logo-image">
             </div>
             <div class="header-menu">
                 <button class="header-button" id="signin-button">вход</button>
