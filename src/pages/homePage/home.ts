@@ -92,10 +92,6 @@ export default {
 
         // Загрузка достопримечательностей
         const attractionsResponse = await Api.getAttractions();
-        if (attractionsResponse.ok!) {
-            console.log('Ошибка getAttractions');
-            alert('Ошибка загрузки достопримечательностей');
-        }
         const attractions = attractionsResponse.data;
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ attractions });
