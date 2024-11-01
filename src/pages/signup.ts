@@ -95,8 +95,13 @@ export default {
 
             const res = await Api.postSignup(formUsername, formEmail, formPassword);
 
-            if (!res.ok) {
+            if (res.status === 409) {
                 errorMessage.textContent = 'Логин уже занят';
+                errorMessage.classList.add('visible');
+                return;
+            }
+            if (res.ok!) {
+                errorMessage.textContent = 'Неизвестная ошибка';
                 errorMessage.classList.add('visible');
                 return;
             }
