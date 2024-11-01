@@ -48,16 +48,21 @@ simpleFormButton()
 
 simpleBlock(blockColor)
   background-color blockColor
-  grid-template-columns auto 1fr auto
   border-radius 20px
-  max-width 75%
+  max-width 70%
   height fit-content
   display grid
   margin 40px auto
-  padding 20px 20px
-  column-gap 20px
+  padding 25px 25px
+  column-gap 25px
+  filter drop-shadow(-16px 16px 0px myShadow)
 
-simpleInformationText()
-  margin 15px 20px
-  color myWhite
-  font-size 24x
+simpleInformationText(textColor)
+  margin 15px 25px
+  color textColor
+  font-size 20px
+
+simpleRow()
+  display grid
+  align-items center
+  margin 0 20px

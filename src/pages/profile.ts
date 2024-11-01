@@ -1,4 +1,6 @@
 import Router from '../utils/Router';
+import Api from '../utils/Api';
+import User from '../utils/user';
 
 export default {
     /**
@@ -13,24 +15,46 @@ export default {
             </div>
         </header>
         <main>
-            <div class="profile-block">
-                <img src="/avatar.png" alt="Аватар" class="avatar">
-                <div class="information-block"></div>
-                <div class="information-block">
-                    <div class="information-row">
-                        <div class="information-text-title">Логин</div>
-                        <div class="information-text">Здесь будет Логин</div>
+            <div class="background-profile">
+                <div class="user-block">
+                    <img src="/src/static/avatar.png" alt="Аватар" class="avatar">
+                    <div class="user-information">
+                        <div class="information-block">
+                            <div class="information-text-title">Здесь будет Username</div>
+                        </div>
+                        <div class="information-block">
+                            <div class="information-user-row">
+                                <div class="information-text-bold">Username</div>
+                                <div class="information-text" id="user-username">Здесь будет username</div>
+                                <div class="edit-button">
+                                    <img src="/src/static/edit.png" alt="edit" class="edit-icon">
+                                </div>
+                            </div>
+                            <div class="information-user-row">
+                                <div class="information-text-bold">Email</div>
+                                <div class="information-text" id="user-email">Здесь будет email</div>
+                            </div>
+                            <div class="information-user-row">
+                                <div class="information-text-bold" >ID</div>
+                                <div class="information-text" id="user-id">Здесь будет id</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="information-row">
-                        <div class="information-text-title">Email</div>
-                        <div class="information-text">Здесь будет Email</div>
+                    <div class="information-back-button" id="back-button">←</div>
+                </div>
+                <div class="profile-block">
+                    <div class="profile-menu-row">
+                        <div class="profile-menu-passive-left">Достижения</div>
+                        <div class="profile-menu-active">Поездки</div>
+                        <div class="profile-menu-passive-right">Отзывы</div>      
                     </div>
-                    <div class="information-row">
-                        <div class="information-text-title">ID</div>
-                        <div class="information-text">Здесь будет ID</div>
+                    <hr>
+                    <div>
+                        <div id="profile-root">
+                            <ul class="trips-gallery" id="trips-gallery">Здесь будут поездки</ul>
+                        </div>
                     </div>
                 </div>
-                <div class="information-back-button" id="back-button">←</div>
             </div>
         </main>`,
 
@@ -47,6 +71,21 @@ export default {
         homeLogo.addEventListener('click', () => {
             router.goto('/home');
         });
+
+        const backButton = document.getElementById('back-button') as HTMLButtonElement;
+        backButton.addEventListener('click', () => {
+            router.goto('/home');
+        });
+
+        // Проверка информации о текущем пользователе
+        const currentUser = await Api.getUser();
+        if (!currentUser.ok) {
+            console.log('Пользователь не авторизован');
+            return;
+        }
+
+
+
     },
 
     /**
