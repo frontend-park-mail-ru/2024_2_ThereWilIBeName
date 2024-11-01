@@ -103,6 +103,7 @@ export default {
             console.log('Пользователь не авторизован');
             return;
         }
+
         User.username = currentUser.data.username;
         User.id = currentUser.data.id;
         signinButton.textContent = 'Сменить пользователя';
