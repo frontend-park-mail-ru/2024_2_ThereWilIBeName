@@ -1,0 +1,48 @@
+@import 'colors.styl'
+@import 'simple.styl'
+@import 'error.styl'
+@import 'header.styl'
+@import 'menu.styl'
+
+@import 'gallery.styl'
+@import 'auth.styl'
+@import 'registration.styl'
+@import '404.styl'
+@import 'profile.styl'
+
+
+@font-face
+    font-style normal
+    font-weight bold
+    font-family 'IBM Plex Mono'
+    src local('IBM Plex Mono Bold'), url('../static/IBMPlexMono-Bold.ttf') format('truetype')
+
+@font-face
+    font-style normal
+    font-weight normal
+    font-family 'IBM Plex Mono'
+    src local('IBM Plex Mono Regular'), url('../static/IBMPlexMono-Regular.ttf') format('truetype')
+
+*
+    box-sizing border-box
+
+body
+    margin 0
+    padding 0
+    height 100%
+    background-size cover
+    background linearGradient() fixed
+    font-family "IBM Plex Mono", sans-serif
+
+.border
+    all unset
+    display block
+    width 90%
+    height 30px
+    padding 10px
+    border-radius 15px
+    margin 10px auto
+    background linearGradient() 50% 50% / 100vw 100vh
+
+.border:focus
+    background-position 0
