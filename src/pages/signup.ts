@@ -14,7 +14,7 @@ export default {
         `
         <header class="header">
             <div class="logo">
-                <img src="/logo.png" alt="Логотип" class="logo-image" id="home-logo">
+                <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
             </div>
         </header>
         <main>
