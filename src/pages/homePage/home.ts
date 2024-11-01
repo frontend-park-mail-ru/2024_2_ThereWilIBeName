@@ -15,6 +15,7 @@ export default {
                 <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
             </div>
             <div class="header-menu">
+                <button class="header-button" id="trips-button">Поездки</button>
                 <button class="header-button" id="signin-button">вход</button>
                 <button class="user-button" id="user-button"></button>
                 
@@ -45,6 +46,7 @@ export default {
      */
     async mount(router: Router): Promise<void> {
         const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
+        const tripsButton = document.getElementById('trips-button') as HTMLButtonElement;
         const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
         const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
         const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
@@ -69,6 +71,10 @@ export default {
 
         profileButton.addEventListener('click', () => {
             router.goto('/profile');
+        });
+
+        tripsButton.addEventListener('click', () => {
+            router.goto('/trips');
         });
 
         changeUserButton.addEventListener('click', () => {

@@ -1,8 +1,8 @@
-simpleButton(button-color, text-color)
+simpleButton(buttonColor, textColor)
   padding 7px 25px
   margin-right 15px
-  background-color button-color
-  color text-color
+  background-color buttonColor
+  color textColor
   border none
   border-radius 15px
   cursor pointer
@@ -22,7 +22,6 @@ simpleTitleGradient()
 
 simpleFormBlock()
   background-color myBlack
-  overflow hidden
   padding 20px
   border-radius 30px
   width 400px
@@ -46,3 +45,19 @@ simpleFormButton()
   border-radius 30px
   cursor pointer
   font-size 20px
+
+simpleBlock(blockColor)
+  background-color blockColor
+  grid-template-columns auto 1fr auto
+  border-radius 20px
+  max-width 75%
+  height fit-content
+  display grid
+  margin 40px auto
+  padding 20px 20px
+  column-gap 20px
+
+simpleInformationText()
+  margin 15px 20px
+  color myWhite
+  font-size 24x

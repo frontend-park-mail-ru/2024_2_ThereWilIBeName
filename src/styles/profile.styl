@@ -1,14 +1,40 @@
 .profile-page
-  .warning
-    padding 7px 25px
-    color myWhite
+  .profile-block
+    simpleBlock(myWhite)
+
+  .avatar
+    width 350px
+    height 350px
+    border-radius 20px
+    object-fit cover
+    grid-row span 2
+    background-color myBlack
+
+  .information-block
+    background-color myBlack
+    heigth fit-content
+    border-radius 20px
+    display grid
+    grid-template-rows auto auto auto
+
+
+  .information-row
+    display grid
+    grid-template-columns auto auto
+    align-items center
+    column-gap 10px
+
+  .information-text
+    simpleInformationText()
+
+  .information-text-title
+    simpleInformationText()
     font-weight bold
-    font-size 45px
-    margin 50px auto
+    font-size 34px
 
-  .warn-message
-    text-align center
-
-  .unknown-page-button
-    simpleButton(myBlack, myWhite)
-    font-size 25px
+  .information-back-button
+    font-size 30px
+    font-weight bold
+    color myGrey
+    text-align right
+    margin 0 20px

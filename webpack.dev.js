@@ -25,7 +25,7 @@ module.exports = merge(commonConfiguration, {
         },
         client: {
             logging: 'none',
-            overlay: true,
+            overlay: false,
             progress: false,
         },
         historyApiFallback: true,

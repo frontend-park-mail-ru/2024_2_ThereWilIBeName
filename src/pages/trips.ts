@@ -9,29 +9,12 @@ export default {
      */
     html: `<header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
+                <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
             </div>
         </header>
-        <main>
-            <div class="profile-block">
-                <img src="/avatar.png" alt="Аватар" class="avatar">
-                <div class="information-block"></div>
-                <div class="information-block">
-                    <div class="information-row">
-                        <div class="information-text-title">Логин</div>
-                        <div class="information-text">Здесь будет Логин</div>
-                    </div>
-                    <div class="information-row">
-                        <div class="information-text-title">Email</div>
-                        <div class="information-text">Здесь будет Email</div>
-                    </div>
-                    <div class="information-row">
-                        <div class="information-text-title">ID</div>
-                        <div class="information-text">Здесь будет ID</div>
-                    </div>
-                </div>
-                <div class="information-back-button" id="back-button">←</div>
-            </div>
+        <main class="warn-message">
+            <div class="warning">Здесь будет страница поездок :)</div>
+            <button class="unknown-page-button" id="error-button">На главную</button>
         </main>`,
 
     /**
@@ -43,6 +26,10 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после установки обработчика события.
      */
     async mount(router: Router): Promise<void> {
+        const errorButton = document.getElementById('error-button');
+        errorButton!.addEventListener('click', () => {
+            router.goto('/home');
+        });
         const homeLogo = document.getElementById('home-logo') as HTMLElement;
         homeLogo.addEventListener('click', () => {
             router.goto('/home');
