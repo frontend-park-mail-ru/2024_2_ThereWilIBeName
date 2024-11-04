@@ -2,8 +2,8 @@ import PageHome from './pages/homePage/home';
 import PageSignIn from './pages/signin';
 import PageSignUp from './pages/signup';
 import Page404 from './pages/404';
-import PageProfile from './pages/profile';
-import PageTrips from './pages/trips';
+import PageProfile from './pages/profilePage/profile';
+import PageTrips from './pages/tripsPage/trips';
 import Router from './utils/Router';
 
 /**

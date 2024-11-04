@@ -1,6 +1,7 @@
-import Router from '../utils/Router';
-import Api from '../utils/Api';
-import User from '../utils/user';
+import Router from '../../utils/Router';
+import Api from '../../utils/Api';
+import User from '../../utils/user';
+import updateMenu from './profileMenu';
 
 export default {
     /**
@@ -20,7 +21,7 @@ export default {
                     <img src="/avatar.png" alt="Аватар" class="avatar">
                     <div class="user-information">
                         <div class="information-block">
-                            <div class="information-text-title">Здесь будет Username</div>
+                            <div class="information-text-title" id="user-title">Здесь будет Username</div>
                         </div>
                         <div class="information-block">
                             <div class="information-user-row">
@@ -44,14 +45,14 @@ export default {
                 </div>
                 <div class="profile-block">
                     <div class="profile-menu-row">
-                        <div class="profile-menu-passive-left">Достижения</div>
-                        <div class="profile-menu-active">Поездки</div>
-                        <div class="profile-menu-passive-right">Отзывы</div>      
+                        <div class="profile-menu-passive-left" id="left-menu-button">Достижения</div>
+                        <div class="profile-menu-active" id="active-menu-button">Поездки</div>
+                        <div class="profile-menu-passive-right" id="right-menu-button">Отзывы</div>      
                     </div>
                     <hr>
                     <div>
                         <div id="profile-root">
-                            <ul class="trips-gallery" id="trips-gallery">Здесь будут поездки</ul>
+                            <ul class="gallery-profile" id="gallery-profile">Здесь будут поездки</ul>
                         </div>
                     </div>
                 </div>
@@ -78,24 +79,52 @@ export default {
         });
 
         // Проверка информации о текущем пользователе
-        const currentUser = await Api.getUser();
-        if (!currentUser.ok) {
-            console.log('Пользователь не авторизован');
-            return;
+
+        if (User.username === '') {
+            const currentUser = await Api.getUser();
+            User.username = currentUser.data.username;
+            User.id = currentUser.data.id;
+            User.email = currentUser.data.email;
         }
 
-        const leftMenuButton = document.getElementById('profile-menu-passive-left') as HTMLButtonElement;
-        const rightMenuButton = document.getElementById('profile-menu-passive-right') as HTMLButtonElement;
-        const activeMenuButton = document.getElementById('profile-menu-active') as HTMLButtonElement;
-        const leftMenuText = leftMenuButton.textContent;
-        const rightMenuText = rightMenuButton.textContent;
-        const centerMenuText = activeMenuButton.textContent;
-        leftMenuButton.addEventListener('click', () => {
+        const userTitle = document.getElementById('user-title') as HTMLElement;
+        const userUserName = document.getElementById('user-username') as HTMLElement;
+        const userEmail = document.getElementById('user-email') as HTMLElement;
+        const userId = document.getElementById('user-id') as HTMLElement;
 
+        userTitle.textContent = User.username.charAt(0).toUpperCase() + User.username.slice(1);
+        userUserName.textContent = User.username;
+        userEmail.textContent = User.email;
+        userId.textContent = User.id;
+
+        const leftMenuButton = document.getElementById('left-menu-button') as HTMLButtonElement;
+        const rightMenuButton = document.getElementById('right-menu-button') as HTMLButtonElement;
+        const activeMenuButton = document.getElementById('active-menu-button') as HTMLButtonElement;
+        let leftMenuText = leftMenuButton.textContent as string;
+        let rightMenuText = rightMenuButton.textContent as string;
+        let centerMenuText = activeMenuButton.textContent as string;
+
+        leftMenuButton.addEventListener('click', () => {
+            leftMenuButton.textContent = rightMenuText;
+            rightMenuButton.textContent = centerMenuText;
+            activeMenuButton.textContent = leftMenuText;
+            updateMenu(activeMenuButton);
+            leftMenuText = leftMenuButton.textContent;
+            rightMenuText = rightMenuButton.textContent;
+            centerMenuText = activeMenuButton.textContent;
         });
 
+        rightMenuButton.addEventListener('click', () => {
+            leftMenuButton.textContent = centerMenuText;
+            rightMenuButton.textContent = leftMenuText;
+            activeMenuButton.textContent = rightMenuText;
+            updateMenu(activeMenuButton);
+            leftMenuText = leftMenuButton.textContent;
+            rightMenuText = rightMenuButton.textContent;
+            centerMenuText = activeMenuButton.textContent;
+        });
 
-
+        updateMenu(activeMenuButton);
 
     },
 

@@ -97,13 +97,31 @@ export default {
         });
 
         // Загрузка достопримечательностей
-        const attractionsResponse = await Api.getAttractions();
+        // const attractionsResponse = await Api.getAttractions();
+        const attractionsResponse = {
+            data: [
+                {},{},{},{},
+            ],
+            status: 200,
+            ok: true,
+        };
+
         const attractions = attractionsResponse.data;
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ attractions });
 
         // Получение информации о текущем пользователе
-        const currentUser = await Api.getUser();
+        // const currentUser = await Api.getUser();
+
+        const currentUser = {
+            data: {
+                username: 'test',
+                email: 'test@mail.ru',
+                id: '0'
+            },
+            status: 200,
+            ok: true
+        };
 
         if (!currentUser.ok) {
             console.log('Пользователь не авторизован');
@@ -112,6 +130,7 @@ export default {
 
         User.username = currentUser.data.username;
         User.id = currentUser.data.id;
+        User.email = currentUser.data.email;
         signinButton.textContent = 'Сменить пользователя';
         userButton.textContent = User.username;
         userNameDiv.textContent = User.username;

@@ -17,6 +17,7 @@
   .user-block
     simpleBlock(myWhite)
     grid-template-columns auto 1fr auto
+    margin-top 0
 
   .profile-block
     simpleBlock(myWhite)
@@ -38,31 +39,43 @@
 
   .information-user-row
     simpleRow()
-    grid-template-columns 40% auto auto
+    grid-template-columns 40% auto 10%
 
   .profile-menu-row
     simpleRow()
     height fit-content
     grid-template-columns 30% 40% 30%
-    column-gap 20px
+
+  .profile-menu-passive-left, .profile-menu-passive-right
+    font-size 27px
+    color myShadow
+    cursor pointer
+    transition transform 0.3s ease
 
   .profile-menu-passive-left
-    font-size 27px
-    color myShadow
     text-align right
-    cursor pointer
+
+  .profile-menu-passive-left:hover
+    transform scale(1.1)
+    color myRed
 
   .profile-menu-passive-right
-    font-size 27px
-    color myShadow
     text-align left
-    cursor pointer
+
+  .profile-menu-passive-right:hover
+    transform scale(1.05)
+    color myRed
 
   .profile-menu-active
     font-size 40px
     color myBlack
     font-weight bold
     text-align center
+    transition transform 0.3s ease
+    cursor pointer
+
+  .profile-menu-active:hover
+    transform scale(1.05)
 
   .information-text
     simpleInformationText(myWhite)
@@ -83,8 +96,13 @@
     font-size 30px
     font-weight bold
     color myGrey
+    height fit-content
     text-align right
     cursor pointer
+    transition transform 0.3s ease
+
+  .information-back-button:hover
+    color myRed
 
   .user-information
     display grid
@@ -97,6 +115,11 @@
     border-radius 10px
     background myWhite
     cursor pointer
+    transition background 0.3s ease, transform 0.3s ease
+
+  .edit-button:hover
+    background linearGradient()
+    transform scale(1.1)
 
   .edit-icon
     object-fit contain
@@ -109,9 +132,121 @@
     background-color myShadow
     margin 20px 30px
 
-  .trips-gallery
+  .gallery-profile
     display flex
     flex-wrap wrap
     justify-content space-evenly
     gap 50px 30px
-    padding 0px 150px
+
+  .gallery-item-profile-trips
+    simpleGalleryItem(250px, 250px, myWhite)
+    grid-template-rows 20% 10% auto
+    cursor pointer
+    transition transform 0.3s ease
+
+  .gallery-item-profile-trips:hover
+    transform scale(1.05)
+
+  .gallery-item-profile-trips-img
+    object-fit cover
+    width 100%
+    height 100%
+    border 2px solid myBlack
+    border-radius 20px
+
+  .trip-icon
+    width 40px
+    height 40px
+
+  .profile-trip-row-name
+    color myBlack
+    display grid
+    grid-template-columns auto 1fr
+    column-gap 20px
+    align-items center
+
+  .gallery-profile-trip-name
+    color myBlack
+    font-size 20px
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+  .gallery-profile-trip-date
+    color myBlack
+    text-align center
+
+  .gallery-item-achievements
+    simpleGalleryItem(250px, 200px, myBlack)
+    grid-template-rows auto auto auto
+    grid-template-columns 100%
+    row-gap 0
+    transition transform 0.3s ease
+    place-items center
+
+  .gallery-item-achievements:hover
+    transform scale(1.05)
+
+  .gallery-item-achievements-img
+    object-fit cover
+    width 90px
+    height 90px
+    border-radius 20px
+
+  .gallery-item-achievements-name
+    width 150px
+    font-size 20px
+    color myWhite
+    text-align center
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+  .gallery-item-achievements-progressbar
+    font-size 20px
+    color myWhite
+    padding 10px 40px
+    background linearGradient()
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+    border-radius 10px
+
+  .gallery-item-reviews
+    simpleGalleryItem(150px, 800px, myWhite)
+    grid-template-columns auto 20% 1fr
+    column-gap 20px
+
+  .gallery-item-reviews-img
+    object-fit cover
+    width 120px
+    height 120px
+    border-radius 20px
+    border 2px solid myBlack
+
+  .gallery-item-reviews-column
+    display grid
+    grid-template-rows 20% 25% 25% 1fr
+    align-items center
+
+  .gallery-item-reviews-name
+    font-size 24px
+    font-weight bold
+    color myBlack
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+  .gallery-item-reviews-score
+    font-size 20px
+    color myBlack
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+  .gallery-item-reviews-text
+    font-size 20px
+    color myBlack
+    overflow hidden
+    height 110px
+    mask-image linear-gradient(180deg, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0))

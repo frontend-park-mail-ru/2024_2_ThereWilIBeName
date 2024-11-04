@@ -1,14 +1,128 @@
 .trips-page
-  .warning
-    padding 7px 25px
-    color myWhite
-    font-weight bold
-    font-size 45px
-    margin 50px auto
+  .trips-block
+    simpleBlock(myBlack)
+    grid-template-rows auto auto 1fr
+    margin-top 0
 
-  .warn-message
+  .trips-button-row
+    display flex
+    flex-wrap wrap
+    justify-content space-evenly
+    padding 0 50px
+
+  .trip-create-button
+    simpleButton(myGrey, myWhite)
+    transition transform 0.3s ease, background 0.3s ease
+
+  .trip-create-button:hover
+    transform scale(1.05)
+    background myGreen
+
+  .trip-delete-button
+    simpleButton(myGrey, myWhite)
+    transition transform 0.3s ease, background 0.3s ease
+
+  .trip-delete-button:hover
+    transform scale(1.05)
+    background myRed
+
+  .trip-edit-button
+    simpleButton(myGrey, myWhite)
+    transition transform 0.3s ease, background 0.3s ease
+
+  .trip-edit-button:hover
+    transform scale(1.05)
+    background myYellow
+
+  .trips-title-row
+    display grid
+    grid-template-columns 1fr auto
+
+  .trips-title
+    font-size 40px
+    padding-left 50px
+    font-weight bold
+    color myWhite
     text-align center
 
-  .unknown-page-button
-    simpleButton(myBlack, myWhite)
-    font-size 25px
+  hr
+    border none
+    height 2px
+    background-color myGrey
+    margin 20px 30px
+
+  .gallery-trips
+    display flex
+    flex-wrap wrap
+    justify-content space-evenly
+    padding 0
+    gap 15px 0
+
+  .trips-back-button
+    font-size 40px
+    font-weight bold
+    padding 0 15px
+    color myGrey
+    height fit-content
+    cursor pointer
+    transition color 0.3s ease
+
+  .trips-back-button:hover
+    color myRed
+
+  .gallery-item-trips
+    simpleGalleryItem(100px, 700px, myWhite)
+    grid-template-columns 10% 15% 35% auto 5%
+    column-gap 10px
+    transition height 0.3s ease
+
+  .gallery-item-trips.open
+    height 500px
+
+  .trips-trip-icon
+    width 65px
+    height 65px
+
+  .gallery-item-trips-img
+    object-fit cover
+    height 65px
+    border 2px solid myBlack
+    border-radius 20px
+
+  .trips-open-icon
+    width 35px
+    height 35px
+    margin auto
+    rotate -90deg
+    cursor pointer
+    transition transform 0.3s ease
+
+  .trips-open-icon.open
+    transform rotate(90deg)
+
+  .trips-share-icon
+    width 30px
+    height 30px
+    border-radius 50%
+    cursor pointer
+
+  .trips-column-open
+    display grid
+    align-items center
+    grid-template-rows 70px 1fr
+
+  .trips-column-info
+    display grid
+    grid-template-rows auto auto 1fr
+
+  .trips-column-buttons
+    display grid
+    grid-template-rows auto auto 1fr
+    row-gap 10px
+
+  .gallery-trips-name
+    font-size 35px
+    font-weight bold
+
+  .gallery-trips-date
+    font-size 17px
