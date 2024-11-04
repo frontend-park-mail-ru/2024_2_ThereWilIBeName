@@ -12,13 +12,13 @@ export default {
      */
     html: `<header class="header">
             <div class="logo">
-                <img src="/logo.png" alt="Логотип" class="logo-image" id="home-logo">
+                <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
             </div>
         </header>
         <main>
             <div class="background-profile">
                 <div class="user-block">
-                    <img src="/avatar.png" alt="Аватар" class="avatar">
+                    <img src="/src/static/avatar.png" alt="Аватар" class="avatar">
                     <div class="user-information">
                         <div class="information-block">
                             <div class="information-text-title" id="user-title">Здесь будет Username</div>
@@ -28,7 +28,7 @@ export default {
                                 <div class="information-text-bold">Username</div>
                                 <div class="information-text" id="user-username">Здесь будет username</div>
                                 <div class="edit-button">
-                                    <img src="/edit.png" alt="edit" class="edit-icon">
+                                    <img src="/src/static/edit.png" alt="edit" class="edit-icon">
                                 </div>
                             </div>
                             <div class="information-user-row">
