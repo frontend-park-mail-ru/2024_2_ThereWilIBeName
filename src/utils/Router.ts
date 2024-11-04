@@ -45,6 +45,9 @@ export default class Router {
         this.routes = routes;
         const rootPath = location.pathname;
         this.goto(rootPath);
+        window.addEventListener('popstate', () => {
+            this.goto(location.pathname, false);
+        });
     }
 
     /**
@@ -69,7 +72,7 @@ export default class Router {
      * @returns {Promise<void>} Промис, который выполняется, когда страница завершила монтирование.
      * @throws {TypeError} Если URL не соответствует ни одному маршруту.
      */
-    async goto(url: string): Promise<void> {
+    async goto(url: string, withPushState = true): Promise<void> {
         if (this.currentPage) {
             this.currentPage.unmount();
         }
@@ -89,7 +92,10 @@ export default class Router {
         // Обновление заголовка и URL
         document.title = page.title;
         const newUrl = location.origin + url;
-        history.pushState(null, '', newUrl);
+
+        if (withPushState) {
+            history.pushState(null, '', newUrl);
+        }
 
         // Изменение CSS-класса
         if (this.lastCssClass === '') {
@@ -98,5 +104,6 @@ export default class Router {
             this.rootElement.classList.replace(this.lastCssClass, page.cssClass);
         }
         this.lastCssClass = page.cssClass;
+
     }
 }
