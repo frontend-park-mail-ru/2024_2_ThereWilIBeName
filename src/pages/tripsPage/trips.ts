@@ -1,6 +1,12 @@
 import Router from '../../utils/Router';
 import galleryTemplateTrips from './trips.hbs';
 
+import logoImage from '../../static/logo.png';
+import openIcon from '../../static/open.png';
+import tripIcon from '../../static/trip_icon.png';
+import copyLinkIcon from '../../static/copylink.png';
+import shareIcon from '../../static/share.png';
+
 export default {
     /**
      * HTML-шаблон для страницы профиля с предупреждающим сообщением и кнопкой
@@ -10,7 +16,7 @@ export default {
      */
     html: `<header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
+                <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
             </div>
         </header>
         <main>
@@ -60,7 +66,7 @@ export default {
         };
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
-        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips });
+        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, shareIcon });
 
         document.querySelectorAll('.trips-open-icon').forEach(icon => {
             icon.addEventListener('click', () => {

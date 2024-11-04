@@ -3,6 +3,8 @@ import User from '../../utils/user';
 import Router from '../../utils/Router';
 import galleryTemplate from './home.hbs';
 
+import logoImage from '../../static/logo.png';
+
 export default {
     /**
      * HTML-шаблон главной страницы, отображающей заголовок, меню пользователя и галерею достопримечательностей.
@@ -12,7 +14,7 @@ export default {
     html: `
         <header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
+                <img src="${logoImage}" alt="Логотип" class="logo-image">
             </div>
             <div class="header-menu">
                 <button class="header-button" id="trips-button">Поездки</button>

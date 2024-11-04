@@ -6,6 +6,7 @@ module.exports = {
     entry: './src/index.ts',
     output: {
         filename: 'bundle.js',
+        publicPath: '/static',
         path: path.resolve(__dirname, 'build'),
         clean: true,
     },
@@ -15,6 +16,7 @@ module.exports = {
             patterns: [
                 {
                     from: path.resolve(__dirname, './src/static'),
+                    to: './static'
                 },
             ],
         }),
@@ -47,6 +49,10 @@ module.exports = {
             {
                 test: /\.hbs$/,
                 loader: 'handlebars-loader',
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
+                type: 'asset/resource',
             },
         ],
     },

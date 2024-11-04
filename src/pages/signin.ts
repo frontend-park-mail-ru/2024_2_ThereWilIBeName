@@ -1,6 +1,8 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
 
+import logoImage from '../static/logo.png';
+
 export default {
     /**
      * HTML-шаблон для страницы входа (авторизации) с формой для ввода email и пароля,
@@ -12,7 +14,7 @@ export default {
         `
     <header class="header">
         <div class="logo">
-            <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
+            <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
         </div>
     </header>
     <main>

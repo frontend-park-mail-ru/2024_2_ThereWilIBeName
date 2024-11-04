@@ -3,6 +3,8 @@ import Router from '../utils/Router';
 import {emailRegex} from './validation';
 import {passwordRegex} from './validation';
 
+import logoImage from '../static/logo.png';
+
 export default {
     /**
      * HTML-шаблон для страницы регистрации, содержащий форму для ввода логина, email, пароля
@@ -14,7 +16,7 @@ export default {
         `
         <header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
+                <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
             </div>
         </header>
         <main>

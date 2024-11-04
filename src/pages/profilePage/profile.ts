@@ -3,6 +3,12 @@ import Api from '../../utils/Api';
 import User from '../../utils/user';
 import updateMenu from './profileMenu';
 
+import logoImage from '../../static/logo.png';
+import defaultAvatar from '../../static/avatar.png';
+import editButton from '../../static/edit.png';
+// import  from '../../static/avatar.png';
+// import  from '../../static/avatar.png';
+
 export default {
     /**
      * HTML-шаблон для страницы профиля с предупреждающим сообщением и кнопкой
@@ -12,13 +18,13 @@ export default {
      */
     html: `<header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
+                <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
             </div>
         </header>
         <main>
             <div class="background-profile">
                 <div class="user-block">
-                    <img src="/src/static/avatar.png" alt="Аватар" class="avatar">
+                    <img src="${defaultAvatar}" alt="Аватар" class="avatar">
                     <div class="user-information">
                         <div class="information-block">
                             <div class="information-text-title" id="user-title">Здесь будет Username</div>
@@ -28,7 +34,7 @@ export default {
                                 <div class="information-text-bold">Username</div>
                                 <div class="information-text" id="user-username">Здесь будет username</div>
                                 <div class="edit-button">
-                                    <img src="/src/static/edit.png" alt="edit" class="edit-icon">
+                                    <img src="${editButton}" alt="edit" class="edit-icon">
                                 </div>
                             </div>
                             <div class="information-user-row">

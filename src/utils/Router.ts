@@ -78,6 +78,9 @@ export default class Router {
         if (!page) {
             throw TypeError('Unknown URL');
         }
+        this.rootElement.classList.add('hidden');
+        await new Promise(resolve => setTimeout(resolve, 200));
+        this.rootElement.classList.remove('hidden');
         this.rootElement.innerHTML = page.html;
         await this.#waitForPageLoad();
         page.mount(this);

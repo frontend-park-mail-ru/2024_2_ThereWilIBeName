@@ -2,6 +2,9 @@ import galleryTemplateTrips from './profileTrips.hbs';
 import galleryTemplateAchievements from './profileAchievements.hbs';
 import galleryTemplateReviews from './profileReviews.hbs';
 
+import defaultAchievementIcon from '../../static/achievement.png';
+import tripIcon from '../../static/trip_icon.png';
+
 export default function updateMenu(activeMenuButton: HTMLElement) {
 
 
@@ -16,7 +19,7 @@ export default function updateMenu(activeMenuButton: HTMLElement) {
         };
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips });
+        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon });
     }
 
     if (activeMenuButton.textContent === 'Достижения') {
@@ -30,7 +33,8 @@ export default function updateMenu(activeMenuButton: HTMLElement) {
         };
         const achievements = achievementsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements });
+        console.log(defaultAchievementIcon);
+        galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
     }
 
     if (activeMenuButton.textContent === 'Отзывы') {
