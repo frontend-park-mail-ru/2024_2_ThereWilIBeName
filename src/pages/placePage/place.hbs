@@ -1,0 +1,15 @@
+{{#each reviews}}
+    <li>
+        <div class="review-block">
+        <div class="review-info">
+            <div class="user-image">
+                <img src="{{image}}" alt="{{name}}">
+            </div>
+            <div class="text-average">{{name}}</div>
+            <div class="rating" style="--progress: {{rating}};">{{rating}}/5</div>
+        </div>
+        <div><hr class="solid"></div>
+        <div class="review-text">{{text}}</div>
+    </div>
+    </li>
+{{/each}}

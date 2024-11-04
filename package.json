@@ -14,11 +14,15 @@
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.11.1",
+    "@types/handlebars": "^4.0.40",
     "@typescript-eslint/eslint-plugin": "^8.12.2",
     "@typescript-eslint/parser": "^8.12.2",
     "eslint": "^9.13.0",
-    "express": "^4.21.0",
-    "globals": "^15.9.0"
+    "express": "^4.21.1",
+    "globals": "^15.9.0",
+    "handlebars-webpack-plugin": "^2.2.1",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "@babel/core": "^7.25.9",
@@ -30,8 +34,6 @@
     "lodash": "^4.17.21",
     "style-loader": "^4.0.0",
     "stylus-loader": "^8.1.1",
-    "ts-loader": "^9.5.1",
-    "webpack": "^5.95.0",
-    "webpack-cli": "^5.1.4"
+    "ts-loader": "^9.5.1"
   }
 }

@@ -32,6 +32,12 @@ module.exports = {
             {
                 test: /\.hbs$/,
                 loader: 'handlebars-loader',
+                options: {
+                    helperDirs: path.join(__dirname, 'src/helpers'),
+                    precompileOptions: {
+                        knownHelpersOnly: false,
+                    },
+                },
             },
         ],
     },

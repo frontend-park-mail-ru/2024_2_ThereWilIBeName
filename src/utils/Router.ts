@@ -78,9 +78,13 @@ export default class Router {
         if (!page) {
             throw TypeError('Unknown URL');
         }
+
+        const match = page.path.exec(url);
+        const params = match ? match.slice(1) : [];
+
         this.rootElement.innerHTML = page.html;
         await this.#waitForPageLoad();
-        page.mount(this);
+        page.mount(this, params);
         this.currentPage = page;
 
         // Обновление заголовка и URL

@@ -3,6 +3,7 @@ import PageSignIn from './pages/signin';
 import PageSignUp from './pages/signup';
 import Page404 from './pages/404';
 import PageProfile from './pages/profile';
+import PagePLace from './pages/placePage/place';
 import Router from './utils/Router'
 
 /**
@@ -19,7 +20,7 @@ export interface Route {
     path: RegExp;
     title: string;
     html: string;
-    mount: (router: Router) => Promise<void>;
+    mount: (router: Router, params: string[]) => Promise<void>;
     unmount: () => void;
     cssClass: string;
 }
@@ -62,6 +63,14 @@ const routes: Route[] = [
         mount: PageSignUp.mount,
         unmount: PageSignUp.unmount,
         cssClass: 'registration-page',
+    },
+    {
+        path: /^\/places\/(\d+)$/,
+        title: '',
+        html: PagePLace.html,
+        mount: PagePLace.mount,
+        unmount: PagePLace.unmount,
+        cssClass: 'place-page',
     },
     {
         path: /.*/,

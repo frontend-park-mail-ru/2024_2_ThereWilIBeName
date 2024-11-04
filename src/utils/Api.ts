@@ -36,6 +36,27 @@ type Logout = {
     // что-то начнут возвращать
 }
 
+type PostReview = {
+    id: number,
+    user_id: number,
+    place_id: number,
+    rating: number,
+    review_text: string,
+    created_at: string,
+}
+
+type GetReview = {
+    id: number,
+    username: string,
+    avatar_path: string,
+    rating: number,
+    review_text: string,
+}
+
+type Response = {
+    message: string,
+}
+
 export default {
     /**
      * Асинхронная функция для получения списка достопримечательностей с сервера.
@@ -65,6 +86,39 @@ export default {
         };
     },
 
+    // async getAttractions(): Promise<{
+    //     data: { imagePath: string; name: string; description: string; id: number }[];
+    //     ok: boolean;
+    //     status: number
+    // }> {
+    //     const getAttractionsUrl = '/api/v1/places?limit=20&offset=0';
+    //     const res = await RESTApi.get(getAttractionsUrl);
+    //     return {
+    //         data: [
+    //             {
+    //                 id: 0,
+    //                 name: 'Московский Кремль',
+    //                 imagePath: '/api/images/image1.png',
+    //                 description: 'Крепость с комплексом церквей, дворцов и музеев с произведениями искусства и государственными регалиями.'
+    //             },
+    //             {
+    //                 id: 1,
+    //                 name: 'Красная Площадь',
+    //                 imagePath: '/api/images/image2.png',
+    //                 description: 'Знаменитая площадь с Кремлем, собором Василия Блаженного XVI века и мавзолеем Ленина.'
+    //             },
+    //             {
+    //                 id: 2,
+    //                 name: 'Храм Василия Блаженного',
+    //                 imagePath: '/api/images/image3.png',
+    //                 description: 'Собор XVI века с разноцветными куполами (ныне музей).'
+    //             }
+    //         ],
+    //         status: res.status,
+    //         ok: res.ok,
+    //     };
+    // },
+
     async getAttraction(id: number): Promise<JsonResponse<Attraction>> {
         const res = await RESTApi.get(`/api/v1/places/${id}`);
         return {
@@ -84,6 +138,73 @@ export default {
             ok: res.ok,
         };
     },
+
+    // async getAttraction(id: number): Promise<{
+    //     data: { imagePath: string; name: string; description: string; id: number };
+    //     ok: boolean;
+    //     status: number
+    // }> {
+    //     const getAttractionsUrl = '/api/v1/places?limit=20&offset=0';
+    //     const res = await RESTApi.get(getAttractionsUrl);
+    //     return {
+    //         data:
+    //             {
+    //                 id: 0,
+    //                 name: 'Московский Кремль',
+    //                 imagePath: '/src/static/img_1.png',
+    //                 description: 'Крепость с комплексом церквей, дворцов и музеев с произведениями искусства и государственными регалиями.'
+    //             },
+    //         status: res.status,
+    //         ok: res.ok,
+    //     };
+    // },
+
+    async getReviews(id: number): Promise<JsonResponse<GetReview[]>> {
+        const res = await RESTApi.get(`/api/v1/reviews/${id}`);
+        return {
+            data: res.data.map( (review: any) =>
+                ({
+                    id: Number(review.data.id),
+                    username: String(review.data.username),
+                    avatar_path: String(review.data.avatar_path),
+                    rating: Number(review.data.rating),
+                    review_text: String(review.data.review_text),
+                })
+            ),
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    // async getReviews(id: number): Promise<{
+    //     data: { image: string; name: string; text: string; id: number; date: string; rating: number}[];
+    //     ok: boolean;
+    //     status: number
+    // }> {
+    //     const res = await RESTApi.get(`/api/v1/reviews/${id}`);
+    //     return {
+    //         data: [
+    //             {
+    //                 'id': 0,
+    //                 'image': '/src/styles/img.png',
+    //                 'name': 'Василиса',
+    //                 'date': '10.10.2024',
+    //                 'text': 'Крепость с комплексом церквей, дворцов и музеев с произведениями искусства и государственными регалиями.',
+    //                 'rating': 4
+    //             },
+    //             {
+    //                 'id': 1,
+    //                 'image': '/src/styles/img.png',
+    //                 'name': 'Артем',
+    //                 'date': '01.10.2024',
+    //                 'text': 'Крепость с комплексом церквей, дворцов и музеев с произведениями искусства и государственными регалиями.',
+    //                 'rating': 2
+    //             },
+    //         ],
+    //         status: res.status,
+    //         ok: res.ok,
+    //     };
+    // },
 
     async getUser(): Promise<JsonResponse<User>> {
         const res = await RESTApi.get('/api/v1/users/me');
@@ -144,6 +265,33 @@ export default {
                 login: String(res.data.login),
                 email: String(res.data.email),
                 created_at: String(res.data.created_at),
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async postReview(user_id: number, place_id: number, review_text: string, rating: number): Promise<JsonResponse<PostReview>> {
+        const res = await RESTApi.post('/api/v1/reviews', {user_id, place_id, rating, review_text});
+        return {
+            data: {
+                id: Number(res.data.id),
+                user_id: Number(res.data.user_id),
+                place_id: Number(res.data.place_id),
+                rating: Number(res.data.rating),
+                review_text: String(res.data.review_text),
+                created_at: String(res.data.created_at),
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async deleteReview(id: number): Promise<JsonResponse<Response>> {
+        const res = await RESTApi.delete(`/api/v1/reviews/${id}`);
+        return {
+            data: {
+                message: String(res.data.message),
             },
             status: res.status,
             ok: res.ok,

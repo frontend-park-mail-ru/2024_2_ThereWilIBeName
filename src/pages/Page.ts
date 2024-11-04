@@ -13,7 +13,7 @@ interface Page {
      * @param router - Экземпляр класса Router для управления навигацией.
      * @returns Промис, который выполняется после завершения монтирования страницы.
      */
-    mount(router: Router): Promise<void>;
+    mount(router: Router, params: any): Promise<void>;
 
     /**
      * Функция размонтирования страницы.
