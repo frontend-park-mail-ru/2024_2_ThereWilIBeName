@@ -99,31 +99,14 @@ export default {
         });
 
         // Загрузка достопримечательностей
-        // const attractionsResponse = await Api.getAttractions();
-        const attractionsResponse = {
-            data: [
-                {},{},{},{},
-            ],
-            status: 200,
-            ok: true,
-        };
+        const attractionsResponse = await Api.getAttractions();
 
         const attractions = attractionsResponse.data;
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ attractions });
 
         // Получение информации о текущем пользователе
-        // const currentUser = await Api.getUser();
-
-        const currentUser = {
-            data: {
-                username: 'test',
-                email: 'test@mail.ru',
-                id: '0'
-            },
-            status: 200,
-            ok: true
-        };
+        const currentUser = await Api.getUser();
 
         if (!currentUser.ok) {
             console.log('Пользователь не авторизован');

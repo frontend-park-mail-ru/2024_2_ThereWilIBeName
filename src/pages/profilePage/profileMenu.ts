@@ -7,7 +7,6 @@ import tripIcon from '../../static/trip_icon.png';
 
 export default function updateMenu(activeMenuButton: HTMLElement) {
 
-
     if (activeMenuButton.textContent === 'Поездки') {
         // const tripsResponse = await Api.getTrips();
         const tripsResponse = {
