@@ -6,7 +6,6 @@ module.exports = {
     entry: './src/index.ts',
     output: {
         filename: 'bundle.js',
-        publicPath: '/static',
         path: path.resolve(__dirname, 'build'),
         clean: true,
     },
