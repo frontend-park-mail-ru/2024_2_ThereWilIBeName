@@ -10,30 +10,30 @@
         margin 10px 10px
         transition transform 0.3s ease
 
-    .logo-image:hover
-        transform scale(1.05)
+        &:hover
+            transform scale(1.05)
 
     .header-menu
         display flex
         align-items center
 
     .header-button
-        simpleButton(myBlack, myWhite)
+        mixinButton(myBlack, myWhite)
         transition transform 0.3s ease
 
-    .header-button:hover
-        transform scale(1.1)
+        &:hover
+            transform scale(1.1)
 
-    .header-button.hidden
-        display none
+        &.hidden
+            display none
 
     .user-button
-        simpleButton(myBlack, myWhite)
+        mixinButton(myBlack, myWhite)
         padding 7px 0
         transition color 0.3s ease
 
-    .user-button:hover
-        color myRed
+        &:hover
+            color myRed
 
-    .user-button.show
-        padding 7px 25px
+        &.show
+            padding 7px 25px

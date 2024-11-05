@@ -1,12 +1,14 @@
 .auth-page
     .auth-block
-        simpleFormBlock()
+        mixinFormBlock()
 
-    .auth-signup-button, .auth-title
-        simpleTitleGradient()
+    .auth-signup-button
+    .auth-title
+        mixinTitleGradient()
 
-    .auth-text, .back-button
-        simpleFormText()
+    .auth-text
+    .back-button
+        mixinFormText()
 
     .back-button
         width fit-content
@@ -14,11 +16,11 @@
         font-weight bold
         font-size 20px
 
-    .back-button:hover
-        color myRed
+        &:hover
+            color myRed
 
     .auth-button
-        simpleFormButton()
+        mixinFormButton()
 
     .auth-signup-button
         font-size 18px
@@ -29,9 +31,9 @@
         display block
         transition letter-spacing 0.2s ease, background-position 0.3s ease
 
-    .auth-signup-button:hover
-        letter-spacing 2px
-        background-position 0 0
+        &:hover
+            letter-spacing 2px
+            background-position 0 0
 
     .remember-me-container
         display flex
@@ -54,13 +56,13 @@
         background-color myGrey
         cursor pointer
 
-    .custom-check-icon::after
-        position absolute
-        left 2px
-        top -3px
-        opacity 0
-        transition opacity 0.2s ease
-        content "✔"
+        &::after
+            position absolute
+            left 2px
+            top -3px
+            opacity 0
+            transition opacity 0.2s ease
+            content "✔"
 
-    .custom-check-icon:checked::after
-        opacity 1
+        &:checked::after
+            opacity 1

@@ -1,6 +1,6 @@
 .home-page
     .menu-button
-        simpleButton(myBlack, myWhite)
+        mixinButton(myBlack, myWhite)
         margin 0
         text-align left
 
@@ -30,11 +30,11 @@
         font-size 30px
 
     .close-button
-        simpleButton(myRed, myWhite)
+        mixinButton(myRed, myWhite)
         margin 0
 
-    .side-menu.open
-        right 0
+        &.open
+            right 0
 
     .background-menu
         position fixed

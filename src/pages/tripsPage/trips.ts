@@ -27,9 +27,7 @@ export default {
                 </div>
                 <hr>
                 <div class="trips-button-row">
-                    <div class="trip-create-button" id="trip-create-button">Создать поездку</div>
-                    <div class="trip-edit-button" id="trip-edit-button">Редактировать поездку</div>
-                    <div class="trip-delete-button" id="trip-delete-button">Удалить поездку</div>
+                    <div class="trip-create-button" id="trip-create-button">+</div>
                 </div>
                 <div id="trips-root">
                     <ul class="gallery-trips" id="gallery-trips">Здесь будут поездки</ul>

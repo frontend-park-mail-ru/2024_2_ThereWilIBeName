@@ -1,9 +1,10 @@
 .registration-page
     .auth-title
-        simpleTitleGradient()
+        mixinTitleGradient()
 
-    .reg-text, .back-button
-        simpleFormText()
+    .reg-text
+    .back-button
+        mixinFormText()
 
     .back-button
         width fit-content
@@ -11,11 +12,11 @@
         font-weight bold
         font-size 20px
 
-    .back-button:hover
+    &:hover
         color myRed
 
     .auth-button
-        simpleFormButton()
+        mixinFormButton()
 
     .reg-block
-        simpleFormBlock()
+        mixinFormBlock()

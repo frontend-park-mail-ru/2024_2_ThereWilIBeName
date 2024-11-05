@@ -4,23 +4,23 @@
     overflow hidden
     min-height 100vh
 
-  .background-profile::before
-    content ''
-    position absolute
-    top 150px
-    left 0
-    width 100%
-    height 100%
-    background-color myBlack
-    z-index -1
+    &::before
+      content ''
+      position absolute
+      top 150px
+      left 0
+      width 100%
+      height 100%
+      background-color myBlack
+      z-index -1
 
   .user-block
-    simpleBlock(myWhite)
+    mixinBlock(myWhite)
     grid-template-columns auto 1fr auto
     margin-top 0
 
   .profile-block
-    simpleBlock(myWhite)
+    mixinBlock(myWhite)
     margin auto auto
 
   .avatar
@@ -38,15 +38,16 @@
     grid-template-rows auto auto auto
 
   .information-user-row
-    simpleRow()
+    mixinRow()
     grid-template-columns 40% auto 10%
 
   .profile-menu-row
-    simpleRow()
+    mixinRow()
     height fit-content
     grid-template-columns 30% 40% 30%
 
-  .profile-menu-passive-left, .profile-menu-passive-right
+  .profile-menu-passive-left
+  .profile-menu-passive-right
     font-size 27px
     color myShadow
     cursor pointer
@@ -55,16 +56,16 @@
   .profile-menu-passive-left
     text-align right
 
-  .profile-menu-passive-left:hover
-    transform scale(1.1)
-    color myRed
+    &:hover
+      transform scale(1.1)
+      color myRed
 
   .profile-menu-passive-right
     text-align left
 
-  .profile-menu-passive-right:hover
-    transform scale(1.05)
-    color myRed
+    &:hover
+      transform scale(1.05)
+      color myRed
 
   .profile-menu-active
     font-size 40px
@@ -74,19 +75,19 @@
     transition transform 0.3s ease
     cursor pointer
 
-  .profile-menu-active:hover
-    transform scale(1.05)
+    &:hover
+      transform scale(1.05)
 
   .information-text
-    simpleInformationText(myWhite)
+    mixinInformationText(myWhite)
 
   .information-text-bold
-    simpleInformationText(myWhite)
+    mixinInformationText(myWhite)
     font-weight bold
     font-size 27px
 
   .information-text-title
-    simpleInformationText(myWhite)
+    mixinInformationText(myWhite)
     font-weight bold
     font-size 27px
     padding-left 10px
@@ -101,8 +102,8 @@
     cursor pointer
     transition transform 0.3s ease
 
-  .information-back-button:hover
-    color myRed
+    &:hover
+      color myRed
 
   .user-information
     display grid
@@ -117,9 +118,9 @@
     cursor pointer
     transition background 0.3s ease, transform 0.3s ease
 
-  .edit-button:hover
-    background linearGradient()
-    transform scale(1.1)
+    &:hover
+      background linearGradient()
+      transform scale(1.1)
 
   .edit-icon
     object-fit contain
@@ -139,13 +140,13 @@
     gap 50px 30px
 
   .gallery-item-profile-trips
-    simpleGalleryItem(250px, 250px, myWhite)
+    mixinGalleryItem(250px, 250px, myWhite)
     grid-template-rows 20% 10% auto
     cursor pointer
     transition transform 0.3s ease
 
-  .gallery-item-profile-trips:hover
-    transform scale(1.05)
+    &:hover
+      transform scale(1.05)
 
   .gallery-item-profile-trips-img
     object-fit cover
@@ -177,15 +178,15 @@
     text-align center
 
   .gallery-item-achievements
-    simpleGalleryItem(250px, 200px, myBlack)
+    mixinGalleryItem(250px, 200px, myBlack)
     grid-template-rows auto auto auto
     grid-template-columns 100%
     row-gap 0
     transition transform 0.3s ease
     place-items center
 
-  .gallery-item-achievements:hover
-    transform scale(1.05)
+    &:hover
+      transform scale(1.05)
 
   .gallery-item-achievements-img
     object-fit cover
@@ -213,7 +214,7 @@
     border-radius 10px
 
   .gallery-item-reviews
-    simpleGalleryItem(150px, 800px, myWhite)
+    mixinGalleryItem(150px, 800px, myWhite)
     grid-template-columns auto 20% 1fr
     column-gap 20px
 

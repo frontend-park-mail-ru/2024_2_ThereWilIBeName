@@ -1,4 +1,4 @@
-simpleButton(buttonColor, textColor)
+mixinButton(buttonColor, textColor)
   padding 7px 25px
   margin 15px 15px
   background-color buttonColor
@@ -9,7 +9,7 @@ simpleButton(buttonColor, textColor)
   font-size 17px
   font-weight bold
 
-simpleTitleGradient()
+mixinTitleGradient()
   margin-top 0
   margin-bottom 0
   font-weight bold
@@ -20,7 +20,7 @@ simpleTitleGradient()
   background linearGradient() 50% 50% / 100vw 100vh
   background-clip text
 
-simpleFormBlock()
+mixinFormBlock()
   background-color myBlack
   padding 20px
   border-radius 30px
@@ -28,14 +28,14 @@ simpleFormBlock()
   height fit-content
   margin 40px auto
 
-simpleFormText()
+mixinFormText()
   padding-left 15px
   color myWhite
   font-size 17px
   display block
   margin-bottom 10px
 
-simpleFormButton()
+mixinFormButton()
   display block
   margin 20px auto
   background-color myGrey
@@ -46,7 +46,7 @@ simpleFormButton()
   cursor pointer
   font-size 20px
 
-simpleBlock(blockColor)
+mixinBlock(blockColor)
   background-color blockColor
   border-radius 20px
   max-width 70%
@@ -57,17 +57,17 @@ simpleBlock(blockColor)
   column-gap 25px
   filter drop-shadow(-16px 16px 0px myShadow)
 
-simpleInformationText(textColor)
+mixinInformationText(textColor)
   margin 15px 25px
   color textColor
   font-size 20px
 
-simpleRow()
+mixinRow()
   display grid
   align-items center
   margin 0 20px
 
-simpleGalleryItem(galleryItemHeight, galleryItemWidth, backgroundColor)
+mixinGalleryItem(galleryItemHeight, galleryItemWidth, backgroundColor)
   margin 0
   padding 15px
   border-radius 20px
