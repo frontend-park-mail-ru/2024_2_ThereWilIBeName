@@ -8,31 +8,31 @@
     display flex
     flex-wrap wrap
     justify-content space-evenly
-    padding 0 50px
+    padding 0 20px
 
   .trip-create-button
     simpleButton(myGrey, myWhite)
     transition transform 0.3s ease, background 0.3s ease
 
-  .trip-create-button:hover
-    transform scale(1.05)
-    background myGreen
+    &:hover
+      transform scale(1.05)
+      background myGreen
 
   .trip-delete-button
     simpleButton(myGrey, myWhite)
     transition transform 0.3s ease, background 0.3s ease
 
-  .trip-delete-button:hover
-    transform scale(1.05)
-    background myRed
+    &:hover
+      transform scale(1.05)
+      background myRed
 
   .trip-edit-button
     simpleButton(myGrey, myWhite)
     transition transform 0.3s ease, background 0.3s ease
 
-  .trip-edit-button:hover
-    transform scale(1.05)
-    background myYellow
+    &:hover
+      transform scale(1.05)
+      background myYellow
 
   .trips-title-row
     display grid
@@ -67,8 +67,8 @@
     cursor pointer
     transition color 0.3s ease
 
-  .trips-back-button:hover
-    color myRed
+    &:hover
+      color myRed
 
   .gallery-item-trips
     simpleGalleryItem(100px, 700px, myWhite)
@@ -76,8 +76,8 @@
     column-gap 10px
     transition height 0.3s ease
 
-  .gallery-item-trips.open
-    height 500px
+    &.open
+      height 500px
 
   .trips-trip-icon
     width 65px
@@ -97,8 +97,8 @@
     cursor pointer
     transition transform 0.3s ease
 
-  .trips-open-icon.open
-    transform rotate(90deg)
+    &.open
+      transform rotate(90deg)
 
   .trips-share-icon
     width 30px
