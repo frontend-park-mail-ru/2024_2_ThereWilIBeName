@@ -3,6 +3,10 @@
         mixinButton(myBlack, myWhite)
         margin 0
         text-align left
+        transition transform  0.3s ease
+
+        &.hover
+            transform scale(1.05)
 
     .side-menu
         position fixed
@@ -32,6 +36,10 @@
     .close-button
         mixinButton(myRed, myWhite)
         margin 0
+        transition transform  0.3s ease
+
+        &.hover
+            transform scale(1.05)
 
     .side-menu.open
         right 0

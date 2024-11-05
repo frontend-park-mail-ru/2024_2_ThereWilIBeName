@@ -67,7 +67,7 @@ export default {
         signinForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formEmail = (formEmailElement).value;
+            const formEmail = (formEmailElement).value.trim().toLowerCase();
             const formPassword = (formPasswordElement).value;
 
             const res = await Api.postSignin(formEmail, formPassword);
