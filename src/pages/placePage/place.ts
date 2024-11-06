@@ -117,6 +117,8 @@ export default {
         const reviewsResponse = await Api.getReviews(itemId);
         let reviews = reviewsResponse.data;
 
+        console.log(reviews);
+
         let userReview: any;
         const currentUser = await Api.getUser();
         if (currentUser.ok) {
@@ -128,9 +130,9 @@ export default {
             userButton.classList.add('show');
             signinButton.classList.add('hidden');
 
-            userReview = reviews.find(review => review.username === User.username);
+            userReview = reviews.find(review => review.user_login === User.username);
             if (userReview) {
-                reviews = reviews.filter(review => review.username !== User.username);
+                reviews = reviews.filter(review => review.user_login !== User.username);
                 userRating.textContent = String(userReview.rating) + '/5';
                 userRating.style.setProperty('--progress', String(userReview.rating));
                 userText.textContent = userReview.review_text;
