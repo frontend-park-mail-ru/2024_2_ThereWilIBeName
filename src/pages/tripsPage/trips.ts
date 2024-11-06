@@ -9,6 +9,8 @@ import copyLinkIcon from '../../static/copylink.png';
 import shareIcon from '../../static/share.png';
 import deleteIcon from '../../static/delete.png';
 import User from '../../utils/user';
+import mountHeader from "../headerMount";
+import headerMount from "../headerMount";
 
 export default {
     /**
@@ -22,7 +24,6 @@ export default {
                 <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
             </div>
             <div class="header-menu">
-                <button class="header-button" id="trips-button">Поездки</button>
                 <button class="header-button" id="signin-button">вход</button>
                 <button class="user-button" id="user-button"></button>
                 
@@ -63,10 +64,19 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после установки обработчика события.
      */
     async mount(router: Router): Promise<void> {
-        const homeLogo = document.getElementById('home-logo') as HTMLElement;
-        homeLogo.addEventListener('click', () => {
-            router.goto('/home');
-        });
+
+        // Монтирование хэдера
+        const homeLogo = document.getElementById('logo-image') as HTMLElement;
+        const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
+        const userButton = document.getElementById('user-button') as HTMLButtonElement;
+        const sideMenu = document.getElementById('side-menu') as HTMLElement;
+        const userNameDiv = document.getElementById('user-name') as HTMLElement;
+        const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
+        const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
+        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
+        const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
+        const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
+        await headerMount(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo, userNameDiv);
 
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         backButton.addEventListener('click', () => {

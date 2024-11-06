@@ -2,7 +2,7 @@ import Api from '../../utils/Api';
 import User from '../../utils/user';
 import Router from '../../utils/Router';
 import galleryTemplate from './home.hbs';
-import mountHeader from '../header';
+import headerMount from '../headerMount';
 
 import logoImage from '../../static/logo.png';
 
@@ -51,7 +51,7 @@ export default {
         const tripsButton = document.getElementById('trips-button') as HTMLButtonElement;
         const placeButton = document.getElementById('gallery') as HTMLButtonElement;
 
-        // Меню авторизованного пользователя
+        // Монтирование хэдера
         const homeLogo = document.getElementById('logo-image') as HTMLElement;
         const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
         const userButton = document.getElementById('user-button') as HTMLButtonElement;
@@ -62,7 +62,7 @@ export default {
         const closeButton = document.getElementById('close-button') as HTMLButtonElement;
         const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
         const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
-        await mountHeader(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo);
+        await headerMount(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo, userNameDiv);
 
         tripsButton.addEventListener('click', () => {
             router.goto('/trips');
@@ -74,7 +74,6 @@ export default {
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ attractions });
 
-
         placeButton.addEventListener('click', (event) => {
             const target = event.target as HTMLElement;
             if (target) {
@@ -85,23 +84,6 @@ export default {
                 }
             }
         });
-
-        // Получение информации о текущем пользователе
-        const currentUser = await Api.getUser();
-
-        if (!currentUser.ok) {
-            console.log('Пользователь не авторизован');
-            return;
-        }
-
-        User.username = currentUser.data.username;
-        User.id = currentUser.data.id;
-        User.email = currentUser.data.email;
-        signinButton.textContent = 'Сменить пользователя';
-        userButton.textContent = User.username;
-        userNameDiv.textContent = User.username;
-        userButton.classList.add('show');
-        signinButton.classList.add('hidden');
     },
 
     /**

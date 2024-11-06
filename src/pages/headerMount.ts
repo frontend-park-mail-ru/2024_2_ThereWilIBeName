@@ -2,7 +2,7 @@ import Router from '../utils/Router';
 import Api from '../utils/Api';
 import User from '../utils/user';
 
-export default async function mountHeader(router: Router,sideMenu: HTMLElement, userButton: HTMLButtonElement, closeButton: HTMLButtonElement, backgroundMenu: HTMLElement, profileButton: HTMLButtonElement, changeUserButton: HTMLButtonElement, signinButton: HTMLButtonElement, logoutButton: HTMLButtonElement, homeLogo: HTMLElement) {
+export default async function headerMount(router: Router,sideMenu: HTMLElement, userButton: HTMLButtonElement, closeButton: HTMLButtonElement, backgroundMenu: HTMLElement, profileButton: HTMLButtonElement, changeUserButton: HTMLButtonElement, signinButton: HTMLButtonElement, logoutButton: HTMLButtonElement, homeLogo: HTMLElement, userNameDiv: HTMLElement) {
 
     homeLogo.addEventListener('click', () => {
         router.goto('/home');
@@ -43,4 +43,20 @@ export default async function mountHeader(router: Router,sideMenu: HTMLElement, 
             await router.goto('/home');
         }
     });
+
+    // Получение информации о текущем пользователе
+    const currentUser = await Api.getUser();
+
+    if (!currentUser.ok) {
+        console.log('Пользователь не авторизован');
+        return;
+    }
+    User.username = currentUser.data.username;
+    User.id = currentUser.data.id;
+    User.email = currentUser.data.email;
+    signinButton.textContent = 'Сменить пользователя';
+    userButton.textContent = User.username;
+    userNameDiv.textContent = User.username;
+    userButton.classList.add('show');
+    signinButton.classList.add('hidden');
 };

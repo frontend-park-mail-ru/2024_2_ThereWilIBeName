@@ -3,7 +3,7 @@ import User from '../../utils/user';
 import placeTemplate from './place.hbs';
 import Router from '../../utils/Router';
 import logoImage from '../../static/logo.png';
-import mountHeader from '../header';
+import headerMount from '../headerMount';
 
 export default {
     html:
@@ -111,7 +111,7 @@ export default {
         const closeButton = document.getElementById('close-button') as HTMLButtonElement;
         const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
         const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
-        await mountHeader(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo);
+        await headerMount(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo, userNameDiv);
 
 
         backButton.addEventListener('click', () => {
@@ -125,19 +125,8 @@ export default {
         const reviewsResponse = await Api.getReviews(itemId);
         let reviews = reviewsResponse.data;
 
-
         let userReview: any;
-        const currentUser = await Api.getUser();
-        if (currentUser.ok) {
-            User.username = currentUser.data.username;
-            User.id = currentUser.data.id;
-            User.email = currentUser.data.email;
-            signinButton.textContent = 'Сменить пользователя';
-            userButton.textContent = User.username;
-            userNameDiv.textContent = User.username;
-            userButton.classList.add('show');
-            signinButton.classList.add('hidden');
-
+        if (User.id !== '') {
             userReview = reviews.find(review => review.user_login === User.username);
             if (userReview) {
                 reviews = reviews.filter(review => review.user_login !== User.username);
