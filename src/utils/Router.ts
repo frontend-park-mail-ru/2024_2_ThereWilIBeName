@@ -84,9 +84,13 @@ export default class Router {
         this.rootElement.classList.add('hidden');
         await new Promise(resolve => setTimeout(resolve, 200));
         this.rootElement.classList.remove('hidden');
+
+        const match = page.path.exec(url);
+        const params = match ? match.slice(1) : [];
+
         this.rootElement.innerHTML = page.html;
         await this.#waitForPageLoad();
-        page.mount(this);
+        page.mount(this, params);
         this.currentPage = page;
 
         // Обновление заголовка и URL
