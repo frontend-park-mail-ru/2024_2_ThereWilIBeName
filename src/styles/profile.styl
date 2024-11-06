@@ -18,6 +18,7 @@
     mixinBlock(myWhite)
     display flex
     flex-direction row
+    align-items flex-start
     margin-top 0
 
   .profile-block
@@ -25,8 +26,9 @@
     margin auto auto
 
   .avatar
-    width 350px
-    height 350px
+    min-width 100px
+    min-height 100px
+    aspect-ratio 1 / 1
     border-radius 20px
     object-fit cover
     background-color myBlack
