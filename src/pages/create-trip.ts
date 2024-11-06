@@ -29,9 +29,9 @@ export default {
                     <label class="create-trip-text">Описание</label>
                     <textarea class="border description" id="description" name="description" ></textarea>
                     <label class="create-trip-text">Дата начала</label>
-                    <input class="border" id="startDate" name="startDate">
+                    <input class="border" type="date" id="startDate" name="startDate">
                     <label class="create-trip-text">Дата конца</label>
-                    <input class="border" id="endDate" name="endDate">
+                    <input class="border" type="date" id="endDate" name="endDate">
                     <label class="create-trip-text checkbox-button">
                         <input type="checkbox" id="private-trip" name="private-trip"> Приватная поездка
                     </label>
