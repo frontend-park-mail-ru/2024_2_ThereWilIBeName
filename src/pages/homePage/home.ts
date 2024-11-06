@@ -110,11 +110,14 @@ export default {
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ attractions });
 
-        placeButton.addEventListener('click', (event: MouseEvent) => {
+        placeButton.addEventListener('click', (event) => {
             const target = event.target as HTMLElement;
-            if (target.tagName === 'LI') {
-                const itemId: string = target.querySelector('a')!.href.split('/').pop()!;
-                router.goto(`/places/${itemId}`);
+            if (target) {
+                const listItem = target.closest('li');
+                if (listItem) {
+                    const itemId = listItem.querySelector('a')!.href.split('/').pop();
+                    router.goto(`/places/${itemId}`);
+                }
             }
         });
 

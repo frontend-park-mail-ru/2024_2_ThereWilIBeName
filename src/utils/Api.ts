@@ -182,7 +182,7 @@ export default {
     },
 
     async getReviews(id: number): Promise<JsonResponse<GetReview[]>> {
-        const res = await RESTApi.get(`/api/v1/reviews/${id}`);
+        const res = await RESTApi.get(`/api/v1/${id}/reviews`);
         return {
             data: res.data.map( (review: any) =>
                 ({
@@ -199,7 +199,7 @@ export default {
     },
 
     async postReview(user_id: number, place_id: number, review_text: string, rating: number): Promise<JsonResponse<PostReview>> {
-        const res = await RESTApi.post('/api/v1/reviews', {user_id, place_id, rating, review_text});
+        const res = await RESTApi.post(`/api/v1/${place_id}/reviews`, {user_id, place_id, rating, review_text});
         return {
             data: {
                 id: Number(res.data.id),
@@ -214,8 +214,8 @@ export default {
         };
     },
 
-    async deleteReview(id: number): Promise<JsonResponse<Response>> {
-        const res = await RESTApi.delete(`/api/v1/reviews/${id}`);
+    async deleteReview(review_id: number, place_id: number): Promise<JsonResponse<Response>> {
+        const res = await RESTApi.delete(`/api/v1/${place_id}/reviews/${review_id}`);
         return {
             data: {
                 message: String(res.data.message),
