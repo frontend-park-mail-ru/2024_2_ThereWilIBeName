@@ -71,7 +71,7 @@ export default {
                 <div class="place-name" id="place-name">
                     Название
                 </div>
-                <div class="back-button" id="back-button"><div class="arrow">➜</div></div>
+                <div class="back-button" id="back-button">←</div>
             </div>
             <div class="place-info">
                 <div class="description" id="description">здесь будет описание</div>
