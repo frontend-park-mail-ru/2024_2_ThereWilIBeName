@@ -7,6 +7,7 @@ type JsonResponse<T> = {
 }
 
 type Trip = {
+    id: string,
     userId: number,
     name: string,
     cityId: number,
@@ -230,6 +231,7 @@ export default {
         return {
             data: res.data.map( (trip: any) => ({
                 userId: Number(trip.user_id),
+                id: String(trip.id),
                 name: String(trip.name),
                 cityId: Number(trip.city_id),
                 description: String(trip.description),
