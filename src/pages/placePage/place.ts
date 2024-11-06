@@ -60,9 +60,7 @@ export default {
                     </div>
                     <div><hr class="solid"></div>
                     <div class="review-text" id="user-text"><!-- текст отзыва--></div>
-                    <button class="delete-review" id="delete-button">
-                        <img src="${deleteIcon}">
-                    </button>
+                    <img src="${deleteIcon}" alt="Удалить" class="delete-review" id="delete-button">
                 </div>
             </div>
             <ul id="reviews">
