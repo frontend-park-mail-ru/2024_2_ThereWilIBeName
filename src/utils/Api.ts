@@ -1,5 +1,5 @@
 import RESTApi from './RESTApi';
-import formatDate from "../pages/formateDate";
+import formatDate from '../pages/formateDate';
 
 type JsonResponse<T> = {
     data: T,

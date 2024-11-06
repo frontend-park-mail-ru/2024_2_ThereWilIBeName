@@ -2,6 +2,7 @@ import Api from '../../utils/Api';
 import User from '../../utils/user';
 import placeTemplate from './place.hbs';
 import Router from '../../utils/Router';
+import deleteIcon from '../../static/delete.png';
 import logoImage from '../../static/logo.png';
 import headerMount from '../headerMount';
 
@@ -60,7 +61,7 @@ export default {
                     <div><hr class="solid"></div>
                     <div class="review-text" id="user-text"><!-- текст отзыва--></div>
                     <button class="delete-review" id="delete-button">
-                        <img src="/src/static/delete.png">
+                        <img src="${deleteIcon}">
                     </button>
                 </div>
             </div>
@@ -72,19 +73,19 @@ export default {
                 <div class="place-name" id="place-name">
                     Название
                 </div>
-                <div class="button-back" id="button-back"><div class="arrow">➜</div></div>
+                <div class="back-button" id="back-button"><div class="arrow">➜</div></div>
             </div>
             <div class="place-info">
                 <div class="description" id="description">здесь будет описание</div>
             </div>
             <div class="map-image">
-                <img src="img.png" alt="{{место на карте}}" id="map-image">
+                <img src="" alt="Место на карте" id="map-image">
             </div>
         </div>
     </div>
 </main>`,
     async mount(router: Router, params: any): Promise<void> {
-        const backButton = document.getElementById('button-back') as HTMLButtonElement;
+        const backButton = document.getElementById('back-button') as HTMLButtonElement;
         const placeName = document.getElementById('place-name') as HTMLElement;
         const placeDescription = document.getElementById('description') as HTMLElement;
         const placeImage = document.getElementById('place-image') as HTMLImageElement;
