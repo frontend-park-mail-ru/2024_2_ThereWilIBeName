@@ -10,7 +10,7 @@ export default {
             <div class="logo">
                 <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
             </div>
-            <div class="header-place-menu">
+            <div class="header-menu">
                 <button class="header-button" id="signin-button">вход</button>
                 <button class="user-button" id="user-button"></button>
                 
@@ -124,6 +124,7 @@ export default {
         if (currentUser.ok) {
             User.username = currentUser.data.username;
             User.id = currentUser.data.id;
+            User.email = currentUser.data.email;
             signinButton.textContent = 'Сменить пользователя';
             userButton.textContent = User.username;
             userNameDiv.textContent = User.username;
@@ -152,6 +153,7 @@ export default {
         backButton.addEventListener('click', () => {
             router.goto('/home');
         });
+
         reviewForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
