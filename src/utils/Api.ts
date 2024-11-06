@@ -228,15 +228,16 @@ export default {
     async getUserTrips(id: string): Promise<JsonResponse<Trip>> {
         const res = await RESTApi.get(`/api/v1/users/${id}/trips`);
         return {
-            data: {
-                userId: Number(res.data.user_id),
-                name: String(res.data.name),
-                cityId: Number(res.data.city_id),
-                description: String(res.data.description),
-                startDate: String(res.data.start_date),
-                endDate: String(res.data.end_date),
-                private: Boolean(res.data.private),
-            },
+            data: res.data.map( (trip: any) => ({
+                userId: Number(trip.data.user_id),
+                name: String(trip.data.name),
+                cityId: Number(trip.data.city_id),
+                description: String(trip.data.description),
+                startDate: String(trip.data.start_date),
+                endDate: String(trip.data.end_date),
+                private: Boolean(trip.data.private),
+            })
+            ),
             status: res.status,
             ok: res.ok,
         };
