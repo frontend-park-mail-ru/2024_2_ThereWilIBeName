@@ -62,6 +62,13 @@ export default {
             router.goto('/createtrip');
         });
 
+        if (User.username === '') {
+            const currentUser = await Api.getUser();
+            User.username = currentUser.data.username;
+            User.id = currentUser.data.id;
+            User.email = currentUser.data.email;
+        }
+
         const tripsResponse = await Api.getUserTrips(User.id);
 
         const trips = tripsResponse.data;
@@ -74,6 +81,20 @@ export default {
                 const parentItem = icon.closest('.gallery-item-trips');
                 if (parentItem) {
                     parentItem.classList.toggle('open');
+                }
+            });
+        });
+
+        document.querySelectorAll('.trips-delete-icon').forEach(icon => {
+            icon.addEventListener('click', async () => {
+                icon.classList.toggle('open');
+                const parentItem = icon.closest('.gallery-item-trips');
+                if (parentItem) {
+                    const id = parentItem.id;
+                    const res = await Api.deleteTrip(id);
+                    if (res.ok) {
+                        router.goto('/trips');
+                    }
                 }
             });
         });

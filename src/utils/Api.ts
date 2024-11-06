@@ -246,15 +246,16 @@ export default {
     async postCreateTrip(userId:number, name: string, cityId: number, description: string, startDate: string, endDate: string, privateTrip: boolean): Promise<JsonResponse<Trip>> {
         const res = await RESTApi.post('/api/v1/trips', {user_id: userId, name, city_id: cityId, description: description, start_date: startDate, end_date: endDate, private_trip: privateTrip });
         return {
-            data: {
-                userId: Number(res.data.user_id),
-                name: String(res.data.name),
-                cityId: Number(res.data.city_id),
-                description: String(res.data.description),
-                startDate: String(res.data.start_date),
-                endDate: String(res.data.end_date),
-                private: Boolean(res.data.private),
-            },
+            data: res.data,
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async deleteTrip(id: string): Promise<JsonResponse<Response>> {
+        const res = await RESTApi.delete(`/api/v1/trips/${id}`, {id: id});
+        return {
+            data: res.data,
             status: res.status,
             ok: res.ok,
         };

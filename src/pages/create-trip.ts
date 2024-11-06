@@ -76,11 +76,11 @@ export default {
 
             const res = await Api.postCreateTrip(formUserId, formName, 1, formDescription, formStartDate, formEndDate, formPrivateTrip);
 
-            if (res.ok!) {
-                errorMessage.textContent = 'Неизвестная ошибка';
-                errorMessage.classList.add('visible');
-                return;
-            }
+            // if (res.ok!) {
+            //     errorMessage.textContent = 'Неизвестная ошибка';
+            //     errorMessage.classList.add('visible');
+            //     return;
+            // }
 
             await router.goto('/trips');
         });
