@@ -7,6 +7,7 @@ import openIcon from '../../static/open.png';
 import tripIcon from '../../static/trip_icon.png';
 import copyLinkIcon from '../../static/copylink.png';
 import shareIcon from '../../static/share.png';
+import deleteIcon from '../../static/delete.png';
 import User from '../../utils/user';
 
 export default {
@@ -65,7 +66,7 @@ export default {
 
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
-        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, shareIcon });
+        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon });
 
         document.querySelectorAll('.trips-open-icon').forEach(icon => {
             icon.addEventListener('click', () => {
