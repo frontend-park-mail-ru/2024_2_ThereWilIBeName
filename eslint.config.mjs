@@ -36,8 +36,6 @@ export default [
             semi: ['error', 'always'],
             // Отступы
             'indent': ['error', 4],
-            // Макс длина строки
-            'max-len': ['warn', { 'code': 100 }],
             // Без var
             'no-var': ['error'],
             // Пробелы вокруг операторов

@@ -2,6 +2,7 @@ import Api from '../../utils/Api';
 import User from '../../utils/user';
 import Router from '../../utils/Router';
 import galleryTemplate from './home.hbs';
+import mountSideMenu from '../side-menu';
 
 import logoImage from '../../static/logo.png';
 
@@ -47,56 +48,24 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после завершения монтирования страницы.
      */
     async mount(router: Router): Promise<void> {
-        const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
         const tripsButton = document.getElementById('trips-button') as HTMLButtonElement;
-        const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
-        const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
-        const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
-
-        const userNameDiv = document.getElementById('user-name') as HTMLElement;
-        const userButton = document.getElementById('user-button') as HTMLButtonElement;
-        const sideMenu = document.getElementById('side-menu') as HTMLElement;
-        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
-        const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
-
         const placeButton = document.getElementById('gallery') as HTMLButtonElement;
 
-        // Открытие меню при клике на кнопку
-        userButton.addEventListener('click', () => {
-            sideMenu.classList.add('open');
-        });
+        // Меню авторизованного пользователя
+        const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
+        const userButton = document.getElementById('user-button') as HTMLButtonElement;
+        const sideMenu = document.getElementById('side-menu') as HTMLElement;
+        const userNameDiv = document.getElementById('user-name') as HTMLElement;
+        const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
+        const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
+        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
+        const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
+        const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
+        await mountSideMenu(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton);
 
-        closeButton.addEventListener('click', () => {
-            sideMenu.classList.remove('open');
-        });
-        backgroundMenu.addEventListener('click', () => {
-            sideMenu.classList.remove('open');
-        });
-
-        profileButton.addEventListener('click', () => {
-            router.goto('/profile');
-        });
 
         tripsButton.addEventListener('click', () => {
             router.goto('/trips');
-        });
-
-        changeUserButton.addEventListener('click', () => {
-            router.goto('/signin');
-        });
-
-
-
-        logoutButton.addEventListener('click', async () => {
-            const resLogout = await Api.postLogout(User.username, User.id);
-            if (resLogout.ok) {
-                User.username = '';
-                User.id = '';
-                User.email = '';
-                userButton.classList.remove('show');
-                signinButton.classList.remove('hidden');
-                router.goto('/home');
-            }
         });
 
         signinButton.addEventListener('click', () => {
@@ -105,10 +74,10 @@ export default {
 
         // Загрузка достопримечательностей
         const attractionsResponse = await Api.getAttractions();
-
         const attractions = attractionsResponse.data;
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ attractions });
+
 
         placeButton.addEventListener('click', (event) => {
             const target = event.target as HTMLElement;

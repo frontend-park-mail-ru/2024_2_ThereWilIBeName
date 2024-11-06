@@ -113,11 +113,28 @@ export default {
         const attractionResponse = await Api.getAttraction(itemId);
         const attraction = attractionResponse.data;
 
-
         const reviewsResponse = await Api.getReviews(itemId);
         let reviews = reviewsResponse.data;
 
-        console.log(reviews);
+
+        // Открытие и закрытие меню
+        userButton.addEventListener('click', () => {
+            sideMenu.classList.add('open');
+        });
+        closeButton.addEventListener('click', () => {
+            sideMenu.classList.remove('open');
+        });
+        backgroundMenu.addEventListener('click', () => {
+            sideMenu.classList.remove('open');
+        });
+
+        // Кнопки бокового меню
+        profileButton.addEventListener('click', () => {
+            router.goto('/profile');
+        });
+        changeUserButton.addEventListener('click', () => {
+            router.goto('/signin');
+        });
 
         let userReview: any;
         const currentUser = await Api.getUser();
