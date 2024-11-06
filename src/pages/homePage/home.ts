@@ -46,7 +46,7 @@ export default {
      * @param {Router} router - Экземпляр класса Router для управления навигацией между страницами.
      * @returns {Promise<void>} Промис, который выполняется после завершения монтирования страницы.
      */
-    async mount(router: Router): Promise<void> {
+    async mount(router: Router, params: any): Promise<void> {
         const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
         const tripsButton = document.getElementById('trips-button') as HTMLButtonElement;
         const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
