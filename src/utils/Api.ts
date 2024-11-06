@@ -253,7 +253,7 @@ export default {
     },
 
     async deleteTrip(id: string): Promise<JsonResponse<Response>> {
-        const res = await RESTApi.delete(`/api/v1/trips/${id}`);
+        const res = await RESTApi.delete(`/api/v1/trips/${id}`, {id: id});
         return {
             data: res.data,
             status: res.status,
