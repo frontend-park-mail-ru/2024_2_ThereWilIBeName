@@ -3,7 +3,7 @@ import User from '../../utils/user';
 import placeTemplate from './place.hbs';
 import Router from '../../utils/Router';
 import logoImage from '../../static/logo.png';
-import mountSideMenu from "../header";
+import mountHeader from '../header';
 
 export default {
     html:
@@ -111,7 +111,7 @@ export default {
         const closeButton = document.getElementById('close-button') as HTMLButtonElement;
         const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
         const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
-        await mountSideMenu(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo);
+        await mountHeader(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo);
 
 
         backButton.addEventListener('click', () => {

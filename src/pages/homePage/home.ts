@@ -15,7 +15,7 @@ export default {
     html: `
         <header class="header">
             <div class="logo">
-                <img src="${logoImage}" alt="Логотип" class="logo-image">
+                <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
             </div>
             <div class="header-menu">
                 <button class="header-button" id="trips-button">Поездки</button>
