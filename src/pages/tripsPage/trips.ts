@@ -1,11 +1,13 @@
 import Router from '../../utils/Router';
 import galleryTemplateTrips from './trips.hbs';
+import Api from '../../utils/Api';
 
 import logoImage from '../../static/logo.png';
 import openIcon from '../../static/open.png';
 import tripIcon from '../../static/trip_icon.png';
 import copyLinkIcon from '../../static/copylink.png';
 import shareIcon from '../../static/share.png';
+import User from "../../utils/user";
 
 export default {
     /**
@@ -54,14 +56,8 @@ export default {
             router.goto('/home');
         });
 
-        // const tripsResponse = await Api.getTrips();
-        const tripsResponse = {
-            data: [
-                {id: '1'},{id: '2'},{id: '3'},{id: '4'},
-            ],
-            status: 200,
-            ok: true,
-        };
+        const tripsResponse = await Api.getUserTrips(User.id);
+
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
         galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, shareIcon });

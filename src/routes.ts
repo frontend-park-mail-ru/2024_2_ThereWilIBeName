@@ -21,7 +21,7 @@ export interface Route {
     path: RegExp;
     title: string;
     html: string;
-    mount: (router: Router, params: string[]) => Promise<void>;
+    mount(router: Router, params: any): Promise<void>;
     unmount: () => void;
     cssClass: string;
 }
