@@ -101,6 +101,7 @@ export default {
                 User.email = '';
                 userButton.classList.remove('show');
                 signinButton.classList.remove('hidden');
+                router.goto('/home');
             }
         });
 
