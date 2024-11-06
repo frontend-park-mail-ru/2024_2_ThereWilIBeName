@@ -91,8 +91,6 @@ export default {
         });
 
         if (User.username === '') {
-            const tripsRoot = document.getElementById('trips-root') as HTMLElement;
-            tripsRoot.innerHTML = '';
             return;
         }
 
