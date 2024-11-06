@@ -176,7 +176,7 @@ export default {
         });
 
         deleteButton.addEventListener('click', async () => {
-            const res = await Api.deleteReview(userReview.id);
+            const res = await Api.deleteReview(userReview.id, itemId);
             userReviewElement.classList.remove('visible');
             reviewElement.classList.toggle('visible');
         });
