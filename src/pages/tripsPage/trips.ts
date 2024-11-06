@@ -78,6 +78,20 @@ export default {
             });
         });
 
+        document.querySelectorAll('.trips-delete-icon').forEach(icon => {
+            icon.addEventListener('click', async () => {
+                icon.classList.toggle('open');
+                const parentItem = icon.closest('.gallery-item-trips');
+                if (parentItem) {
+                    const id = parentItem.id;
+                    const res = await Api.deleteTrip(id);
+                    if (res.ok) {
+                        router.goto('/trips');
+                    }
+                }
+            });
+        });
+
     },
 
     /**
