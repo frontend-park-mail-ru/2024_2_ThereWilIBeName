@@ -58,7 +58,7 @@ type PostReview = {
 
 type GetReview = {
     id: number,
-    username: string,
+    user_login: string,
     avatar_path: string,
     rating: number,
     review_text: string,
@@ -188,7 +188,7 @@ export default {
             data: res.data.map( (review: any) =>
                 ({
                     id: Number(review.id),
-                    username: String(review.username),
+                    user_login: String(review.user_login),
                     avatar_path: String(review.avatar_path),
                     rating: Number(review.rating),
                     review_text: String(review.review_text),
