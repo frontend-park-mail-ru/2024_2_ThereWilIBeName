@@ -186,11 +186,11 @@ export default {
         return {
             data: res.data.map( (review: any) =>
                 ({
-                    id: Number(review.data.id),
-                    username: String(review.data.username),
-                    avatar_path: String(review.data.avatar_path),
-                    rating: Number(review.data.rating),
-                    review_text: String(review.data.review_text),
+                    id: Number(review.id),
+                    username: String(review.username),
+                    avatar_path: String(review.avatar_path),
+                    rating: Number(review.rating),
+                    review_text: String(review.review_text),
                 })
             ),
             status: res.status,
