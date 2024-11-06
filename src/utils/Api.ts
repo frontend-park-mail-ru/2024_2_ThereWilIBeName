@@ -229,13 +229,13 @@ export default {
         const res = await RESTApi.get(`/api/v1/users/${id}/trips`);
         return {
             data: res.data.map( (trip: any) => ({
-                userId: Number(trip.data.user_id),
-                name: String(trip.data.name),
-                cityId: Number(trip.data.city_id),
-                description: String(trip.data.description),
-                startDate: String(trip.data.start_date),
-                endDate: String(trip.data.end_date),
-                private: Boolean(trip.data.private),
+                userId: Number(trip.user_id),
+                name: String(trip.name),
+                cityId: Number(trip.city_id),
+                description: String(trip.description),
+                startDate: String(trip.start_date),
+                endDate: String(trip.end_date),
+                private: Boolean(trip.private),
             })
             ),
             status: res.status,
