@@ -2,7 +2,7 @@ import Api from '../../utils/Api';
 import User from '../../utils/user';
 import Router from '../../utils/Router';
 import galleryTemplate from './home.hbs';
-import mountSideMenu from '../side-menu';
+import mountHeader from '../header';
 
 import logoImage from '../../static/logo.png';
 
@@ -52,6 +52,7 @@ export default {
         const placeButton = document.getElementById('gallery') as HTMLButtonElement;
 
         // Меню авторизованного пользователя
+        const homeLogo = document.getElementById('logo-image') as HTMLElement;
         const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
         const userButton = document.getElementById('user-button') as HTMLButtonElement;
         const sideMenu = document.getElementById('side-menu') as HTMLElement;
@@ -61,15 +62,10 @@ export default {
         const closeButton = document.getElementById('close-button') as HTMLButtonElement;
         const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
         const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
-        await mountSideMenu(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton);
-
+        await mountHeader(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo);
 
         tripsButton.addEventListener('click', () => {
             router.goto('/trips');
-        });
-
-        signinButton.addEventListener('click', () => {
-            router.goto('/signin');
         });
 
         // Загрузка достопримечательностей

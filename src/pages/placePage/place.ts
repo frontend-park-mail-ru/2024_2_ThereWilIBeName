@@ -3,6 +3,7 @@ import User from '../../utils/user';
 import placeTemplate from './place.hbs';
 import Router from '../../utils/Router';
 import logoImage from '../../static/logo.png';
+import mountSideMenu from "../header";
 
 export default {
     html:
@@ -83,8 +84,6 @@ export default {
     </div>
 </main>`,
     async mount(router: Router, params: any): Promise<void> {
-        const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
-        const homeLogo = document.getElementById('logo-image') as HTMLElement;
         const backButton = document.getElementById('button-back') as HTMLButtonElement;
         const placeName = document.getElementById('place-name') as HTMLElement;
         const placeDescription = document.getElementById('description') as HTMLElement;
@@ -100,14 +99,24 @@ export default {
         const userReviewElement = document.getElementById('user-review') as HTMLElement;
         const reviewElement = document.getElementById('leave-review') as HTMLElement;
 
-        const userNameDiv = document.getElementById('user-name') as HTMLElement;
+
+        // Монтирование хэдера
+        const homeLogo = document.getElementById('logo-image') as HTMLElement;
+        const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
         const userButton = document.getElementById('user-button') as HTMLButtonElement;
         const sideMenu = document.getElementById('side-menu') as HTMLElement;
-        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
+        const userNameDiv = document.getElementById('user-name') as HTMLElement;
         const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
         const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
-        const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
+        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
         const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
+        const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
+        await mountSideMenu(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo);
+
+
+        backButton.addEventListener('click', () => {
+            router.goto('/home');
+        });
 
         const itemId: number = Number(params);
         const attractionResponse = await Api.getAttraction(itemId);
@@ -116,25 +125,6 @@ export default {
         const reviewsResponse = await Api.getReviews(itemId);
         let reviews = reviewsResponse.data;
 
-
-        // Открытие и закрытие меню
-        userButton.addEventListener('click', () => {
-            sideMenu.classList.add('open');
-        });
-        closeButton.addEventListener('click', () => {
-            sideMenu.classList.remove('open');
-        });
-        backgroundMenu.addEventListener('click', () => {
-            sideMenu.classList.remove('open');
-        });
-
-        // Кнопки бокового меню
-        profileButton.addEventListener('click', () => {
-            router.goto('/profile');
-        });
-        changeUserButton.addEventListener('click', () => {
-            router.goto('/signin');
-        });
 
         let userReview: any;
         const currentUser = await Api.getUser();
@@ -160,16 +150,6 @@ export default {
                 reviewElement.classList.toggle('visible');
             }
         }
-
-        signinButton.addEventListener('click', () => {
-            router.goto('/signin');
-        });
-        homeLogo.addEventListener('click', () => {
-            router.goto('/home');
-        });
-        backButton.addEventListener('click', () => {
-            router.goto('/home');
-        });
 
         reviewForm.addEventListener('submit', async (event) => {
             event.preventDefault();
