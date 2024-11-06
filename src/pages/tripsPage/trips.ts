@@ -32,7 +32,7 @@ export default {
                     <div class="trip-create-button" id="trip-create-button">+</div>
                 </div>
                 <div id="trips-root">
-                    <ul class="gallery-trips" id="gallery-trips">Здесь будут поездки</ul>
+                    <ul class="gallery-trips" id="gallery-trips"></ul>
                 </div>
             </div>
         </main>`,
