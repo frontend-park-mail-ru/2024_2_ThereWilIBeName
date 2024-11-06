@@ -2,15 +2,15 @@ import Api from '../../utils/Api';
 import User from '../../utils/user';
 import placeTemplate from './place.hbs';
 import Router from '../../utils/Router';
-
+import logoImage from '../../static/logo.png';
 
 export default {
     html:
         `<header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="logo-image">
+                <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
             </div>
-            <div class="header-menu">
+            <div class="header-place-menu">
                 <button class="header-button" id="signin-button">вход</button>
                 <button class="user-button" id="user-button"></button>
                 

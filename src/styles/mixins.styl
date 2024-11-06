@@ -91,3 +91,62 @@ mixinReviewBlock()
   filter drop-shadow(-16px 16px 0px #23232380)
   padding 10px
   gap 3px
+
+mixinSideMenu()
+  .menu-button
+    mixinButton(myBlack, myWhite)
+    margin 0
+    text-align left
+    transition transform  0.3s ease
+
+    &.hover
+      transform scale(1.05)
+
+  .side-menu
+    position fixed
+    top 0
+    right -300px
+    width 200px
+    height 100%
+    background-color myBlack
+    box-shadow -2px 0 5px rgba(0,0,0,0.5)
+    transition right 0.3s ease
+    padding 20px
+    z-index 1000
+
+    ul
+      list-style-type none
+      padding 0
+
+      li
+        margin 20px 0
+
+  .user-name
+    padding 7px
+    color myWhite
+    border none
+    font-size 30px
+
+  .close-button
+    mixinButton(myRed, myWhite)
+    margin 0
+    transition transform  0.3s ease
+
+    &.hover
+      transform scale(1.05)
+
+  .side-menu.open
+    right 0
+
+  .background-menu
+    position fixed
+    pointer-events none
+    inset 0
+    background-color myBlackout
+    z-index -1
+    opacity 0
+    transition opacity 0.3s ease
+
+  .side-menu.open .background-menu
+    opacity 1
+    pointer-events auto
