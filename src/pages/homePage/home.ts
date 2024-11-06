@@ -59,6 +59,8 @@ export default {
         const closeButton = document.getElementById('close-button') as HTMLButtonElement;
         const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
 
+        const placeButton = document.getElementById('gallery') as HTMLButtonElement;
+
         // Открытие меню при клике на кнопку
         userButton.addEventListener('click', () => {
             sideMenu.classList.add('open');
@@ -81,6 +83,14 @@ export default {
 
         changeUserButton.addEventListener('click', () => {
             router.goto('/signin');
+        });
+
+        placeButton.addEventListener('click', (event: MouseEvent) => {
+            const target = event.target as HTMLElement;
+            if (target.tagName === 'LI') {
+                const itemId: string = target.querySelector('a')!.href.split('/').pop()!;
+                router.goto(`/places/${itemId}`);
+            }
         });
 
         logoutButton.addEventListener('click', async () => {

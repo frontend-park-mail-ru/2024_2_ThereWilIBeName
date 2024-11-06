@@ -4,6 +4,7 @@ import PageSignUp from './pages/signup';
 import Page404 from './pages/404';
 import PageProfile from './pages/profilePage/profile';
 import PageTrips from './pages/tripsPage/trips';
+import PagePLace from './pages/placePage/place';
 import Router from './utils/Router';
 
 /**
@@ -71,6 +72,14 @@ const routes: Route[] = [
         mount: PageTrips.mount,
         unmount: PageTrips.unmount,
         cssClass: 'trips-page',
+    },
+    {
+        path: /^\/places\/(\d+)$/,
+        title: '',
+        html: PagePLace.html,
+        mount: PagePLace.mount,
+        unmount: PagePLace.unmount,
+        cssClass: 'place-page',
     },
     {
         path: /.*/,

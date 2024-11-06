@@ -36,6 +36,27 @@ type Logout = {
     // что-то начнут возвращать
 }
 
+type PostReview = {
+    id: number,
+    user_id: number,
+    place_id: number,
+    rating: number,
+    review_text: string,
+    created_at: string,
+}
+
+type GetReview = {
+    id: number,
+    username: string,
+    avatar_path: string,
+    rating: number,
+    review_text: string,
+}
+
+type Response = {
+    message: string,
+}
+
 export default {
     /**
      * Асинхронная функция для получения списка достопримечательностей с сервера.
@@ -144,6 +165,50 @@ export default {
                 login: String(res.data.login),
                 email: String(res.data.email),
                 createdAt: String(res.data.created_at),
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async getReviews(id: number): Promise<JsonResponse<GetReview[]>> {
+        const res = await RESTApi.get(`/api/v1/reviews/${id}`);
+        return {
+            data: res.data.map( (review: any) =>
+                ({
+                    id: Number(review.data.id),
+                    username: String(review.data.username),
+                    avatar_path: String(review.data.avatar_path),
+                    rating: Number(review.data.rating),
+                    review_text: String(review.data.review_text),
+                })
+            ),
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async postReview(user_id: number, place_id: number, review_text: string, rating: number): Promise<JsonResponse<PostReview>> {
+        const res = await RESTApi.post('/api/v1/reviews', {user_id, place_id, rating, review_text});
+        return {
+            data: {
+                id: Number(res.data.id),
+                user_id: Number(res.data.user_id),
+                place_id: Number(res.data.place_id),
+                rating: Number(res.data.rating),
+                review_text: String(res.data.review_text),
+                created_at: String(res.data.created_at),
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async deleteReview(id: number): Promise<JsonResponse<Response>> {
+        const res = await RESTApi.delete(`/api/v1/reviews/${id}`);
+        return {
+            data: {
+                message: String(res.data.message),
             },
             status: res.status,
             ok: res.ok,
