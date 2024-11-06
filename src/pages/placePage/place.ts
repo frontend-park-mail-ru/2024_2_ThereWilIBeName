@@ -10,21 +10,21 @@ export default {
             <div class="logo">
                 <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="logo-image">
             </div>
-            <div class="header-menu">
-                <button class="header-button" id="signin-button">вход</button>
-                <button class="user-button" id="user-button"></button>
-                
-                <div id="side-menu" class="side-menu">
-                    <div class="background-menu" id="background-menu"></div>
-                    <div class="user-name" id="user-name"></div>
-                    <ul>
-                        <li><button class="menu-button" id="change-user-button">Сменить пользователя</button></li>
-                        <li><button class="menu-button" id="profile-button">Профиль</button></li>
-                        <li><button class="menu-button" id="logout-button">Выйти</button></li>
-                    </ul>
-                    <button id="close-button" class="close-button">Закрыть</button>
-                </div>
-            </div>
+<!--            <div class="header-menu">-->
+<!--                <button class="header-button" id="signin-button">вход</button>-->
+<!--                <button class="user-button" id="user-button"></button>-->
+<!--                -->
+<!--                <div id="side-menu" class="side-menu">-->
+<!--                    <div class="background-menu" id="background-menu"></div>-->
+<!--                    <div class="user-name" id="user-name"></div>-->
+<!--                    <ul>-->
+<!--                        <li><button class="menu-button" id="change-user-button">Сменить пользователя</button></li>-->
+<!--                        <li><button class="menu-button" id="profile-button">Профиль</button></li>-->
+<!--                        <li><button class="menu-button" id="logout-button">Выйти</button></li>-->
+<!--                    </ul>-->
+<!--                    <button id="close-button" class="close-button">Закрыть</button>-->
+<!--                </div>-->
+<!--            </div>-->
         </header>
 <main>
     <div class="place-block">
