@@ -85,13 +85,7 @@ export default {
             router.goto('/signin');
         });
 
-        placeButton.addEventListener('click', (event: MouseEvent) => {
-            const target = event.target as HTMLElement;
-            if (target.tagName === 'LI') {
-                const itemId: string = target.querySelector('a')!.href.split('/').pop()!;
-                router.goto(`/places/${itemId}`);
-            }
-        });
+
 
         logoutButton.addEventListener('click', async () => {
             const resLogout = await Api.postLogout(User.username, User.id);
@@ -115,6 +109,14 @@ export default {
         const attractions = attractionsResponse.data;
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ attractions });
+
+        placeButton.addEventListener('click', (event: MouseEvent) => {
+            const target = event.target as HTMLElement;
+            if (target.tagName === 'LI') {
+                const itemId: string = target.querySelector('a')!.href.split('/').pop()!;
+                router.goto(`/places/${itemId}`);
+            }
+        });
 
         // Получение информации о текущем пользователе
         const currentUser = await Api.getUser();
