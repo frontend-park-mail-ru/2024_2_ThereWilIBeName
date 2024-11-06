@@ -6,11 +6,9 @@ import logoImage from '../../static/logo.png';
 import openIcon from '../../static/open.png';
 import tripIcon from '../../static/trip_icon.png';
 import copyLinkIcon from '../../static/copylink.png';
-import shareIcon from '../../static/share.png';
 import deleteIcon from '../../static/delete.png';
 import User from '../../utils/user';
-import mountHeader from "../headerMount";
-import headerMount from "../headerMount";
+import headerMount from '../headerMount';
 
 export default {
     /**
@@ -21,7 +19,7 @@ export default {
      */
     html: `<header class="header">
             <div class="logo">
-                <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
+                <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
             </div>
             <div class="header-menu">
                 <button class="header-button" id="signin-button">вход</button>

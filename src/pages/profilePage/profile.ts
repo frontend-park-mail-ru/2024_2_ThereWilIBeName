@@ -18,7 +18,7 @@ export default {
      */
     html: `<header class="header">
             <div class="logo">
-                <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
+                <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
             </div>
         </header>
         <main>
@@ -74,7 +74,7 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после установки обработчика события.
      */
     async mount(router: Router): Promise<void> {
-        const homeLogo = document.getElementById('home-logo') as HTMLElement;
+        const homeLogo = document.getElementById('logo-image') as HTMLElement;
         homeLogo.addEventListener('click', () => {
             router.goto('/home');
         });
