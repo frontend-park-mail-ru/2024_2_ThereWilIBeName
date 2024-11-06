@@ -45,9 +45,10 @@ export default {
                 </div>
                 <hr>
                 <div class="trips-button-row">
-                    <div class="trip-create-button" id="trip-create-button">+</div>
+                    <div class="trip-create-button hidden" id="trip-create-button">+</div>
                 </div>
                 <div id="trips-root">
+                    <div class="auth-please" id="auth-please">Пожалуйста, авторизуйтесь</div>
                     <ul class="gallery-trips" id="gallery-trips"></ul>
                 </div>
             </div>
@@ -63,6 +64,11 @@ export default {
      */
     async mount(router: Router): Promise<void> {
 
+        const backButton = document.getElementById('back-button') as HTMLButtonElement;
+        const createTripButton = document.getElementById('trip-create-button') as HTMLButtonElement;
+        const authPleaseMessage = document.getElementById('auth-please') as HTMLButtonElement;
+
+
         // Монтирование хэдера
         const homeLogo = document.getElementById('logo-image') as HTMLElement;
         const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
@@ -76,22 +82,22 @@ export default {
         const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
         await headerMount(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo, userNameDiv);
 
-        const backButton = document.getElementById('back-button') as HTMLButtonElement;
         backButton.addEventListener('click', () => {
             router.goto('/home');
         });
 
-        const createTripButton = document.getElementById('trip-create-button') as HTMLButtonElement;
         createTripButton.addEventListener('click', () => {
             router.goto('/createtrip');
         });
 
         if (User.username === '') {
-            const currentUser = await Api.getUser();
-            User.username = currentUser.data.username;
-            User.id = currentUser.data.id;
-            User.email = currentUser.data.email;
+            const tripsRoot = document.getElementById('trips-root') as HTMLElement;
+            tripsRoot.innerHTML = '';
+            return;
         }
+
+        authPleaseMessage.classList.add('hidden');
+        createTripButton.classList.remove('hidden');
 
         const tripsResponse = await Api.getUserTrips(User.id);
 
