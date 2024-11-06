@@ -1,21 +1,16 @@
 import galleryTemplateTrips from './profileTrips.hbs';
 import galleryTemplateAchievements from './profileAchievements.hbs';
 import galleryTemplateReviews from './profileReviews.hbs';
+import Api from '../../utils/Api';
+import User from '../../utils/user';
 
 import defaultAchievementIcon from '../../static/achievement.png';
 import tripIcon from '../../static/trip_icon.png';
 
-export default function updateMenu(activeMenuButton: HTMLElement) {
+export default async function updateMenu(activeMenuButton: HTMLElement) {
 
     if (activeMenuButton.textContent === 'Поездки') {
-        // const tripsResponse = await Api.getTrips();
-        const tripsResponse = {
-            data: [
-                {},{},{},{},
-            ],
-            status: 200,
-            ok: true,
-        };
+        const tripsResponse = await Api.getUserTrips(User.id);
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon });

@@ -2,9 +2,9 @@
     <li class="gallery-item-profile-trips">
         <div class="profile-trip-row-name">
             <img src="{{../tripIcon}}" alt="Иконка путешествия" class="trip-icon">
-            <div class="gallery-profile-trip-name">Название</div>
+            <div class="gallery-profile-trip-name">{{name}}</div>
         </div>
-        <div class="gallery-profile-trip-date">00/00/00 - 00/00/00</div>
+        <div class="gallery-profile-trip-date">{{startDate}} - {{endDate}}</div>
         <img src="{{imagePath}}" alt="Картинка поездки" class="gallery-item-profile-trips-img">
     </li>
 {{/each}}

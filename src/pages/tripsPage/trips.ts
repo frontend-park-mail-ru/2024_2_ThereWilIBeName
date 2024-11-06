@@ -7,7 +7,7 @@ import openIcon from '../../static/open.png';
 import tripIcon from '../../static/trip_icon.png';
 import copyLinkIcon from '../../static/copylink.png';
 import shareIcon from '../../static/share.png';
-import User from "../../utils/user";
+import User from '../../utils/user';
 
 export default {
     /**
@@ -54,6 +54,11 @@ export default {
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         backButton.addEventListener('click', () => {
             router.goto('/home');
+        });
+
+        const createTripButton = document.getElementById('trip-create-button') as HTMLButtonElement;
+        createTripButton.addEventListener('click', () => {
+            router.goto('/createtrip');
         });
 
         const tripsResponse = await Api.getUserTrips(User.id);

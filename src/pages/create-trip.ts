@@ -1,5 +1,6 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
+import User from '../utils/user';
 
 import logoImage from '../static/logo.png';
 
@@ -18,20 +19,23 @@ export default {
             </div>
         </header>
         <main>
-            <div class="reg-block">
+            <div class="create-trip-block">
                 <div class="back-button" id ="back-button">←</div>
-                <div class="auth-title">Регистрация</div>
+                <div class="create-trip-title">Создание поездки</div>
                 <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
-                <form id="signup-form">
-                    <label class="reg-text">Логин</label>
-                    <input class="border" id="login" name="login" >
-                    <label class="reg-text">Email</label>
-                    <input class="border" id="email" name="email" >
-                    <label class="reg-text">Пароль</label>
-                    <input class="border" type="password" id="password" name="password">
-                    <label class="reg-text">Подтверждение пароля</label>
-                    <input class="border" type="password" id="confirm-password" name="confirm-password">
-                    <button class="auth-button">Зарегистрироваться</button>
+                <form id="create-trip-form">
+                    <label class="create-trip-text">Название</label>
+                    <input class="border" id="name" name="name" >
+                    <label class="create-trip-text">Описание</label>
+                    <textarea class="border description" id="description" name="description" ></textarea>
+                    <label class="create-trip-text">Дата начала</label>
+                    <input class="border" id="startDate" name="startDate">
+                    <label class="create-trip-text">Дата конца</label>
+                    <input class="border" id="endDate" name="endDate">
+                    <label class="create-trip-text checkbox-button">
+                        <input type="checkbox" id="private-trip" name="private-trip"> Приватная поездка
+                    </label>
+                    <button class="create-trip-button">Создать поездку</button>
                 </form>
             </div>
         </main>
@@ -48,7 +52,7 @@ export default {
     async mount(router: Router): Promise<void> {
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         backButton.addEventListener('click', () => {
-            router.goto('/signin');
+            router.goto('/trips');
         });
 
         const homeLogo = document.getElementById('home-logo') as HTMLElement;
@@ -56,31 +60,29 @@ export default {
             router.goto('/home');
         });
 
-        const signupForm = document.getElementById('signup-form') as HTMLElement;
+        const createTripForm = document.getElementById('create-trip-form') as HTMLElement;
         const errorMessage = document.getElementById('error-message') as HTMLElement;
 
-        signupForm.addEventListener('submit', async (event) => {
+        createTripForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formUsername = (document.getElementById('login') as HTMLInputElement).value.trim();
-            const formEmail = (document.getElementById('email') as HTMLInputElement).value.trim().toLowerCase();
-            const formPassword = (document.getElementById('password') as HTMLInputElement).value;
-            const formConfirmPassword = (document.getElementById('confirm-password') as HTMLInputElement).value;
+            const formUserId = Number(User.id);
+            const formName = (document.getElementById('name') as HTMLInputElement).value;
+            const formDescription = (document.getElementById('description') as HTMLInputElement).value;
+            const formStartDate = (document.getElementById('startDate') as HTMLInputElement).value;
+            const formEndDate = (document.getElementById('endDate') as HTMLInputElement).value;
+            const formPrivateTrip = (document.getElementById('private-trip') as HTMLInputElement).checked;
 
-            const res = await Api.postSignup(formUsername, formEmail, formPassword);
 
-            if (res.status === 409) {
-                errorMessage.textContent = 'Логин уже занят';
-                errorMessage.classList.add('visible');
-                return;
-            }
+            const res = await Api.postCreateTrip(formUserId, formName, 1, formDescription, formStartDate, formEndDate, formPrivateTrip);
+
             if (res.ok!) {
                 errorMessage.textContent = 'Неизвестная ошибка';
                 errorMessage.classList.add('visible');
                 return;
             }
 
-            router.goto('/home');
+            await router.goto('/trips');
         });
     },
 
