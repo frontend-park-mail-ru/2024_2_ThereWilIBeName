@@ -102,11 +102,11 @@ export default {
                 errorMessage.classList.add('visible');
                 return;
             }
-            if (res.ok!) {
-                errorMessage.textContent = 'Неизвестная ошибка';
-                errorMessage.classList.add('visible');
-                return;
-            }
+            // if (res.ok!) {
+            //     errorMessage.textContent = 'Неизвестная ошибка';
+            //     errorMessage.classList.add('visible');
+            //     return;
+            // }
 
             router.goto('/home');
         });
