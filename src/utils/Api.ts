@@ -1,4 +1,5 @@
 import RESTApi from './RESTApi';
+import formatDate from "../pages/formateDate";
 
 type JsonResponse<T> = {
     data: T,
@@ -235,8 +236,8 @@ export default {
                 name: String(trip.name),
                 cityId: Number(trip.city_id),
                 description: String(trip.description),
-                startDate: String(trip.start_date),
-                endDate: String(trip.end_date),
+                startDate: formatDate(trip.start_date),
+                endDate: formatDate(trip.end_date),
                 private: Boolean(trip.private),
             })
             ),
