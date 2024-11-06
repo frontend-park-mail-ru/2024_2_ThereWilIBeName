@@ -62,6 +62,13 @@ export default {
             router.goto('/createtrip');
         });
 
+        if (User.username === '') {
+            const currentUser = await Api.getUser();
+            User.username = currentUser.data.username;
+            User.id = currentUser.data.id;
+            User.email = currentUser.data.email;
+        }
+
         const tripsResponse = await Api.getUserTrips(User.id);
 
         const trips = tripsResponse.data;
