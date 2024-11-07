@@ -5,6 +5,7 @@ import Router from '../../utils/Router';
 import deleteIcon from '../../static/delete.png';
 import logoImage from '../../static/logo.png';
 import headerMount from '../headerMount';
+import map from '../../static/map.png';
 
 export default {
     html:
@@ -77,7 +78,7 @@ export default {
                 <div class="description" id="description">здесь будет описание</div>
             </div>
             <div class="map-image">
-                <img src="" alt="Место на карте" id="map-image">
+                <img src="${map}" alt="Место на карте" id="map-image">
             </div>
         </div>
     </div>

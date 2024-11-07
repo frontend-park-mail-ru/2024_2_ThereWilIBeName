@@ -125,6 +125,10 @@
       background linearGradient()
       transform scale(1.1)
 
+    &.active
+      background linearGradient()
+      transform scale(1.1)
+
   .edit-icon
     object-fit contain
     width 100%
@@ -250,3 +254,9 @@
     overflow hidden
     height 110px
     mask-image linear-gradient(180deg, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0))
+
+  .edit-profile-input
+    margin auto
+
+    &.hidden
+      display none

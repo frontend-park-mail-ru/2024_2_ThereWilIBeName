@@ -6,8 +6,6 @@ import updateMenu from './profileMenu';
 import logoImage from '../../static/logo.png';
 import defaultAvatar from '../../static/avatar.png';
 import editButton from '../../static/edit.png';
-// import  from '../../static/avatar.png';
-// import  from '../../static/avatar.png';
 
 export default {
     /**
@@ -33,13 +31,15 @@ export default {
                             <div class="information-user-row">
                                 <div class="information-text-bold">Username</div>
                                 <div class="information-text" id="user-username">Здесь будет username</div>
+                                <input class="edit-profile-input hidden" type="text" id="username-input">
                                 <div class="edit-button">
-                                    <img src="${editButton}" alt="edit" class="edit-icon">
+                                    <img src="${editButton}" alt="edit" class="edit-icon" id="edit-button">
                                 </div>
                             </div>
                             <div class="information-user-row">
                                 <div class="information-text-bold">Email</div>
                                 <div class="information-text" id="user-email">Здесь будет email</div>
+                                <input class="edit-profile-input hidden" type="text" id="email-input">
                             </div>
                             <div class="information-user-row">
                                 <div class="information-text-bold" >ID</div>
@@ -102,6 +102,20 @@ export default {
         userUserName.textContent = User.username;
         userEmail.textContent = User.email;
         userId.textContent = User.id;
+
+
+        const editButton = document.getElementById('edit-button') as HTMLButtonElement;
+        const usernameInput = document.getElementById('username-input') as HTMLInputElement;
+        const emailInput = document.getElementById('email-input') as HTMLInputElement;
+        editButton.addEventListener('click', () => {
+            editButton.classList.toggle('active');
+            if (editButton.classList.contains('active')) {
+                usernameInput.classList.remove('hidden');
+                emailInput.classList.remove('hidden');
+            }
+            usernameInput.classList.add('hidden');
+            emailInput.classList.add('hidden');
+        });
 
         const leftMenuButton = document.getElementById('left-menu-button') as HTMLButtonElement;
         const rightMenuButton = document.getElementById('right-menu-button') as HTMLButtonElement;

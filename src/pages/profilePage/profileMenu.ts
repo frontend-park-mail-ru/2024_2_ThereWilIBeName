@@ -13,6 +13,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const tripsResponse = await Api.getUserTrips(User.id);
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
+        galleryProfileElement.innerHTML = '';
         galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon });
     }
 
@@ -27,6 +28,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         };
         const achievements = achievementsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
+        galleryProfileElement.innerHTML = '';
         galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
     }
 
@@ -39,6 +41,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         };
         const reviews = reviewsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
+        galleryProfileElement.innerHTML = '';
         galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
     }
 
