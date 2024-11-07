@@ -108,11 +108,12 @@ export default {
         const usernameInput = document.getElementById('username-input') as HTMLInputElement;
         const emailInput = document.getElementById('email-input') as HTMLInputElement;
         editButton.addEventListener('click', () => {
-            editButton.classList.toggle('active');
             if (editButton.classList.contains('active')) {
+                editButton.classList.add('active');
                 usernameInput.classList.remove('hidden');
                 emailInput.classList.remove('hidden');
             }
+            editButton.classList.remove('active');
             usernameInput.classList.add('hidden');
             emailInput.classList.add('hidden');
         });
