@@ -77,9 +77,7 @@ export default {
             <div class="place-info">
                 <div class="description" id="description">здесь будет описание</div>
             </div>
-            <div class="map-image">
-                <img src="${map}" alt="Место на карте" id="map-image">
-            </div>
+            <img class="map-image" src="${map}" alt="Место на карте" id="map-image">
         </div>
     </div>
 </main>`,
@@ -88,7 +86,6 @@ export default {
         const placeName = document.getElementById('place-name') as HTMLElement;
         const placeDescription = document.getElementById('description') as HTMLElement;
         const placeImage = document.getElementById('place-image') as HTMLImageElement;
-        const mapImage = document.getElementById('map-image') as HTMLImageElement;
         const reviewsElement = document.getElementById('reviews') as HTMLElement;
         const userRating = document.getElementById('user-rating') as HTMLElement;
         const userText = document.getElementById('user-text') as HTMLElement;
