@@ -23,7 +23,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         // const achievementsResponse = await Api.getAchievements();
         // const achievements = achievementsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        galleryProfileElement.innerHTML = `<img src="${ inProgressPng }">`;
+        galleryProfileElement.innerHTML = `<img src="${ inProgressPng }" class="in-progress-img">`;
         // galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
     }
 
