@@ -2,7 +2,7 @@ import Router from '../utils/Router';
 import Api from '../utils/Api';
 import User from '../utils/user';
 
-export default async function headerMount(router: Router,sideMenu: HTMLElement, userButton: HTMLButtonElement, closeButton: HTMLButtonElement, backgroundMenu: HTMLElement, profileButton: HTMLButtonElement, changeUserButton: HTMLButtonElement, signinButton: HTMLButtonElement, logoutButton: HTMLButtonElement, homeLogo: HTMLElement, userNameDiv: HTMLElement) {
+export default async function headerMount(router: Router, sideMenu: HTMLElement, userButton: HTMLButtonElement, closeButton: HTMLButtonElement, backgroundMenu: HTMLElement, profileButton: HTMLButtonElement, changeUserButton: HTMLButtonElement, signinButton: HTMLButtonElement, logoutButton: HTMLButtonElement, homeLogo: HTMLElement, userNameDiv: HTMLElement) {
 
     homeLogo.addEventListener('click', () => {
         router.goto('/home');
