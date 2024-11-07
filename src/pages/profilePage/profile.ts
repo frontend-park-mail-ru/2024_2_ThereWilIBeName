@@ -46,6 +46,7 @@ export default {
                                 <img src="${confirmIcon}" alt="confirm" class="submit-edit-button hidden" id="submit-edit-button">
                             </div>
                         </div>
+                        <div class="change-password-button" id="change-password-button">Сменить пароль</div>
                     </div>
                     <div class="information-back-button" id="back-button">←</div>
                 </div>
