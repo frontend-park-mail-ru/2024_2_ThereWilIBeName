@@ -13,11 +13,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const tripsResponse = await Api.getUserTrips(User.id);
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        galleryProfileElement.innerHTML = '';
-        galleryProfileElement.textContent = 'Здесь будут ваши поездки';
-        if (tripsResponse.status === 200) {
-            galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon });
-        }
+        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon });
     }
 
     if (activeMenuButton.textContent === 'Достижения') {
@@ -31,11 +27,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         };
         const achievements = achievementsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        galleryProfileElement.innerHTML = '';
-        galleryProfileElement.textContent = 'Здесь будут ваши достижения';
-        if (achievementsResponse.ok) {
-            galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
-        }
+        galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
     }
 
     if (activeMenuButton.textContent === 'Отзывы') {
@@ -47,11 +39,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         };
         const reviews = reviewsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        galleryProfileElement.innerHTML = '';
-        galleryProfileElement.textContent = 'Здесь будут ваши отзывы';
-        if (reviewsResponse.status === 200) {
-            galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
-        }
+        galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
     }
 
 };
