@@ -14,7 +14,9 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.textContent = 'Здесь будут ваши поездки';
-        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon });
+        if (trips) {
+            galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon });
+        }
     }
 
     if (activeMenuButton.textContent === 'Достижения') {
@@ -29,20 +31,24 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const achievements = achievementsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.textContent = 'Здесь будут ваши достижения';
-        galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
+        if (achievements) {
+            galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
+        }
     }
 
     if (activeMenuButton.textContent === 'Отзывы') {
         // const reviewsResponse = await Api.getReviews();
         const reviewsResponse = {
-            data: {},
+            data: [],
             status: 200,
             ok: true,
         };
         const reviews = reviewsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.textContent = 'Здесь будут ваши отзывы';
-        galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
+        if (reviews) {
+            galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
+        }
     }
 
 };
