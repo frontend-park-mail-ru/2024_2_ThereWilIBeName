@@ -6,6 +6,7 @@ import updateMenu from './profileMenu';
 import logoImage from '../../static/logo.png';
 import defaultAvatar from '../../static/avatar.png';
 import editButton from '../../static/edit.png';
+import confirmIcon from '../../static/confirm.png';
 
 export default {
     /**
@@ -42,7 +43,7 @@ export default {
                             <div class="information-user-row">
                                 <div class="information-text-bold" >ID</div>
                                 <div class="information-text" id="user-id">Здесь будет id</div>
-                                <img src="${editButton}" alt="edit" class="submit-edit-button hidden" id="submit-edit-button">
+                                <img src="${confirmIcon}" alt="edit" class="submit-edit-button hidden" id="submit-edit-button">
                             </div>
                         </div>
                     </div>
