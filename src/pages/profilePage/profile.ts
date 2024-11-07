@@ -43,7 +43,7 @@ export default {
                             <div class="information-user-row">
                                 <div class="information-text-bold" >ID</div>
                                 <div class="information-text" id="user-id">Здесь будет id</div>
-                                <img src="${confirmIcon}" alt="edit" class="submit-edit-button hidden" id="submit-edit-button">
+                                <img src="${confirmIcon}" alt="confirm" class="submit-edit-button hidden" id="submit-edit-button">
                             </div>
                         </div>
                     </div>
