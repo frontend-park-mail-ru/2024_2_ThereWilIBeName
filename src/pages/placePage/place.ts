@@ -174,7 +174,6 @@ export default {
         placeName.textContent = attraction.name;
         placeDescription.textContent = attraction.description;
         placeImage.src = attraction.imagePath;
-        mapImage.src = attraction.imagePath;
 
         reviewsElement.innerHTML = placeTemplate({reviews});
 

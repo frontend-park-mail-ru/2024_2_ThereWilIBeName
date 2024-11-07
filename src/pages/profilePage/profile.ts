@@ -32,9 +32,7 @@ export default {
                                 <div class="information-text-bold">Username</div>
                                 <div class="information-text" id="user-username">Здесь будет username</div>
                                 <input class="edit-profile-input hidden" type="text" id="username-input">
-                                <div class="edit-button">
-                                    <img src="${editButton}" alt="edit" class="edit-icon" id="edit-button">
-                                </div>
+                                <img src="${editButton}" alt="edit" class="edit-button" id="edit-button">
                             </div>
                             <div class="information-user-row">
                                 <div class="information-text-bold">Email</div>
@@ -44,6 +42,7 @@ export default {
                             <div class="information-user-row">
                                 <div class="information-text-bold" >ID</div>
                                 <div class="information-text" id="user-id">Здесь будет id</div>
+                                <img src="${editButton}" alt="edit" class="submit-edit-button hidden" id="submit-edit-button">
                             </div>
                         </div>
                     </div>
@@ -105,17 +104,17 @@ export default {
 
 
         const editButton = document.getElementById('edit-button') as HTMLButtonElement;
+        const submitEditButton = document.getElementById('submit-edit-button') as HTMLButtonElement;
         const usernameInput = document.getElementById('username-input') as HTMLInputElement;
         const emailInput = document.getElementById('email-input') as HTMLInputElement;
+
         editButton.addEventListener('click', () => {
-            if (editButton.classList.contains('active')) {
-                editButton.classList.add('active');
-                usernameInput.classList.remove('hidden');
-                emailInput.classList.remove('hidden');
-            }
-            editButton.classList.remove('active');
-            usernameInput.classList.add('hidden');
-            emailInput.classList.add('hidden');
+            editButton.classList.toggle('active');
+            submitEditButton.classList.toggle('hidden');
+            usernameInput.classList.toggle('hidden');
+            emailInput.classList.toggle('hidden');
+            userUserName.classList.toggle('hidden');
+            userEmail.classList.toggle('hidden');
         });
 
         const leftMenuButton = document.getElementById('left-menu-button') as HTMLButtonElement;
