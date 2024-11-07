@@ -65,6 +65,13 @@ type GetReview = {
     review_text: string,
 }
 
+type UserReview = {
+    id: number,
+    place_name: string,
+    rating: number,
+    text: string,
+}
+
 type Response = {
     message: string,
 }
@@ -264,4 +271,18 @@ export default {
         };
     },
 
+    async getUserReviews(id: string): Promise<JsonResponse<UserReview>> {
+        const res = await RESTApi.get(`api/v1/users/${id}/reviews`);
+        return {
+            data: res.data.map( (review: any) => ({
+                id: Number(review.id),
+                placeName: String(review.place_name),
+                rating: Number(review.rating),
+                reviewText: String(review.text),
+            })
+            ),
+            status: res.status,
+            ok: res.ok,
+        };
+    },
 };

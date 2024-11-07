@@ -1,11 +1,12 @@
 {{#each reviews}}
     <li class="gallery-item-reviews">
-        <img src="{{ imagePath }}" alt="Картинка отзыва" class="gallery-item-reviews-img">
+<!--        <img src="" alt="Картинка отзыва" class="gallery-item-reviews-img">-->
+        <div class="gallery-item-reviews-img"></div>>
         <div class="gallery-item-reviews-column">
             <div></div>
-            <div class="gallery-item-reviews-name">Название</div>
-            <div class="gallery-item-reviews-score">4/5</div>
+            <div class="gallery-item-reviews-name">{{placeName}}</div>
+            <div class="gallery-item-reviews-score">{{rating}}/5</div>
         </div>
-        <div class="gallery-item-reviews-text">I recently had the opportunity to [describe the experience, e.g., visit a restaurant, stay at a hotel, use a product, etc.], and I wanted to share my thoughts.</div>
-        </li>
+        <div class="gallery-item-reviews-text">{{reviewText}}</div>>
+    </li>
 {{/each}}

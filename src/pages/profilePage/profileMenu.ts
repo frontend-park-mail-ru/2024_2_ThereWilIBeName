@@ -28,11 +28,10 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
     }
 
     if (activeMenuButton.textContent === 'Отзывы') {
-        // const reviewsResponse = await Api.getReviews();
-        // const reviews = reviewsResponse.data;
+        const reviewsResponse = await Api.getUserReviews(User.id);
+        const reviews = reviewsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        galleryProfileElement.innerHTML = `<img src="${ inProgressPng }" class="in-progress-img">`;
-        // galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
+        galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
     }
 
 };
