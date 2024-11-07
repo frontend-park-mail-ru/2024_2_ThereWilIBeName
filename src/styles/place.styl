@@ -107,14 +107,14 @@
     color #f4f4f4
     font-size 17px
     position relative
-    &before
+    &::before
       content ""
       position absolute
       background-color #232323
       border-radius 30px
       inset 0
       z-index -1
-    &after
+    &::after
       position absolute
       border-radius 30px
       background linear-gradient(to bottom right, #F58080, #F2E2A9)
@@ -182,8 +182,8 @@
       color #232323
       border 2px #232323
 
-      &hover
-      &hover ~ .star
+      &:hover
+      &:hover ~ .star
       &.selected ~ .star
       &.selected
         background linear-gradient(to bottom right, #F58080, #F2E2A9) 50% 50% / 100vw 100vh
@@ -222,5 +222,5 @@
       text-align left
       transition transform  0.3s ease
 
-      &.hover
+      &:hover
         transform scale(1.05)
