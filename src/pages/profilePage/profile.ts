@@ -58,7 +58,7 @@ export default {
                     <hr>
                     <div>
                         <div id="profile-root">
-                            <ul class="gallery-profile" id="gallery-profile">Здесь будут поездки</ul>
+                            <ul class="gallery-profile" id="gallery-profile">Здесь будут ваши поездки</ul>
                         </div>
                     </div>
                 </div>
