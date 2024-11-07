@@ -14,7 +14,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.textContent = 'Здесь будут ваши поездки';
-        if (tripsResponse.ok) {
+        if (tripsResponse.status === 200) {
             galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon });
         }
     }
@@ -40,13 +40,13 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         // const reviewsResponse = await Api.getReviews();
         const reviewsResponse = {
             data: [],
-            status: 200,
-            ok: true,
+            status: 404,
+            ok: false,
         };
         const reviews = reviewsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.textContent = 'Здесь будут ваши отзывы';
-        if (reviewsResponse.ok) {
+        if (reviewsResponse.status === 200) {
             galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
         }
     }
