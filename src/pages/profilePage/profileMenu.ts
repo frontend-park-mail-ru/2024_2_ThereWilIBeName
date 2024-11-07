@@ -2,6 +2,7 @@ import galleryTemplateTrips from './profileTrips.hbs';
 import galleryTemplateAchievements from './profileAchievements.hbs';
 import galleryTemplateReviews from './profileReviews.hbs';
 import myBlackIcon from '../../static/232323.png';
+import inProgressPng from '../../static/in progress.png';
 import Api from '../../utils/Api';
 import User from '../../utils/user';
 
@@ -20,30 +21,18 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
 
     if (activeMenuButton.textContent === 'Достижения') {
         // const achievementsResponse = await Api.getAchievements();
-        const achievementsResponse = {
-            data: [
-                {},{},{},{}
-            ],
-            status: 200,
-            ok: true,
-        };
-        const achievements = achievementsResponse.data;
+        // const achievements = achievementsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        galleryProfileElement.innerHTML = '';
-        galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
+        galleryProfileElement.innerHTML = `<img src="${ inProgressPng }">`;
+        // galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
     }
 
     if (activeMenuButton.textContent === 'Отзывы') {
         // const reviewsResponse = await Api.getReviews();
-        const reviewsResponse = {
-            data: [],
-            status: 404,
-            ok: false,
-        };
-        const reviews = reviewsResponse.data;
+        // const reviews = reviewsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        galleryProfileElement.innerHTML = '';
-        galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
+        galleryProfileElement.innerHTML = `<img src="${ inProgressPng }">`;
+        // galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
     }
 
 };
