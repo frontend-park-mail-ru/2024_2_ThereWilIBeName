@@ -1,6 +1,7 @@
 import galleryTemplateTrips from './profileTrips.hbs';
 import galleryTemplateAchievements from './profileAchievements.hbs';
 import galleryTemplateReviews from './profileReviews.hbs';
+import myBlackIcon from '../../static/232323.png';
 import Api from '../../utils/Api';
 import User from '../../utils/user';
 
@@ -14,7 +15,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.innerHTML = '';
-        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon });
+        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon, myBlackIcon });
     }
 
     if (activeMenuButton.textContent === 'Достижения') {
