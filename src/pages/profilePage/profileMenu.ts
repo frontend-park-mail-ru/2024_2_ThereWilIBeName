@@ -14,7 +14,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.textContent = 'Здесь будут ваши поездки';
-        if (trips) {
+        if (tripsResponse.ok) {
             galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon });
         }
     }
@@ -31,7 +31,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const achievements = achievementsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.textContent = 'Здесь будут ваши достижения';
-        if (achievements) {
+        if (achievementsResponse.ok) {
             galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
         }
     }
@@ -46,7 +46,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const reviews = reviewsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.textContent = 'Здесь будут ваши отзывы';
-        if (reviews) {
+        if (reviewsResponse.ok) {
             galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
         }
     }
