@@ -1,0 +1,150 @@
+.trips-page
+  mixinSideMenu()
+
+  .trips-block
+    mixinBlock(myBlack)
+    display flex
+    flex-direction column
+    margin-top 0
+
+  .trips-button-row
+    display flex
+    flex-wrap wrap
+    justify-content space-evenly
+    padding 0 20px
+
+  .trip-create-button
+    mixinButton(myGrey, myLightGrey)
+    border-radius 20%
+    font-size 30px
+    display flex
+    justify-content center
+    align-items center
+    transition transform 0.3s ease, background 0.3s ease, color 0.3s ease
+
+    &:hover
+      transform scale(1.05)
+      background myGreen
+      color myWhite
+
+    &.hidden
+      display none
+
+  .trips-title-row
+    display grid
+    grid-template-columns 1fr auto
+
+  .trips-title
+    font-size 40px
+    padding-left 50px
+    font-weight bold
+    color myWhite
+    text-align center
+
+  hr
+    border none
+    height 2px
+    background-color myGrey
+    margin 20px 30px
+
+  .gallery-trips
+    display flex
+    flex-wrap wrap
+    justify-content space-evenly
+    padding 0
+    gap 15px 0
+
+  .trips-back-button
+    font-size 40px
+    font-weight bold
+    padding 0 15px
+    color myGrey
+    height fit-content
+    cursor pointer
+    transition color 0.3s ease
+
+    &:hover
+      color myRed
+
+  .gallery-item-trips
+    mixinGalleryItem(110px, 700px, myWhite)
+    margin auto
+    display flex
+    flex-direction row
+    column-gap 10px
+    transition height 0.3s ease
+
+    &.open
+      height 500px
+
+  .trips-trip-icon
+    width 65px
+    height 65px
+
+  .gallery-item-trips-img
+    object-fit fill
+    height 65px
+    width 200px
+    border 2px solid myBlack
+    background myBlack
+    border-radius 20px
+
+  .trips-open-icon
+    width 35px
+    height 35px
+    margin auto
+    rotate -90deg
+    cursor pointer
+    transition transform 0.3s ease
+
+    &.open
+      transform rotate(90deg)
+
+  .trips-edit-icon, .trips-delete-icon
+    width 30px
+    height 30px
+    cursor pointer
+
+  .trips-column-open
+    display grid
+    align-items center
+    grid-template-rows 70px 1fr
+
+  .trips-column-info
+    display grid
+    grid-template-rows auto auto 1fr
+
+  .trips-column-buttons
+    display grid
+    grid-template-rows auto auto 1fr
+    row-gap 10px
+
+  .gallery-trips-name
+    font-size 20px
+    font-weight bold
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+  .gallery-trips-date
+    font-size 17px
+
+  .please-block
+    align-items center
+    display flex
+    flex-direction column
+
+    &.hidden
+      display none
+
+  .please-img
+    height 200px
+    width 200px
+
+  .auth-please
+    font-size 24px
+    font-weight bold
+    color myWhite
+    margin auto
+    text-align center
+    width fit-content

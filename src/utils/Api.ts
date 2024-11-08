@@ -1,9 +1,21 @@
 import RESTApi from './RESTApi';
+import formatDate from '../pages/formateDate';
 
 type JsonResponse<T> = {
     data: T,
     status: number,
     ok: boolean,
+}
+
+type Trip = {
+    id: string,
+    userId: number,
+    name: string,
+    cityId: number,
+    description: string,
+    startDate: string,
+    endDate: string,
+    private: boolean,
 }
 
 type Attraction = {
@@ -29,11 +41,16 @@ type Login = {
     id: string,
     login: string,
     email: string,
-    created_at: string,
+    createdAt: string,
 }
 
 type Logout = {
     // что-то начнут возвращать
+}
+
+type changePassword = {
+    id: number,
+    newPassword: string,
 }
 
 type PostReview = {
@@ -47,10 +64,28 @@ type PostReview = {
 
 type GetReview = {
     id: number,
-    username: string,
+    user_login: string,
     avatar_path: string,
     rating: number,
     review_text: string,
+}
+
+type UserReview = {
+    id: number,
+    place_name: string,
+    rating: number,
+    text: string,
+}
+
+type Avatar = {
+    message: string,
+    avatarPath: string,
+}
+
+type Profile = {
+    username: string,
+    avatarPath: string,
+    email: string,
 }
 
 type Response = {
@@ -86,39 +121,6 @@ export default {
         };
     },
 
-    // async getAttractions(): Promise<{
-    //     data: { imagePath: string; name: string; description: string; id: number }[];
-    //     ok: boolean;
-    //     status: number
-    // }> {
-    //     const getAttractionsUrl = '/api/v1/places?limit=20&offset=0';
-    //     const res = await RESTApi.get(getAttractionsUrl);
-    //     return {
-    //         data: [
-    //             {
-    //                 id: 0,
-    //                 name: 'Московский Кремль',
-    //                 imagePath: '/api/images/image1.png',
-    //                 description: 'Крепость с комплексом церквей, дворцов и музеев с произведениями искусства и государственными регалиями.'
-    //             },
-    //             {
-    //                 id: 1,
-    //                 name: 'Красная Площадь',
-    //                 imagePath: '/api/images/image2.png',
-    //                 description: 'Знаменитая площадь с Кремлем, собором Василия Блаженного XVI века и мавзолеем Ленина.'
-    //             },
-    //             {
-    //                 id: 2,
-    //                 name: 'Храм Василия Блаженного',
-    //                 imagePath: '/api/images/image3.png',
-    //                 description: 'Собор XVI века с разноцветными куполами (ныне музей).'
-    //             }
-    //         ],
-    //         status: res.status,
-    //         ok: res.ok,
-    //     };
-    // },
-
     async getAttraction(id: number): Promise<JsonResponse<Attraction>> {
         const res = await RESTApi.get(`/api/v1/places/${id}`);
         return {
@@ -139,73 +141,6 @@ export default {
         };
     },
 
-    // async getAttraction(id: number): Promise<{
-    //     data: { imagePath: string; name: string; description: string; id: number };
-    //     ok: boolean;
-    //     status: number
-    // }> {
-    //     const getAttractionsUrl = '/api/v1/places?limit=20&offset=0';
-    //     const res = await RESTApi.get(getAttractionsUrl);
-    //     return {
-    //         data:
-    //             {
-    //                 id: 0,
-    //                 name: 'Московский Кремль',
-    //                 imagePath: '/src/static/img_1.png',
-    //                 description: 'Крепость с комплексом церквей, дворцов и музеев с произведениями искусства и государственными регалиями.'
-    //             },
-    //         status: res.status,
-    //         ok: res.ok,
-    //     };
-    // },
-
-    async getReviews(id: number): Promise<JsonResponse<GetReview[]>> {
-        const res = await RESTApi.get(`/api/v1/reviews/${id}`);
-        return {
-            data: res.data.map( (review: any) =>
-                ({
-                    id: Number(review.data.id),
-                    username: String(review.data.username),
-                    avatar_path: String(review.data.avatar_path),
-                    rating: Number(review.data.rating),
-                    review_text: String(review.data.review_text),
-                })
-            ),
-            status: res.status,
-            ok: res.ok,
-        };
-    },
-
-    // async getReviews(id: number): Promise<{
-    //     data: { image: string; name: string; text: string; id: number; date: string; rating: number}[];
-    //     ok: boolean;
-    //     status: number
-    // }> {
-    //     const res = await RESTApi.get(`/api/v1/reviews/${id}`);
-    //     return {
-    //         data: [
-    //             {
-    //                 'id': 0,
-    //                 'image': '/src/styles/img.png',
-    //                 'name': 'Василиса',
-    //                 'date': '10.10.2024',
-    //                 'text': 'Крепость с комплексом церквей, дворцов и музеев с произведениями искусства и государственными регалиями.',
-    //                 'rating': 4
-    //             },
-    //             {
-    //                 'id': 1,
-    //                 'image': '/src/styles/img.png',
-    //                 'name': 'Артем',
-    //                 'date': '01.10.2024',
-    //                 'text': 'Крепость с комплексом церквей, дворцов и музеев с произведениями искусства и государственными регалиями.',
-    //                 'rating': 2
-    //             },
-    //         ],
-    //         status: res.status,
-    //         ok: res.ok,
-    //     };
-    // },
-
     async getUser(): Promise<JsonResponse<User>> {
         const res = await RESTApi.get('/api/v1/users/me');
         return {
@@ -225,7 +160,7 @@ export default {
             data: {},
             status: res.status,
             ok: res.ok,
-        }
+        };
     },
 
     /**
@@ -242,7 +177,7 @@ export default {
                 id: String(res.data.id),
                 login: String(res.data.login),
                 email: String(res.data.email),
-                created_at: String(res.data.created_at),
+                createdAt: String(res.data.created_at),
             },
             status: res.status,
             ok: res.ok,
@@ -264,15 +199,32 @@ export default {
                 id: String(res.data.id),
                 login: String(res.data.login),
                 email: String(res.data.email),
-                created_at: String(res.data.created_at),
+                createdAt: String(res.data.created_at),
             },
             status: res.status,
             ok: res.ok,
         };
     },
 
+    async getReviews(id: number): Promise<JsonResponse<GetReview[]>> {
+        const res = await RESTApi.get(`/api/v1/places/${id}/reviews`);
+        return {
+            data: res.data.map( (review: any) =>
+                ({
+                    id: Number(review.id),
+                    user_login: String(review.user_login),
+                    avatar_path: String(review.avatar_path),
+                    rating: Number(review.rating),
+                    review_text: String(review.review_text),
+                })
+            ),
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
     async postReview(user_id: number, place_id: number, review_text: string, rating: number): Promise<JsonResponse<PostReview>> {
-        const res = await RESTApi.post('/api/v1/reviews', {user_id, place_id, rating, review_text});
+        const res = await RESTApi.post(`/api/v1/places/${place_id}/reviews`, {user_id, place_id, rating, review_text});
         return {
             data: {
                 id: Number(res.data.id),
@@ -287,8 +239,8 @@ export default {
         };
     },
 
-    async deleteReview(id: number): Promise<JsonResponse<Response>> {
-        const res = await RESTApi.delete(`/api/v1/reviews/${id}`);
+    async deleteReview(review_id: number, place_id: number): Promise<JsonResponse<Response>> {
+        const res = await RESTApi.delete(`/api/v1/${place_id}/reviews/${review_id}`);
         return {
             data: {
                 message: String(res.data.message),
@@ -296,6 +248,118 @@ export default {
             status: res.status,
             ok: res.ok,
         };
-    }
+    },
+
+    async getUserTrips(id: string): Promise<JsonResponse<Trip>> {
+        const res = await RESTApi.get(`/api/v1/users/${id}/trips`);
+        return {
+            data: res.data.map( (trip: any) => ({
+                userId: Number(trip.user_id),
+                id: String(trip.id),
+                name: String(trip.name),
+                cityId: Number(trip.city_id),
+                description: String(trip.description),
+                startDate: formatDate(trip.start_date),
+                endDate: formatDate(trip.end_date),
+                private: Boolean(trip.private),
+            })
+            ),
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async postCreateTrip(userId:number, name: string, cityId: number, description: string, startDate: string, endDate: string, privateTrip: boolean): Promise<JsonResponse<Trip>> {
+        const res = await RESTApi.post('/api/v1/trips', {user_id: userId, name, city_id: cityId, description: description, start_date: startDate, end_date: endDate, private_trip: privateTrip });
+        return {
+            data: res.data,
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async putTrip(id: string, userId:number, name: string, cityId: number, description: string, startDate: string, endDate: string, privateTrip: boolean): Promise<JsonResponse<Trip>> {
+        const res = await RESTApi.put(`api/v1/trips/${id}`, {user_id: userId, name, city_id: cityId, description: description, start_date: startDate, end_date: endDate, private_trip: privateTrip });
+        return {
+            data: res.data,
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async deleteTrip(id: string): Promise<JsonResponse<Response>> {
+        const res = await RESTApi.delete(`/api/v1/trips/${id}`, {id: id});
+        return {
+            data: res.data,
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async getUserReviews(id: string): Promise<JsonResponse<UserReview>> {
+        const res = await RESTApi.get(`api/v1/users/${id}/reviews`);
+        return {
+            data: res.data.map( (review: any) => ({
+                id: Number(review.id),
+                placeName: String(review.place_name),
+                rating: Number(review.rating),
+                reviewText: String(review.text),
+            })
+            ),
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async putChangePassword(id: string,oldPassword: string, newPassword: string): Promise<JsonResponse<changePassword>> {
+        const res = await RESTApi.put(`/api/v1/users/${id}/update/password`, {old_password: oldPassword, new_password: newPassword});
+        return {
+            data: {
+                id: Number(res.data.id),
+                newPassword: String(res.data.password)
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async putUserInformation(id: string, username: string, email: string): Promise<JsonResponse<User>> {
+        const res = await RESTApi.put(`/api/v1/users/${id}/profile`, {username, email});
+        return {
+            data: {
+                id: String(res.data.id),
+                username: String(res.data.username),
+                email: String(res.data.email),
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async putAvatar(id: string, avatar: File): Promise<JsonResponse<Avatar>> {
+        const res = await RESTApi.put(`api/v1/users/${id}/avatars`, {avatar});
+        return {
+            data: {
+                message: String(res.data.message),
+                avatarPath: String(res.data.avatarPath)
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async getProfile(id: string): Promise<JsonResponse<Profile>> {
+        const res = await RESTApi.get(`api/v1/users/${id}/profile`);
+        return {
+            data: {
+                username: String(res.data.login),
+                avatarPath: String(res.data.avatar_path),
+                email: String(res.data.email),
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
 
 };

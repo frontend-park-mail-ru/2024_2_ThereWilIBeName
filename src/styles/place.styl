@@ -1,4 +1,6 @@
 .place-page
+  mixinSideMenu()
+
   .place-block
     display flex
     margin 70px 100px 30px 100px
@@ -7,99 +9,97 @@
     justify-content center
 
   .column1 column2
-    display: flex
-    flex-direction: column
-    gap: 20px
+    display flex
+    flex-direction column
+    gap 20px
 
   .place-name
-    background-color: #232323
-    border-radius: 30px
-    font-weight: bold
-    color: white
-    padding: 20px
-    font-size: 35px
-    text-align: center
-    flex-grow: 1
-    filter: drop-shadow(-16px 16px 0px #23232380)
+    background-color #232323
+    border-radius 30px
+    font-weight bold
+    color white
+    padding 20px
+    font-size 35px
+    text-align center
+    flex-grow 1
+    filter drop-shadow(-16px 16px 0px myShadow)
 
   .place-header
-    display: flex
-    gap: 25px
+    display flex
+    gap 25px
 
-  .button-back
-    background-color: #232323
-    border-radius: 30px
-    font-size: 30px
-    text-align: center
-    padding: 20px 25px
-    transform: rotate(180deg)
-    filter: drop-shadow(16px -16px 0px #23232380)
-    display: flex
-    align-items: center
+  .back-button
+    background-color #232323
+    border-radius 30px
+    font-size 30px
+    text-align center
+    padding 20px 25px
+    filter drop-shadow(-16px 16px 0px myShadow)
+    display flex
+    align-items center
+    cursor pointer
+    color myWhite
 
-  .button-back:hover
-    cursor: pointer
+    &:hover
+      color myRed
 
-  .arrow
-    background: linear-gradient(to bottom right, #F58080, #F2E2A9) 50% 50% / 100vw 100vh
-    color: transparent
-    background-clip: text
-
+  .button-backhover
+    cursor pointer
 
   .place-image img
-    object-fit: cover
-    width: 100%
-    height: 100%
-    display: block
-    max-width: 400px
-    border-radius: 30px
-    min-width: 200px
-    filter: drop-shadow(-16px 16px 0px #23232380)
-    aspect-ratio: 1 / 0.9
+    object-fit cover
+    width 100%
+    height 100%
+    display block
+    max-width 400px
+    border-radius 30px
+    min-width 200px
+    filter drop-shadow(-16px 16px 0px myShadow)
+    aspect-ratio 1 / 0.9
 
   hr.solid
-    border-top: 2px solid #23232320
+    border-top 2px solid #23232320
 
-  .map-image img
-    object-fit: cover
-    width: 100%
-    height: 100%
-    display: block
-    max-width: 100%
-    max-height: 350px
-    border-radius: 30px
-    min-width: 200px
-    filter: drop-shadow(-16px 16px 0px #23232380)
+  .map-image
+    object-fit cover
+    width 100%
+    height 100%
+    display block
+    max-width 100%
+    max-height 350px
+    border-radius 30px
+    min-width 200px
+    filter drop-shadow(-16px 16px 0px #23232380)
 
-  @media (max-width: 700px)
+  @media (max-width 700px)
     .place-block
-      flex-direction: column
+      flex-direction column
 
   .place-info
-    max-width: 600px
-    background-color: #232323
-    border-radius: 30px
-    padding: 30px
-    font-size: 20px
-    color: white
-    margin: 30px 0
-    filter: drop-shadow(-16px 16px 0px #23232380)
+    max-width 600px
+    background-color #232323
+    border-radius 30px
+    padding 30px
+    font-size 20px
+    color white
+    margin 30px 0
+    filter drop-shadow(-16px 16px 0px myShadow)
 
   .description
-    border: 10px
-    padding: 10px 0
+    border 10px
+    padding 10px 0
 
   .review-block
-    simpleReviewBlock()
+    mixinReviewBlock()
 
   .user-review-block
-    simpleReviewBlock()
+    mixinReviewBlock()
     margin-bottom 0
 
   .review-info
-    display: flex
-    gap: 10px
-    align-items: center
+    display flex
+    gap 10px
+    align-items center
 
   .rating
     padding 12px 45px
@@ -126,22 +126,22 @@
 
 
   .text-average
-    font-size: 20px
-    font-weight: 600
+    font-size 20px
+    font-weight 600
 
   .user-image img
-    max-width: 45px
-    max-height: 45px
-    border-radius: 50%
-    display: block
-    aspect-ratio: 1 / 1
+    max-width 45px
+    max-height 45px
+    border-radius 50%
+    display block
+    aspect-ratio 1 / 1
 
   .review-text
-    font-size: 17px
-    padding-bottom: 10px
+    font-size 17px
+    padding-bottom 10px
 
   .leave-review
-    simpleReviewBlock()
+    mixinReviewBlock()
     display none
 
   .leave-review.visible
@@ -191,18 +191,17 @@
         background-clip text
 
   .review-button
-    simpleFormButton()
+    mixinFormButton()
 
   .delete-review
-    simpleFormButton()
-    margin 0 auto
-    padding 5px 20px
-
-
-  .delete-review img
+    margin 10px auto
     cursor pointer
     width 35px
     height 35px
+    transition transform 0.3s ease
+
+    &:hover
+      transform scale(1.05)
 
   .user-review
     display none
@@ -213,6 +212,15 @@
     margin 0
 
   ul
-    list-style-type: none
-    padding: 0
+    list-style-type none
+    padding 0
     margin 0
+
+    .menu-button
+      mixinButton(myBlack, myWhite)
+      margin 0
+      text-align left
+      transition transform  0.3s ease
+
+      &:hover
+        transform scale(1.05)

@@ -1,8 +1,11 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
-import Page from './Page';
+import {emailRegex} from './validation';
+import {passwordRegex} from './validation';
 
-const SignUpPage: Page = {
+import logoImage from '../static/logo.png';
+
+export default {
     /**
      * HTML-шаблон для страницы регистрации, содержащий форму для ввода логина, email, пароля
      * и подтверждения пароля, а также элементы для навигации на другие страницы.
@@ -13,7 +16,7 @@ const SignUpPage: Page = {
         `
         <header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
+                <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
             </div>
         </header>
         <main>
@@ -27,7 +30,7 @@ const SignUpPage: Page = {
                     <label class="reg-text">Email</label>
                     <input class="border" id="email" name="email" >
                     <label class="reg-text">Пароль</label>
-                    <input class="border" type="password" id="password" name="password">
+                    <input class="border" type="password" id="password" name="password" autocomplete="new-password">
                     <label class="reg-text">Подтверждение пароля</label>
                     <input class="border" type="password" id="confirm-password" name="confirm-password">
                     <button class="auth-button">Зарегистрироваться</button>
@@ -61,12 +64,11 @@ const SignUpPage: Page = {
         signupForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formUsername = (document.getElementById('login') as HTMLInputElement).value;
-            const formEmail = (document.getElementById('email') as HTMLInputElement).value;
+            const formUsername = (document.getElementById('login') as HTMLInputElement).value.trim();
+            const formEmail = (document.getElementById('email') as HTMLInputElement).value.trim().toLowerCase();
             const formPassword = (document.getElementById('password') as HTMLInputElement).value;
             const formConfirmPassword = (document.getElementById('confirm-password') as HTMLInputElement).value;
 
-            const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
             if (!emailRegex.test(formEmail)) {
                 errorMessage.textContent = 'Неверный email';
                 errorMessage.classList.add('visible');
@@ -79,7 +81,6 @@ const SignUpPage: Page = {
                 return;
             }
 
-            const passwordRegex = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&*_-]?).{8,}$/;
             if (!passwordRegex.test(formPassword)) {
                 errorMessage.textContent = 'Пароль должен включать букву, цифру и символ';
                 errorMessage.classList.add('visible');
@@ -92,10 +93,17 @@ const SignUpPage: Page = {
                 return;
             }
 
+
+
             const res = await Api.postSignup(formUsername, formEmail, formPassword);
 
-            if (!res.ok) {
+            if (res.status === 409) {
                 errorMessage.textContent = 'Логин уже занят';
+                errorMessage.classList.add('visible');
+                return;
+            }
+            if (!res.ok) {
+                errorMessage.textContent = 'Неизвестная ошибка';
                 errorMessage.classList.add('visible');
                 return;
             }
@@ -113,5 +121,3 @@ const SignUpPage: Page = {
         // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };
-
-export default SignUpPage;

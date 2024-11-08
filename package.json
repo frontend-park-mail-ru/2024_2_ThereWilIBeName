@@ -5,35 +5,49 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "lint": "eslint **/*.{ts,styl} --fix",
-    "build": "webpack"
+    "lint": "eslint **/*.ts --fix",
+    "build": "webpack",
+    "dev": "webpack serve --config ./webpack.dev.js"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "repository": "git+https://github.com/frontend-park-mail-ru/2024_2_ThereWilIBeName.git",
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@eslint/js": "^9.11.1",
-    "@types/handlebars": "^4.0.40",
+    "@eslint/js": "^9.13.0",
     "@typescript-eslint/eslint-plugin": "^8.12.2",
     "@typescript-eslint/parser": "^8.12.2",
     "eslint": "^9.13.0",
-    "express": "^4.21.1",
+    "express": "^4.21.0",
     "globals": "^15.9.0",
-    "handlebars-webpack-plugin": "^2.2.1",
-    "webpack": "^5.96.1",
-    "webpack-cli": "^5.1.4"
+    "html-webpack-plugin": "^5.6.3",
+    "webpack-dev-server": "^5.1.0",
+    "ip": "^2.0.1"
   },
   "dependencies": {
     "@babel/core": "^7.25.9",
     "@babel/preset-env": "^7.25.9",
+    "@eslint/compat": "^1.2.2",
+    "@eslint/eslintrc": "^3.1.0",
+    "@types/eslint__js": "^8.42.3",
     "babel-loader": "^9.2.1",
+    "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
     "handlebars": "^4.7.8",
     "handlebars-loader": "^1.7.3",
-    "lodash": "^4.17.21",
+    "html-webpack-plugin": "^5.6.3",
+    "pre-commit": "^1.2.2",
     "style-loader": "^4.0.0",
+    "stylus": "^0.64.0",
     "stylus-loader": "^8.1.1",
-    "ts-loader": "^9.5.1"
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.12.2",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^6.0.1"
   }
 }

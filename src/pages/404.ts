@@ -1,7 +1,8 @@
 import Router from '../utils/Router';
-import Page from './Page';
 
-const ErrorPage: Page = {
+import logoImage from '../static/logo.png';
+
+export default {
     /**
      * HTML-шаблон страницы ошибки 404, отображающий сообщение об ошибке и кнопку
      * для перехода на главную страницу.
@@ -11,7 +12,7 @@ const ErrorPage: Page = {
     html:
         `<header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
+                <img src="${logoImage}" alt="Логотип" class="logo-image">
             </div>
         </header>
         <main class="warn-message">
@@ -42,6 +43,3 @@ const ErrorPage: Page = {
         // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };
-
-
-export default ErrorPage;

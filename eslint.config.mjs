@@ -1,31 +1,41 @@
+import path from 'node:path';
+import url from 'node:url';
+import pluginJs from '@eslint/js';
+import pluginTs from '@typescript-eslint/eslint-plugin';
 import globals from 'globals';
+import tsParser from '@typescript-eslint/parser';
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 export default [
-    {
-        languageOptions: {
-            globals: {...globals.browser},
-        }},
+
+    // Базовая конфигурация ESLint для JavaScript
+    pluginJs.configs.recommended,
+
     {
         ignores: ['server/*', 'webpack.config.js', 'build/*'],
     },
     {
-        files: ['*.styl'],
-        rules: {
-            // Точки с запятой
-            semi: ['error', 'never'],
-            // Пустая строка
-            'eol-last': ['error', 'always'],
+        files: ['**/*.ts'],
+        languageOptions: {
+            parser: tsParser,
+            parserOptions: {
+                project: path.resolve(__dirname, './tsconfig.json'),
+            },
+            globals: {
+                ...globals.browser,
+            },
         },
-    },
-    {
-        files: ['*.ts'],
+        plugins: {
+            '@typescript-eslint': pluginTs,
+        },
         rules: {
+            // Неиспользуемые переменные
+            'no-unused-vars': ['warn'],
             // Точки с запятой
             semi: ['error', 'always'],
             // Отступы
             'indent': ['error', 4],
-            // Макс длина строки
-            'max-len': ['warn', { 'code': 100 }],
             // Без var
             'no-var': ['error'],
             // Пробелы вокруг операторов

@@ -1,4 +1,6 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: './src/index.ts',
@@ -8,6 +10,17 @@ module.exports = {
         clean: true,
     },
     mode: 'development',
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, './index.html'),
+            minify: true,
+        }),
+        new CopyPlugin({
+            patterns: [
+                {from: "src/service-worker.js"},
+            ],
+        })
+    ],
     module: {
         rules: [
             {
@@ -38,6 +51,10 @@ module.exports = {
                         knownHelpersOnly: false,
                     },
                 },
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
+                type: 'asset/resource',
             },
         ],
     },

@@ -2,9 +2,11 @@ import Api from '../../utils/Api';
 import User from '../../utils/user';
 import Router from '../../utils/Router';
 import galleryTemplate from './home.hbs';
-import Page from '../Page'
+import headerMount from '../headerMount';
 
-const HomePage: Page = {
+import logoImage from '../../static/logo.png';
+
+export default {
     /**
      * HTML-шаблон главной страницы, отображающей заголовок, меню пользователя и галерею достопримечательностей.
      *
@@ -13,10 +15,11 @@ const HomePage: Page = {
     html: `
         <header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
+                <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
             </div>
             <div class="header-menu">
-                <button class="header-button" id="signin-button">вход</button>
+                <button class="header-button" id="trips-button">Поездки</button>
+                <button class="header-button" id="signin-button">Вход</button>
                 <button class="user-button" id="user-button"></button>
                 
                 <div id="side-menu" class="side-menu">
@@ -45,59 +48,24 @@ const HomePage: Page = {
      * @returns {Promise<void>} Промис, который выполняется после завершения монтирования страницы.
      */
     async mount(router: Router): Promise<void> {
-        const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
-        const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
-        const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
-        const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
-
-        const userNameDiv = document.getElementById('user-name') as HTMLElement;
-        const userButton = document.getElementById('user-button') as HTMLButtonElement;
-        const sideMenu = document.getElementById('side-menu') as HTMLElement;
-        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
-        const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
+        const tripsButton = document.getElementById('trips-button') as HTMLButtonElement;
         const placeButton = document.getElementById('gallery') as HTMLButtonElement;
 
-        // Открытие меню при клике на кнопку
-        userButton.addEventListener('click', () => {
-            sideMenu.classList.add('open');
-        });
+        // Монтирование хэдера
+        const homeLogo = document.getElementById('logo-image') as HTMLElement;
+        const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
+        const userButton = document.getElementById('user-button') as HTMLButtonElement;
+        const sideMenu = document.getElementById('side-menu') as HTMLElement;
+        const userNameDiv = document.getElementById('user-name') as HTMLElement;
+        const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
+        const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
+        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
+        const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
+        const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
+        await headerMount(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo, userNameDiv);
 
-        closeButton.addEventListener('click', () => {
-            sideMenu.classList.remove('open');
-        });
-        backgroundMenu.addEventListener('click', () => {
-            sideMenu.classList.remove('open');
-        });
-
-        profileButton.addEventListener('click', () => {
-            router.goto('/profile');
-        });
-
-        changeUserButton.addEventListener('click', () => {
-            router.goto('/signin');
-        });
-
-        placeButton.addEventListener('click', (event: MouseEvent) => {
-            const target = event.target as HTMLElement;
-            if (target.tagName === 'LI') {
-                const itemId: string = target.querySelector('a')!.href.split('/').pop()!;
-                router.goto(`/places/${itemId}`);
-            }
-        });
-
-        logoutButton.addEventListener('click', async () => {
-            const resLogout = await Api.postLogout(User.username, User.id);
-            if (resLogout.ok) {
-                User.username = '';
-                User.id = '';
-                User.email = '';
-                userButton.classList.remove('show');
-                signinButton.classList.remove('hidden');
-            }
-        });
-
-        signinButton.addEventListener('click', () => {
-            router.goto('/signin');
+        tripsButton.addEventListener('click', () => {
+            router.goto('/trips');
         });
 
         // Загрузка достопримечательностей
@@ -106,20 +74,16 @@ const HomePage: Page = {
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ attractions });
 
-        // Получение информации о текущем пользователе
-        const currentUser = await Api.getUser();
-
-        if (!currentUser.ok) {
-            console.log('Пользователь не авторизован')
-            return;
-        }
-        User.username = currentUser.data.username;
-        User.id = currentUser.data.id;
-        signinButton.textContent = 'Сменить пользователя';
-        userButton.textContent = User.username;
-        userNameDiv.textContent = User.username;
-        userButton.classList.add('show');
-        signinButton.classList.add('hidden');
+        placeButton.addEventListener('click', (event) => {
+            const target = event.target as HTMLElement;
+            if (target) {
+                const listItem = target.closest('li');
+                if (listItem) {
+                    const itemId = listItem.querySelector('a')!.href.split('/').pop();
+                    router.goto(`/places/${itemId}`);
+                }
+            }
+        });
     },
 
     /**
@@ -130,5 +94,3 @@ const HomePage: Page = {
         // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
     },
 };
-
-export default HomePage;

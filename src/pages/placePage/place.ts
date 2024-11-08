@@ -1,18 +1,20 @@
 import Api from '../../utils/Api';
 import User from '../../utils/user';
-import placeTemplate from './place.hbs'
-import Page from "../Page";
+import placeTemplate from './place.hbs';
 import Router from '../../utils/Router';
+import deleteIcon from '../../static/delete.png';
+import logoImage from '../../static/logo.png';
+import headerMount from '../headerMount';
+import map from '../../static/map.png';
 
-
-const placePage: Page =  {
+export default {
     html:
         `<header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="logo-image">
+                <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
             </div>
             <div class="header-menu">
-                <button class="header-button" id="signin-button">вход</button>
+                <button class="header-button" id="signin-button">Вход</button>
                 <button class="user-button" id="user-button"></button>
                 
                 <div id="side-menu" class="side-menu">
@@ -59,9 +61,7 @@ const placePage: Page =  {
                     </div>
                     <div><hr class="solid"></div>
                     <div class="review-text" id="user-text"><!-- текст отзыва--></div>
-                    <button class="delete-review" id="delete-button">
-                        <img src="/src/static/delete.png">
-                    </button>
+                    <img src="${deleteIcon}" alt="Удалить" class="delete-review" id="delete-button">
                 </div>
             </div>
             <ul id="reviews">
@@ -72,25 +72,20 @@ const placePage: Page =  {
                 <div class="place-name" id="place-name">
                     Название
                 </div>
-                <div class="button-back" id="button-back"><div class="arrow">➜</div></div>
+                <div class="back-button" id="back-button">←</div>
             </div>
             <div class="place-info">
                 <div class="description" id="description">здесь будет описание</div>
             </div>
-            <div class="map-image">
-                <img src="img.png" alt="{{место на карте}}" id="map-image">
-            </div>
+            <img class="map-image" src="${map}" alt="Место на карте" id="map-image">
         </div>
     </div>
 </main>`,
     async mount(router: Router, params: any): Promise<void> {
-        const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
-        const homeLogo = document.getElementById('logo-image') as HTMLElement;
-        const backButton = document.getElementById('button-back') as HTMLButtonElement;
-        const placeName= document.getElementById('place-name') as HTMLElement;
+        const backButton = document.getElementById('back-button') as HTMLButtonElement;
+        const placeName = document.getElementById('place-name') as HTMLElement;
         const placeDescription = document.getElementById('description') as HTMLElement;
         const placeImage = document.getElementById('place-image') as HTMLImageElement;
-        const mapImage = document.getElementById('map-image') as HTMLImageElement;
         const reviewsElement = document.getElementById('reviews') as HTMLElement;
         const userRating = document.getElementById('user-rating') as HTMLElement;
         const userText = document.getElementById('user-text') as HTMLElement;
@@ -101,56 +96,47 @@ const placePage: Page =  {
         const userReviewElement = document.getElementById('user-review') as HTMLElement;
         const reviewElement = document.getElementById('leave-review') as HTMLElement;
 
-        const userNameDiv = document.getElementById('user-name') as HTMLElement;
+
+        // Монтирование хэдера
+        const homeLogo = document.getElementById('logo-image') as HTMLElement;
+        const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
         const userButton = document.getElementById('user-button') as HTMLButtonElement;
         const sideMenu = document.getElementById('side-menu') as HTMLElement;
-        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
+        const userNameDiv = document.getElementById('user-name') as HTMLElement;
         const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
         const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
-        const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
+        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
         const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
+        const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
+        await headerMount(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo, userNameDiv);
+
+
+        backButton.addEventListener('click', () => {
+            router.goto('/home');
+        });
 
         const itemId: number = Number(params);
         const attractionResponse = await Api.getAttraction(itemId);
         const attraction = attractionResponse.data;
 
-
         const reviewsResponse = await Api.getReviews(itemId);
         let reviews = reviewsResponse.data;
 
         let userReview: any;
-        const currentUser = await Api.getUser();
-        if (currentUser.ok) {
-            User.username = currentUser.data.username;
-            User.id = currentUser.data.id;
-            signinButton.textContent = 'Сменить пользователя';
-            userButton.textContent = User.username;
-            userNameDiv.textContent = User.username;
-            userButton.classList.add('show');
-            signinButton.classList.add('hidden');
-
-            userReview = reviews.find(review => review.username === User.username);
+        if (User.id !== '') {
+            userReview = reviews.find(review => review.user_login === User.username);
             if (userReview) {
-                reviews = reviews.filter(review => review.username !== User.username);
+                reviews = reviews.filter(review => review.user_login !== User.username);
                 userRating.textContent = String(userReview.rating) + '/5';
                 userRating.style.setProperty('--progress', String(userReview.rating));
                 userText.textContent = userReview.review_text;
                 userReviewElement.classList.toggle('visible');
 
             } else if (reviewElement) {
-                    reviewElement.classList.toggle('visible');
-                }
+                reviewElement.classList.toggle('visible');
+            }
         }
 
-        signinButton.addEventListener('click', () => {
-            router.goto('/signin');
-        });
-        homeLogo.addEventListener('click', () => {
-            router.goto('/home');
-        });
-        backButton.addEventListener('click', () => {
-            router.goto('/home');
-        });
         reviewForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
@@ -176,8 +162,8 @@ const placePage: Page =  {
             userReviewElement.classList.toggle('visible');
         });
 
-        deleteButton.addEventListener('click', async() => {
-            const res = await Api.deleteReview(userReview.id);
+        deleteButton.addEventListener('click', async () => {
+            const res = await Api.deleteReview(userReview.id, itemId);
             userReviewElement.classList.remove('visible');
             reviewElement.classList.toggle('visible');
         });
@@ -185,7 +171,6 @@ const placePage: Page =  {
         placeName.textContent = attraction.name;
         placeDescription.textContent = attraction.description;
         placeImage.src = attraction.imagePath;
-        mapImage.src = attraction.imagePath;
 
         reviewsElement.innerHTML = placeTemplate({reviews});
 
@@ -200,5 +185,3 @@ const placePage: Page =  {
 
     unmount(): void {}
 };
-
-export default placePage;
