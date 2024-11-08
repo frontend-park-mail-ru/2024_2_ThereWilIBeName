@@ -16,7 +16,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const tripsResponse = await Api.getUserTrips(User.id);
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        if (trips) {
+        if (trips !== undefined) {
             galleryProfileElement.innerHTML = '';
             galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon, myBlackIcon });
         }
@@ -46,7 +46,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const reviewsResponse = await Api.getUserReviews(User.id);
         const reviews = reviewsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        if (reviews) {
+        if (reviews !== undefined) {
             galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
         }
         else {
