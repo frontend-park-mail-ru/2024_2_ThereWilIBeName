@@ -102,7 +102,7 @@ export default {
         const getAttractionsUrl = '/api/v1/places?limit=20&offset=0';
         const res = await RESTApi.get(getAttractionsUrl);
         return {
-            data: res.data.map( (attraction: any) =>
+            data: res.data ? res.data.map( (attraction: any) =>
                 ({
                     id: String(attraction.id),
                     name: String(attraction.name),
@@ -114,8 +114,7 @@ export default {
                     cityID: Number(attraction.cityID),
                     phoneNumber: String(attraction.phoneNumber),
                     categoriesId: attraction.categoriesId as number[],
-                })
-            ),
+                })) : [],
             status: res.status,
             ok: res.ok,
         };
@@ -209,15 +208,14 @@ export default {
     async getReviews(id: number): Promise<JsonResponse<GetReview[]>> {
         const res = await RESTApi.get(`/api/v1/places/${id}/reviews`);
         return {
-            data: res.data.map( (review: any) =>
+            data: res.data ? res.data.map( (review: any) =>
                 ({
                     id: Number(review.id),
                     user_login: String(review.user_login),
                     avatar_path: String(review.avatar_path),
                     rating: Number(review.rating),
                     review_text: String(review.review_text),
-                })
-            ),
+                })) : [],
             status: res.status,
             ok: res.ok,
         };
@@ -253,7 +251,7 @@ export default {
     async getUserTrips(id: string): Promise<JsonResponse<Trip>> {
         const res = await RESTApi.get(`/api/v1/users/${id}/trips`);
         return {
-            data: res.data.map( (trip: any) => ({
+            data: res.data ? res.data.map( (trip: any) => ({
                 userId: Number(trip.user_id),
                 id: String(trip.id),
                 name: String(trip.name),
@@ -262,8 +260,7 @@ export default {
                 startDate: formatDate(trip.start_date),
                 endDate: formatDate(trip.end_date),
                 private: Boolean(trip.private),
-            })
-            ),
+            })) : [],
             status: res.status,
             ok: res.ok,
         };
@@ -298,14 +295,14 @@ export default {
 
     async getUserReviews(id: string): Promise<JsonResponse<UserReview>> {
         const res = await RESTApi.get(`api/v1/users/${id}/reviews`);
+
         return {
-            data: res.data.map( (review: any) => ({
+            data: res.data ? res.data.map( (review: any) => ({
                 id: Number(review.id),
                 placeName: String(review.place_name),
                 rating: Number(review.rating),
                 reviewText: String(review.text),
-            })
-            ),
+            })) : [],
             status: res.status,
             ok: res.ok,
         };
