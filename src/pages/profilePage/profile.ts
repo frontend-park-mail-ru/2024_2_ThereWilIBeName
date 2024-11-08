@@ -24,7 +24,7 @@ export default {
         <main>
             <div class="background-profile">
                 <div class="user-block">
-                    <img src="${defaultAvatar}" alt="Аватар" class="avatar">
+                    <img src="${defaultAvatar}" alt="Аватар" class="avatar" id="avatar">
                     <div class="information-block">
                         <div class="information-text-bold">Username</div>
                         <div class="information-text" id="user-username">Здесь будет username</div>
@@ -101,18 +101,47 @@ export default {
         const userEmail = document.getElementById('user-email') as HTMLElement;
         const userId = document.getElementById('user-id') as HTMLElement;
 
-        userTitle.textContent = User.username.charAt(0).toUpperCase() + User.username.slice(1);
-        userUserName.textContent = User.username;
-        userEmail.textContent = User.email;
+        const resProfile = await Api.getProfile(User.id);
+        userTitle.textContent = resProfile.data.username.charAt(0).toUpperCase() + resProfile.data.username.slice(1);
+        userUserName.textContent = resProfile.data.username;
+        userEmail.textContent = resProfile.data.email;
         userId.textContent = User.id;
+        const avatar = document.getElementById('avatar') as HTMLImageElement;
+        avatar.src = `avatars/${resProfile.data.avatarPath}`;
 
+        avatar.addEventListener('click', () => {
+            const avatarInputElement = document.createElement('input') as HTMLInputElement;
+            avatarInputElement.type = 'file';
+            avatarInputElement.accept = 'image/*'; // Ограничиваем тип файлов на изображения
+            avatarInputElement.style.display = 'none';
+
+
+            avatarInputElement.addEventListener('change', async () => {
+                if (avatarInputElement.files) {
+                    const newAvatar = avatarInputElement.files[0];
+                    const res = await Api.putAvatar(User.id, newAvatar);
+                }
+            });
+
+            avatarInputElement.click();
+        });
 
         const editButton = document.getElementById('edit-button') as HTMLButtonElement;
         const submitEditButton = document.getElementById('submit-edit-button') as HTMLButtonElement;
         const usernameInput = document.getElementById('username-input') as HTMLInputElement;
-        usernameInput.value = userUserName.textContent;
+
+
+        if (userUserName.textContent) {
+            usernameInput.value = userUserName.textContent;
+        }
         const emailInput = document.getElementById('email-input') as HTMLInputElement;
-        emailInput.value = userEmail.textContent;
+        if (userEmail.textContent) {
+            emailInput.value = userEmail.textContent;
+        }
+
+
+
+
 
         editButton.addEventListener('click', () => {
             editButton.classList.toggle('active');

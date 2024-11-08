@@ -77,6 +77,17 @@ type UserReview = {
     text: string,
 }
 
+type Avatar = {
+    message: string,
+    avatarPath: string,
+}
+
+type Profile = {
+    username: string,
+    avatarPath: string,
+    email: string,
+}
+
 type Response = {
     message: string,
 }
@@ -309,6 +320,31 @@ export default {
             data: {
                 id: String(res.data.id),
                 username: String(res.data.username),
+                email: String(res.data.email),
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async putAvatar(id: string, avatar: File): Promise<JsonResponse<Avatar>> {
+        const res = await RESTApi.put(`api/v1/users/${id}/avatars`, {avatar});
+        return {
+            data: {
+                message: String(res.data.message),
+                avatarPath: String(res.data.avatarPath)
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async getProfile(id: string): Promise<JsonResponse<Profile>> {
+        const res = await RESTApi.get(`api/v1/users/${id}/profile`);
+        return {
+            data: {
+                username: String(res.data.login),
+                avatarPath: String(res.data.avatar_path),
                 email: String(res.data.email),
             },
             status: res.status,
