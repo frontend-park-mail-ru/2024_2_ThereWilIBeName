@@ -12,7 +12,7 @@ import editIcon from '../../static/edit.png';
 import palmsImg from '../../static/please white.png';
 import User from '../../utils/user';
 import Trip from '../../utils/trip';
-import headerMount from '../headerMount';
+import header from '../../components/header';
 
 export default {
     /**
@@ -21,26 +21,7 @@ export default {
      *
      * @type {string}
      */
-    html: `<header class="header">
-            <div class="logo">
-                <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
-            </div>
-            <div class="header-menu">
-                <button class="header-button" id="signin-button">Вход</button>
-                <button class="user-button" id="user-button"></button>
-                
-                <div id="side-menu" class="side-menu">
-                    <div class="background-menu" id="background-menu"></div>
-                    <div class="user-name" id="user-name"></div>
-                    <ul>
-                        <li><button class="menu-button" id="change-user-button">Сменить пользователя</button></li>
-                        <li><button class="menu-button" id="profile-button">Профиль</button></li>
-                        <li><button class="menu-button" id="logout-button">Выйти</button></li>
-                    </ul>
-                    <button id="close-button" class="close-button">Закрыть</button>
-                </div>
-            </div>
-        </header>
+    html: `${header.html}
         <main>
             <div class="trips-block">
                 <div class="trips-title-row">
@@ -52,7 +33,7 @@ export default {
                     <div class="trip-create-button hidden" id="trip-create-button">+</div>
                 </div>
                 <div id="trips-root">
-                    <div class="please-block">
+                    <div class="please-block" id="please-block">
                         <img src="${palmsImg}" class="please-img">
                         <div class="auth-please" id="auth-please">Пожалуйста, авторизуйтесь</div>
                     </div>
@@ -73,21 +54,10 @@ export default {
 
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         const createTripButton = document.getElementById('trip-create-button') as HTMLButtonElement;
-        const authPleaseBlock = document.getElementById('please-block') as HTMLButtonElement;
-
+        const authPleaseBlock = document.getElementById('please-block') as HTMLElement;
 
         // Монтирование хэдера
-        const homeLogo = document.getElementById('logo-image') as HTMLElement;
-        const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
-        const userButton = document.getElementById('user-button') as HTMLButtonElement;
-        const sideMenu = document.getElementById('side-menu') as HTMLElement;
-        const userNameDiv = document.getElementById('user-name') as HTMLElement;
-        const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
-        const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
-        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
-        const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
-        const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
-        await headerMount(router, sideMenu, userButton, closeButton, backgroundMenu, profileButton, changeUserButton, signinButton, logoutButton, homeLogo, userNameDiv);
+        await header.mount(router);
 
         backButton.addEventListener('click', () => {
             router.goto('/home');
