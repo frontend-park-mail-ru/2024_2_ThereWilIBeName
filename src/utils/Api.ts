@@ -240,7 +240,7 @@ export default {
     },
 
     async deleteReview(review_id: number, place_id: number): Promise<JsonResponse<Response>> {
-        const res = await RESTApi.delete(`/api/v1/${place_id}/reviews/${review_id}`);
+        const res = await RESTApi.delete(`/api/v1/places/${place_id}/reviews/${review_id}`);
         return {
             data: {
                 message: String(res.data.message),
