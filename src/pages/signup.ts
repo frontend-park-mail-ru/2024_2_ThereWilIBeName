@@ -30,7 +30,7 @@ export default {
                     <label class="reg-text">Email</label>
                     <input class="border" id="email" name="email" >
                     <label class="reg-text">Пароль</label>
-                    <input class="border" type="password" id="password" name="password">
+                    <input class="border" type="password" id="password" name="password" autocomplete="new-password">
                     <label class="reg-text">Подтверждение пароля</label>
                     <input class="border" type="password" id="confirm-password" name="confirm-password">
                     <button class="auth-button">Зарегистрироваться</button>

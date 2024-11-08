@@ -302,4 +302,17 @@ export default {
             ok: res.ok,
         };
     },
+
+    async putUserInformation(id: string, username: string, email: string): Promise<JsonResponse<User>> {
+        const res = await RESTApi.put(`/api/v1/users/${id}/profile`, {username, email});
+        return {
+            data: {
+                id: String(res.data.id),
+                username: String(res.data.username),
+                email: String(res.data.email),
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
 };

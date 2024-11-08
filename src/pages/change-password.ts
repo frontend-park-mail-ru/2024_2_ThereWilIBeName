@@ -27,7 +27,7 @@ export default {
                     <label class="change-password-text">Старый пароль</label>
                     <input class="border" id="old-password" name="old-password" >
                     <label class="change-password-text">Новый пароль</label>
-                    <input class="border" id="new-password" name="new-password" >
+                    <input class="border" id="new-password" name="new-password" autocomplete="new-password">
                     <label class="change-password-text">Введите новый пароль ещё раз</label>
                     <input class="border" id="retype-new-password" name="retype-new-password" >
                     <button class="change-password-button">Сменить пароль</button>

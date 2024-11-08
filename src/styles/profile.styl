@@ -16,18 +16,24 @@
 
   .user-block
     mixinBlock(myWhite)
-    display flex
-    flex-direction row
-    align-items flex-start
+    display grid
+    grid-template-rows repeat(2, auto)
+    grid-template-columns repeat(3, auto)
     margin-top 0
+    padding 20px
+    gap 20px 20px
 
   .profile-block
     mixinBlock(myWhite)
     margin auto auto
 
   .avatar
+    height 100%
+    width 100%
     min-width 100px
     min-height 100px
+    max-width 350px
+    max-height 350px
     aspect-ratio 1 / 1
     border-radius 20px
     object-fit cover
@@ -35,10 +41,21 @@
 
   .information-block
     background-color myBlack
+    display grid
+    grid-template-columns auto auto auto
+    grid-template-rows repeat(3, auto)
+    padding 20px
+    gap 40px 40px
+    align-content center
+    border-radius 20px
+
+
+  .information-title-block
+    background-color myBlack
     heigth fit-content
     border-radius 20px
-    display flex
-    flex-direction column
+    max-width 350px
+    min
 
   .information-user-row
     mixinRow()
@@ -91,7 +108,7 @@
   .information-text-bold
     mixinInformationText(myWhite)
     font-weight bold
-    font-size 27px
+    font-size 20px
 
   .information-text-title
     mixinInformationText(myWhite)
@@ -290,7 +307,10 @@
   .change-password-button
     mixinButton(myBlack, myWhite)
     padding 10px
-    margin-top 0
+    margin 0
+    font-size 20px
+    align-content center
+
 
   .in-progress-img
     width 550px

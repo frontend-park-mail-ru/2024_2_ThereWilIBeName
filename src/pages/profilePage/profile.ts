@@ -7,6 +7,7 @@ import logoImage from '../../static/logo.png';
 import defaultAvatar from '../../static/avatar.png';
 import editButton from '../../static/edit.png';
 import confirmIcon from '../../static/confirm.png';
+import {emailRegex} from '../validation';
 
 export default {
     /**
@@ -24,31 +25,27 @@ export default {
             <div class="background-profile">
                 <div class="user-block">
                     <img src="${defaultAvatar}" alt="Аватар" class="avatar">
-                    <div class="user-information">
-                        <div class="information-block">
-                            <div class="information-text-title" id="user-title">Здесь будет Username</div>
-                        </div>
-                        <div class="information-block">
-                            <div class="information-user-row">
-                                <div class="information-text-bold">Username</div>
-                                <div class="information-text" id="user-username">Здесь будет username</div>
-                                <input class="edit-profile-input hidden" type="text" id="username-input">
-                                <img src="${editButton}" alt="edit" class="edit-button" id="edit-button">
-                            </div>
-                            <div class="information-user-row">
-                                <div class="information-text-bold">Email</div>
-                                <div class="information-text" id="user-email">Здесь будет email</div>
-                                <input class="edit-profile-input hidden" type="text" id="email-input">
-                            </div>
-                            <div class="information-user-row">
-                                <div class="information-text-bold" >ID</div>
-                                <div class="information-text" id="user-id">Здесь будет id</div>
-                                <img src="${confirmIcon}" alt="confirm" class="submit-edit-button hidden" id="submit-edit-button">
-                            </div>
-                        </div>
-                        <div class="change-password-button" id="change-password-button">Сменить пароль</div>
+                    <div class="information-block">
+                        <div class="information-text-bold">Username</div>
+                        <div class="information-text" id="user-username">Здесь будет username</div>
+                        <input class="edit-profile-input hidden" type="text" id="username-input">
+                        <img src="${editButton}" alt="edit" class="edit-button" id="edit-button">
+                        <div class="information-text-bold">Email</div>
+                        <div class="information-text" id="user-email">Здесь будет email</div>
+                        <input class="edit-profile-input hidden" type="text" id="email-input">
+                        <div></div>
+                        <div class="information-text-bold" >ID</div>
+                        <div class="information-text" id="user-id">Здесь будет id</div>
+                        <img src="${confirmIcon}" alt="confirm" class="submit-edit-button hidden" id="submit-edit-button">
                     </div>
+
                     <div class="information-back-button" id="back-button">←</div>
+                    <div class="information-title-block">
+                        <div class="information-text-title" id="user-title">Здесь будет Username</div>
+                    </div>
+                    <div class="change-password-button" id="change-password-button">Сменить пароль</div>
+
+                    <div></div>
                 </div>
                 <div class="profile-block">
                     <div class="profile-menu-row">
@@ -113,7 +110,9 @@ export default {
         const editButton = document.getElementById('edit-button') as HTMLButtonElement;
         const submitEditButton = document.getElementById('submit-edit-button') as HTMLButtonElement;
         const usernameInput = document.getElementById('username-input') as HTMLInputElement;
+        usernameInput.value = userUserName.textContent;
         const emailInput = document.getElementById('email-input') as HTMLInputElement;
+        emailInput.value = userEmail.textContent;
 
         editButton.addEventListener('click', () => {
             editButton.classList.toggle('active');
@@ -122,6 +121,27 @@ export default {
             emailInput.classList.toggle('hidden');
             userUserName.classList.toggle('hidden');
             userEmail.classList.toggle('hidden');
+        });
+
+        submitEditButton.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formUsername = (document.getElementById('username-input') as HTMLInputElement).value.trim();
+            const formEmail = (document.getElementById('email-input') as HTMLInputElement).value.trim().toLowerCase();
+
+            if (!emailRegex.test(formEmail)) {
+                console.log('Неверный email');
+                return;
+            }
+
+            const res = await Api.putUserInformation(User.id, formUsername, formEmail);
+
+            if (!res.ok) {
+                console.log('Ошибка изменения данных пользователя');
+            }
+
+            router.goto('/profile');
+
         });
 
         const leftMenuButton = document.getElementById('left-menu-button') as HTMLButtonElement;
