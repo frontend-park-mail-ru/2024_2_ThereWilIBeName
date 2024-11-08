@@ -47,7 +47,7 @@ export default {
     async mount(router: Router): Promise<void> {
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         backButton.addEventListener('click', () => {
-            router.goto('/trips');
+            router.goto('/profile');
         });
 
         const homeLogo = document.getElementById('home-logo') as HTMLElement;
