@@ -3,6 +3,8 @@ import Router from '../utils/Router';
 import {emailRegex} from './validation';
 import {passwordRegex} from './validation';
 
+import logoImage from '../static/logo.png';
+
 export default {
     /**
      * HTML-шаблон для страницы регистрации, содержащий форму для ввода логина, email, пароля
@@ -14,7 +16,7 @@ export default {
         `
         <header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
+                <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
             </div>
         </header>
         <main>
@@ -28,7 +30,7 @@ export default {
                     <label class="reg-text">Email</label>
                     <input class="border" id="email" name="email" >
                     <label class="reg-text">Пароль</label>
-                    <input class="border" type="password" id="password" name="password">
+                    <input class="border" type="password" id="password" name="password" autocomplete="new-password">
                     <label class="reg-text">Подтверждение пароля</label>
                     <input class="border" type="password" id="confirm-password" name="confirm-password">
                     <button class="auth-button">Зарегистрироваться</button>
@@ -100,7 +102,7 @@ export default {
                 errorMessage.classList.add('visible');
                 return;
             }
-            if (res.ok!) {
+            if (!res.ok) {
                 errorMessage.textContent = 'Неизвестная ошибка';
                 errorMessage.classList.add('visible');
                 return;

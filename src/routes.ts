@@ -2,7 +2,12 @@ import PageHome from './pages/homePage/home';
 import PageSignIn from './pages/signin';
 import PageSignUp from './pages/signup';
 import Page404 from './pages/404';
-import PageProfile from './pages/profile';
+import PageProfile from './pages/profilePage/profile';
+import PageTrips from './pages/tripsPage/trips';
+import PagePLace from './pages/placePage/place';
+import PageCreateTrip from './pages/create-trip';
+import PageChangePassword from './pages/change-password';
+import PageEditTrip from './pages/edit-trip';
 import Router from './utils/Router';
 
 /**
@@ -19,7 +24,7 @@ export interface Route {
     path: RegExp;
     title: string;
     html: string;
-    mount: (router: Router) => Promise<void>;
+    mount(router: Router, params: any): Promise<void>;
     unmount: () => void;
     cssClass: string;
 }
@@ -33,7 +38,7 @@ export interface Route {
 const routes: Route[] = [
     {
         path: /^(|\/|\/home)$/,
-        title: 'ДОСТОПРИМЕЧАТЕЛЬНОСТИ',
+        title: 'Домашнаяя страница',
         html: PageHome.html,
         mount: PageHome.mount,
         unmount: PageHome.unmount,
@@ -41,7 +46,7 @@ const routes: Route[] = [
     },
     {
         path: /^(|\/|\/profile)$/,
-        title: 'ПРОФИЛЬ',
+        title: 'Профиль',
         html: PageProfile.html,
         mount: PageProfile.mount,
         unmount: PageProfile.unmount,
@@ -49,7 +54,7 @@ const routes: Route[] = [
     },
     {
         path: /^\/signin/,
-        title: 'АВТОРИЗАЦИЯ',
+        title: 'Авторизация',
         html: PageSignIn.html,
         mount: PageSignIn.mount,
         unmount: PageSignIn.unmount,
@@ -57,11 +62,51 @@ const routes: Route[] = [
     },
     {
         path: /^\/signup/,
-        title: 'РЕГИСТРАЦИЯ',
+        title: 'Регистрация',
         html: PageSignUp.html,
         mount: PageSignUp.mount,
         unmount: PageSignUp.unmount,
         cssClass: 'registration-page',
+    },
+    {
+        path: /^\/trips/,
+        title: 'Поездки',
+        html: PageTrips.html,
+        mount: PageTrips.mount,
+        unmount: PageTrips.unmount,
+        cssClass: 'trips-page',
+    },
+    {
+        path: /^\/createtrip/,
+        title: 'Создание поездки',
+        html: PageCreateTrip.html,
+        mount: PageCreateTrip.mount,
+        unmount: PageCreateTrip.unmount,
+        cssClass: 'create-trip-page',
+    },
+    {
+        path: /^\/edittrip/,
+        title: 'Редактирование поездки',
+        html: PageEditTrip.html,
+        mount: PageEditTrip.mount,
+        unmount: PageEditTrip.unmount,
+        cssClass: 'create-trip-page',
+    },
+    {
+        path: /^\/changepassword/,
+        title: 'Смена пароля',
+        html: PageChangePassword.html,
+        mount: PageChangePassword.mount,
+        unmount: PageChangePassword.unmount,
+        cssClass: 'change-password-page',
+    },
+    {
+        path: /^\/places\/(\d+)$/,
+        title: 'Страница достопримечательности',
+        html: PagePLace.html,
+        mount: PagePLace.mount,
+        unmount: PagePLace.unmount,
+        cssClass: 'place-page',
     },
     {
         path: /.*/,

@@ -69,7 +69,6 @@ export default class Router {
      * Также обновляет заголовок страницы, URL и применяет CSS-класс.
      *
      * @param {string} url - URL, на который нужно перейти.
-     * @param {boolean} [withPushState=true] - Флаг, указывающий, нужно ли обновлять состояние истории браузера.
      * @returns {Promise<void>} Промис, который выполняется, когда страница завершила монтирование.
      * @throws {TypeError} Если URL не соответствует ни одному маршруту.
      */
@@ -77,19 +76,21 @@ export default class Router {
         if (this.currentPage) {
             this.currentPage.unmount();
         }
-
         // Отрисовка страницы
         const page = this.routes.find(route => route.path.test(url));
         if (!page) {
             throw TypeError('Unknown URL');
         }
-
         this.rootElement.classList.add('hidden');
         await new Promise(resolve => setTimeout(resolve, 200));
         this.rootElement.classList.remove('hidden');
+
+        const match = page.path.exec(url);
+        const params = match ? match.slice(1) : [];
+
         this.rootElement.innerHTML = page.html;
         await this.#waitForPageLoad();
-        page.mount(this);
+        page.mount(this, params);
         this.currentPage = page;
 
         // Обновление заголовка и URL
@@ -107,5 +108,6 @@ export default class Router {
             this.rootElement.classList.replace(this.lastCssClass, page.cssClass);
         }
         this.lastCssClass = page.cssClass;
+
     }
 }

@@ -1,5 +1,7 @@
 import Router from '../utils/Router';
 
+import logoImage from '../static/logo.png';
+
 export default {
     /**
      * HTML-шаблон страницы ошибки 404, отображающий сообщение об ошибке и кнопку
@@ -10,7 +12,7 @@ export default {
     html:
         `<header class="header">
             <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
+                <img src="${logoImage}" alt="Логотип" class="logo-image">
             </div>
         </header>
         <main class="warn-message">

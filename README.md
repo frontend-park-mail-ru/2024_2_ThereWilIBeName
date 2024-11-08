@@ -29,7 +29,7 @@
 - [Громыко Григорий](https://github.com/SLDminor) - *frontend*
 - [Ксения Бардыкина](https://github.com/mevain) - *backend*
 - [Дана Шаклеина](https://github.com/AnnHarvard) - *backend*
-- [Тимур Исаев](https://github.com/timurIsaevIY) - *full stack*
+- [Тимур Исаев](https://github.com/timurIsaevIY) - *backend*
 
 ***Менторы:***
 

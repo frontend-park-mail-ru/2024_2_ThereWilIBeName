@@ -1,0 +1,18 @@
+{{#each trips}}
+    <li class="gallery-item-trips" id="{{ id }}">
+        <div class="trips-column-open">
+            <img src="{{../openIcon}}" alt="Иконка путешествия" class="trips-open-icon">
+        </div>
+        <img src="{{../tripIcon}}" alt="Иконка путешествия" class="trips-trip-icon">
+        <div class="trips-column-info">
+            <div class="gallery-trips-name">{{name}}</div>
+            <div class="gallery-trips-date">{{startDate}} - {{endDate}}</div>
+        </div>
+<!--        <img src="{{../myBlackIcon}}" alt="Картинка поездки" class="gallery-item-trips-img">-->
+        <div class="gallery-item-trips-img"></div>
+        <div class="trips-column-buttons">
+            <img src="{{../editIcon}}" alt="Иконка путешествия" class="trips-edit-icon">
+            <img src="{{../deleteIcon}}" alt="Иконка удаления" class="trips-delete-icon">
+        </div>
+    </li>
+{{/each}}

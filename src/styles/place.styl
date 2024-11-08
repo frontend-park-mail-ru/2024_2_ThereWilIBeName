@@ -1,0 +1,226 @@
+.place-page
+  mixinSideMenu()
+
+  .place-block
+    display flex
+    margin 70px 100px 30px 100px
+    height 100%
+    gap 50px
+    justify-content center
+
+  .column1 column2
+    display flex
+    flex-direction column
+    gap 20px
+
+  .place-name
+    background-color #232323
+    border-radius 30px
+    font-weight bold
+    color white
+    padding 20px
+    font-size 35px
+    text-align center
+    flex-grow 1
+    filter drop-shadow(-16px 16px 0px myShadow)
+
+  .place-header
+    display flex
+    gap 25px
+
+  .back-button
+    background-color #232323
+    border-radius 30px
+    font-size 30px
+    text-align center
+    padding 20px 25px
+    filter drop-shadow(-16px 16px 0px myShadow)
+    display flex
+    align-items center
+    cursor pointer
+    color myWhite
+
+    &:hover
+      color myRed
+
+  .button-backhover
+    cursor pointer
+
+  .place-image img
+    object-fit cover
+    width 100%
+    height 100%
+    display block
+    max-width 400px
+    border-radius 30px
+    min-width 200px
+    filter drop-shadow(-16px 16px 0px myShadow)
+    aspect-ratio 1 / 0.9
+
+  hr.solid
+    border-top 2px solid #23232320
+
+  .map-image
+    object-fit cover
+    width 100%
+    height 100%
+    display block
+    max-width 100%
+    max-height 350px
+    border-radius 30px
+    min-width 200px
+    filter drop-shadow(-16px 16px 0px #23232380)
+
+  @media (max-width 700px)
+    .place-block
+      flex-direction column
+
+  .place-info
+    max-width 600px
+    background-color #232323
+    border-radius 30px
+    padding 30px
+    font-size 20px
+    color white
+    margin 30px 0
+    filter drop-shadow(-16px 16px 0px myShadow)
+
+  .description
+    border 10px
+    padding 10px 0
+
+  .review-block
+    mixinReviewBlock()
+
+  .user-review-block
+    mixinReviewBlock()
+    margin-bottom 0
+
+  .review-info
+    display flex
+    gap 10px
+    align-items center
+
+  .rating
+    padding 12px 45px
+    margin-left auto
+    color #f4f4f4
+    font-size 17px
+    position relative
+    &::before
+      content ""
+      position absolute
+      background-color #232323
+      border-radius 30px
+      inset 0
+      z-index -1
+    &::after
+      position absolute
+      border-radius 30px
+      background linear-gradient(to bottom right, #F58080, #F2E2A9)
+      inset 0 auto 0 0
+      margin 2px
+      width calc(97.5% * (var(--progress, 2) / 5))
+      content ""
+      z-index -1
+
+
+  .text-average
+    font-size 20px
+    font-weight 600
+
+  .user-image img
+    max-width 45px
+    max-height 45px
+    border-radius 50%
+    display block
+    aspect-ratio 1 / 1
+
+  .review-text
+    font-size 17px
+    padding-bottom 10px
+
+  .leave-review
+    mixinReviewBlock()
+    display none
+
+  .leave-review.visible
+    display flex
+
+  .review-field
+    all unset
+    padding 12px
+    white-space pre-wrap
+    overflow-wrap break-word
+    text-align start
+    width 100%
+    overflow-y hidden
+    resize none
+    border-radius 30px
+    border 3px solid #232323
+    box-sizing border-box
+
+  .leave-review-header
+    display flex
+    justify-content center
+    align-items center
+    padding 10px
+
+
+  .leave-review-header-text
+    font-size 20px
+
+  .stars
+    margin-left auto
+    font-size 27px
+    display flex
+    cursor pointer
+    gap 10px
+    flex-direction row-reverse
+
+    .star
+      color #232323
+      border 2px #232323
+
+      &:hover
+      &:hover ~ .star
+      &.selected ~ .star
+      &.selected
+        background linear-gradient(to bottom right, #F58080, #F2E2A9) 50% 50% / 100vw 100vh
+        color transparent
+        background-clip text
+
+  .review-button
+    mixinFormButton()
+
+  .delete-review
+    margin 10px auto
+    cursor pointer
+    width 35px
+    height 35px
+    transition transform 0.3s ease
+
+    &:hover
+      transform scale(1.05)
+
+  .user-review
+    display none
+
+  .user-review.visible
+    display flex
+    flex-direction column
+    margin 0
+
+  ul
+    list-style-type none
+    padding 0
+    margin 0
+
+    .menu-button
+      mixinButton(myBlack, myWhite)
+      margin 0
+      text-align left
+      transition transform  0.3s ease
+
+      &:hover
+        transform scale(1.05)

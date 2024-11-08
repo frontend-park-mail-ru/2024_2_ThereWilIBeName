@@ -1,31 +1,38 @@
 .auth-page
     .auth-block
-        simpleFormBlock()
-
-    .auth-signup-button, .auth-title
-        simpleTitleGradient()
-
-    .auth-text, .back-button
-        simpleFormText()
-
-    .back-button
-        cursor pointer
-
-    .auth-button
-        simpleFormButton()
+        mixinFormBlock()
 
     .auth-signup-button
-        font-size 18px
-        cursor pointer
-        margin-top 15px
-        border-top 2px solid myGrey
-        padding 15px
-        display block
-        transition letter-spacing 0.2s ease, background-position 0.3s ease
+    .auth-title
+        mixinTitleGradient()
 
-    .auth-signup-button:hover
-        letter-spacing 2px
-        background-position 0 0
+    .auth-text
+    .back-button
+        mixinFormText()
+
+    .back-button
+        width fit-content
+        cursor pointer
+        font-weight bold
+        font-size 20px
+
+        &:hover
+            color myRed
+
+    .auth-button
+        mixinFormButton()
+        margin-top 30px
+
+    .auth-signup-button
+        mixinFormButton()
+        color myWhite
+        border 2px solid myGrey
+        width fit-content
+        margin-bottom 0
+        transition all 0.3s ease
+
+        &:hover
+            color myLightGrey
 
     .remember-me-container
         display flex
@@ -48,13 +55,29 @@
         background-color myGrey
         cursor pointer
 
-    .custom-check-icon::after
-        position absolute
-        left 2px
-        top -3px
-        opacity 0
-        transition opacity 0.2s ease
-        content "✔"
+        &::after
+            position absolute
+            left 2px
+            top -3px
+            opacity 0
+            transition opacity 0.2s ease
+            content "✔"
 
-    .custom-check-icon:checked::after
-        opacity 1
+        &:checked::after
+            opacity 1
+
+    .border
+        all unset
+        display block
+        width 90%
+        height 30px
+        padding 10px
+        border-radius 15px
+        margin 10px auto
+        background linearGradient() 50% 50% / 100vw 100vh
+
+        &:focus
+            background-position 0
+
+    .auth-line
+        border-top 2px solid myGrey

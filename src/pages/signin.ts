@@ -1,6 +1,8 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
 
+import logoImage from '../static/logo.png';
+
 export default {
     /**
      * HTML-шаблон для страницы входа (авторизации) с формой для ввода email и пароля,
@@ -12,7 +14,7 @@ export default {
         `
     <header class="header">
         <div class="logo">
-            <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
+            <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
         </div>
     </header>
     <main>
@@ -20,13 +22,14 @@ export default {
             <div class="back-button" id="back-button">←</div>
             <div class="auth-title">Вход</div>
             <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
-            <form id="signin-form">
+            <form class="signin-form" id="signin-form">
                 <label class="auth-text">Email</label>
-                <input class="border" id="email" name="email" required>
+                <input class="border" id="email" name="email" autocomplete="email" required>
                 <label class="auth-text">Пароль</label>
-                <input class="border" type="password" id="password" name="password" required>
+                <input class="border" type="password" id="password" name="password" autocomplete="current-password" required>
                 <button class="auth-button">Войти</button>
-                <div class="auth-signup-button" id="signup-button">СОЗДАТЬ АККАУНТ</div>
+                <div class="auth-line">
+                <div class="auth-signup-button" id="signup-button">Создать аккаунт</div>
             </form>
         </div>
     </main>
@@ -65,7 +68,7 @@ export default {
         signinForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formEmail = (formEmailElement).value;
+            const formEmail = (formEmailElement).value.trim().toLowerCase();
             const formPassword = (formPasswordElement).value;
 
             const res = await Api.postSignin(formEmail, formPassword);
