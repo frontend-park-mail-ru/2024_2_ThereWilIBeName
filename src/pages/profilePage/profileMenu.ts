@@ -22,17 +22,21 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
     if (activeMenuButton.textContent === 'Достижения') {
         // const achievementsResponse = await Api.getAchievements();
         // const achievements = achievementsResponse.data;
+        const achievements = [{}, {}, {}, {}];
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        galleryProfileElement.innerHTML = `<img src="${ inProgressPng }" class="in-progress-img">`;
-        // galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
+        galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
+        const myImg = document.createElement(`<img src="${ inProgressPng }" class="in-progress-img">`);
+        galleryProfileElement.appendChild(myImg);
     }
 
     if (activeMenuButton.textContent === 'Отзывы') {
         // const reviewsResponse = await Api.getUserReviews(User.id);
         // const reviews = reviewsResponse.data;
+        const reviews = [{},{},{},{}];
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        galleryProfileElement.innerHTML = `<img src="${ inProgressPng }" class="in-progress-img">`;
-        // galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
+        galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
+        const myImg = document.createElement(`<img src="${ inProgressPng }" class="in-progress-img">`);
+        galleryProfileElement.appendChild(myImg);
     }
 
 };
