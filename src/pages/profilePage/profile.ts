@@ -24,19 +24,18 @@ export default {
         <main>
             <div class="background-profile">
                 <div class="user-block">
-                    <img src="${defaultAvatar}" alt="Аватар" class="avatar" id="avatar">
+                    <img src="" alt="Аватар" class="avatar" id="avatar">
                     <div class="information-block">
-                        <div class="information-text-bold">Username</div>
-                        <div class="information-text" id="user-username">Здесь будет username</div>
-                        <input class="edit-profile-input hidden" type="text" id="username-input">
-                        <img src="${editButton}" alt="edit" class="edit-button" id="edit-button">
-                        <div class="information-text-bold">Email</div>
-                        <div class="information-text" id="user-email">Здесь будет email</div>
-                        <input class="edit-profile-input hidden" type="text" id="email-input">
-                        <div></div>
-                        <div class="information-text-bold" >ID</div>
-                        <div class="information-text" id="user-id">Здесь будет id</div>
-                        <img src="${confirmIcon}" alt="confirm" class="submit-edit-button hidden" id="submit-edit-button">
+                        <div class="information-text-bold username-grid" >Username</div>
+                        <div class="information-text username-input-grid" id="user-username">Здесь будет username</div>
+                        <input class="edit-profile-input username-input-grid hidden" type="text" id="username-input">
+                        <img src="${editButton}" alt="edit" class="edit-button edit-button-grid" id="edit-button">
+                        <div class="information-text-bold email-grid">Email</div>
+                        <div class="information-text email-input-grid" id="user-email">Здесь будет email</div>
+                        <input class="edit-profile-input email-input-grid hidden" type="text" id="email-input">
+                        <div class="information-text-bold id-grid" >ID</div>
+                        <div class="information-text id-input-grid" id="user-id">Здесь будет id</div>
+                        <img src="${confirmIcon}" alt="confirm" class="submit-edit-button submit-grid hidden" id="submit-edit-button">
                     </div>
 
                     <div class="information-back-button" id="back-button">←</div>
@@ -107,7 +106,8 @@ export default {
         userEmail.textContent = resProfile.data.email;
         userId.textContent = User.id;
         const avatar = document.getElementById('avatar') as HTMLImageElement;
-        avatar.src = `avatars/${resProfile.data.avatarPath}`;
+        avatar.src = resProfile.data.avatarPath ?
+            `avatars/${resProfile.data.avatarPath}` : defaultAvatar;
 
         avatar.addEventListener('click', () => {
             const avatarInputElement = document.createElement('input') as HTMLInputElement;
@@ -115,11 +115,24 @@ export default {
             avatarInputElement.accept = 'image/*'; // Ограничиваем тип файлов на изображения
             avatarInputElement.style.display = 'none';
 
-
-            avatarInputElement.addEventListener('change', async () => {
+            avatarInputElement.addEventListener('change', () => {
                 if (avatarInputElement.files) {
                     const newAvatar = avatarInputElement.files[0];
-                    const res = await Api.putAvatar(User.id, newAvatar);
+                    const reader = new FileReader();
+                    reader.addEventListener('load', async () => {
+                        const basedAvatar = String(reader.result ? reader.result : '');
+                        if (!basedAvatar) {
+                            alert('Ошибка загрузки аватарки');
+                        }
+                        const res = await Api.putAvatar(User.id, basedAvatar);
+                        if (!res.ok) {
+                            alert('Ошибка загрузки аватарки');
+                        }
+
+                        avatar.src = basedAvatar;
+
+                    });
+                    reader.readAsDataURL(newAvatar);
                 }
             });
 

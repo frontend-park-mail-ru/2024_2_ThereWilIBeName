@@ -84,7 +84,7 @@ type Avatar = {
 
 type Profile = {
     username: string,
-    avatarPath: string,
+    avatarPath: string | null,
     email: string,
 }
 
@@ -336,7 +336,7 @@ export default {
         };
     },
 
-    async putAvatar(id: string, avatar: File): Promise<JsonResponse<Avatar>> {
+    async putAvatar(id: string, avatar: string): Promise<JsonResponse<Avatar>> {
         const res = await RESTApi.put(`api/v1/users/${id}/avatars`, {avatar});
         return {
             data: {
@@ -350,10 +350,12 @@ export default {
 
     async getProfile(id: string): Promise<JsonResponse<Profile>> {
         const res = await RESTApi.get(`api/v1/users/${id}/profile`);
+
         return {
             data: {
                 username: String(res.data.login),
-                avatarPath: String(res.data.avatar_path),
+                avatarPath: res.data.avatar_path = res.data.avatar_path ?
+                    String(res.data.avatar_path) : null,
                 email: String(res.data.email),
             },
             status: res.status,

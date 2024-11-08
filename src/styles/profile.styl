@@ -23,6 +23,9 @@
     padding 20px
     gap 20px 20px
 
+    @media (max-width 700px)
+      grid-template-columns auto
+
   .profile-block
     mixinBlock(myWhite)
     margin auto auto
@@ -44,11 +47,42 @@
     display grid
     grid-template-columns auto auto auto
     grid-template-rows repeat(3, auto)
+    grid-template-areas "a b e"\
+    "c d h"\
+    "f g ."
     padding 20px
     gap 40px 40px
     align-content center
     border-radius 20px
 
+    @media (max-width 700px)
+      grid-template-columns 1fr 1fr
+      grid-template-rows repeat(7, auto)
+      row-gap 0
+      grid-template-areas "a a"\
+      "b b"\
+      "c c"\
+      "d d"\
+      "f f"\
+      "g g"\
+      "e h"
+
+  .username-grid
+    grid-area a
+  .username-input-grid
+    grid-area b
+  .email-grid
+    grid-area c
+  .email-input-grid
+    grid-area d
+  .edit-button-grid
+    grid-area e
+  .id-grid
+    grid-area f
+  .id-input-grid
+    grid-area g
+  .submit-button-grid
+    grid-area h
 
   .information-title-block
     background-color myBlack
@@ -66,6 +100,11 @@
     mixinRow()
     height fit-content
     grid-template-columns 30% 40% 30%
+
+    @media (max-width 700px)
+      grid-template-rows auto auto auto
+      grid-template-columns auto
+
 
   .profile-menu-passive-left
   .profile-menu-passive-right
@@ -128,6 +167,9 @@
 
     &:hover
       color myRed
+
+    @media (max-width 700px)
+      display none
 
   .user-information
     display grid
@@ -291,11 +333,11 @@
     mask-image linear-gradient(180deg, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0))
 
   .edit-profile-input
-    all unset
     padding 10px
     margin auto
     border myShadow
     border-radius 10px
+    outline none
     background linearGradient() 50% 50% / 100vw 100vh
 
     &:focus
