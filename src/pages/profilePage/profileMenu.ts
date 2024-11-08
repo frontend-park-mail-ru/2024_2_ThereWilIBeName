@@ -14,15 +14,23 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
     if (activeMenuButton.textContent === 'Поездки') {
         const tripsResponse = await Api.getUserTrips(User.id);
         const trips = tripsResponse.data;
-        const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
-        galleryProfileElement.innerHTML = '';
-        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon, myBlackIcon });
+        if (trips) {
+            const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
+            galleryProfileElement.innerHTML = '';
+            galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon, myBlackIcon });
+        }
     }
 
     if (activeMenuButton.textContent === 'Достижения') {
         // const achievementsResponse = await Api.getAchievements();
         // const achievements = achievementsResponse.data;
-        const achievements = [{}, {}, {}, {}];
+        const achievements = [
+            {
+                placeName: 'Москва',
+                rating: '5',
+                reviewText: 'Очень понравилось место. Остался бы здесь жить'
+            },
+        ];
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
         galleryProfileElement.insertAdjacentHTML('beforeend', `<img src="${ inProgressPng }" class="in-progress-img">`);
