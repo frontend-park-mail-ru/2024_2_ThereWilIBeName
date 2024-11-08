@@ -25,8 +25,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const achievements = [{}, {}, {}, {}];
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
-        const myImg = document.createElement(`<img src="${ inProgressPng }" class="in-progress-img">`);
-        galleryProfileElement.appendChild(myImg);
+        galleryProfileElement.insertAdjacentHTML('beforeend', `<img src="${ inProgressPng }" class="in-progress-img">`);
     }
 
     if (activeMenuButton.textContent === 'Отзывы') {
@@ -35,8 +34,6 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const reviews = [{},{},{},{}];
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
-        const myImg = document.createElement(`<img src="${ inProgressPng }" class="in-progress-img">`);
-        galleryProfileElement.appendChild(myImg);
+        galleryProfileElement.insertAdjacentHTML('beforeend', `<img src="${ inProgressPng }" class="in-progress-img">`);
     }
-
 };
