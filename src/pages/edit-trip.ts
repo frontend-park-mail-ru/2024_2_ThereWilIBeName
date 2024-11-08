@@ -36,7 +36,7 @@ export default {
                     <label class="create-trip-text checkbox-button">
                         <input type="checkbox" id="private-trip" name="private-trip"> Приватная поездка
                     </label>
-                    <button class="create-trip-button">Создать поездку</button>
+                    <button class="create-trip-button">Подтвердить изменения</button>
                 </form>
             </div>
         </main>

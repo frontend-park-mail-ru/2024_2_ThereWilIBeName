@@ -18,7 +18,7 @@ export default {
                 <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
             </div>
             <div class="header-menu">
-                <button class="header-button" id="trips-button">Поездки</button>
+                <button class="header-button" id="trips-button">поездки</button>
                 <button class="header-button" id="signin-button">вход</button>
                 <button class="user-button" id="user-button"></button>
                 

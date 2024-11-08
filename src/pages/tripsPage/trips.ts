@@ -9,6 +9,7 @@ import copyLinkIcon from '../../static/copylink.png';
 import deleteIcon from '../../static/delete.png';
 import myBlackIcon from '../../static/232323.png';
 import editIcon from '../../static/edit.png';
+import palmsImg from '../../static/please white.png';
 import User from '../../utils/user';
 import Trip from '../../utils/trip';
 import headerMount from '../headerMount';
@@ -51,7 +52,10 @@ export default {
                     <div class="trip-create-button hidden" id="trip-create-button">+</div>
                 </div>
                 <div id="trips-root">
-                    <div class="auth-please" id="auth-please">Пожалуйста, авторизуйтесь</div>
+                    <div class="please-block">
+                        <img src="${palmsImg}" class="please-img">
+                        <div class="auth-please" id="auth-please">Пожалуйста, авторизуйтесь</div>
+                    </div>
                     <ul class="gallery-trips" id="gallery-trips"></ul>
                 </div>
             </div>
@@ -69,7 +73,7 @@ export default {
 
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         const createTripButton = document.getElementById('trip-create-button') as HTMLButtonElement;
-        const authPleaseMessage = document.getElementById('auth-please') as HTMLButtonElement;
+        const authPleaseBlock = document.getElementById('please-block') as HTMLButtonElement;
 
 
         // Монтирование хэдера
@@ -97,7 +101,7 @@ export default {
             return;
         }
 
-        authPleaseMessage.classList.add('hidden');
+        authPleaseBlock.classList.add('hidden');
         createTripButton.classList.remove('hidden');
 
         const tripsResponse = await Api.getUserTrips(User.id);

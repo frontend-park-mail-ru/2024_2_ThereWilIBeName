@@ -38,7 +38,7 @@ export interface Route {
 const routes: Route[] = [
     {
         path: /^(|\/|\/home)$/,
-        title: 'ДОСТОПРИМЕЧАТЕЛЬНОСТИ',
+        title: 'Домашнаяя страница',
         html: PageHome.html,
         mount: PageHome.mount,
         unmount: PageHome.unmount,
@@ -46,7 +46,7 @@ const routes: Route[] = [
     },
     {
         path: /^(|\/|\/profile)$/,
-        title: 'ПРОФИЛЬ',
+        title: 'Профиль',
         html: PageProfile.html,
         mount: PageProfile.mount,
         unmount: PageProfile.unmount,
@@ -54,7 +54,7 @@ const routes: Route[] = [
     },
     {
         path: /^\/signin/,
-        title: 'АВТОРИЗАЦИЯ',
+        title: 'Авторизация',
         html: PageSignIn.html,
         mount: PageSignIn.mount,
         unmount: PageSignIn.unmount,
@@ -62,7 +62,7 @@ const routes: Route[] = [
     },
     {
         path: /^\/signup/,
-        title: 'РЕГИСТРАЦИЯ',
+        title: 'Регистрация',
         html: PageSignUp.html,
         mount: PageSignUp.mount,
         unmount: PageSignUp.unmount,
@@ -70,7 +70,7 @@ const routes: Route[] = [
     },
     {
         path: /^\/trips/,
-        title: 'ПОЕЗДКИ',
+        title: 'Поездки',
         html: PageTrips.html,
         mount: PageTrips.mount,
         unmount: PageTrips.unmount,
@@ -78,7 +78,7 @@ const routes: Route[] = [
     },
     {
         path: /^\/createtrip/,
-        title: 'СОЗДАНИЕ ПОЕЗДКИ',
+        title: 'Создание поездки',
         html: PageCreateTrip.html,
         mount: PageCreateTrip.mount,
         unmount: PageCreateTrip.unmount,
@@ -86,7 +86,7 @@ const routes: Route[] = [
     },
     {
         path: /^\/edittrip/,
-        title: 'РЕДАКТИРОВАНИЕ ПОЕЗДКИ',
+        title: 'Редактирование поездки',
         html: PageEditTrip.html,
         mount: PageEditTrip.mount,
         unmount: PageEditTrip.unmount,
@@ -94,7 +94,7 @@ const routes: Route[] = [
     },
     {
         path: /^\/changepassword/,
-        title: 'СМЕНА ПАРОЛЯ',
+        title: 'Смена пароля',
         html: PageChangePassword.html,
         mount: PageChangePassword.mount,
         unmount: PageChangePassword.unmount,
@@ -102,7 +102,7 @@ const routes: Route[] = [
     },
     {
         path: /^\/places\/(\d+)$/,
-        title: '',
+        title: 'Страница достопримечательности',
         html: PagePLace.html,
         mount: PagePLace.mount,
         unmount: PagePLace.unmount,
