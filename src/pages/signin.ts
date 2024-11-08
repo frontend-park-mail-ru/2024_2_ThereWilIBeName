@@ -22,13 +22,14 @@ export default {
             <div class="back-button" id="back-button">←</div>
             <div class="auth-title">Вход</div>
             <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
-            <form id="signin-form">
+            <form class="signin-form" id="signin-form">
                 <label class="auth-text">Email</label>
                 <input class="border" id="email" name="email" autocomplete="email" required>
                 <label class="auth-text">Пароль</label>
                 <input class="border" type="password" id="password" name="password" autocomplete="current-password" required>
                 <button class="auth-button">Войти</button>
-                <div class="auth-signup-button" id="signup-button">СОЗДАТЬ АККАУНТ</div>
+                <div class="auth-line">
+                <div class="auth-signup-button" id="signup-button">Создать аккаунт</div>
             </form>
         </div>
     </main>

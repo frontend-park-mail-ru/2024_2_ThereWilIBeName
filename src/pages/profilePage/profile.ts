@@ -152,9 +152,7 @@ export default {
             userEmail.classList.toggle('hidden');
         });
 
-        submitEditButton.addEventListener('submit', async (event) => {
-            event.preventDefault();
-
+        submitEditButton.addEventListener('click', async () => {
             const formUsername = (document.getElementById('username-input') as HTMLInputElement).value.trim();
             const formEmail = (document.getElementById('email-input') as HTMLInputElement).value.trim().toLowerCase();
 
