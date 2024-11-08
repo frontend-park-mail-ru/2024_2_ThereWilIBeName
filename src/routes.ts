@@ -7,6 +7,7 @@ import PageTrips from './pages/tripsPage/trips';
 import PagePLace from './pages/placePage/place';
 import PageCreateTrip from './pages/create-trip';
 import PageChangePassword from './pages/change-password';
+import PageEditTrip from './pages/edit-trip';
 import Router from './utils/Router';
 
 /**
@@ -81,6 +82,14 @@ const routes: Route[] = [
         html: PageCreateTrip.html,
         mount: PageCreateTrip.mount,
         unmount: PageCreateTrip.unmount,
+        cssClass: 'create-trip-page',
+    },
+    {
+        path: /^\/edittrip/,
+        title: 'РЕДАКТИРОВАНИЕ ПОЕЗДКИ',
+        html: PageEditTrip.html,
+        mount: PageEditTrip.mount,
+        unmount: PageEditTrip.unmount,
         cssClass: 'create-trip-page',
     },
     {

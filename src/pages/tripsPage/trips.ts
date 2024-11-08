@@ -8,7 +8,9 @@ import tripIcon from '../../static/trip_icon.png';
 import copyLinkIcon from '../../static/copylink.png';
 import deleteIcon from '../../static/delete.png';
 import myBlackIcon from '../../static/232323.png';
+import editIcon from '../../static/edit.png';
 import User from '../../utils/user';
+import Trip from '../../utils/trip';
 import headerMount from '../headerMount';
 
 export default {
@@ -102,7 +104,7 @@ export default {
 
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
-        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, myBlackIcon });
+        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, myBlackIcon, editIcon });
 
         document.querySelectorAll('.trips-open-icon').forEach(icon => {
             icon.addEventListener('click', () => {
@@ -124,6 +126,17 @@ export default {
                     if (res.ok) {
                         router.goto('/trips');
                     }
+                }
+            });
+        });
+
+        document.querySelectorAll('.trips-edit-icon').forEach(icon => {
+            icon.addEventListener('click', async () => {
+                icon.classList.toggle('open');
+                const parentItem = icon.closest('.gallery-item-trips');
+                if (parentItem) {
+                    Trip.id = parentItem.id;
+                    router.goto('/edittrip');
                 }
             });
         });

@@ -278,6 +278,15 @@ export default {
         };
     },
 
+    async putTrip(id: string, userId:number, name: string, cityId: number, description: string, startDate: string, endDate: string, privateTrip: boolean): Promise<JsonResponse<Trip>> {
+        const res = await RESTApi.put(`api/v1/trips/${id}`, {user_id: userId, name, city_id: cityId, description: description, start_date: startDate, end_date: endDate, private_trip: privateTrip });
+        return {
+            data: res.data,
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
     async deleteTrip(id: string): Promise<JsonResponse<Response>> {
         const res = await RESTApi.delete(`/api/v1/trips/${id}`, {id: id});
         return {
@@ -351,4 +360,6 @@ export default {
             ok: res.ok,
         };
     },
+
+
 };
