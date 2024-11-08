@@ -85,6 +85,11 @@ export default {
             router.goto('/home');
         });
 
+        const changePasswordButton = document.getElementById('change-password-button') as HTMLButtonElement;
+        changePasswordButton.addEventListener('click', () => {
+            router.goto('/changepassword');
+        });
+
         // Проверка информации о текущем пользователе
 
         if (User.username === '') {

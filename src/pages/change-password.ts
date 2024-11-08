@@ -1,7 +1,6 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
-import {emailRegex} from './validation';
-import {passwordRegex} from './validation';
+import User from '../utils/user';
 
 import logoImage from '../static/logo.png';
 
@@ -20,20 +19,18 @@ export default {
             </div>
         </header>
         <main>
-            <div class="reg-block">
+            <div class="change-password-block">
                 <div class="back-button" id ="back-button">←</div>
-                <div class="auth-title">Регистрация</div>
+                <div class="change-password-title">Смена пароля</div>
                 <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
-                <form id="signup-form">
-                    <label class="reg-text">Логин</label>
-                    <input class="border" id="login" name="login" >
-                    <label class="reg-text">Email</label>
-                    <input class="border" id="email" name="email" >
-                    <label class="reg-text">Пароль</label>
-                    <input class="border" type="password" id="password" name="password">
-                    <label class="reg-text">Подтверждение пароля</label>
-                    <input class="border" type="password" id="confirm-password" name="confirm-password">
-                    <button class="auth-button">Зарегистрироваться</button>
+                <form id="change-password-form">
+                    <label class="change-password-text">Старый пароль</label>
+                    <input class="border" id="old-password" name="old-password" >
+                    <label class="change-password-text">Новый пароль</label>
+                    <input class="border" id="new-password" name="new-password" >
+                    <label class="change-password-text">Введите новый пароль ещё раз</label>
+                    <input class="border" id="retype-new-password" name="retype-new-password" >
+                    <button class="change-password-button">Сменить пароль</button>
                 </form>
             </div>
         </main>
@@ -50,7 +47,7 @@ export default {
     async mount(router: Router): Promise<void> {
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         backButton.addEventListener('click', () => {
-            router.goto('/signin');
+            router.goto('/trips');
         });
 
         const homeLogo = document.getElementById('home-logo') as HTMLElement;
@@ -58,57 +55,37 @@ export default {
             router.goto('/home');
         });
 
-        const signupForm = document.getElementById('signup-form') as HTMLElement;
+        const createTripForm = document.getElementById('change-password-form') as HTMLElement;
         const errorMessage = document.getElementById('error-message') as HTMLElement;
 
-        signupForm.addEventListener('submit', async (event) => {
+        createTripForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formUsername = (document.getElementById('login') as HTMLInputElement).value.trim();
-            const formEmail = (document.getElementById('email') as HTMLInputElement).value.trim().toLowerCase();
-            const formPassword = (document.getElementById('password') as HTMLInputElement).value;
-            const formConfirmPassword = (document.getElementById('confirm-password') as HTMLInputElement).value;
+            const formOldPassword = (document.getElementById('old-password') as HTMLInputElement).value;
+            const formNewPassword = (document.getElementById('new-password') as HTMLInputElement).value;
+            const formRetypePassword = (document.getElementById('retype-new-password') as HTMLInputElement).value;
 
-            if (!emailRegex.test(formEmail)) {
-                errorMessage.textContent = 'Неверный email';
+            if (formOldPassword === formNewPassword) {
+                errorMessage.textContent = 'Новый пароль такой же';
                 errorMessage.classList.add('visible');
                 return;
             }
 
-            if (formPassword.length < 8) {
-                errorMessage.textContent = 'Пароль должен быть не короче 8 символов';
+            if (formRetypePassword !== formNewPassword) {
+                errorMessage.textContent = 'Введите новый пароль ещё раз';
                 errorMessage.classList.add('visible');
                 return;
             }
 
-            if (!passwordRegex.test(formPassword)) {
-                errorMessage.textContent = 'Пароль должен включать букву, цифру и символ';
-                errorMessage.classList.add('visible');
-                return;
-            }
+            const res = await Api.putChangePassword(User.id, formOldPassword, formNewPassword);
 
-            if (formPassword !== formConfirmPassword) {
-                errorMessage.textContent = 'Пароли не совпадают';
-                errorMessage.classList.add('visible');
-                return;
-            }
-
-
-
-            const res = await Api.postSignup(formUsername, formEmail, formPassword);
-
-            if (res.status === 409) {
-                errorMessage.textContent = 'Логин уже занят';
-                errorMessage.classList.add('visible');
-                return;
-            }
             if (!res.ok) {
-                errorMessage.textContent = 'Неизвестная ошибка';
+                errorMessage.textContent = 'Ошибка смены пароля';
                 errorMessage.classList.add('visible');
                 return;
             }
 
-            router.goto('/home');
+            await router.goto('/profile');
         });
     },
 

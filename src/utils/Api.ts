@@ -48,6 +48,11 @@ type Logout = {
     // что-то начнут возвращать
 }
 
+type changePassword = {
+    id: number,
+    newPassword: string,
+}
+
 type PostReview = {
     id: number,
     user_id: number,
@@ -281,6 +286,18 @@ export default {
                 reviewText: String(review.text),
             })
             ),
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async putChangePassword(id: string,oldPassword: string, newPassword: string): Promise<JsonResponse<changePassword>> {
+        const res = await RESTApi.put(`/api/v1/users/${id}/update/password`, {old_password: oldPassword, new_password: newPassword});
+        return {
+            data: {
+                id: Number(res.data.id),
+                newPassword: String(res.data.password)
+            },
             status: res.status,
             ok: res.ok,
         };
