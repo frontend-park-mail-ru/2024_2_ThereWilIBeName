@@ -68,10 +68,34 @@
   .gallery-item-trips
     mixinGalleryItem(110px, 700px, myWhite)
     margin auto
-    display flex
-    flex-direction row
-    column-gap 10px
+    display grid
+    grid-template-columns repeat(7, 1fr)
+    grid-template-rows 1fr 1fr
+    grid-template-areas "a b c c e e f"\
+    "a b d d e e g"
     transition height 0.3s ease
+
+    @media (max-width 700px)
+      grid-template-columns repeat(3, 1fr)
+      grid-template-rows repeat(3, 1fr)
+      grid-template-areas "b c f"\
+      "d d g"\
+      "e e a"
+
+    .trips-open-icon-grid
+      grid-area a
+    .trips-trip-icon-grid
+      grid-area b
+    .gallery-trips-name-grid
+      grid-area c
+    .gallery-trips-date-grid
+      grid-area d
+    .gallery-item-trips-img-grid
+      grid-area e
+    .trips-edit-icon-grid
+      grid-area f
+    .trips-delete-icon-grid
+      grid-area g
 
     &.open
       height 500px
