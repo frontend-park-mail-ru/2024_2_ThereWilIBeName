@@ -54,7 +54,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const reviewsResponse = await Api.getUserReviews(User.id);
         const reviews = reviewsResponse.data;
         if (reviewsResponse.status === 200) {
-            galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews, avatarPathReview });
+            galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews, avatarPathReview});
         }
     }
 };

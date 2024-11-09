@@ -208,7 +208,7 @@ export default {
                 id: Number(review.id),
                 placeName: String(review.place_name),
                 rating: Number(review.rating),
-                reviewText: String(review.text),
+                reviewText: String(review.review_text),
             })) : [],
             status: res.status,
             ok: res.ok,
