@@ -49,7 +49,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         galleryProfileElement.innerHTML =
             `<div class="please-block">
                 <img src="${palmsImg}" class="please-img">
-                <div class="auth-please" id="auth-please">Список отзывов в разработке</div>
+                <div class="auth-please" id="auth-please">Здесь будут ваши отзывы</div>
             </div>`;
         const reviewsResponse = await Api.getUserReviews(User.id);
         const reviews = reviewsResponse.data;

@@ -299,6 +299,15 @@
     grid-template-areas "a b d d"\
     "a c d d"
 
+    @media (max-width 700px)
+      grid-template-columns 1fr 1fr
+      grid-template-rows repeat(5, 1fr)
+      grid-template-areas "a a"\
+      "b b"\
+      "c c"\
+      "d d"\
+      "d d"
+
     .img-grid
       grid-area a
     .name-grid
