@@ -4,6 +4,7 @@ import galleryTemplateReviews from './profileReviews.hbs';
 import myBlackIcon from '../../static/232323.png';
 import inProgressPng from '../../static/in progress.png';
 import palmsImg from '../../static/please white.svg';
+import palmsImgB from '../../static/please black.svg';
 import Api from '../../utils/Api';
 import User from '../../utils/user';
 
@@ -31,7 +32,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.innerHTML =
             `<div class="please-block">
-                <img src="${palmsImg}" class="please-img">
+                <img src="${palmsImgB}" class="please-img">
                 <div class="auth-please" id="auth-please">Достижения в разработке</div>
             </div>`;
         // const achievementsResponse = await Api.getAchievements();
