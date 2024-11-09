@@ -22,8 +22,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
                 </div>`;
         const tripsResponse = await Api.getUserTrips(User.id);
         const trips = tripsResponse.data;
-        if (trips) {
-            galleryProfileElement.innerHTML = '';
+        if (tripsResponse.status === 200) {
             galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon, myBlackIcon });
         }
     }
@@ -54,7 +53,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
             </div>`;
         const reviewsResponse = await Api.getUserReviews(User.id);
         const reviews = reviewsResponse.data;
-        if (reviews) {
+        if (reviewsResponse.status === 200) {
             galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews, avatarPathReview });
         }
     }
