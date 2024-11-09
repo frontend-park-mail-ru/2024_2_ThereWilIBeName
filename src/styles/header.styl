@@ -1,6 +1,6 @@
 .header
-    display flex
-    justify-content space-between
+    display grid
+    grid-auto-columns auto auto auto
     align-items center
     padding 10px 20px
 
@@ -12,6 +12,9 @@
 
         &:hover
             transform scale(1.05)
+
+        @media (max-width 700px)
+            height 60px
 
     .header-menu
         display flex
@@ -37,3 +40,7 @@
 
         &.show
             padding 7px 25px
+
+    @media (max-width 700px)
+        padding 0
+        padding-top 20px
