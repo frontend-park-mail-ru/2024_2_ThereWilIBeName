@@ -77,7 +77,8 @@
     @media (max-width 700px)
       height fit-content
       width 250px
-      gap 10px
+      row-gap 10px
+      padding 10px
       grid-template-columns repeat(3, 1fr)
       grid-template-rows repeat(3, 1fr)
       grid-template-areas "b c f"\
@@ -107,7 +108,7 @@
     height 65px
 
   .gallery-item-trips-img
-    object-fit fill
+    object-fit contain
     height 65px
     width 200px
     border 2px solid myBlack

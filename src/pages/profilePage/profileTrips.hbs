@@ -1,11 +1,8 @@
 {{#each trips}}
     <li class="gallery-item-profile-trips">
-        <div class="profile-trip-row-name">
-            <img src="{{../tripIcon}}" alt="Иконка путешествия" class="trip-icon">
-            <div class="gallery-profile-trip-name">{{name}}</div>
-        </div>
-        <div class="gallery-profile-trip-date">{{startDate}} - {{endDate}}</div>
-<!--        <img src="{{../myBlackIcon}}" alt="Картинка поездки" class="gallery-item-profile-trips-img">-->
-        <div class="gallery-item-profile-trips-img"></div>
+        <img src="{{../tripIcon}}" alt="Иконка путешествия" class="trip-icon trip-icon-grid">
+        <div class="gallery-profile-trip-name gallery-profile-trip-name-grid">{{name}}</div>
+        <div class="gallery-profile-trip-date gallery-profile-trip-date-grid">{{startDate}} - {{endDate}}</div>
+        <img src="{{../myBlackIcon}}" alt="Картинка поездки" class="gallery-item-profile-trips-img gallery-item-profile-trips-img-trip">
     </li>
 {{/each}}

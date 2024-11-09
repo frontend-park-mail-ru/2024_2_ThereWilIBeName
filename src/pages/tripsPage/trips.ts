@@ -10,6 +10,7 @@ import deleteIcon from '../../static/delete.png';
 import myBlackIcon from '../../static/232323.png';
 import editIcon from '../../static/edit.png';
 import palmsImg from '../../static/please white.svg';
+import palmsImgB from '../../static/please black.svg';
 import User from '../../utils/user';
 import Trip from '../../utils/trip';
 import header from '../../components/header';
@@ -78,7 +79,7 @@ export default {
 
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
-        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, myBlackIcon, editIcon });
+        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImgB, editIcon });
 
         document.querySelectorAll('.trips-open-icon').forEach(icon => {
             icon.addEventListener('click', () => {
