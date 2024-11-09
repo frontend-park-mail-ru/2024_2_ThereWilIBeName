@@ -79,7 +79,7 @@ export default {
 
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
-        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImgB, editIcon });
+        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImg, editIcon });
 
         document.querySelectorAll('.trips-open-icon').forEach(icon => {
             icon.addEventListener('click', () => {

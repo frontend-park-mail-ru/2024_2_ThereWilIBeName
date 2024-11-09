@@ -66,12 +66,17 @@
       color myRed
 
   .gallery-item-trips
-    mixinGalleryItem(110px, 700px, myWhite)
     display grid
+    padding 25px
+    border-radius 20px
+    background myWhite
+    height 10vh
+    gap 10px
+    align-items center
     grid-template-columns repeat(7, 1fr)
     grid-template-rows 1fr 1fr
-    grid-template-areas "a b c c e e f"\
-    "a b d d e e g"
+    grid-template-areas "a b c c e e e f"\
+    "a b d d e e e g"
     transition height 0.3s ease
 
     @media (max-width 700px)
