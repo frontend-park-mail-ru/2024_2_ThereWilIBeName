@@ -48,12 +48,12 @@ self.addEventListener('fetch', async (event) => {
         }
 
         // Если его нет, и мы оффлайн, то сервер не может приготовить кофе, потому что он чайник
-        const init = {
-            status: 418,
-            statusText: 'Offline Mode'
-        };
-        const data = { message: 'Ошибка, так как вы офлайн и кэша нет' };
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        resolve(new Response(blob, init));
+        // const init = {
+        //     status: 418,
+        //     statusText: 'Offline Mode'
+        // };
+        // const data = { message: 'Ошибка, так как вы офлайн и кэша нет' };
+        // const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        // resolve(new Response(blob, init));
     }))
 });
