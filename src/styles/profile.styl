@@ -294,11 +294,10 @@
 
   .gallery-item-reviews
     mixinGalleryItem(150px, 800px, myWhite)
-    grid-template-columns repeat(4, auto)
-    grid-template-rows auto auto
+    grid-template-columns 1fr 1fr 1fr 1fr
+    grid-template-rows 1fr 1fr
     grid-template-areas "a b d d"\
     "a c d d"
-    column-gap 20px
 
     .img-grid
       grid-area a
