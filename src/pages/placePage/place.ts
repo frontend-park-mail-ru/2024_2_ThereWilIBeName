@@ -71,9 +71,10 @@ export default {
         const userText = document.getElementById('user-text') as HTMLElement;
         const deleteButton = document.getElementById('delete-button') as HTMLButtonElement;
         const reviewForm = document.getElementById('review-form') as HTMLElement;
-        const stars = document.querySelectorAll('.star');
+        const stars = Array.from(document.querySelectorAll('.star'));
         const userReviewElement = document.getElementById('user-review') as HTMLElement;
         const reviewElement = document.getElementById('leave-review') as HTMLElement;
+        const reviewTextArea = document.getElementById('review-field') as HTMLTextAreaElement;
 
         // Монтирование хэдера
         await header.mount(router);
@@ -106,15 +107,14 @@ export default {
 
         reviewForm.addEventListener('submit', async (event) => {
             event.preventDefault();
-
-            const text = (document.getElementById('review-field') as HTMLTextAreaElement).value;
-            let selectedStars = 0;
-            stars.forEach(star => {
-                if (star.classList.contains('selected')) {
-                    selectedStars++;
-                }
-            });
-            const res = await Api.postReview(Number(User.id), itemId, text, selectedStars);
+            const star = stars.find(element => element.classList.contains('selected'));
+            if (!star) {
+                alert('Укажите рейтинг');
+                return;
+            }
+            const raiting = Number(star.getAttribute('data-value'));
+            const reviewText = (reviewTextArea).value;
+            const res = await Api.postReview(Number(User.id), itemId, reviewText, raiting);
 
             (document.getElementById('review-field') as HTMLTextAreaElement).value = '';
             stars.forEach(star => {
