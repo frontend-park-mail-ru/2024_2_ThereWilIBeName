@@ -107,7 +107,7 @@ export default {
         userId.textContent = User.id;
         const avatar = document.getElementById('avatar') as HTMLImageElement;
         avatar.src = resProfile.data.avatarPath ?
-            `avatars/${resProfile.data.avatarPath}` : defaultAvatar;
+            `/avatars/${resProfile.data.avatarPath}` : defaultAvatar;
 
         avatar.addEventListener('click', () => {
             const avatarInputElement = document.createElement('input') as HTMLInputElement;
@@ -151,9 +151,6 @@ export default {
         if (userEmail.textContent) {
             emailInput.value = userEmail.textContent;
         }
-
-
-
 
 
         editButton.addEventListener('click', () => {
