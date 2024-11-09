@@ -18,7 +18,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.innerHTML =
             `<div class="please-block">
-                    <img src="${palmsImg}" class="please-img">
+                    <img src="${palmsImgB}" class="please-img">
                     <div class="auth-please" id="auth-please">У вас нет поездок</div>
                 </div>`;
         const tripsResponse = await Api.getUserTrips(User.id);
@@ -49,7 +49,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.innerHTML =
             `<div class="please-block">
-                <img src="${palmsImg}" class="please-img">
+                <img src="${palmsImgB}" class="please-img">
                 <div class="auth-please" id="auth-please">Здесь будут ваши отзывы</div>
             </div>`;
         const reviewsResponse = await Api.getUserReviews(User.id);
