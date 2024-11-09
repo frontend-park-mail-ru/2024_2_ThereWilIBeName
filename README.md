@@ -2,7 +2,7 @@
 
 Это фронтенд репозиторий команды "Здесь будет название" по разработке аналога Trip Advisor.
 
-> [Сайт проекта](http://109.120.181.229/)
+> [Сайт проекта](https://therewillbetrip.ru/)
 > :sunrise_over_mountains:
 
 > [BackEnd репозиторий](https://github.com/go-park-mail-ru/2024_2_ThereWillBeName)
@@ -29,7 +29,7 @@
 - [Громыко Григорий](https://github.com/SLDminor) - *frontend*
 - [Ксения Бардыкина](https://github.com/mevain) - *backend*
 - [Дана Шаклеина](https://github.com/AnnHarvard) - *backend*
-- [Тимур Исаев](https://github.com/timurIsaevIY) - *full stack*
+- [Тимур Исаев](https://github.com/timurIsaevIY) - *backend*
 
 ***Менторы:***
 
