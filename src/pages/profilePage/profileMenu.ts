@@ -3,7 +3,7 @@ import galleryTemplateAchievements from './profileAchievements.hbs';
 import galleryTemplateReviews from './profileReviews.hbs';
 import myBlackIcon from '../../static/232323.png';
 import inProgressPng from '../../static/in progress.png';
-import palmsImg from '../../static/please black.svg';
+import palmsImg from '../../static/please white.svg';
 import Api from '../../utils/Api';
 import User from '../../utils/user';
 
@@ -23,7 +23,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const tripsResponse = await Api.getUserTrips(User.id);
         const trips = tripsResponse.data;
         if (tripsResponse.status === 200) {
-            galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon, myBlackIcon });
+            galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, tripIcon, myBlackIcon, palmsImg });
         }
     }
 
