@@ -67,22 +67,22 @@
       "g g"\
       "e h"
 
-  .username-grid
-    grid-area a
-  .username-input-grid
-    grid-area b
-  .email-grid
-    grid-area c
-  .email-input-grid
-    grid-area d
-  .edit-button-grid
-    grid-area e
-  .id-grid
-    grid-area f
-  .id-input-grid
-    grid-area g
-  .submit-button-grid
-    grid-area h
+    .username-grid
+      grid-area a
+    .username-input-grid
+      grid-area b
+    .email-grid
+      grid-area c
+    .email-input-grid
+      grid-area d
+    .edit-button-grid
+      grid-area e
+    .id-grid
+      grid-area f
+    .id-input-grid
+      grid-area g
+    .submit-button-grid
+      grid-area h
 
   .information-title-block
     background-color myBlack
@@ -294,8 +294,20 @@
 
   .gallery-item-reviews
     mixinGalleryItem(150px, 800px, myWhite)
-    grid-template-columns auto 20% 1fr
+    grid-template-columns repeat(4, auto)
+    grid-template-rows auto auto
+    grid-template-areas "a b d d"\
+    "a c d d"
     column-gap 20px
+
+    .img-grid
+      grid-area a
+    .name-grid
+      grid-area b
+    .rating-grid
+      grid-area c
+    .text-grid
+      grid-area d
 
   .gallery-item-reviews-img
     object-fit cover

@@ -9,6 +9,7 @@ import User from '../../utils/user';
 
 import defaultAchievementIcon from '../../static/achievement.png';
 import tripIcon from '../../static/trip_icon.png';
+import defaultAvatar from '../../static/avatar.png';
 
 export default async function updateMenu(activeMenuButton: HTMLElement) {
 
@@ -41,6 +42,10 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
 
 
     if (activeMenuButton.textContent === 'Отзывы') {
+        const resProfile = await Api.getProfile(User.id);
+        const avatarPathReview = resProfile.data.avatarPath ?
+            `/avatars/${resProfile.data.avatarPath}` : defaultAvatar;
+
         const galleryProfileElement = document.getElementById('gallery-profile') as HTMLElement;
         galleryProfileElement.innerHTML =
             `<div class="please-block">
@@ -50,7 +55,7 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         const reviewsResponse = await Api.getUserReviews(User.id);
         const reviews = reviewsResponse.data;
         if (reviews) {
-            galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews });
+            galleryProfileElement.innerHTML = galleryTemplateReviews({ reviews, avatarPathReview });
         }
     }
 };
