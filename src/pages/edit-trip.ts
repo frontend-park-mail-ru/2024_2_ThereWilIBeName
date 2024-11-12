@@ -4,6 +4,7 @@ import User from '../utils/user';
 import Trip from '../utils/trip';
 
 import logoImage from '../static/logo trip.svg';
+import backButton from '../static/back button white.svg';
 
 export default {
     /**
@@ -14,14 +15,10 @@ export default {
      */
     html:
         `
-        <header class="header">
-            <div class="logo">
-                <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
-            </div>
-        </header>
+        <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
         <main>
             <div class="create-trip-block">
-                <div class="back-button" id ="back-button">←</div>
+                <img src="${backButton}" class="back-button" id="back-button">
                 <div class="create-trip-title">Редактирование поездки</div>
                 <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
                 <form class="create-trip-form" id="create-trip-form">
