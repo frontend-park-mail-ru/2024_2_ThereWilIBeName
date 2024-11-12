@@ -3,7 +3,9 @@ import Router from '../utils/Router';
 import logoImage from '../static/logo black.svg';
 
 export default {
-    html: `<footer class="footer">
+    html: `
+                <div class="space"></div>
+                <footer class="footer">
                 <img src="${logoImage}" class="logo-grid">
                 <div class="front-grid">frontend</div>
                 

@@ -45,9 +45,14 @@ body
     padding 0
     height 100%
     background-size cover
+    overflow-x hidden
     background linearGradient() fixed
 
 #root
     transition opacity 0.2s ease
+    display flex
+    flex-direction column
+    min-height 100%
+
     &.hidden
         opacity 0
