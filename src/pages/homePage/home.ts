@@ -3,6 +3,7 @@ import User from '../../utils/user';
 import Router from '../../utils/Router';
 import galleryTemplate from './home.hbs';
 import header from '../../components/header';
+import footer from '../../components/footer';
 
 import logoImage from '../../static/logo.png';
 
@@ -17,7 +18,9 @@ export default {
             <div class="headline">Достопримечательности</div>
             <hr>
             <ul class="gallery" id="gallery"></ul>
-        </main>`,
+        </main>
+        ${footer.html}
+    `,
 
     /**
      * Функция монтирования главной страницы.

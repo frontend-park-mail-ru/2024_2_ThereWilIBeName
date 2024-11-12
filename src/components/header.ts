@@ -1,7 +1,7 @@
 import Router from '../utils/Router';
 import Api from '../utils/Api';
 import User from '../utils/user';
-import logoImage from '../static/logo black.svg';
+import logoImage from '../static/logo trip black.svg';
 
 export default {
     html: `<header class="header">

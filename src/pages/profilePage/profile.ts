@@ -3,11 +3,13 @@ import Api from '../../utils/Api';
 import User from '../../utils/user';
 import updateMenu from './profileMenu';
 
-import logoImage from '../../static/logo.svg';
+import logoImage from '../../static/logo trip.svg';
 import defaultAvatar from '../../static/avatar.png';
 import editButton from '../../static/edit.png';
 import confirmIcon from '../../static/confirm.png';
 import {emailRegex} from '../validation';
+import footer from '../../components/footer';
+import backButton from '../../static/back button white.svg';
 
 export default {
     /**
@@ -23,7 +25,7 @@ export default {
                 <div class="user-block">
                     <img src="" alt="Аватар" class="avatar" id="avatar">
                     <div class="information-block">
-                        <div class="information-text-bold username-grid" >Username</div>
+                        <div class="information-text-bold username-grid" >Имя</div>
                         <div class="information-text username-input-grid" id="user-username">Здесь будет username</div>
                         <input class="edit-profile-input username-input-grid hidden" type="text" id="username-input">
                         <img src="${editButton}" alt="edit" class="edit-button edit-button-grid" id="edit-button">
@@ -34,8 +36,7 @@ export default {
                         <div class="information-text id-input-grid" id="user-id">Здесь будет id</div>
                         <img src="${confirmIcon}" alt="confirm" class="submit-edit-button submit-grid hidden" id="submit-edit-button">
                     </div>
-
-                    <div class="information-back-button" id="back-button">←</div>
+                    <img src="${backButton}" class="information-back-button" id="back-button">
                     <div class="information-title-block">
                         <div class="information-text-title" id="user-title">Здесь будет Username</div>
                     </div>
@@ -57,7 +58,9 @@ export default {
                     </div>
                 </div>
             </div>
-        </main>`,
+        </main>
+        ${footer.html}
+`,
 
     /**
      * Функция для монтирования страницы профиля, которая добавляет обработчик события

@@ -24,7 +24,7 @@
 
     &:hover
       transform scale(1.05)
-      background myGreen
+      background myPink
       color myWhite
 
     &.hidden
@@ -55,14 +55,7 @@
     gap 15px 0
 
   .trips-back-button
-    color myWhite
-    margin-left 30px
-    width 30px
-    cursor pointer
-    transition transform 0.3s ease
-
-    &:hover
-      transform scale(1.05)
+    mixinBackButton()
 
   .gallery-item-trips
     display grid

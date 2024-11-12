@@ -1,8 +1,9 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
 
-import logoImage from '../static/logo.svg';
-// import backButton from '../static/back button white.svg';
+import logoImage from '../static/logo trip.svg';
+import backButton from '../static/back button white.svg';
+import footer from '../components/footer';
 
 export default {
     /**
@@ -16,7 +17,7 @@ export default {
     <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
     <main>
         <div class="auth-block">
-            <img src="" class="back-button" id="back-button">
+            <img src="${backButton}" class="back-button" id="back-button">
             <div class="auth-title">Вход</div>
             <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
             <form class="signin-form" id="signin-form">
@@ -24,12 +25,14 @@ export default {
                 <input class="border" id="email" name="email" autocomplete="email" required>
                 <label class="auth-text">Пароль</label>
                 <input class="border" type="password" id="password" name="password" autocomplete="current-password" required>
-                <button class="auth-button">Войти</button>
-                <div class="auth-line">
-                <div class="auth-signup-button" id="signup-button">Создать аккаунт</div>
+                <div class="auth-buttons">
+                    <button class="auth-button">Войти</button>
+                    <div class="auth-signup-button" id="signup-button">Создать аккаунт</div>
+                </div>
             </form>
         </div>
     </main>
+    ${footer.html}
     `,
 
     /**

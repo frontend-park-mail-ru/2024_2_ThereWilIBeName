@@ -2,7 +2,9 @@ import Api from '../utils/Api';
 import Router from '../utils/Router';
 import User from '../utils/user';
 
-import logoImage from '../static/logo.svg';
+import logoImage from '../static/logo trip.svg';
+import footer from '../components/footer';
+import backButton from '../static/back button white.svg';
 
 export default {
     /**
@@ -16,10 +18,10 @@ export default {
         <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
         <main>
             <div class="create-trip-block">
-                <div class="back-button" id ="back-button">←</div>
+                <img src="${backButton}" class="back-button" id="back-button">
                 <div class="create-trip-title">Создание поездки</div>
                 <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
-                <form id="create-trip-form">
+                <form id="create-trip-form" class="create-trip-form">
                     <label class="create-trip-text">Название</label>
                     <input class="border" id="name" name="name" >
                     <label class="create-trip-text">Описание</label>
@@ -35,7 +37,8 @@ export default {
                 </form>
             </div>
         </main>
-    `,
+        ${footer.html}    
+`,
 
     /**
      * Функция для монтирования страницы регистрации.

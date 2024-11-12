@@ -14,6 +14,8 @@ import palmsImgB from '../../static/please black.svg';
 import User from '../../utils/user';
 import Trip from '../../utils/trip';
 import header from '../../components/header';
+import backButton from '../../static/back button white.svg';
+import footer from '../../components/footer';
 
 export default {
     /**
@@ -26,7 +28,7 @@ export default {
         <main>
             <div class="trips-block">
                 <div class="trips-title-row">
-                    <img src="" class="trips-back-button" id="back-button">
+                    <img src="${backButton}" class="trips-back-button" id="back-button">
                     <div class="trips-title">Поездки</div>
                 </div>
                 <hr>
@@ -34,14 +36,16 @@ export default {
                     <div class="trip-create-button hidden" id="trip-create-button">+</div>
                 </div>
                 <div id="trips-root">
-                    <div class="please-block" id="please-block">
+                    <div class="please-block hidden" id="please-block">
                         <img src="${palmsImg}" class="please-img">
                         <div class="auth-please" id="auth-please">Пожалуйста, авторизуйтесь</div>
                     </div>
                     <ul class="gallery-trips" id="gallery-trips"></ul>
                 </div>
             </div>
-        </main>`,
+        </main>
+        ${footer.html}
+`,
 
     /**
      * Функция для монтирования страницы профиля, которая добавляет обработчик события
@@ -72,14 +76,15 @@ export default {
             return;
         }
 
-        authPleaseBlock.classList.add('hidden');
-        createTripButton.classList.remove('hidden');
-
         const tripsResponse = await Api.getUserTrips(User.id);
 
-        const trips = tripsResponse.data;
-        const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
-        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImg, editIcon });
+        if (tripsResponse.ok) {
+            authPleaseBlock.classList.remove('hidden');
+            createTripButton.classList.remove('hidden');
+            const trips = tripsResponse.data;
+            const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
+            galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImg, editIcon });
+        }
 
         document.querySelectorAll('.trips-open-icon').forEach(icon => {
             icon.addEventListener('click', () => {

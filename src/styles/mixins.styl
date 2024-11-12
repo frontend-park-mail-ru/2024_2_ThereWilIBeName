@@ -25,6 +25,9 @@ mixinTitleGradient()
   background-clip text
 
 mixinFormBlock()
+  display flex
+  flex-direction column
+  align-items center
   background-color myBlack
   padding 20px
   border-radius 30px
@@ -32,25 +35,50 @@ mixinFormBlock()
   height fit-content
   margin 40px auto
 
+mixinForm()
+  display grid
+  width 100%
+  row-gap 10px
+
+mixinBorder()
+  all unset
+  display block
+  height 30px
+  padding 10px
+  border-radius 15px
+  background myGrey
+
+  &:focus
+    background my
+
+mixinBackButton()
+  padding 5px
+  width 35px
+  cursor pointer
+  align-self normal
+  opacity 0.5
+  transition opacity 0.3s ease
+
+  &:hover
+    opacity 1
+
 mixinFormText()
   padding-left 15px
   color myWhite
   font-size 17px
-  display block
-  margin-bottom 10px
 
 mixinFormButton()
-  margin 15px auto
-  padding 10px 30px
+  padding 10px
   display block
   font-weight normal
-  width fit-content
+  width 100%
   background-color myGrey
   color myWhite
   border none
-  border-radius 20px
+  border-radius 15px
   cursor pointer
-  font-size 20px
+  font-size 17px
+  margin-top 15px
   transition transform 0.3s ease
 
   &:hover

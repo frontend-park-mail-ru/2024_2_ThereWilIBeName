@@ -1,0 +1,54 @@
+.footer
+  display grid
+  grid-template-rows repeat(4, 25%)
+  grid-template-columns auto auto 20% 10%
+  column-gap 10px
+  grid-template-areas "a b c d"\
+  "a b e f"\
+  "a b g h"\
+  "a b i j"
+  background myBlack
+  padding 20px
+  height 150px
+  margin-top 100px
+
+  a
+    text-decoration none
+    color myWhite
+    text-align right
+
+  .logo-grid
+    grid-area a
+    height 100%
+
+  .text-grid
+    grid-area b
+    color myLightGrey
+
+  .grisha-grid
+    grid-area c
+
+  .front-grid
+    grid-area d
+    color myLightGrey
+
+  .ksusha-grid
+    grid-area e
+
+  .back-one-grid
+    grid-area f
+    color myGrey
+
+  .dana-grid
+    grid-area g
+
+  .back-two-grid
+    grid-area h
+    color myGrey
+
+  .timur-grid
+    grid-area i
+
+  .back-three-grid
+    grid-area j
+    color myGrey

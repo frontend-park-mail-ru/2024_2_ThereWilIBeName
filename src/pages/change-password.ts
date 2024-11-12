@@ -2,7 +2,9 @@ import Api from '../utils/Api';
 import Router from '../utils/Router';
 import User from '../utils/user';
 
-import logoImage from '../static/logo.svg';
+import logoImage from '../static/logo trip.svg';
+import backButton from '../static/back button white.svg';
+import footer from '../components/footer';
 
 export default {
     /**
@@ -16,10 +18,10 @@ export default {
         <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
         <main>
             <div class="change-password-block">
-                <div class="back-button" id ="back-button">←</div>
+                <img src="${backButton}" class="back-button" id ="back-button">
                 <div class="change-password-title">Смена пароля</div>
                 <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
-                <form id="change-password-form">
+                <form id="change-password-form" class="change-password-form">
                     <label class="change-password-text">Старый пароль</label>
                     <input class="border" id="old-password" name="old-password" >
                     <label class="change-password-text">Новый пароль</label>
@@ -28,8 +30,9 @@ export default {
                     <input class="border" id="retype-new-password" name="retype-new-password" >
                     <button class="change-password-button">Сменить пароль</button>
                 </form>
-            </div>
+            </img>
         </main>
+        ${footer.html}
     `,
 
     /**

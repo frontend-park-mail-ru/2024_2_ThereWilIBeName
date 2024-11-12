@@ -3,6 +3,7 @@
     position relative
     overflow hidden
     min-height 100vh
+    padding 50px
 
     &::before
       content ''
@@ -159,16 +160,7 @@
     text-align center
 
   .information-back-button
-    font-size 30px
-    font-weight bold
-    color myGrey
-    height fit-content
-    text-align right
-    cursor pointer
-    transition transform 0.3s ease
-
-    &:hover
-      color myRed
+    mixinBackButton()
 
     @media (max-width 700px)
       display none
