@@ -1,6 +1,7 @@
 import Router from '../utils/Router';
 
-import logoImage from '../static/logo.png';
+import logoImage from '../static/logo trip.svg';
+import footer from '../components/footer';
 
 export default {
     /**
@@ -18,7 +19,9 @@ export default {
         <main class="warn-message">
             <div class="warning">Упс, такой страницы нет...</div>
             <button class="unknown-page-button" id="error-button">На главную</button>
-        </main>`,
+        </main>
+        ${footer.html}
+`,
 
     /**
      * Функция монтирования страницы ошибки 404.

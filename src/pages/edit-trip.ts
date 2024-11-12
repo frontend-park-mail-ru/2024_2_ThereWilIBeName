@@ -3,7 +3,7 @@ import Router from '../utils/Router';
 import User from '../utils/user';
 import Trip from '../utils/trip';
 
-import logoImage from '../static/logo.png';
+import logoImage from '../static/logo trip.svg';
 
 export default {
     /**
