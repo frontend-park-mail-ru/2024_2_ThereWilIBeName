@@ -8,7 +8,6 @@ import tripIcon from '../../static/trip_icon.png';
 import copyLinkIcon from '../../static/copylink.png';
 import deleteIcon from '../../static/delete.png';
 import myBlackIcon from '../../static/232323.png';
-import backButton from '../../static/back button white.svg';
 import editIcon from '../../static/edit.png';
 import palmsImg from '../../static/please white.svg';
 import palmsImgB from '../../static/please black.svg';
@@ -27,7 +26,7 @@ export default {
         <main>
             <div class="trips-block">
                 <div class="trips-title-row">
-                    <img src="${backButton}" class="trips-back-button" id="back-button">
+                    <img src="" class="trips-back-button" id="back-button">
                     <div class="trips-title">Поездки</div>
                 </div>
                 <hr>
