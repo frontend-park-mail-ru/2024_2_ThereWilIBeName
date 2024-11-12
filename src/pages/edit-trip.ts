@@ -24,7 +24,7 @@ export default {
                 <div class="back-button" id ="back-button">←</div>
                 <div class="create-trip-title">Редактирование поездки</div>
                 <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
-                <form id="create-trip-form">
+                <form class="create-trip-form" id="create-trip-form">
                     <label class="create-trip-text">Название</label>
                     <input class="border" id="name" name="name" >
                     <label class="create-trip-text">Описание</label>
