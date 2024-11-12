@@ -25,8 +25,14 @@
     font-family 'IBM Plex Mono'
     src local('IBM Plex Mono Regular'), url('../static/IBMPlexMono-Regular.ttf') format('truetype')
 
+@font-face
+    font-style normal
+    font-family 'Hero'
+    src local('Hero'), url('../static/Hero.ttf') format('truetype')
+
 *
     box-sizing border-box
+    font-family 'Hero'
 
 html
     height 100%
@@ -39,7 +45,6 @@ body
     height 100%
     background-size cover
     background linearGradient() fixed
-    font-family "IBM Plex Mono", sans-serif
 
 #root
     transition opacity 0.2s ease

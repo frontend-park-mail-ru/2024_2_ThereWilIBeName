@@ -5,7 +5,7 @@
     mixinBlock(myBlack)
     display flex
     flex-direction column
-    margin-top 0
+    margin-top 15px
 
   .trips-button-row
     display flex
@@ -32,12 +32,12 @@
 
   .trips-title-row
     display grid
-    grid-template-columns 1fr auto
+    grid-template-columns auto 1fr
+    align-items center
 
   .trips-title
     font-size 40px
-    padding-left 50px
-    font-weight bold
+    padding-right 60px
     color myWhite
     text-align center
 
@@ -55,15 +55,14 @@
     gap 15px 0
 
   .trips-back-button
-    font-size 40px
-    font-weight bold
     color myWhite
-    height fit-content
+    margin-left 30px
+    width 30px
     cursor pointer
-    transition color 0.3s ease
+    transition transform 0.3s ease
 
     &:hover
-      color myRed
+      transform scale(1.05)
 
   .gallery-item-trips
     display grid
@@ -173,7 +172,6 @@
 
   .auth-please
     font-size 24px
-    font-weight bold
     color myWhite
     margin auto
     text-align center

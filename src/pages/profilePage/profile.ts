@@ -3,7 +3,7 @@ import Api from '../../utils/Api';
 import User from '../../utils/user';
 import updateMenu from './profileMenu';
 
-import logoImage from '../../static/logo.png';
+import logoImage from '../../static/logo.svg';
 import defaultAvatar from '../../static/avatar.png';
 import editButton from '../../static/edit.png';
 import confirmIcon from '../../static/confirm.png';
@@ -16,11 +16,8 @@ export default {
      *
      * @type {string}
      */
-    html: `<header class="header">
-            <div class="logo">
-                <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
-            </div>
-        </header>
+    html: `
+        <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
         <main>
             <div class="background-profile">
                 <div class="user-block">

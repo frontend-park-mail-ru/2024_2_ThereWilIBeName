@@ -4,6 +4,7 @@ import {emailRegex} from './validation';
 import {passwordRegex} from './validation';
 
 import logoImage from '../static/logo.png';
+import backButton from '../static/back button white.svg';
 
 export default {
     /**
@@ -14,14 +15,10 @@ export default {
      */
     html:
         `
-        <header class="header">
-            <div class="logo">
-                <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
-            </div>
-        </header>
+        <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
         <main>
             <div class="reg-block">
-                <div class="back-button" id ="back-button">←</div>
+                <img src="${backButton}" class="back-button" id="back-button">
                 <div class="auth-title">Регистрация</div>
                 <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
                 <form id="signup-form">

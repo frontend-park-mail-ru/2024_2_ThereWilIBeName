@@ -15,6 +15,7 @@ export default {
     html: ` ${header.html}
         <main>
             <div class="headline">Достопримечательности</div>
+            <hr>
             <ul class="gallery" id="gallery"></ul>
         </main>`,
 

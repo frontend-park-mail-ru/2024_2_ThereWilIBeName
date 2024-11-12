@@ -2,7 +2,7 @@ import Api from '../utils/Api';
 import Router from '../utils/Router';
 import User from '../utils/user';
 
-import logoImage from '../static/logo.png';
+import logoImage from '../static/logo.svg';
 
 export default {
     /**
@@ -13,11 +13,7 @@ export default {
      */
     html:
         `
-        <header class="header">
-            <div class="logo">
-                <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
-            </div>
-        </header>
+        <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
         <main>
             <div class="create-trip-block">
                 <div class="back-button" id ="back-button">←</div>

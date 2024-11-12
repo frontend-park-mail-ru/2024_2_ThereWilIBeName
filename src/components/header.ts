@@ -1,28 +1,27 @@
 import Router from '../utils/Router';
 import Api from '../utils/Api';
 import User from '../utils/user';
-import logoImage from '../static/logo.png';
+import logoImage from '../static/logo black.svg';
 
 export default {
     html: `<header class="header">
                 <div class="logo">
-                    <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
+                    <img src="${logoImage}" alt="Логотип" class="logo-image-black" id="logo-image">
                 </div>
-                <div class="header-menu">
-                    <button class="header-button" id="trips-button">Поездки</button>
-                    <button class="header-button" id="signin-button">Вход</button>
-                    <button class="user-button" id="user-button"></button>
-                
-                    <div id="side-menu" class="side-menu">
-                        <div class="background-menu" id="background-menu"></div>
-                        <div class="user-name" id="user-name"></div>
-                        <ul>
-                            <li><button class="menu-button" id="change-user-button">Сменить пользователя</button></li>
-                            <li><button class="menu-button" id="profile-button">Профиль</button></li>
-                            <li><button class="menu-button" id="logout-button">Выйти</button></li>
-                        </ul>
-                        <button id="close-button" class="close-button">Закрыть</button>
-                    </div>
+                <input type="text" placeholder="Здесь будет поиск" class="search">
+                <button class="header-button" id="trips-button">Поездки</button>
+                <button class="header-button" id="signin-button">Вход</button>
+                <button class="user-button" id="user-button"></button>
+            
+                <div id="side-menu" class="side-menu">
+                    <div class="background-menu" id="background-menu"></div>
+                    <div class="user-name" id="user-name"></div>
+                    <ul>
+                        <li><button class="menu-button" id="change-user-button">Сменить пользователя</button></li>
+                        <li><button class="menu-button" id="profile-button">Профиль</button></li>
+                        <li><button class="menu-button" id="logout-button">Выйти</button></li>
+                    </ul>
+                    <button id="close-button" class="close-button">Закрыть</button>
                 </div>
             </header>`,
 

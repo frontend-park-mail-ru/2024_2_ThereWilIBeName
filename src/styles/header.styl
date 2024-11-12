@@ -1,28 +1,57 @@
+.logo-image
+    height 100px
+    cursor pointer
+    margin 20px 20px
+    transition transform 0.3s ease
+
+    &:hover
+        transform scale(1.05)
+
 .header
-    display flex
-    flex-direction row
+    display grid
+    grid-template-columns 20% 1fr 15% 15%
+    column-gap 10px
     align-items center
-    padding 10px 20px
+    background myBlack
+    margin-top 20px
+    margin-bottom 20px
+    // ширина прокрутки
+    margin-right 16px
 
-
-    .logo-image
-        height 80px
+    .logo-image-black
+        height 100%
+        width 100%
+        max-width 200px
         cursor pointer
-        margin 10px 10px
+        margin 10px 20px
         transition transform 0.3s ease
 
         &:hover
             transform scale(1.05)
 
+    .search
+        padding 15px
+        margin auto
+        width 60%
+        border 1px solid myWhite
+        background myBlack
+        border-radius 10px
+        outline none
+        text-align center
+        color myWhite
+        cursor pointer
+
+        &::placeholder
+            text-align center
+            font-family 'Hero'
+            font-size 20px
+
         @media (max-width 700px)
             height 60px
 
-    .header-menu
-        display flex
-        align-items center
-
     .header-button
         mixinButton(myBlack, myWhite)
+        border 1px solid myWhite
         transition transform 0.3s ease
 
         &:hover
@@ -33,7 +62,8 @@
 
     .user-button
         mixinButton(myBlack, myWhite)
-        padding 7px 0
+        text-align center
+        border 1px solid myWhite
         transition all 0.3s ease
 
         &:hover
