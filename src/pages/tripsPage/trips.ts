@@ -72,19 +72,23 @@ export default {
             router.goto('/createtrip');
         });
 
-        if (User.username === '') {
+        if (!User.isSignedIn) {
+            authPleaseBlock.classList.remove('hidden');
             return;
         }
 
         const tripsResponse = await Api.getUserTrips(User.id);
 
-        if (tripsResponse.ok) {
-            authPleaseBlock.classList.remove('hidden');
-            createTripButton.classList.remove('hidden');
-            const trips = tripsResponse.data;
-            const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
-            galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImg, editIcon });
+        if (!tripsResponse.ok) {
+            console.log('Ошибка получения поездок');
+            return;
         }
+
+        createTripButton.classList.remove('hidden');
+        const trips = tripsResponse.data;
+        const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
+        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImg, editIcon });
+
 
         document.querySelectorAll('.trips-open-icon').forEach(icon => {
             icon.addEventListener('click', () => {

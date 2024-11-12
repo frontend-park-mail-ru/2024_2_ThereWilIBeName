@@ -76,6 +76,7 @@ export default {
                 User.username = '';
                 User.id = '';
                 User.email = '';
+                User.isSignedIn = false;
                 userButton.classList.remove('show');
                 signinButton.classList.remove('hidden');
                 await router.goto('/home');
@@ -92,6 +93,7 @@ export default {
         User.username = currentUser.data.username;
         User.id = currentUser.data.id;
         User.email = currentUser.data.email;
+        User.isSignedIn = true;
         signinButton.textContent = 'Сменить пользователя';
         userButton.textContent = User.username;
         userNameDiv.textContent = User.username;
