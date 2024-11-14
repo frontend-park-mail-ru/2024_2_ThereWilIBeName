@@ -37,9 +37,8 @@ export default {
         await header.mount(router);
 
         // Загрузка достопримечательностей
-        // const attractionsResponse = await Api.getAttractions();
-        // const attractions = attractionsResponse.data;
-        const attractions = [{},{},{},{},{},{},{},{},{},{},];
+        const attractionsResponse = await Api.getAttractions();
+        const attractions = attractionsResponse.data;
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ attractions });
 
