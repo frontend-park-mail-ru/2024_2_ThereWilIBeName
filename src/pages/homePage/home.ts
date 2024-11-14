@@ -17,7 +17,7 @@ export default {
         <main>
             <div class="headline">Достопримечательности</div>
             <hr>
-            <ul class="gallery" id="gallery"></ul>
+            <div class="gallery" id="gallery"></div>
         </main>
         ${footer.html}
     `,
