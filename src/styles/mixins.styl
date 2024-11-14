@@ -92,7 +92,16 @@ mixinBlock(blockColor)
   margin 20px auto
   padding 25px 25px
   column-gap 25px
-  filter drop-shadow(-16px 16px 0px myShadow)
+  position relative
+
+  &::before
+    content ''
+    border-radius 30px
+    position absolute
+    inset 16px 16px -16px -16px
+    background myShadow
+    overflow auto
+    z-index -1
 
 mixinInformationText(textColor)
   margin 15px 25px
@@ -114,7 +123,21 @@ mixinGalleryItem(galleryItemHeight, galleryItemWidth, backgroundColor)
   display grid
   overflow hidden
   border 2px solid myShadow
-  filter drop-shadow(-16px 16px 0px myShadow)
+  position relative
+
+  &::before
+    content ''
+    border-radius 30px
+    position absolute
+    inset 16px 16px -16px -16px
+    background myShadow
+    overflow auto
+    z-index -1
+
+  &::before
+    content ''
+
+
 
 mixinReviewBlock()
   display flex

@@ -16,40 +16,44 @@
             font-size 30px
 
     .gallery
-        display flex
-        flex-wrap wrap
-        justify-content space-evenly
+        columns 3 300px
+        list-style none
         gap 50px 30px
-        padding 0px 50px
+        //padding 0px 50px
 
     .gallery-item
-        margin 0
         padding 0
-        border-radius 30px
-        position relative
-        overflow hidden
-        min-width 200px
-        max-width 300px
-        height 200px
-        width 100%
-        filter drop-shadow(-16px 16px 0px myShadow)
+        border-radius 20px
+        width 300px
+        height 100%
         transition transform 0.3s ease
         cursor pointer
+        position relative
+
+        &::before
+            content ''
+            border-radius 30px
+            position absolute
+            inset 16px 16px -16px -16px
+            background myShadow
+            overflow auto
+            z-index -1
 
         &:hover
-            transform scale(1.05)
+            transform scale(1.02)
 
         img
             object-fit cover
             width 100%
             height 100%
-            border-radius 30px 30px 0 0
+            border-radius 20px
 
         p
             position absolute
             text-align center
             padding 10px
             margin 0
+            border-radius 0 0 20px 20px
             background myShadow
             color myWhite
             bottom 0
