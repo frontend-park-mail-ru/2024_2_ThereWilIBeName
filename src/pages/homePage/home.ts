@@ -18,7 +18,7 @@ export default {
             <div class="gallery-block">
                 <div class="headline">Достопримечательности</div>
                 <hr>
-                <div class="gallery" id="gallery"></div>
+                <ul class="gallery" id="gallery"></ul>
             </div>
         </main>
         ${footer.html}
@@ -48,7 +48,7 @@ export default {
         placeButton.addEventListener('click', (event) => {
             const target = event.target as HTMLElement;
             if (target) {
-                const listItem = target.closest('div');
+                const listItem = target.closest('LI');
                 if (listItem) {
                     const itemId = listItem.querySelector('a')!.href.split('/').pop();
                     router.goto(`/places/${itemId}`);
