@@ -15,9 +15,11 @@ export default {
      */
     html: ` ${header.html}
         <main>
-            <div class="headline">Достопримечательности</div>
-            <hr>
-            <div class="gallery" id="gallery"></div>
+            <div class="gallery-block">
+                <div class="headline">Достопримечательности</div>
+                <hr>
+                <div class="gallery" id="gallery"></div>
+            </div>
         </main>
         ${footer.html}
     `,
