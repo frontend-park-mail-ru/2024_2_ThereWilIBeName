@@ -37,8 +37,9 @@ export default {
         await header.mount(router);
 
         // Загрузка достопримечательностей
-        const attractionsResponse = await Api.getAttractions();
-        const attractions = attractionsResponse.data;
+        // const attractionsResponse = await Api.getAttractions();
+        // const attractions = attractionsResponse.data;
+        const attractions = [{},{},{},{},{},{},{},{},{},{},];
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ attractions });
 
@@ -46,7 +47,7 @@ export default {
         placeButton.addEventListener('click', (event) => {
             const target = event.target as HTMLElement;
             if (target) {
-                const listItem = target.closest('li');
+                const listItem = target.closest('div');
                 if (listItem) {
                     const itemId = listItem.querySelector('a')!.href.split('/').pop();
                     router.goto(`/places/${itemId}`);
