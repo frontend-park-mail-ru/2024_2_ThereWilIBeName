@@ -8,6 +8,7 @@ import PagePLace from './pages/placePage/place';
 import PageCreateTrip from './pages/create-trip';
 import PageChangePassword from './pages/change-password';
 import PageEditTrip from './pages/edit-trip';
+import PageHello from './pages/hello';
 import Router from './utils/Router';
 
 /**
@@ -37,7 +38,15 @@ export interface Route {
  */
 const routes: Route[] = [
     {
-        path: /^(|\/|\/home)$/,
+        path: /^(|\/|\/hello)$/,
+        title: 'Начальная страница',
+        html: PageHello.html,
+        mount: PageHello.mount,
+        unmount: PageHello.unmount,
+        cssClass: 'hello-page',
+    },
+    {
+        path: /^\/home/,
         title: 'Домашнаяя страница',
         html: PageHome.html,
         mount: PageHome.mount,
@@ -45,7 +54,7 @@ const routes: Route[] = [
         cssClass: 'home-page',
     },
     {
-        path: /^(|\/|\/profile)$/,
+        path: /^\/profile/,
         title: 'Профиль',
         html: PageProfile.html,
         mount: PageProfile.mount,
