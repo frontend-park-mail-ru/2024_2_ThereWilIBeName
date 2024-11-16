@@ -3,6 +3,7 @@ import Api from '../utils/Api';
 import User from '../utils/user';
 import logoImage from '../static/logo trip black.svg';
 import searchButton from '../static/search button.svg';
+import avatarPng from '../static/avatar.png';
 
 export default {
     html: `<header class="header">
@@ -16,7 +17,7 @@ export default {
                 <button class="header-button" id="trips-button">Поездки</button>
                 <button class="header-button" id="signin-button">Вход</button>
                 <div class="user-button" id="user-button">
-                    <img class="avatar" alt="Аватарка" id="avatar">
+                    <img src="${avatarPng}" class="avatar" alt="Аватарка" id="avatar">
                 </div>
             
                 <div id="side-menu" class="side-menu">
