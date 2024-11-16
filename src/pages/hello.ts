@@ -14,7 +14,7 @@ export default {
     html: `
         <div class="background-hello"></div>
         <main>
-            
+            <title>Здесь будет приветственная страница</title>
         </main>
         ${footer.html}
     `,
