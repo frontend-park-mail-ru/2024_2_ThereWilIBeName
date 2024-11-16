@@ -1,7 +1,6 @@
 import Api from '../utils/Api';
 import User from '../utils/user';
 import Router from '../utils/Router';
-import header from '../components/header';
 import footer from '../components/footer';
 
 import logoImage from '../../static/logo.png';
@@ -12,7 +11,8 @@ export default {
      *
      * @type {string}
      */
-    html: ` ${header.html}
+    html: `
+        <div class="background-hello"></div>
         <main>
             
         </main>
@@ -28,9 +28,6 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после завершения монтирования страницы.
      */
     async mount(router: Router): Promise<void> {
-
-        // Монтирование хэдера
-        await header.mount(router);
 
     },
 
