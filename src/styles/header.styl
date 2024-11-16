@@ -10,7 +10,7 @@
 
 .header
     display grid
-    grid-template-columns 20% 1fr 15% 15%
+    grid-template-columns 20% 1fr 15% 10%
     grid-template-rows auto
     column-gap 10px
     align-items center
@@ -32,18 +32,32 @@
             transform scale(1.05)
 
     .search
+        position relative
+        padding 0 40px
+
+    .search-button
+        position absolute
+        height 42px
+        aspect-ratio 1 / 1
+        top 2px
+        right 105px
+        cursor pointer
+        transition all 0.3s ease
+
+        &:hover
+            transform scale(0.95)
+
+    .search-input
         padding 15px
         margin auto
-        width 60%
+        width 90%
         border 1px solid myWhite
         background myBlack
         border-radius 10px
         outline none
-        text-align center
         color myWhite
 
         &::placeholder
-            text-align center
             font-family 'Hero'
             font-size 20px
 
@@ -62,17 +76,27 @@
             display none
 
     .user-button
-        mixinButton(myBlack, myWhite)
-        text-align center
-        border 1px solid myWhite
-        transition all 0.3s ease
+        height 60px
+        width 60px
+        border-radius 10px
+        background linearGradient()
         display none
-
-        &:hover
-            color myRed
+        cursor pointer
+        margin auto
+        position relative
 
         &.show
             display block
+
+        .avatar
+            position absolute
+            border-radius 10px
+            inset 0
+
+            &:hover
+                transform scale(0.95)
+
+
 
 @media (max-width 700px)
     display grid
