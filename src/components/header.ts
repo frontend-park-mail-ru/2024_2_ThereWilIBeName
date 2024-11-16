@@ -16,7 +16,7 @@ export default {
                 <button class="header-button" id="trips-button">Поездки</button>
                 <button class="header-button" id="signin-button">Вход</button>
                 <div class="user-button" id="user-button">
-                    <img class="avatar" alt="Аватарка">
+                    <img class="avatar" alt="Аватарка" id="avatar">
                 </div>
             
                 <div id="side-menu" class="side-menu">
@@ -34,7 +34,8 @@ export default {
     async mount(router: Router): Promise<void> {
         const homeLogo = document.getElementById('logo-image') as HTMLElement;
         const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
-        const userButton = document.getElementById('user-button') as HTMLImageElement;
+        const userButton = document.getElementById('user-button') as HTMLButtonElement;
+        const avatarImage = document.getElementById('avatar') as HTMLImageElement;
         const sideMenu = document.getElementById('side-menu') as HTMLElement;
         const userNameDiv = document.getElementById('user-name') as HTMLElement;
         const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
@@ -103,7 +104,7 @@ export default {
         signinButton.textContent = 'Сменить пользователя';
         const avatarPath = (await Api.getProfile(User.id)).data.avatarPath;
         if (avatarPath) {
-            userButton.src = avatarPath;
+            avatarImage.src = avatarPath;
         }
         userNameDiv.textContent = User.username;
         userButton.classList.add('show');
