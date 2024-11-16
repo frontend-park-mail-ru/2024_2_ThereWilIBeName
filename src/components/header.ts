@@ -101,7 +101,7 @@ export default {
         User.email = currentUser.data.email;
         User.isSignedIn = true;
         signinButton.textContent = 'Сменить пользователя';
-        const avatarPath = (await Api.getProfile(User.id)).data.avatarPath
+        const avatarPath = (await Api.getProfile(User.id)).data.avatarPath;
         if (avatarPath) {
             userButton.src = avatarPath;
         }
