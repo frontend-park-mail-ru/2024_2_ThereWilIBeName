@@ -5,7 +5,7 @@ import Router from '../../utils/Router';
 import deleteIcon from '../../static/delete.png';
 import header from '../../components/header';
 import mapMarkerIcon from '../../static/map marker.svg';
-import backButton from '../../static/back button white.svg'
+import backButton from '../../static/back button white.svg';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
