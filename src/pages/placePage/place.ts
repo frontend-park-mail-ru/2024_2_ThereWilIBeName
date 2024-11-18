@@ -4,8 +4,9 @@ import placeTemplate from './place.hbs';
 import Router from '../../utils/Router';
 import deleteIcon from '../../static/delete.png';
 import header from '../../components/header';
-import map from '../../static/map.png';
+import mapMarkerIcon from '../../static/map marker.svg';
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 export default {
     html:
@@ -89,11 +90,14 @@ export default {
         const attraction = attractionResponse.data;
         const latitude: number = 55.7558;
         const longitude: number = 37.6173;
-        const map = L.map('map').setView([latitude, longitude], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; ThereWillBeTrip',
-        }).addTo(map);
-        L.marker([latitude, longitude])
+        const map = L.map('map', {attributionControl: false}).setView([latitude, longitude], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        const customIcon = L.icon({
+            iconUrl: mapMarkerIcon,
+            iconSize: [60, 60],
+            popupAnchor: [0, -25], // Точка привязки всплывающего окна относительно иконки
+        });
+        L.marker([latitude, longitude], { icon: customIcon })
             .addTo(map)
             .bindPopup(`${attraction.name}`)
             .openPopup();
