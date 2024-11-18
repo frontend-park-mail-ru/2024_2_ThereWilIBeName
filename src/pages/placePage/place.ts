@@ -5,6 +5,7 @@ import Router from '../../utils/Router';
 import deleteIcon from '../../static/delete.png';
 import header from '../../components/header';
 import map from '../../static/map.png';
+import L from 'leaflet';
 
 export default {
     html:
@@ -57,7 +58,7 @@ export default {
                     <div class="place-info">
                         <div class="description" id="description">здесь будет описание</div>
                     </div>
-                    <img class="map-image" src="${map}" alt="Место на карте" id="map-image">
+                    <div class="map-place" id="map"></div>
                 </div>
             </div>
         </main>`,
@@ -86,6 +87,16 @@ export default {
         const itemId: number = Number(params);
         const attractionResponse = await Api.getAttraction(itemId);
         const attraction = attractionResponse.data;
+        const latitude: number = 55.7558;
+        const longitude: number = 37.6173;
+        const map = L.map('map').setView([latitude, longitude], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; ThereWillBeTrip',
+        }).addTo(map);
+        L.marker([latitude, longitude])
+            .addTo(map)
+            .bindPopup(`${attraction.name}`)
+            .openPopup();
 
         const reviewsResponse = await Api.getReviews(itemId);
         let reviews = reviewsResponse.data;
