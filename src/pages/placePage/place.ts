@@ -95,7 +95,8 @@ export default {
         const customIcon = L.icon({
             iconUrl: mapMarkerIcon,
             iconSize: [60, 60],
-            popupAnchor: [0, -25], // Точка привязки всплывающего окна относительно иконки
+            iconAnchor: [0, -15],
+            popupAnchor: [0, -40], // Точка привязки всплывающего окна относительно иконки
         });
         L.marker([latitude, longitude], { icon: customIcon })
             .addTo(map)
