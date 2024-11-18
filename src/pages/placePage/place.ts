@@ -5,6 +5,7 @@ import Router from '../../utils/Router';
 import deleteIcon from '../../static/delete.png';
 import header from '../../components/header';
 import mapMarkerIcon from '../../static/map marker.svg';
+import backButton from '../../static/back button white.svg'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -54,7 +55,7 @@ export default {
                         <div class="place-name" id="place-name">
                             Название
                         </div>
-                        <div class="back-button" id="back-button">←</div>
+                        <img src="${backButton}" class="back-button" id="back-button">
                     </div>
                     <div class="place-info">
                         <div class="description" id="description">здесь будет описание</div>
@@ -95,8 +96,7 @@ export default {
         const customIcon = L.icon({
             iconUrl: mapMarkerIcon,
             iconSize: [60, 60],
-            iconAnchor: [0, -15],
-            popupAnchor: [0, -40], // Точка привязки всплывающего окна относительно иконки
+            popupAnchor: [0, -25], // Точка привязки всплывающего окна относительно иконки
         });
         L.marker([latitude, longitude], { icon: customIcon })
             .addTo(map)

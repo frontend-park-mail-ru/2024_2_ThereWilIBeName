@@ -22,28 +22,23 @@
     font-size 35px
     text-align center
     flex-grow 1
-    filter drop-shadow(-16px 16px 0px myShadow)
+    position relative
+
+    &::before
+      content ''
+      border-radius 30px
+      position absolute
+      inset 16px 16px -16px -16px
+      background myShadow
+      overflow auto
+      z-index -1
 
   .place-header
     display flex
     gap 25px
 
   .back-button
-    background-color #232323
-    border-radius 30px
-    font-size 30px
-    text-align center
-    padding 20px 25px
-    filter drop-shadow(-16px 16px 0px myShadow)
-    display flex
-    align-items center
-    cursor pointer
-    color myWhite
-
-    &:hover
-      color myRed
-
-  .button-backhover
+    mixinBlock(myBlack)
     cursor pointer
 
   .place-image img
@@ -54,8 +49,17 @@
     max-width 400px
     border-radius 30px
     min-width 200px
-    filter drop-shadow(-16px 16px 0px myShadow)
-    aspect-ratio 1 / 0.9
+    aspect-ratio 1 / 1
+    position relative
+
+    &::before
+      content ''
+      border-radius 30px
+      position absolute
+      inset 16px 16px -16px -16px
+      background myShadow
+      overflow auto
+      z-index -1
 
   hr.solid
     border-top 2px solid #23232320
@@ -68,7 +72,16 @@
     max-height 350px
     border-radius 30px
     min-width 200px
-    filter drop-shadow(-16px 16px 0px #23232380)
+    position relative
+
+    &::before
+      content ''
+      border-radius 30px
+      position absolute
+      inset 16px 16px -16px -16px
+      background myShadow
+      overflow auto
+      z-index -1
 
   @media (max-width 700px)
     .place-block
@@ -76,13 +89,22 @@
 
   .place-info
     max-width 600px
-    background-color #232323
+    background-color myBlack
     border-radius 30px
     padding 30px
     font-size 20px
     color white
     margin 30px 0
-    filter drop-shadow(-16px 16px 0px myShadow)
+    position relative
+
+    &::before
+      content ''
+      border-radius 30px
+      position absolute
+      inset 16px 16px -16px -16px
+      background myShadow
+      overflow auto
+      z-index -1
 
   .description
     border 10px
@@ -119,7 +141,7 @@
       background linear-gradient(to bottom right, #F58080, #F2E2A9)
       inset 0 auto 0 0
       margin 2px
-      width calc(97.5% * (var(--progress, 2) / 5))
+      width calc(97.5% * (max(var(--progress, 2), 1.5) / 5))
       content ""
       z-index -1
 
