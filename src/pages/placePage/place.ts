@@ -107,6 +107,10 @@ export default {
             .bindPopup(`${attraction.name}`)
             .openPopup();
 
+        window.addEventListener('resize', () => {
+            map.invalidateSize();
+        });
+
         const reviewsResponse = await Api.getReviews(itemId);
         let reviews = reviewsResponse.data;
 
