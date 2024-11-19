@@ -96,9 +96,7 @@ export default {
         const latitude: number = 55.7558;
         const longitude: number = 37.6173;
         const map = L.map('map', {attributionControl: false}).setView([latitude, longitude], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').on('load', () => {
-            console.log('Тайлы карты загружены');
-        }).addTo(map);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
         const customIcon = L.icon({
             iconUrl: mapMarkerIcon,
             iconSize: [60, 60],
