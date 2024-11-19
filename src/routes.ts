@@ -38,7 +38,7 @@ export interface Route {
  */
 const routes: Route[] = [
     {
-        path: /^(|\/|\/hello)$/,
+        path: /^\/hello/,
         title: 'Начальная страница',
         html: PageHello.html,
         mount: PageHello.mount,
@@ -46,7 +46,7 @@ const routes: Route[] = [
         cssClass: 'hello-page',
     },
     {
-        path: /^\/home/,
+        path: /^(|\/|\/home)$/,
         title: 'Домашнаяя страница',
         html: PageHome.html,
         mount: PageHome.mount,
