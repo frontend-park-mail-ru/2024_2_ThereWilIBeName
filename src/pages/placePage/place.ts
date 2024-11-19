@@ -155,6 +155,7 @@ export default {
             userRating.style.setProperty('--progress', String(userReview.rating));
             userText.textContent = userReview.review_text;
             userReviewElement.classList.toggle('visible');
+            router.goto(`${window.location.pathname}`);
         });
 
         deleteButton.addEventListener('click', async () => {
