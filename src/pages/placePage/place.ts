@@ -55,7 +55,9 @@ export default {
                         <div class="place-name" id="place-name">
                             Название
                         </div>
-                        <img src="${backButton}" class="back-button" id="back-button">
+                        <div class="back-button">
+                            <img src="${backButton}" id="back-button">
+                        </div>
                     </div>
                     <div class="place-info">
                         <div class="description" id="description">здесь будет описание</div>

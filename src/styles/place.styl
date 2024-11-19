@@ -39,32 +39,28 @@
 
   .back-button
     mixinBlock(myBlack)
+    margin auto
     cursor pointer
 
-  .place-image img
-    object-fit cover
-    width 100%
-    height 100%
+  .place-image
+    mixinBlock(myBlack)
+    margin auto
     display block
+    width 100%
     max-width 400px
     border-radius 30px
     min-width 200px
     aspect-ratio 1 / 1
-    position relative
 
-    &::before
-      content ''
-      border-radius 30px
-      position absolute
-      inset 16px 16px -16px -16px
-      background myShadow
-      overflow auto
-      z-index -1
+  .place-image img
+    object-fit cover
 
   hr.solid
     border-top 2px solid #23232320
 
   .map-place
+    mixinBlock(myBlack)
+    margin auto
     width 100%
     height 100%
     display block
@@ -72,16 +68,6 @@
     max-height 350px
     border-radius 30px
     min-width 200px
-    position relative
-
-    &::before
-      content ''
-      border-radius 30px
-      position absolute
-      inset 16px 16px -16px -16px
-      background myShadow
-      overflow auto
-      z-index -1
 
   @media (max-width 700px)
     .place-block
