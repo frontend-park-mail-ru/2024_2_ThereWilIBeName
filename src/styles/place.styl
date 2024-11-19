@@ -37,14 +37,19 @@
     display flex
     gap 25px
 
-  .back-button
+  .back-button-block
     mixinBlock(myBlack)
     margin auto
-    cursor pointer
+
+    .back-button
+      mixinBackButton()
+      width 100%
+      height 100%
 
   .place-image
     mixinBlock(myBlack)
     margin auto
+    padding 0
     display block
     width 100%
     max-width 400px
@@ -54,13 +59,17 @@
 
   .place-image img
     object-fit cover
+    border-radius 20px
+    height 100%
+    width 100%
 
   hr.solid
     border-top 2px solid #23232320
 
-  .map-place
+  .map-container
     mixinBlock(myBlack)
     margin auto
+    padding 0
     width 100%
     height 100%
     display block
@@ -69,12 +78,16 @@
     border-radius 30px
     min-width 200px
 
+  .map-class
+    width 100%
+    height 100%
+    border-radius 30px
+
   @media (max-width 700px)
     .place-block
       flex-direction column
 
   .place-info
-    max-width 600px
     background-color myBlack
     border-radius 30px
     padding 30px
@@ -130,7 +143,6 @@
       width calc(90% * (max(var(--progress, 2), 1.5) / 5))
       content ""
       z-index -1
-
 
   .text-average
     font-size 20px

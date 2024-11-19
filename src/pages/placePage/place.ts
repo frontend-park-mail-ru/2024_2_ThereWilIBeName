@@ -55,14 +55,16 @@ export default {
                         <div class="place-name" id="place-name">
                             Название
                         </div>
-                        <div class="back-button">
-                            <img src="${backButton}" id="back-button">
+                        <div class="back-button-block">
+                            <img class="back-button" src="${backButton}" id="back-button">
                         </div>
                     </div>
                     <div class="place-info">
                         <div class="description" id="description">здесь будет описание</div>
                     </div>
-                    <div class="map-place" id="map"></div>
+                    <div class="map-container">
+                        <div class="map-class" id="map"></div>
+                    </div>
                 </div>
             </div>
         </main>`,
