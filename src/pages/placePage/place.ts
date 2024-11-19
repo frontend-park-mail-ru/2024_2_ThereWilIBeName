@@ -95,23 +95,25 @@ export default {
         const attraction = attractionResponse.data;
         const latitude: number = 55.7558;
         const longitude: number = 37.6173;
-        window.onload = () => {
-            const map = L.map('map', {attributionControl: false}).setView([latitude, longitude], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-            const customIcon = L.icon({
-                iconUrl: mapMarkerIcon,
-                iconSize: [60, 60],
-                popupAnchor: [0, -25], // Точка привязки всплывающего окна относительно иконки
-            });
-            L.marker([latitude, longitude], { icon: customIcon })
-                .addTo(map)
-                .bindPopup(`${attraction.name}`)
-                .openPopup();
+        const map = L.map('map', {attributionControl: false}).setView([latitude, longitude], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        const customIcon = L.icon({
+            iconUrl: mapMarkerIcon,
+            iconSize: [60, 60],
+            popupAnchor: [0, -25], // Точка привязки всплывающего окна относительно иконки
+        });
+        L.marker([latitude, longitude], { icon: customIcon })
+            .addTo(map)
+            .bindPopup(`${attraction.name}`)
+            .openPopup();
 
-            window.addEventListener('resize', () => {
-                map.invalidateSize();
-            });
+        window.onload = () => {
+            map.invalidateSize();
         };
+
+        window.addEventListener('resize', () => {
+            map.invalidateSize();
+        });
 
         const reviewsResponse = await Api.getReviews(itemId);
         let reviews = reviewsResponse.data;
