@@ -77,14 +77,13 @@ export default {
             return;
         }
 
+        createTripButton.classList.remove('hidden');
         const tripsResponse = await Api.getUserTrips(User.id);
 
         if (!tripsResponse.ok) {
             console.log('Ошибка получения поездок');
             return;
         }
-
-        createTripButton.classList.remove('hidden');
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
         galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImg, editIcon });
