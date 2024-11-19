@@ -107,8 +107,9 @@ export default {
             .bindPopup(`${attraction.name}`)
             .openPopup();
 
-        map.invalidateSize();
-
+        document.addEventListener('DOMContentLoaded', () => {
+            map.invalidateSize();
+        });
         window.addEventListener('resize', () => {
             map.invalidateSize();
         });
