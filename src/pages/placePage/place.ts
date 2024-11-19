@@ -110,7 +110,7 @@ export default {
         window.addEventListener('load', () => {
             const resizeTimeout = setTimeout(() => {
                 map.invalidateSize();
-            }, 100);  // Задержка 100 мс
+            }, 1000);
         });
         window.addEventListener('resize', () => {
             map.invalidateSize();
