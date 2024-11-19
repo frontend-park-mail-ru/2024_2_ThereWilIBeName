@@ -14,13 +14,24 @@
     gap 20px
 
   .place-name
-    mixinBlock(myBlack)
+    background-color myBlack
     border-radius 30px
     font-weight bold
     color myWhite
+    padding 20px
     font-size 35px
     text-align center
     flex-grow 1
+    position relative
+
+    &::before
+      content ''
+      border-radius 30px
+      position absolute
+      inset 16px 16px -16px -16px
+      background myShadow
+      overflow auto
+      z-index -1
 
   .place-header
     display flex
@@ -28,39 +39,74 @@
 
   .back-button
     mixinBlock(myBlack)
+    height 60px
+    aspect-ratio 1 / 1
     cursor pointer
 
   .place-image img
-    mixinBlock(#00000000)
     object-fit cover
     width 100%
     height 100%
     display block
     max-width 400px
+    border-radius 30px
     min-width 200px
     aspect-ratio 1 / 1
+    position relative
+
+    &::before
+      content ''
+      border-radius 30px
+      position absolute
+      inset 16px 16px -16px -16px
+      background myShadow
+      overflow auto
+      z-index -1
 
   hr.solid
     border-top 2px solid #23232320
 
   .map-place
-    mixinBlock(#00000000)
     width 100%
     height 100%
     display block
+    max-width 100%
     max-height 350px
+    border-radius 30px
     min-width 200px
+    position relative
+
+    &::before
+      content ''
+      border-radius 30px
+      position absolute
+      inset 16px 16px -16px -16px
+      background myShadow
+      overflow auto
+      z-index -1
 
   @media (max-width 700px)
     .place-block
       flex-direction column
 
   .place-info
-    mixinBlock(myBlack)
     max-width 600px
+    background-color myBlack
+    border-radius 30px
+    padding 30px
     font-size 20px
     color myWhite
     margin 30px 0
+    position relative
+
+    &::before
+      content ''
+      border-radius 30px
+      position absolute
+      inset 16px 16px -16px -16px
+      background myShadow
+      overflow auto
+      z-index -1
 
   .description
     border 10px
@@ -81,20 +127,20 @@
   .rating
     padding 12px 45px
     margin-left auto
-    color #f4f4f4
+    color myWhite
     font-size 17px
     position relative
     &::before
       content ""
       position absolute
-      background-color #232323
+      background-color myBlack
       border-radius 30px
       inset 0
       z-index -1
     &::after
       position absolute
       border-radius 30px
-      background linear-gradient(to bottom right, #F58080, #F2E2A9)
+      background linearGradient()
       inset 0 auto 0 0
       margin 5px
       width calc(90% * (max(var(--progress, 2), 1.5) / 5))
@@ -134,7 +180,7 @@
     overflow-y hidden
     resize none
     border-radius 30px
-    border 3px solid #232323
+    border 3px solid myBlack
     box-sizing border-box
 
   .leave-review-header
@@ -156,14 +202,14 @@
     flex-direction row-reverse
 
     .star
-      color #232323
-      border 2px #232323
+      color myBlack
+      border 2px myBlack
 
       &:hover
       &:hover ~ .star
       &.selected ~ .star
       &.selected
-        background linear-gradient(to bottom right, #F58080, #F2E2A9) 50% 50% / 100vw 100vh
+        background linearGradient() 50% 50% / 100vw 100vh
         color transparent
         background-clip text
 
