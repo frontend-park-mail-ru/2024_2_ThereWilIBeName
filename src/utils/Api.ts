@@ -29,6 +29,8 @@ type Attraction = {
     cityID: number,
     phoneNumber: string,
     categoriesId: number[],
+    latitude: number,
+    longitude: number,
 }
 
 type User = {
@@ -114,6 +116,8 @@ export default {
                     cityID: Number(attraction.cityID),
                     phoneNumber: String(attraction.phoneNumber),
                     categoriesId: attraction.categoriesId as number[],
+                    latitude: Number(res.data.latitude),
+                    longitude: Number(res.data.longitude),
                 })) : [],
             status: res.status,
             ok: res.ok,
@@ -134,6 +138,8 @@ export default {
                 cityID: Number(res.data.cityID),
                 phoneNumber: String(res.data.phoneNumber),
                 categoriesId: res.data.categoriesId as number[],
+                latitude: Number(res.data.latitude),
+                longitude: Number(res.data.longitude),
             },
             status: res.status,
             ok: res.ok,
