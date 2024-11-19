@@ -62,7 +62,7 @@ export default {
                     <div class="place-info">
                         <div class="description" id="description">здесь будет описание</div>
                     </div>
-                    <div class="map-container">
+                    <div class="map-container" id="map-container">
                         <div class="map-class" id="map"></div>
                     </div>
                 </div>
@@ -107,14 +107,13 @@ export default {
             .bindPopup(`${attraction.name}`)
             .openPopup();
 
-        window.addEventListener('load', () => {
-            const resizeTimeout = setTimeout(() => {
+        const mapContainer = document.getElementById('map-container');
+        if (mapContainer) {
+            const resizeObserver = new ResizeObserver(() => {
                 map.invalidateSize();
-            }, 1000);
-        });
-        window.addEventListener('resize', () => {
-            map.invalidateSize();
-        });
+            });
+            resizeObserver.observe(mapContainer);
+        }
 
         const reviewsResponse = await Api.getReviews(itemId);
         let reviews = reviewsResponse.data;
