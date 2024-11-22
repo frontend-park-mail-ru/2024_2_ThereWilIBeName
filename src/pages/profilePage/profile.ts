@@ -7,7 +7,7 @@ import logoImage from '../../static/logo trip.svg';
 import defaultAvatar from '../../static/avatar.png';
 import editButton from '../../static/edit.png';
 import confirmIcon from '../../static/confirm.png';
-import {emailRegex} from '../validation';
+import {emailRegex} from '../../components/validation';
 import footer from '../../components/footer';
 import backButton from '../../static/back button white.svg';
 
@@ -23,8 +23,9 @@ export default {
         <main>
             <div class="background-profile">
                 <div class="user-block">
-                    <img src="" alt="Аватар" class="avatar" id="avatar">
-                    <div class="information-block">
+                    <img src="${backButton}" class="information-back-button back-button-grid" id="back-button">
+                    <img src="" alt="Аватар" class="avatar avatar-grid" id="avatar">
+                    <div class="information-block information-block-grid">
                         <div class="information-text-bold username-grid" >Имя</div>
                         <div class="information-text username-input-grid" id="user-username">Здесь будет username</div>
                         <input class="edit-profile-input username-input-grid hidden" type="text" id="username-input">
@@ -36,11 +37,10 @@ export default {
                         <div class="information-text id-input-grid" id="user-id">Здесь будет id</div>
                         <img src="${confirmIcon}" alt="confirm" class="submit-edit-button submit-grid hidden" id="submit-edit-button">
                     </div>
-                    <img src="${backButton}" class="information-back-button" id="back-button">
-                    <div class="information-title-block">
+                    <div class="information-title-block information-title-block-grid">
                         <div class="information-text-title" id="user-title">Здесь будет Username</div>
                     </div>
-                    <div class="change-password-button" id="change-password-button">Сменить пароль</div>
+                    <div class="change-password-button change-password-button-grid" id="change-password-button">Сменить пароль</div>
 
                     <div></div>
                 </div>

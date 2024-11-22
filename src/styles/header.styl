@@ -8,6 +8,10 @@
     &:hover
         transform scale(1.05)
 
+
+    @media (max-width 700px)
+        margin 0px
+
 .header
     display grid
     grid-template-columns 20% 1fr 15% 10%
@@ -20,6 +24,34 @@
     padding 5px 0
     padding-right 15px
 
+    @media (max-width 700px)
+        display grid
+        grid-template-rows auto auto
+        grid-template-columns 35% auto auto
+        grid-template-areas "a c d"\
+        "b b b"
+        padding 5px
+        column-gap 5px
+        justify-items center
+
+        .logo-grid
+            grid-area a
+            height 100%
+            justify-self start
+            padding-left 10px
+
+        .search-grid
+            grid-area b
+            width 100%
+            margin 10px
+
+        .trips-grid
+            grid-area c
+
+        .user-grid
+            grid-area d
+            height 100%
+
     .logo-image-black
         height 100%
         width 100%
@@ -31,38 +63,19 @@
         &:hover
             transform scale(1.05)
 
-    .search
-        position relative
-        padding 0 40px
+        @media (max-width 700px)
+            margin 0px
 
-    .search-button
-        position absolute
-        height 42px
-        aspect-ratio 1 / 1
-        top 2px
-        right 105px
-        cursor pointer
-        transition all 0.3s ease
 
-        &:hover
-            transform scale(0.95)
-
-    .search-input
-        padding 15px
-        margin auto
-        width 90%
+    .trips-button
+        mixinButton(myBlack, myWhite)
         border 1px solid myWhite
-        background myBlack
-        border-radius 10px
-        outline none
-        color myWhite
 
-        &::placeholder
-            font-family 'Hero'
-            font-size 20px
+        &.hidden
+            display none
 
         @media (max-width 700px)
-            height 60px
+            margin 0px
 
     .header-button
         mixinButton(myBlack, myWhite)
@@ -74,6 +87,11 @@
 
         &.hidden
             display none
+
+        @media (max-width 700px)
+            margin 0px
+            height fit-content
+
 
     .user-button
         height 70px
@@ -98,9 +116,3 @@
 
             &:hover
                 transform scale(0.92)
-
-
-
-@media (max-width 700px)
-    display grid
-    grid-auto-columns auto auto auto

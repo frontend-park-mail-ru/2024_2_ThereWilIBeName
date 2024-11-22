@@ -2,24 +2,20 @@ import Router from '../utils/Router';
 import Api from '../utils/Api';
 import User from '../utils/user';
 import logoImage from '../static/logo trip black.svg';
-import searchButton from '../static/search button.svg';
 import avatarPng from '../static/avatar.png';
+import search from './search/search';
 
 export default {
     html: `<header class="header">
-                <div class="logo">
+                <div class="logo logo-grid">
                     <img src="${logoImage}" alt="Логотип" class="logo-image-black" id="logo-image">
                 </div>
-                <div class="search">
-                    <input type="text" placeholder="Здесь будет поиск" class="search-input">
-                    <img src="${searchButton}" alt="Поиск" class="search-button" id="search-button">
-                </div>
-                <button class="header-button" id="trips-button">Поездки</button>
-                <button class="header-button" id="signin-button">Вход</button>
-                <div class="user-button" id="user-button">
+                ${search.html}
+                <button class="trips-button trips-grid" id="trips-button">Поездки</button>
+                <button class="header-button user-grid" id="signin-button">Вход</button>
+                <div class="user-button user-grid" id="user-button">
                     <img src="${avatarPng}" class="avatar" alt="Аватарка" id="avatar">
                 </div>
-            
                 <div id="side-menu" class="side-menu">
                     <div class="background-menu" id="background-menu"></div>
                     <div class="user-name" id="user-name"></div>
@@ -45,6 +41,8 @@ export default {
         const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
         const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
         const tripsButton = document.getElementById('trips-button') as HTMLButtonElement;
+
+        search.mount(router);
 
         tripsButton.addEventListener('click', () => {
             router.goto('/trips');

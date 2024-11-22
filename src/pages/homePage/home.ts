@@ -4,8 +4,7 @@ import Router from '../../utils/Router';
 import galleryTemplate from './home.hbs';
 import header from '../../components/header';
 import footer from '../../components/footer';
-
-import logoImage from '../../static/logo.png';
+import Search from '../../utils/search-memory';
 
 export default {
     /**
@@ -39,7 +38,7 @@ export default {
         await header.mount(router);
 
         // Загрузка достопримечательностей
-        const attractionsResponse = await Api.getAttractions();
+        const attractionsResponse = await Api.getAttractions(Search.limit, Search.offset, Search.cityId, Search.categoryId);
         const attractions = attractionsResponse.data;
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ attractions });

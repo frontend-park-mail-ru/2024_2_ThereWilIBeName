@@ -1,7 +1,7 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
-import {emailRegex} from './validation';
-import {passwordRegex} from './validation';
+import {emailRegex} from '../components/validation';
+import {passwordRegex} from '../components/validation';
 
 import logoImage from '../static/logo trip.svg';
 import backButton from '../static/back button white.svg';

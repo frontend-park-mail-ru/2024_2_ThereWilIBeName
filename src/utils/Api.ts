@@ -1,5 +1,5 @@
 import RESTApi from './RESTApi';
-import formatDate from '../pages/formateDate';
+import formatDate from '../components/formateDate';
 
 type JsonResponse<T> = {
     data: T,
@@ -94,15 +94,42 @@ type Response = {
     message: string,
 }
 
+type SearchItem = {
+    name: string,
+    id: number,
+    type: string,
+}
+
 export default {
+    async getSearch(query: string): Promise<JsonResponse<SearchItem[]>> {
+        const res = await RESTApi.get(`/api/v1/search?query=${encodeURIComponent(query)}`);
+        return {
+            data: Array.isArray(res.data) ? res.data.map( (searchItem: any) =>
+                ({
+                    name: String(searchItem.name),
+                    id: Number(searchItem.id),
+                    type: String(searchItem.type),
+                })) : [],
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
     /**
      * Асинхронная функция для получения списка достопримечательностей с сервера.
      *
      * @returns {Promise<{data: Object[], status: number, ok: boolean}>} Ответ сервера с данными достопримечательностей, статусом и флагом успеха.
      */
-    async getAttractions(): Promise<JsonResponse<Attraction[]>> {
-        const getAttractionsUrl = '/api/v1/places?limit=20&offset=0';
-        const res = await RESTApi.get(getAttractionsUrl);
+    async getAttractions(limit: number, offset:number, cityId: number, categoryId: number): Promise<JsonResponse<Attraction[]>> {
+        const defaultGetAttractionsURL = `/api/v1/places/search?limit=${limit}&offset=${offset}`;
+        let getAttracionsURL = defaultGetAttractionsURL;
+        if (cityId !== -1) {
+            getAttracionsURL = getAttracionsURL + `&city=${cityId}`;
+        }
+        if (categoryId !== -1) {
+            getAttracionsURL = getAttracionsURL + `&category=${categoryId}`;
+        }
+        const res = await RESTApi.get(getAttracionsURL);
         return {
             data: Array.isArray(res.data) ? res.data.map( (attraction: any) =>
                 ({

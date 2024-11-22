@@ -1,0 +1,50 @@
+.search
+  position relative
+  padding 0 40px
+
+  @media (max-width 700px)
+    padding 0px
+    justify-self center
+    width 90%
+
+  .search-button
+    position absolute
+    height 42px
+    aspect-ratio 1 / 1
+    top 2px
+    right 105px
+    cursor pointer
+    transition all 0.3s ease
+
+    &:hover
+      transform scale(0.95)
+
+  .search-input
+    padding 15px
+    margin auto
+    width 100%
+    border 1px solid myWhite
+    background myBlack
+    border-radius 10px
+    outline none
+    color myWhite
+
+    &::placeholder
+      font-family 'Hero'
+      font-size 20px
+
+    @media (max-width 700px)
+      margin 0
+
+  .search-results
+    display block
+    position absolute
+    height fit-content
+    background-color myWhite
+    border-radius 20px
+    left 0
+    right 0
+    z-index 999
+
+    &.hidden
+      display none
