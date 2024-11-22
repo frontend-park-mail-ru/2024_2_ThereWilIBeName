@@ -46,7 +46,7 @@ export default {
 
                 const results = response.data;
 
-                results.forEach((result) => {
+                for (const result of results) {
                     if (result.type === 'city') {
                         const city = {
                             name: result.name,
@@ -55,10 +55,10 @@ export default {
                         searchResultsCities.insertAdjacentHTML('beforeend', searchCitiesTemplate({ city }));
                     }
                     if (result.type === 'place') {
-                        const place = Api.getAttraction(result.id);
+                        const place = await Api.getAttraction(result.id);
                         searchResultsPlaces.insertAdjacentHTML('beforeend', searchPlacesTemplate({ place }));
                     }
-                });
+                }
 
                 searchResultsCities.addEventListener('click', (event) => {
                     const target = event.target as HTMLElement;
