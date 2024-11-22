@@ -60,6 +60,8 @@
   .search-city-item
     padding 20px 0
     border-bottom myBlack
+    cursor pointer
+    transition background-color 0.3s ease
 
     div
       font-weight bold
@@ -68,15 +70,23 @@
     city
       display none
 
+    &:hover
+      background-color myLightGrey
+
   .search-place-item
     padding-right 40px
     display grid
     grid-template-rows auto
     grid-template-columns auto 30%
     border-bottom myBlack
+    cursor pointer
+    transition background-color 0.3s ease
 
     a
       display none
 
     img
       width 100%
+
+    &:hover
+      background-color myLightGrey
