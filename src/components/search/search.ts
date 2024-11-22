@@ -55,7 +55,7 @@ export default {
                         searchResultsCities.insertAdjacentHTML('beforeend', searchCitiesTemplate({ city }));
                     }
                     if (result.type === 'place') {
-                        const place = await Api.getAttraction(result.id);
+                        const place = (await Api.getAttraction(result.id)).data;
                         searchResultsPlaces.insertAdjacentHTML('beforeend', searchPlacesTemplate({ place }));
                     }
                 }
