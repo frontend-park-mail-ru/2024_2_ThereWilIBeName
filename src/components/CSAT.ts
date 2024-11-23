@@ -4,22 +4,27 @@ import closeIcon from '../static/close icon.svg';
 
 export default {
     html: `
-        <div class="csat" id="csat-block">
+        <div class="csat hidden-animation" id="csat-block">
             <img src="${closeIcon}" class="close-button" id="csat-close-button">
         </div>
     `,
 
-    mount(): void {
+    async mount(): Promise<void> {
         const csatBlock = document.getElementById('csat-block') as HTMLElement;
+        csatBlock.classList.remove('hidden-animation');
 
         const closeButton = document.getElementById('csat-close-button') as HTMLButtonElement;
-        closeButton.addEventListener('click', () => {
+        closeButton.addEventListener('click', async () => {
             csatBlock.classList.add('hidden');
+            await new Promise(resolve => setTimeout(resolve, 200));
+            csatBlock.classList.add('hidden-animation');
             CSAT.homeActiveQ = false;
         });
 
         if (!CSAT.homeActiveQ || CSAT.homeQ) {
             csatBlock.classList.add('hidden');
+            await new Promise(resolve => setTimeout(resolve, 200));
+            csatBlock.classList.add('hidden-animation');
         }
     }
 };

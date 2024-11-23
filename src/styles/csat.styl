@@ -3,12 +3,18 @@
   position fixed
   width 400px
   height 200px
-  right 0
-  bottom 0
+  right 20px
+  bottom 20px
+  border-radius 20px
+  opacity 1
   background-color myWhite
+  transition opacity 0.3s ease
 
   .close-button
     background-color none
 
   &.hidden
     display none
+
+  &.hidden-animation
+    opacity 0
