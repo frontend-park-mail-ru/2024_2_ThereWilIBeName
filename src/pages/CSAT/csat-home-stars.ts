@@ -1,4 +1,6 @@
 import starIcon from '../../static/star.svg';
+import Api from '../../utils/Api';
+import User from '../../utils/user';
 
 export default {
     html: `
@@ -26,19 +28,30 @@ export default {
                 <img src="${starIcon}">
             </div>
         </star-container>
-        <button class="csat-question-button">Далее</button>
+        <button class="csat-question-button" id="star-button">Далее</button>
     </div>
     `,
     mount(): void {
         const starContainer = document.getElementById('star-container') as HTMLElement;
+        const starButton = document.getElementById('star-button') as HTMLButtonElement;
+        let rating  = 0;
 
-        starContainer.addEventListener('change', () => {
+        if (User.id) {
+            starButton.addEventListener('click', async () => {
+                if (rating !== 0) {
+                    const res = await Api.postHomeCSAT(User.id, rating);
+                }
+            });
+        } else {
+            console.log('Пользователь не авторизован. Отзыв не отправлен');
+        }
+
+        starContainer.addEventListener('change', async () => {
             const selectedRating = document.querySelector('#star-container input:checked') as HTMLInputElement;
-            if (selectedRating) {
-                console.log(`Выбранный рейтинг: ${selectedRating.value}`);
-            } else {
-                console.log('Рейтинг не выбран');
-            }
+            rating = Number(selectedRating.value);
+            // if (rating > 3) {
+            //
+            // }
         });
 
 

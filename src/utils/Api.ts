@@ -100,6 +100,10 @@ type SearchItem = {
     type: string,
 }
 
+type Survey = {
+
+}
+
 export default {
     async getSearch(query: string): Promise<JsonResponse<SearchItem[]>> {
         const res = await RESTApi.get(`/api/v1/search?query=${encodeURIComponent(query)}`);
@@ -243,6 +247,15 @@ export default {
                 rating: Number(review.rating),
                 reviewText: String(review.review_text),
             })) : [],
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async postHomeCSAT(userId: string, rating: number): Promise<JsonResponse<Survey>> {
+        const res = await RESTApi.post('/api/v1/survey/1', {survey_id: 1, user_id: userId, rating});
+        return {
+            data: {},
             status: res.status,
             ok: res.ok,
         };
