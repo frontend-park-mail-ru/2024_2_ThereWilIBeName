@@ -8,12 +8,11 @@ export default {
     `,
 
     async mount(): Promise<void> {
-
         const csatRoot = document.getElementById('csat-root') as HTMLElement;
 
-        if (CSAT.homeActiveQ && !CSAT.homeQ) {
-            csatRoot.innerHTML = csatHomeQuestion.html;
-        }
+        // if (CSAT.homeActiveQ && !CSAT.homeQ) {
+        csatRoot.innerHTML = csatHomeQuestion.html;
+        // }
     },
 
     unmount(): void {}

@@ -28,6 +28,5 @@ export default {
             csatBlock.classList.remove('hidden-animation');
         }
 
-        await CSATPage.mount();
     }
 };
