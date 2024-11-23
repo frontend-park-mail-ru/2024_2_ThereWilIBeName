@@ -11,7 +11,7 @@ export default {
                 <link href="/src/styles/csat.styl" rel="stylesheet" id="css-file">
             </head>
             <body>
-                <div class="csat-root" id="csat-root"></div>
+                
             </body>
         </html>
     `,
