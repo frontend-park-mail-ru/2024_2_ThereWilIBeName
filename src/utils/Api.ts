@@ -261,6 +261,33 @@ export default {
         };
     },
 
+    async postSearchCSAT(userId: string, rating: number): Promise<JsonResponse<Survey>> {
+        const res = await RESTApi.post('/api/v1/survey/2', {survey_id: 1, user_id: userId, rating});
+        return {
+            data: {},
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async postTripsCSAT(userId: string, rating: number): Promise<JsonResponse<Survey>> {
+        const res = await RESTApi.post('/api/v1/survey/3', {survey_id: 1, user_id: userId, rating});
+        return {
+            data: {},
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async postProfileCSAT(userId: string, rating: number): Promise<JsonResponse<Survey>> {
+        const res = await RESTApi.post('/api/v1/survey/4', {survey_id: 1, user_id: userId, rating});
+        return {
+            data: {},
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
     async postLogout(username: string, id: string): Promise<JsonResponse<Logout>> {
         const res = await RESTApi.post('/api/v1/auth/logout', {username, id});
         return {

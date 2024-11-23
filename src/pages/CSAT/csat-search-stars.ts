@@ -5,7 +5,7 @@ import User from '../../utils/user';
 export default {
     html: `
     <div class="home-question">
-        <div class="csat-question-title">Как вам наш дизайн?</div>
+        <div class="csat-question-title">Как вам поиск?</div>
         <star-container id="star-container">
             <div class="star">
                 <input class="star-input" type="radio" id="rating1" name="rating" value="1">
@@ -40,7 +40,7 @@ export default {
 
         starButton.addEventListener('click', async () => {
             if (rating !== 0) {
-                const res = await Api.postHomeCSAT(User.id, rating);
+                const res = await Api.postSearchCSAT(User.id, rating);
             }
         });
 

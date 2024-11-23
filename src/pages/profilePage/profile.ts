@@ -10,6 +10,8 @@ import confirmIcon from '../../static/confirm.png';
 import {emailRegex} from '../../components/validation';
 import footer from '../../components/footer';
 import backButton from '../../static/back button white.svg';
+import CSAT from "../../utils/CSAT-memory";
+import csat from "../../components/csat-block";
 
 export default {
     /**
@@ -210,6 +212,9 @@ export default {
 
         updateMenu(activeMenuButton);
 
+        CSAT.profileActiveQ = true;
+        csat.mount();
+
     },
 
     /**
@@ -217,6 +222,6 @@ export default {
      * Используется для очистки состояния или удаления обработчиков событий при переходе на другую страницу.
      */
     unmount() {
-        // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
+        CSAT.profileActiveQ = false;
     },
 };

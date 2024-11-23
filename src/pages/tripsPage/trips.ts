@@ -16,6 +16,8 @@ import Trip from '../../utils/trip';
 import header from '../../components/header';
 import backButton from '../../static/back button white.svg';
 import footer from '../../components/footer';
+import CSAT from "../../utils/CSAT-memory";
+import csat from "../../components/csat-block";
 
 export default {
     /**
@@ -124,6 +126,8 @@ export default {
             });
         });
 
+        CSAT.tripsActiveQ = true;
+        csat.mount();
     },
 
     /**
@@ -131,6 +135,6 @@ export default {
      * Используется для очистки состояния или удаления обработчиков событий при переходе на другую страницу.
      */
     unmount() {
-        // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
+        CSAT.homeActiveQ = false;
     },
 };

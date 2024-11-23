@@ -6,6 +6,8 @@ import searchCitiesTemplate from './searchCities.hbs';
 import searchPlacesTemplate from './searchPlaces.hbs';
 import Search from '../../utils/search-memory';
 import debounce from '../debounce';
+import CSAT from "../../utils/CSAT-memory";
+import csat from "../csat-block";
 
 export default {
     html: `
@@ -37,7 +39,8 @@ export default {
                 const response = await Api.getSearch(query);
 
                 const results = response.data;
-
+                CSAT.searchActiveQ = true;
+                csat.mount();
                 for (const result of results) {
                     if (result.type === 'city') {
                         const city = {
