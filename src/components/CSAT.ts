@@ -15,16 +15,16 @@ export default {
 
         const closeButton = document.getElementById('csat-close-button') as HTMLButtonElement;
         closeButton.addEventListener('click', async () => {
-            csatBlock.classList.add('hidden');
-            await new Promise(resolve => setTimeout(resolve, 200));
             csatBlock.classList.add('hidden-animation');
+            await new Promise(resolve => setTimeout(resolve, 200));
+            csatBlock.classList.add('hidden');
             CSAT.homeActiveQ = false;
         });
 
         if (!CSAT.homeActiveQ || CSAT.homeQ) {
-            csatBlock.classList.add('hidden');
-            await new Promise(resolve => setTimeout(resolve, 200));
             csatBlock.classList.add('hidden-animation');
+            await new Promise(resolve => setTimeout(resolve, 200));
+            csatBlock.classList.add('hidden');
         }
     }
 };
