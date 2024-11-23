@@ -37,6 +37,9 @@ export default {
     async mount(router: Router): Promise<void> {
         const placeButton = document.getElementById('gallery') as HTMLButtonElement;
 
+        CSAT.homeActiveQ = true;
+        csat.mount();
+
         // Монтирование хэдера
         await header.mount(router);
 
@@ -61,8 +64,6 @@ export default {
             console.log('Ошибка загрузки мест');
         }
 
-        CSAT.homeActiveQ = true;
-        csat.mount();
     },
 
     /**
