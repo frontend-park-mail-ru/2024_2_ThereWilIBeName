@@ -1,4 +1,5 @@
 .csat-page
+
   .csat-root
     position absolute
     width 400px
@@ -13,6 +14,38 @@
     position absolute
     inset 0
     padding 20px
+
+    star-container
+      display flex
+      flex-direction row
+
+      star
+        position relative
+
+        img
+          position absolute
+          width 100%
+          height 100%
+          opacity 0.5
+          z-index 998
+
+        .star-input
+          position absolute
+          width 100%
+          height 100%
+          opacity 1
+          z-index 999
+
+      input + img
+        cursor pointer
+
+      input:checked + img ~ img
+        opacity 1
+
+      img:active
+        transform scale(0.8)
+        transition 0.3s ease
+
 
     .csat-question-title
       font-weight bold

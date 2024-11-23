@@ -1,5 +1,5 @@
 import CSAT from '../../utils/CSAT-memory';
-import csatHomeQuestion from './csat-home-question';
+import csatHomeQuestion from './csat-home-stars';
 import Router from '../../utils/Router';
 
 export default {
@@ -12,6 +12,7 @@ export default {
 
         // if (CSAT.homeActiveQ && !CSAT.homeQ) {
         csatRoot.innerHTML = csatHomeQuestion.html;
+        csatHomeQuestion.mount();
         // }
     },
 
