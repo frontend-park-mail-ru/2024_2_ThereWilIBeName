@@ -24,7 +24,7 @@ export default {
                         <li><button class="menu-button" id="profile-button">Профиль</button></li>
                         <li><button class="menu-button" id="logout-button">Выйти</button></li>
                     </ul>
-                    <button id="close-button" class="close-button">Закрыть</button>
+                    <button id="menu-close-button" class="menu-close-button">Закрыть</button>
                 </div>
             </header>`,
 
@@ -37,7 +37,7 @@ export default {
         const userNameDiv = document.getElementById('user-name') as HTMLElement;
         const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
         const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
-        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
+        const closeButton = document.getElementById('menu-close-button') as HTMLButtonElement;
         const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
         const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
         const tripsButton = document.getElementById('trips-button') as HTMLButtonElement;

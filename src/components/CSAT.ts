@@ -5,7 +5,7 @@ import closeIcon from '../static/close icon.svg';
 export default {
     html: `
         <div class="csat hidden-animation" id="csat-block">
-            <img src="${closeIcon}" class="close-button" id="csat-close-button">
+            <img src="${closeIcon}" class="csat-close-button" id="csat-close-button">
         </div>
     `,
 
