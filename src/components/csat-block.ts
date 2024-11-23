@@ -1,6 +1,7 @@
 import CSAT from '../utils/CSAT-memory';
 import csat from '../pages/CSAT/csat';
 import closeIcon from '../static/close icon.svg';
+import CSATPage from '../pages/CSAT/csat';
 
 export default {
     html: `
@@ -26,5 +27,7 @@ export default {
             await new Promise(resolve => setTimeout(resolve, 200));
             csatBlock.classList.remove('hidden-animation');
         }
+
+        await CSATPage.mount();
     }
 };

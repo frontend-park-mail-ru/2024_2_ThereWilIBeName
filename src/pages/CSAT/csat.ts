@@ -7,7 +7,7 @@ export default {
        <div class="csat-root" id="csat-root"></div>
     `,
 
-    async mount(router: Router): Promise<void> {
+    async mount(): Promise<void> {
 
         const csatRoot = document.getElementById('csat-root') as HTMLElement;
 
