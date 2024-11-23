@@ -124,7 +124,7 @@ const routes: Route[] = [
         html: PageCSAT.html,
         mount: PageCSAT.mount,
         unmount: PageCSAT.unmount,
-        cssClass: 'csat',
+        cssClass: 'csat-page',
     },
     {
         path: /.*/,
