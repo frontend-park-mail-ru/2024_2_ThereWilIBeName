@@ -12,10 +12,14 @@
 
   .csat-close-button
     position absolute
-    right 0
-    top 0
+    right 10px
+    top 10px
     width 25px
     padding 0
+    transition transform 0.3s ease
+
+    &:hover
+      transform scale(1.05)
 
   &.hidden
     display none
