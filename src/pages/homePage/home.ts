@@ -5,6 +5,8 @@ import galleryTemplate from './home.hbs';
 import header from '../../components/header';
 import footer from '../../components/footer';
 import Search from '../../utils/search-memory';
+import csat from '../../components/CSAT';
+import CSAT from '../../utils/CSAT-memory';
 
 export default {
     /**
@@ -21,6 +23,7 @@ export default {
             </div>
         </main>
         ${footer.html}
+        ${csat.html}
     `,
 
     /**
@@ -54,6 +57,10 @@ export default {
                 }
             }
         });
+
+        CSAT.homeActiveQ = true;
+
+        csat.mount();
     },
 
     /**
