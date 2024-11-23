@@ -10,6 +10,7 @@ import PageChangePassword from './pages/change-password';
 import PageEditTrip from './pages/edit-trip';
 import PageHello from './pages/hello';
 import PageCSAT from './pages/CSAT/csat';
+import PageAdmin from './pages/CSAT/admin';
 import Router from './utils/Router';
 
 /**
@@ -125,6 +126,14 @@ const routes: Route[] = [
         mount: PageCSAT.mount,
         unmount: PageCSAT.unmount,
         cssClass: 'csat-page',
+    },
+    {
+        path: /^\/admin/,
+        title: 'Админка',
+        html: PageAdmin.html,
+        mount: PageAdmin.mount,
+        unmount: PageAdmin.unmount,
+        cssClass: 'admin-page',
     },
     {
         path: /.*/,

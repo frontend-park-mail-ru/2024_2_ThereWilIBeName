@@ -16,8 +16,8 @@ import Trip from '../../utils/trip';
 import header from '../../components/header';
 import backButton from '../../static/back button white.svg';
 import footer from '../../components/footer';
-import CSAT from "../../utils/CSAT-memory";
-import csat from "../../components/csat-block";
+import CSAT from '../../utils/CSAT-memory';
+import csat from '../../components/csat-block';
 
 export default {
     /**

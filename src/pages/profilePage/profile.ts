@@ -10,8 +10,8 @@ import confirmIcon from '../../static/confirm.png';
 import {emailRegex} from '../../components/validation';
 import footer from '../../components/footer';
 import backButton from '../../static/back button white.svg';
-import CSAT from "../../utils/CSAT-memory";
-import csat from "../../components/csat-block";
+import CSAT from '../../utils/CSAT-memory';
+import csat from '../../components/csat-block';
 
 export default {
     /**
