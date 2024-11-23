@@ -12,7 +12,7 @@ export default {
 
         // if (CSAT.homeActiveQ && !CSAT.homeQ) {
         csatRoot.innerHTML = csatHomeQuestion.html;
-        csatHomeQuestion.mount();
+        await csatHomeQuestion.mount();
         // }
     },
 
