@@ -1,6 +1,6 @@
 import Router from '../utils/Router';
 import CSAT from '../utils/CSAT-memory';
-import closeIcon from '../static/close icon grey.svg';
+import closeIcon from '../static/close icon.svg';
 
 export default {
     html: `
