@@ -1,15 +1,12 @@
-import Router from '../../utils/Router';
-import CSAT from '../../utils/CSAT-memory';
-import closeIcon from '../../static/close icon.svg';
-import csatHomeQuestion from './csat-home-question';
+import CSAT from '../utils/CSAT-memory';
+import csat from '../pages/CSAT/csat';
+import closeIcon from '../static/close icon.svg';
 
 export default {
     html: `
         <div class="csat hidden hidden-animation" id="csat-block">
             <img src="${closeIcon}" class="csat-close-button" id="csat-close-button">
-            <div class="csat-root" id="csat-root">
-                
-            </div>
+            <iframe srcdoc=="${csat.html}"></iframe>
         </div>
     `,
 
@@ -24,15 +21,10 @@ export default {
             CSAT.homeActiveQ = false;
         });
 
-        const csatRoot = document.getElementById('csat-root') as HTMLElement;
-
         if (CSAT.homeActiveQ && !CSAT.homeQ) {
-
             csatBlock.classList.remove('hidden');
             await new Promise(resolve => setTimeout(resolve, 200));
             csatBlock.classList.remove('hidden-animation');
-
-            csatRoot.innerHTML = csatHomeQuestion.html;
         }
     }
 };

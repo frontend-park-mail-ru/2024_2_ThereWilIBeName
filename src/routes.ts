@@ -124,7 +124,7 @@ const routes: Route[] = [
         mount: Page404.mount,
         unmount: Page404.unmount,
         cssClass: 'unknown-page',
-    },
+    }
 ];
 
 export default routes;

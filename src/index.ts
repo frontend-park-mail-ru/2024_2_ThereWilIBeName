@@ -1,6 +1,6 @@
 import routes from './routes';
 import Router from './utils/Router';
-import csat from './components/CSAT/CSAT';
+import csat from './components/csat-block';
 import './styles/index.styl';
 import debounce from './components/debounce';
 
