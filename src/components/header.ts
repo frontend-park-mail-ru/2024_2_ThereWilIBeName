@@ -89,24 +89,29 @@ export default {
             }
         });
 
-        // Получение информации о текущем пользователе
-        const currentUser = await Api.getUser();
+        try {
+            // Получение информации о текущем пользователе
+            const currentUser = await Api.getUser();
 
-        if (!currentUser.ok) {
+            if (!currentUser.ok) {
+                console.log('Пользователь не авторизован');
+                return;
+            }
+            User.username = currentUser.data.username;
+            User.id = currentUser.data.id;
+            User.email = currentUser.data.email;
+            User.isSignedIn = true;
+            signinButton.textContent = 'Сменить пользователя';
+            const avatarPath = (await Api.getProfile(User.id)).data.avatarPath;
+            if (avatarPath) {
+                avatarImage.src = avatarPath;
+            }
+            userNameDiv.textContent = User.username;
+            userButton.classList.add('show');
+            signinButton.classList.add('hidden');
+        } catch (error) {
             console.log('Пользователь не авторизован');
-            return;
         }
-        User.username = currentUser.data.username;
-        User.id = currentUser.data.id;
-        User.email = currentUser.data.email;
-        User.isSignedIn = true;
-        signinButton.textContent = 'Сменить пользователя';
-        const avatarPath = (await Api.getProfile(User.id)).data.avatarPath;
-        if (avatarPath) {
-            avatarImage.src = avatarPath;
-        }
-        userNameDiv.textContent = User.username;
-        userButton.classList.add('show');
-        signinButton.classList.add('hidden');
+
     }
 };

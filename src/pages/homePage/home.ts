@@ -40,26 +40,28 @@ export default {
         // Монтирование хэдера
         await header.mount(router);
 
-        // Загрузка достопримечательностей
-        const attractionsResponse = await Api.getAttractions(Search.limit, Search.offset, Search.cityId, Search.categoryId);
-        const attractions = attractionsResponse.data;
-        const galleryElement = document.getElementById('gallery') as HTMLElement;
-        galleryElement.innerHTML = galleryTemplate({ attractions });
+        try {
+            // Загрузка достопримечательностей
+            const attractionsResponse = await Api.getAttractions(Search.limit, Search.offset, Search.cityId, Search.categoryId);
+            const attractions = attractionsResponse.data;
+            const galleryElement = document.getElementById('gallery') as HTMLElement;
+            galleryElement.innerHTML = galleryTemplate({ attractions });
 
-
-        placeButton.addEventListener('click', (event) => {
-            const target = event.target as HTMLElement;
-            if (target) {
-                const listItem = target.closest('LI');
-                if (listItem) {
-                    const itemId = listItem.querySelector('a')!.href.split('/').pop();
-                    router.goto(`/places/${itemId}`);
+            placeButton.addEventListener('click', (event) => {
+                const target = event.target as HTMLElement;
+                if (target) {
+                    const listItem = target.closest('LI');
+                    if (listItem) {
+                        const itemId = listItem.querySelector('a')!.href.split('/').pop();
+                        router.goto(`/places/${itemId}`);
+                    }
                 }
-            }
-        });
+            });
+        } catch (error) {
+            console.log('Ошибка загрузки мест');
+        }
 
         CSAT.homeActiveQ = true;
-
         csat.mount();
     },
 
