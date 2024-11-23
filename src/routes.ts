@@ -119,14 +119,6 @@ const routes: Route[] = [
         cssClass: 'place-page',
     },
     {
-        path: /.*/,
-        title: '404',
-        html: Page404.html,
-        mount: Page404.mount,
-        unmount: Page404.unmount,
-        cssClass: 'unknown-page',
-    },
-    {
         path: /^\/csat/,
         title: 'CSAT',
         html: PageCSAT.html,
@@ -134,6 +126,14 @@ const routes: Route[] = [
         unmount: PageCSAT.unmount,
         cssClass: 'csat',
     },
+    {
+        path: /.*/,
+        title: '404',
+        html: Page404.html,
+        mount: Page404.mount,
+        unmount: Page404.unmount,
+        cssClass: 'unknown-page',
+    }
 ];
 
 export default routes;
