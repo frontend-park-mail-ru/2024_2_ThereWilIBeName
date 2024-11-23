@@ -24,7 +24,7 @@ export default {
             </div>
             <div class="table-question">
                 <div class="title-question title-grid" id="question-search">Как вам поиск?</div>
-                <div class="avg-rating avg-grid" id="avg-rating-search">0.0</div>
+                <div class="avg-rating avg-grid" id="avg-rating-2">0.0</div>
                 <div class="star-number one-star-grid" >1 звезда</div>
                 <div class="star-count one-star-count-grid" id="one-star-2">0</div>
                 <div class="star-number two-star-grid" >2 звезды</div>
@@ -38,31 +38,31 @@ export default {
             </div>
             <div class="table-question">
                 <div class="title-question title-grid" id="question-trips">Как вам поездки?</div>
-                <div class="avg-rating avg-grid" id="avg-rating-trips">0.0</div>
+                <div class="avg-rating avg-grid" id="avg-rating-3">0.0</div>
                 <div class="star-number one-star-grid">1 звезда</div>
-                <div class="star-count one-star-count-grid" id="three-star-3">0</div>
+                <div class="star-count one-star-count-grid" id="one-star-3">0</div>
                 <div class="star-number two-star-grid">2 звезды</div>
-                <div class="star-count two-star-count-grid" id="three-star-3">0</div>
+                <div class="star-count two-star-count-grid" id="two-star-3">0</div>
                 <div class="star-number three-star-grid">3 звезды</div>
-                <div class="star-count three-star-count-grid">0</div>
+                <div class="star-count three-star-count-grid" id="three-star-3">0</div>
                 <div class="star-number four-star-grid">4 звезды</div>
-                <div class="star-count four-star-count-grid">0</div>
+                <div class="star-count four-star-count-grid" id="four-star-3">0</div>
                 <div class="star-number five-star-grid">5 звёзд</div>
-                <div class="star-count five-star-count-grid">0</div>
+                <div class="star-count five-star-count-grid" id="five-star-3">0</div>
             </div>
             <div class="table-question">
                 <div class="title-question title-grid" id="question-profile">Как вам профиль?</div>
-                <div class="avg-rating avg-grid" id="avg-rating-profile">0.0</div>
-                <div class="star-number one-star-grid" id="one-star-4">1 звезда</div>
-                <div class="star-count one-star-count-grid">0</div>
+                <div class="avg-rating avg-grid" id="avg-rating-4">0.0</div>
+                <div class="star-number one-star-grid">1 звезда</div>
+                <div class="star-count one-star-count-grid" id="one-star-4">0</div>
                 <div class="star-number two-star-grid">2 звезды</div>
-                <div class="star-count two-star-count-grid">0</div>
+                <div class="star-count two-star-count-grid" id="two-star-4">0</div>
                 <div class="star-number three-star-grid">3 звезды</div>
-                <div class="star-count three-star-count-grid">0</div>
+                <div class="star-count three-star-count-grid" id="three-star-4">0</div>
                 <div class="star-number four-star-grid">4 звезды</div>
-                <div class="star-count four-star-count-grid">0</div>
+                <div class="star-count four-star-count-grid" id="four-star-4">0</div>
                 <div class="star-number five-star-grid">5 звёзд</div>
-                <div class="star-count five-star-count-grid">0</div>
+                <div class="star-count five-star-count-grid" id="five-star-4">0</div>
             </div>
         </div>
         ${footer.html}
@@ -73,7 +73,7 @@ export default {
         await header.mount(router);
 
         User.id = (await Api.getUser()).data.id;
-        const numberOfSurvey = [1, 2, 3, 4]
+        const numberOfSurvey = [1, 2, 3, 4];
 
         for (let item of numberOfSurvey) {
             const data = (await Api.getStat(String(item))).data;
