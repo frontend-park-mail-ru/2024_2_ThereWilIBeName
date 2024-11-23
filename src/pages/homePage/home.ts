@@ -61,8 +61,8 @@ export default {
             console.log('Ошибка загрузки мест');
         }
 
-        csat.mount();
         CSAT.homeActiveQ = true;
+        csat.mount();
 
     },
 
