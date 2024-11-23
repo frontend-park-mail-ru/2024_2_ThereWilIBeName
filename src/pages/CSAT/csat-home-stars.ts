@@ -37,12 +37,8 @@ export default {
         let rating  = 0;
 
         starButton.addEventListener('click', async () => {
-            if (User.id) {
-                if (rating !== 0) {
-                    const res = await Api.postHomeCSAT(User.id, rating);
-                }
-            } else {
-                console.log('Пользователь не авторизован. Отзыв не отправлен');
+            if (rating !== 0) {
+                const res = await Api.postHomeCSAT(User.id, rating);
             }
         });
 
