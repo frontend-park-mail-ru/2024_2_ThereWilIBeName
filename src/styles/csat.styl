@@ -9,6 +9,7 @@
   opacity 1
   background-color myWhite
   transition opacity 0.3s ease
+  z-index 998
 
   .csat-close-button
     position absolute
@@ -18,6 +19,7 @@
     padding 0
     opacity 0.5
     transition opacity 0.3s ease
+    z-index 999
 
     &:hover
       opacity 1
@@ -29,6 +31,10 @@
     opacity 0
 
   .home-question
+    display grid
+    grid-template-columns auto
+    grid-template-rows auto auto auto
+    row-gap 10px
     position absolute
     inset 0
     padding 20px
@@ -36,3 +42,9 @@
     .csat-question-title
       font-weight bold
       font-size 20px
+
+    .csat-question-input
+      border-radius 20px
+
+    .csat-question-button
+      cursor pointer
