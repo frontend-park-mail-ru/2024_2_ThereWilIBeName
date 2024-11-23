@@ -5,6 +5,7 @@ import Api from '../../utils/Api';
 import searchCitiesTemplate from './searchCities.hbs';
 import searchPlacesTemplate from './searchPlaces.hbs';
 import Search from '../../utils/search-memory';
+import debounce from '../debounce';
 
 export default {
     html: `
@@ -23,15 +24,6 @@ export default {
         const searchResultsPlaces = document.getElementById('search-results-places') as HTMLElement;
 
         if (!inputSearch || !searchResultsCities || !searchResultsPlaces) return;
-
-        // Дебаунс-функция
-        const debounce = <T extends (...args: any[]) => any>(func: T, delay: number) => {
-            let timer: number | undefined;
-            return (...args: Parameters<T>) => {
-                if (timer) clearTimeout(timer);
-                timer = window.setTimeout(() => func(...args), delay);
-            };
-        };
 
         // Функция поиска
         const search = async (query: string) => {

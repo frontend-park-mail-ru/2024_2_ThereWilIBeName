@@ -1,8 +1,24 @@
 import routes from './routes';
 import Router from './utils/Router';
+import csat from './components/CSAT';
 import './styles/index.styl';
+import debounce from './components/debounce';
 
 const router: Router = new Router(routes, 'root');
+
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+const mountCSATTimeout = async (callback: () => void) => {
+    while (true) {
+        await delay(60000); // Ждём 1 минуту
+        callback();
+    }
+};
+
+mountCSATTimeout(() => {
+    csat.mount;
+});
+
 //
 // if ('serviceWorker' in navigator) {
 //     (async () => {
