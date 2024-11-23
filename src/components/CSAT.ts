@@ -9,8 +9,7 @@ export default {
         </div>
     `,
 
-    mount(): void {
-
+    async mount(): Promise<void> {
         const csatBlock = document.getElementById('csat-block') as HTMLElement;
 
         const closeButton = document.getElementById('close-button') as HTMLButtonElement;
@@ -22,5 +21,9 @@ export default {
         if (!CSAT.homeActiveQ || CSAT.homeQ) {
             csatBlock.classList.add('hidden');
         }
+    },
+
+    active(): void {
+        const csatBlock = document.getElementById('csat-block') as HTMLElement;
     }
 };
