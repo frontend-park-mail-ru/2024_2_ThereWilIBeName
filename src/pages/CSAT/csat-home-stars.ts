@@ -46,6 +46,7 @@ export default {
         starContainer.addEventListener('change', async () => {
             const selectedRating = document.querySelector('#star-container input:checked') as HTMLInputElement;
             rating = Number(selectedRating.value);
+            console.log(User.id);
             // if (rating > 3) {
             //
             // }
