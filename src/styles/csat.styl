@@ -47,10 +47,21 @@
       border-radius 20px
 
     .csat-question-button
-      mixinButton(myBlack, myWhite)
-      margin 0
+      mixinBorder()
+      padding 0 30px
+      background-color myBlack
+      color myWhite
+      border 2px solid myNone
+      border-radius 15px
+      cursor pointer
+      font-size 20px
+      text-align center
       width fit-content
-      transition background-color 0.3s ease
+      transition background-color 0.3s ease, border 0.3 ease
 
       &:hover
         background-color myPink
+        transform scale(1)
+
+      &:focus
+        border 2px solid myGrey
