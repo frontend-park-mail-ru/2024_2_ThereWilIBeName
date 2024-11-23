@@ -105,6 +105,21 @@ type Survey = {
 }
 
 export default {
+
+    async getStat(userId: string) {
+        const res = await RESTApi.get(`/api/v1/survey/stats/${userId}`);
+        return {
+            data: {
+                surveyId: Number(res.data.survey_id),
+                surveyText: String(res.data.survey_text),
+                avgRating: Number(res.data.avg_rating),
+                ratingsCount: res.data.ratings_count as number[],
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
     async getSearch(query: string): Promise<JsonResponse<SearchItem[]>> {
         const res = await RESTApi.get(`/api/v1/search?query=${encodeURIComponent(query)}`);
         return {
