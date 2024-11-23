@@ -36,15 +36,16 @@ export default {
         const starButton = document.getElementById('star-button') as HTMLButtonElement;
         let rating  = 0;
 
-        if (User.id) {
-            starButton.addEventListener('click', async () => {
+        starButton.addEventListener('click', async () => {
+            if (User.id) {
                 if (rating !== 0) {
                     const res = await Api.postHomeCSAT(User.id, rating);
                 }
-            });
-        } else {
-            console.log('Пользователь не авторизован. Отзыв не отправлен');
-        }
+            } else {
+                console.log('Пользователь не авторизован. Отзыв не отправлен');
+            }
+        });
+
 
         starContainer.addEventListener('change', async () => {
             const selectedRating = document.querySelector('#star-container input:checked') as HTMLInputElement;
