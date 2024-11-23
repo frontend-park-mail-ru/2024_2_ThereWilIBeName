@@ -9,6 +9,7 @@ import PageCreateTrip from './pages/create-trip';
 import PageChangePassword from './pages/change-password';
 import PageEditTrip from './pages/edit-trip';
 import PageHello from './pages/hello';
+import PageCSAT from './pages/CSAT/csat';
 import Router from './utils/Router';
 
 /**
@@ -124,7 +125,15 @@ const routes: Route[] = [
         mount: Page404.mount,
         unmount: Page404.unmount,
         cssClass: 'unknown-page',
-    }
+    },
+    {
+        path: /^\/csat/,
+        title: 'CSAT',
+        html: PageCSAT.html,
+        mount: PageCSAT.mount,
+        unmount: PageCSAT.unmount,
+        cssClass: 'csat',
+    },
 ];
 
 export default routes;

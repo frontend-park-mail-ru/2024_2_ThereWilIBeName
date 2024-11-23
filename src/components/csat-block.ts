@@ -6,7 +6,7 @@ export default {
     html: `
         <div class="csat hidden hidden-animation" id="csat-block">
             <img src="${closeIcon}" class="csat-close-button" id="csat-close-button">
-            <iframe src="../pages/CSAT/csat.html"></iframe>
+            <iframe src="https://therewillbetrip.ru/csat"></iframe>
         </div>
     `,
 
