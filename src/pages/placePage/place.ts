@@ -15,7 +15,9 @@ export default {
         `${header.html}
         <main>
             <div class="place-block">
-                <img class="place-image grid-place-image" src="img_1.png" alt="{{name}}" id="place-image">
+                <div class="place-image grid-place-image">
+                    <img src="img_1.png" alt="{{name}}" id="place-image">
+                </div>
                 <div class="place-name grid-place-name" id="place-name">Название</div>
                 <div class="back-button-block grid-back-button">
                     <img class="back-button" src="${backButton}" id="back-button">
