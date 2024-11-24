@@ -86,7 +86,7 @@ export default {
             console.log('Ошибка получения поездок');
             return;
         }
-        const trips = tripsResponse.data;
+        const trips = tripsResponse.data.trips;
         const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
         galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImg, editIcon });
 
