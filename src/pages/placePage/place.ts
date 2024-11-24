@@ -20,7 +20,9 @@ export default {
                 <div class="back-button-block grid-back-button">
                     <img class="back-button" src="${backButton}" id="back-button">
                 </div>
-                <div class="place-info grid-place-info" id="description">Здесь будет описание</div>
+                <div class="place-info grid-place-info">
+                    <div class="description" id="description">Здесь будет описание</div>
+                </div>
                 <div class="map-container grid-map-container" id="map-container">
                     <div class="map-class" id="map"></div>
                 </div>

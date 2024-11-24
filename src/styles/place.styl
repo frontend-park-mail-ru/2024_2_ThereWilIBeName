@@ -107,8 +107,6 @@
     font-size 20px
     color myWhite
     position relative
-    overflow-y scroll
-    scrollbar-width none
 
     &::before
       content ''
@@ -118,6 +116,10 @@
       background myShadow
       overflow auto
       z-index -1
+
+    .description
+      overflow-y scroll
+      scrollbar-width none
 
   .reviews
     display flex
