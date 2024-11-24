@@ -1,12 +1,10 @@
-import Api from '../../utils/Api';
-import User from '../../utils/user';
 import Router from '../../utils/Router';
-import galleryTemplate from './home.hbs';
 import header from '../../components/header';
 import footer from '../../components/footer';
 import Search from '../../utils/search-memory';
 import csat from '../../components/csat-block';
 import CSAT from '../../utils/CSAT-memory';
+import attractionsLoad from './attractions-load';
 
 export default {
     /**
@@ -17,8 +15,17 @@ export default {
     html: ` ${header.html}
         <main>
             <div class="gallery-block">
-                <div class="headline">Достопримечательности</div>
+                <div class="headline">Интересные места</div>
                 <hr>
+                <div class="categories">
+                    <div class="category" categoryId="1" id="category-one">Исторические памятники</div>
+                    <div class="category" categoryId="2" id="category-two">Соборы</div>
+                    <div class="category" categoryId="3" id="category-three">Театры</div>
+                    <div class="category" categoryId="4" id="category-four">Музеи</div>
+                    <div class="category" categoryId="5" id="category-five">Мечети</div>
+                    <div class="category" categoryId="6" id="category-six">Крепости</div>
+                    <div class="category" categoryId="7" id="category-seven">Храмы</div>
+                </div>
                 <ul class="gallery" id="gallery"></ul>
             </div>
         </main>
@@ -37,29 +44,47 @@ export default {
     async mount(router: Router): Promise<void> {
         const placeButton = document.getElementById('gallery') as HTMLButtonElement;
 
+        const categoryOneButton = document.getElementById('category-one') as HTMLButtonElement;
+        categoryOneButton.addEventListener('click', async () => {
+            Search.categoryId = 1;
+            await attractionsLoad(placeButton, router);
+        });
+        const categoryTwoButton = document.getElementById('category-two') as HTMLButtonElement;
+        categoryTwoButton.addEventListener('click', async () => {
+            Search.categoryId = 2;
+            await attractionsLoad(placeButton, router);
+        });
+        const categoryThreeButton = document.getElementById('category-three') as HTMLButtonElement;
+        categoryThreeButton.addEventListener('click', async () => {
+            Search.categoryId = 3;
+            await attractionsLoad(placeButton, router);
+        });
+        const categoryFourButton = document.getElementById('category-four') as HTMLButtonElement;
+        categoryFourButton.addEventListener('click', async () => {
+            Search.categoryId = 4;
+            await attractionsLoad(placeButton, router);
+        });
+        const categoryFiveButton = document.getElementById('category-five') as HTMLButtonElement;
+        categoryFiveButton.addEventListener('click', async () => {
+            Search.categoryId = 5;
+            await attractionsLoad(placeButton, router);
+        });
+        const categorySixButton = document.getElementById('category-six') as HTMLButtonElement;
+        categorySixButton.addEventListener('click', async () => {
+            Search.categoryId = 6;
+            await attractionsLoad(placeButton, router);
+        });
+        const categorySevenButton = document.getElementById('category-seven') as HTMLButtonElement;
+        categorySevenButton.addEventListener('click', async () => {
+            Search.categoryId = 7;
+            await attractionsLoad(placeButton, router);
+        });
+
         // Монтирование хэдера
         await header.mount(router);
 
-        try {
-            // Загрузка достопримечательностей
-            const attractionsResponse = await Api.getAttractions(Search.limit, Search.offset, Search.cityId, Search.categoryId);
-            const attractions = attractionsResponse.data;
-            const galleryElement = document.getElementById('gallery') as HTMLElement;
-            galleryElement.innerHTML = galleryTemplate({ attractions });
-
-            placeButton.addEventListener('click', (event) => {
-                const target = event.target as HTMLElement;
-                if (target) {
-                    const listItem = target.closest('LI');
-                    if (listItem) {
-                        const itemId = listItem.querySelector('a')!.href.split('/').pop();
-                        router.goto(`/places/${itemId}`);
-                    }
-                }
-            });
-        } catch (error) {
-            console.log('Ошибка загрузки мест');
-        }
+        // Загрузка мест
+        await attractionsLoad(placeButton, router);
 
         // CSAT.homeActiveQ = true;
         // await csat.mount();

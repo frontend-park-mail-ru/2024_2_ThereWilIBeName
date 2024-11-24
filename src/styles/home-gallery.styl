@@ -15,6 +15,29 @@
         @media (max-width 700px)
             font-size 30px
 
+    .categories
+        display flex
+        width 90%
+        margin auto
+        flex-direction row
+        column-gap 10px
+        overflow-x scroll
+        scrollbar-width none
+
+        .category
+            text-align center
+            padding 5px 20px
+            align-content center
+            background myGrey
+            color myWhite
+            border-radius 15px
+            cursor pointer
+            transition all 0.3s ease
+
+            &:hover
+                background myPink
+                transform scale(0.98)
+
     .gallery-block
         mixinBlock(myBlack)
 
