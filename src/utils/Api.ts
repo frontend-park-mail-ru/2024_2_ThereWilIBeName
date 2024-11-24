@@ -16,7 +16,12 @@ type Trip = {
     startDate: string,
     endDate: string,
     private: boolean,
+    photos: string[],
 }
+
+type TripPhoto = {
+    photoPath: string
+};
 
 type Attraction = {
     id: string,
@@ -142,8 +147,7 @@ export default {
      * @returns {Promise<{data: Object[], status: number, ok: boolean}>} Ответ сервера с данными достопримечательностей, статусом и флагом успеха.
      */
     async getAttractions(limit: number, offset:number, cityId: number, categoryId: number): Promise<JsonResponse<Attraction[]>> {
-        const defaultGetAttractionsURL = `/api/v1/places/search?limit=${limit}&offset=${offset}`;
-        let getAttracionsURL = defaultGetAttractionsURL;
+        let getAttracionsURL = `/api/v1/places/search?limit=${limit}&offset=${offset}`;
         if (cityId !== -1) {
             getAttracionsURL = getAttracionsURL + `&city=${cityId}`;
         }
@@ -249,6 +253,9 @@ export default {
                 startDate: formatDate(trip.start_date),
                 endDate: formatDate(trip.end_date),
                 private: Boolean(trip.private),
+                photos: Array.isArray(trip.photos)
+                    ? trip.photos.map((photo: any) => String(photo))
+                    : [],
             })) : [],
             status: res.status,
             ok: res.ok,
@@ -407,6 +414,16 @@ export default {
         };
     },
 
+    async putPhotos(tripId: string, newPhotos: string[]): Promise<JsonResponse<TripPhoto[]>> {
+        const res = await RESTApi.put('', {photos: newPhotos});
+        return {
+            data: Array.isArray(res.data) ? res.data.map( (photo) => ({
+                photoPath: String(photo.photoPath),
+            })) : [],
+            status: res.status,
+            ok: res.ok,
+        };
+    },
 
     async deleteTrip(id: string): Promise<JsonResponse<Response>> {
         const res = await RESTApi.delete(`/api/v1/trips/${id}`, {id: id});

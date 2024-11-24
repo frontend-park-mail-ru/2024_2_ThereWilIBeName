@@ -71,6 +71,9 @@
     row-gap 20px
     transition height 0.3s ease
 
+    @media (max-width 700px)
+      width 100%
+
     &.open
       height 300px
 
@@ -84,15 +87,10 @@
       "a b d e g"
 
       @media (max-width 700px)
-        height fit-content
-        width 250px
-        gap 10px
-        padding 20px
-        grid-template-columns repeat(3, auto)
-        grid-template-rows repeat(3, auto)
-        grid-template-areas "b c f"\
-        "d d g"\
-        "e e a"
+        grid-template-columns 15% 70% 15%
+        grid-template-areas "a c f"\
+        "a d g"
+
 
     .gallery-item-trips-bottom-panel
       display flex
@@ -121,6 +119,14 @@
         border-radius 20px
         min-width 150px
         min-height 150px
+        cursor pointer
+        transition background 0.3s ease
+
+        &:hover
+          background myPinkShadow
+
+        @media (max-width 700px)
+          min-width 100px
 
       .added-photo
         color myWhite
@@ -151,12 +157,18 @@
     width 65px
     height 65px
 
+    @media (max-width 700px)
+      display none
+
   .gallery-item-trips-img
     object-fit contain
     height 100%
     width 100%
     background myBlack
     border-radius 20px
+
+    @media (max-width 700px)
+      display none
 
   .trips-open-icon
     width 35px

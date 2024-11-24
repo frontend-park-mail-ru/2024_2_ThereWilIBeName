@@ -18,6 +18,7 @@ import backButton from '../../static/back button white.svg';
 import footer from '../../components/footer';
 import CSAT from '../../utils/CSAT-memory';
 import csat from '../../components/csat-block';
+import galleryPhotosTemplate from './trips-photos.hbs';
 
 export default {
     /**
@@ -80,7 +81,12 @@ export default {
         }
 
         createTripButton.classList.remove('hidden');
-        const tripsResponse = await Api.getUserTrips(User.id);
+        // const tripsResponse = await Api.getUserTrips(User.id);
+        const tripsResponse = {
+            data: [{id: 1, name: 'Название поездки', startDate: '00.00.00', endDate: '00.00.00', photos: ['/', '/', '/', '/', '/', '/']}],
+            status: 200,
+            ok: true,
+        };
 
 
         if (!tripsResponse.ok) {
@@ -95,10 +101,10 @@ export default {
         document.querySelectorAll('.trips-open-icon').forEach(icon => {
             icon.addEventListener('click', async () => {
                 icon.classList.toggle('open');
-                const parentItem1 = icon.closest('.gallery-item-trips');
-                if (parentItem1) {
-                    parentItem1.classList.toggle('open');
-                    const bottomPanel = parentItem1.querySelector('.gallery-item-trips-bottom-panel');
+                const parentItem = icon.closest('.gallery-item-trips');
+                if (parentItem) {
+                    parentItem.classList.toggle('open');
+                    const bottomPanel = parentItem.querySelector('.gallery-item-trips-bottom-panel');
                     if (bottomPanel) {
                         if (!bottomPanel.classList.contains('open')) {
                             bottomPanel.classList.remove('hidden');
@@ -109,7 +115,48 @@ export default {
                             await new Promise(resolve => setTimeout(resolve, 200));
                             bottomPanel.classList.add('hidden');
                         }
+                        const addPhotoButton = bottomPanel.querySelector('.add-photo-button') as HTMLButtonElement;
 
+                        addPhotoButton.addEventListener('click', () => {
+                            const tripPhotoInputElement = document.createElement('input') as HTMLInputElement;
+                            tripPhotoInputElement.type = 'file';
+                            tripPhotoInputElement.accept = 'image/*'; // Ограничиваем тип файлов на изображения
+                            tripPhotoInputElement.multiple = true; // Разрешаем выбирать несколько фото
+                            tripPhotoInputElement.style.display = 'none';
+
+                            tripPhotoInputElement.addEventListener('change', async () => {
+                                if (tripPhotoInputElement.files) {
+                                    const files = tripPhotoInputElement.files;
+                                    const base64Photos: string[] = [];
+
+                                    for (let i = 0; i < files.length; i++) {
+                                        const file = files[i];
+                                        const reader = new FileReader();
+
+                                        // Используем промисы для ожидания конвертации
+                                        const base64 = await new Promise<string>((resolve, reject) => {
+                                            reader.onload = () => resolve(String(reader.result));
+                                            reader.onerror = () => reject('Ошибка чтения файла');
+                                            reader.readAsDataURL(file);
+                                        });
+
+                                        base64Photos.push(base64);
+                                    }
+
+                                    const res = await Api.putPhotos(parentItem.id, base64Photos);
+                                    if (!res.ok) {
+                                        alert('Ошибка загрузки фото');
+                                        return;
+                                    }
+
+                                    // Получаем список фотографий
+                                    const newTripPhotos = (await Api.getUserTrips(User.id)).data[Number(parentItem.id)].photos;
+                                    parentItem.innerHTML = galleryPhotosTemplate({ newTripPhotos });
+                                }
+                            });
+
+                            tripPhotoInputElement.click();
+                        });
                     }
                 }
             });
