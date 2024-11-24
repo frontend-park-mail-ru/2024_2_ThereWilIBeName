@@ -81,13 +81,7 @@ export default {
         }
 
         createTripButton.classList.remove('hidden');
-        // const tripsResponse = await Api.getUserTrips(User.id);
-        const tripsResponse = {
-            data: [{id: 1, name: 'Название поездки', startDate: '00.00.00', endDate: '00.00.00', photos: ['/', '/', '/', '/', '/', '/']}],
-            status: 200,
-            ok: true,
-        };
-
+        const tripsResponse = await Api.getUserTrips(User.id);
 
         if (!tripsResponse.ok) {
             console.log('Ошибка получения поездок');

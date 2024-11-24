@@ -415,7 +415,7 @@ export default {
     },
 
     async putPhotos(tripId: string, newPhotos: string[]): Promise<JsonResponse<TripPhoto[]>> {
-        const res = await RESTApi.put('', {photos: newPhotos});
+        const res = await RESTApi.put(`api/v1/trips/${tripId}/photos`, {photos: newPhotos});
         return {
             data: Array.isArray(res.data) ? res.data.map( (photo) => ({
                 photoPath: String(photo.photoPath),
