@@ -82,21 +82,35 @@ export default {
         createTripButton.classList.remove('hidden');
         const tripsResponse = await Api.getUserTrips(User.id);
 
+
         if (!tripsResponse.ok) {
             console.log('Ошибка получения поездок');
             return;
         }
-        const trips = tripsResponse.data.trips;
+        const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
         galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImg, editIcon });
 
 
         document.querySelectorAll('.trips-open-icon').forEach(icon => {
-            icon.addEventListener('click', () => {
+            icon.addEventListener('click', async () => {
                 icon.classList.toggle('open');
-                const parentItem = icon.closest('.gallery-item-trips');
-                if (parentItem) {
-                    parentItem.classList.toggle('open');
+                const parentItem1 = icon.closest('.gallery-item-trips');
+                if (parentItem1) {
+                    parentItem1.classList.toggle('open');
+                    const bottomPanel = parentItem1.querySelector('.gallery-item-trips-bottom-panel');
+                    if (bottomPanel) {
+                        if (!bottomPanel.classList.contains('open')) {
+                            bottomPanel.classList.remove('hidden');
+                            await new Promise(resolve => setTimeout(resolve, 200));
+                            bottomPanel.classList.remove('hidden-animation');
+                        } else {
+                            bottomPanel.classList.add('hidden-animation');
+                            await new Promise(resolve => setTimeout(resolve, 200));
+                            bottomPanel.classList.add('hidden');
+                        }
+
+                    }
                 }
             });
         });

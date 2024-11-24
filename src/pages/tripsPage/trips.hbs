@@ -1,11 +1,20 @@
 {{#each trips}}
     <li class="gallery-item-trips" id="{{ id }}">
-        <img src="{{../openIcon}}" alt="Иконка путешествия" class="trips-open-icon trips-open-icon-grid">
-        <img src="{{../tripIcon}}" alt="Иконка путешествия" class="trips-trip-icon trips-trip-icon-grid">
-        <div class="gallery-trips-name gallery-trips-name-grid">{{name}}</div>
-        <div class="gallery-trips-date gallery-trips-date-grid">{{startDate}} - {{endDate}}</div>
-        <img src="{{../palmsImg}}" alt="Картинка поездки" class="gallery-item-trips-img gallery-item-trips-img-grid">
-        <img src="{{../editIcon}}" alt="Иконка путешествия" class="trips-edit-icon trips-edit-icon-grid">
-        <img src="{{../deleteIcon}}" alt="Иконка удаления" class="trips-delete-icon trips-delete-icon-grid">
+        <div class="gallery-item-trips-top-panel">
+            <img src="{{../openIcon}}" alt="Иконка путешествия" class="trips-open-icon trips-open-icon-grid">
+            <img src="{{../tripIcon}}" alt="Иконка путешествия" class="trips-trip-icon trips-trip-icon-grid">
+            <div class="gallery-trips-name gallery-trips-name-grid">{{name}}</div>
+            <div class="gallery-trips-date gallery-trips-date-grid">{{startDate}} - {{endDate}}</div>
+            <img src="{{../palmsImg}}" alt="Картинка поездки" class="gallery-item-trips-img gallery-item-trips-img-grid">
+            <img src="{{../editIcon}}" alt="Иконка путешествия" class="trips-edit-icon trips-edit-icon-grid">
+            <img src="{{../deleteIcon}}" alt="Иконка удаления" class="trips-delete-icon trips-delete-icon-grid">
+        </div>
+        <div class="gallery-item-trips-bottom-panel hidden hidden-animation">
+            <div class="add-photo-button">Добавить фото</div>
+            <div class="added-photo">Фото</div>
+            <div class="added-photo">Фото</div>
+            <div class="added-photo">Фото</div>
+            <div class="added-photo">Фото</div>
+        </div>
     </li>
 {{/each}}
