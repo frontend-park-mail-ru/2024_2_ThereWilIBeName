@@ -79,6 +79,7 @@ export default {
         logoutButton.addEventListener('click', async () => {
             const resLogout = await Api.postLogout(User.username, User.id);
             if (resLogout.ok) {
+                localStorage.removeItem('token');
                 User.username = '';
                 User.id = '';
                 User.email = '';
