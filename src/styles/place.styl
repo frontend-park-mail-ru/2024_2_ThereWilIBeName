@@ -2,16 +2,34 @@
   mixinSideMenu()
 
   .place-block
-    display flex
-    margin 70px 100px 30px 100px
+    display grid
+    grid-template-rows auto auto auto auto
+    grid-template-columns 10% auto 20%
+    margin 0 20px
     height 100%
-    gap 50px
-    justify-content center
+    gap 10px 20px
+    grid-template-areas "a b c"\
+    "d d c"\
+    "e e e"\
+    "f f f"
 
-  .column1 column2
-    display flex
-    flex-direction column
-    gap 20px
+    .grid-back-button
+      grid-area a
+
+    .grid-place-name
+      grid-area b
+
+    .grid-place-image
+      grid-area c
+
+    .grid-place-info
+      grid-area d
+
+    .grid-map-container
+      grid-area e
+
+    .grid-reviews
+      grid-area f
 
   .place-name
     background-color myBlack
@@ -34,10 +52,6 @@
       background myShadow
       overflow auto
       z-index -1
-
-  .place-header
-    display flex
-    gap 25px
 
   .back-button-block
     mixinBlock(myBlack)
@@ -107,141 +121,144 @@
       overflow auto
       z-index -1
 
-  .description
-    border 10px
-    padding 10px 0
-
-  .review-block
-    mixinReviewBlock()
-
-  .user-review-block
-    mixinReviewBlock()
-    margin-bottom 0
-
-  .review-info
+  .reviews
     display flex
-    gap 10px
-    align-items center
-
-  .rating
-    padding 12px 45px
-    margin-left auto
-    color myWhite
-    font-size 17px
-    position relative
-    &::before
-      content ""
-      position absolute
-      background-color myBlack
-      border-radius 30px
-      inset 0
-      z-index -1
-    &::after
-      position absolute
-      border-radius 30px
-      background linearGradient()
-      inset 0 auto 0 0
-      margin 5px
-      width calc(90% * (max(var(--progress, 2), 1.5) / 5))
-      content ""
-      z-index -1
-
-  .text-average
-    font-size 20px
-    font-weight 600
-
-  .user-image img
-    max-width 45px
-    max-height 45px
-    border-radius 50%
-    display block
-    aspect-ratio 1 / 1
-
-  .review-text
-    font-size 17px
-    padding-bottom 10px
-
-  .leave-review
-    mixinReviewBlock()
-    display none
-
-  .leave-review.visible
-    display flex
-
-  .review-field
-    all unset
-    padding 12px
-    white-space pre-wrap
-    overflow-wrap break-word
-    text-align start
-    width 100%
+    flex-direction row
+    overflow-x scroll
     overflow-y hidden
-    resize none
-    border-radius 30px
-    border 3px solid myBlack
-    box-sizing border-box
+    scrollbar-width none
 
-  .leave-review-header
-    display flex
-    justify-content center
-    align-items center
-    padding 10px
+    .review-block
+      mixinReviewBlock()
+
+    .user-review-block
+      mixinReviewBlock()
+      margin-bottom 0
+
+    .review-info
+      display flex
+      gap 10px
+      align-items center
+
+    .rating
+      padding 12px 45px
+      margin-left auto
+      color myWhite
+      font-size 17px
+      position relative
+      &::before
+        content ""
+        position absolute
+        background-color myBlack
+        border-radius 30px
+        inset 0
+        z-index -1
+      &::after
+        position absolute
+        border-radius 30px
+        background linearGradient()
+        inset 0 auto 0 0
+        margin 5px
+        width calc(90% * (max(var(--progress, 2), 1.5) / 5))
+        content ""
+        z-index -1
+
+    .text-average
+      font-size 20px
+      font-weight 600
+
+    .user-image img
+      max-width 45px
+      max-height 45px
+      border-radius 50%
+      display block
+      aspect-ratio 1 / 1
+
+    .review-text
+      font-size 17px
+      padding-bottom 10px
+
+    .leave-review
+      mixinReviewBlock()
+      display none
+
+    .leave-review.visible
+      display flex
+
+    .review-field
+      all unset
+      padding 12px
+      white-space pre-wrap
+      overflow-wrap break-word
+      text-align start
+      width 100%
+      overflow-y hidden
+      resize none
+      border-radius 30px
+      border 3px solid myBlack
+      box-sizing border-box
+
+    .leave-review-header
+      display flex
+      justify-content center
+      align-items center
+      padding 10px
 
 
-  .leave-review-header-text
-    font-size 20px
+    .leave-review-header-text
+      font-size 20px
 
-  .stars
-    margin-left auto
-    font-size 27px
-    display flex
-    cursor pointer
-    gap 10px
-    flex-direction row-reverse
+    .stars
+      margin-left auto
+      font-size 27px
+      display flex
+      cursor pointer
+      gap 10px
+      flex-direction row-reverse
 
-    .star
-      color myBlack
-      border 2px myBlack
+      .star
+        color myBlack
+        border 2px myBlack
 
-      &:hover
-      &:hover ~ .star
-      &.selected ~ .star
-      &.selected
-        background linearGradient() 50% 50% / 100vw 100vh
-        color transparent
-        background-clip text
+        &:hover
+        &:hover ~ .star
+        &.selected ~ .star
+        &.selected
+          background linearGradient() 50% 50% / 100vw 100vh
+          color transparent
+          background-clip text
 
-  .review-button
-    mixinFormButton()
+    .review-button
+      mixinFormButton()
 
-  .delete-review
-    margin 10px auto
-    cursor pointer
-    width 35px
-    height 35px
-    transition transform 0.3s ease
-
-    &:hover
-      transform scale(1.05)
-
-  .user-review
-    display none
-
-  .user-review.visible
-    display flex
-    flex-direction column
-    margin 0
-
-  ul
-    list-style-type none
-    padding 0
-    margin 0
-
-    .menu-button
-      mixinButton(myBlack, myWhite)
-      margin 0
-      text-align left
-      transition transform  0.3s ease
+    .delete-review
+      margin 10px auto
+      cursor pointer
+      width 35px
+      height 35px
+      transition transform 0.3s ease
 
       &:hover
         transform scale(1.05)
+
+    .user-review
+      display none
+
+    .user-review.visible
+      display flex
+      flex-direction column
+      margin 0
+
+    ul
+      list-style-type none
+      padding 0
+      margin 0
+
+      .menu-button
+        mixinButton(myBlack, myWhite)
+        margin 0
+        text-align left
+        transition transform  0.3s ease
+
+        &:hover
+          transform scale(1.05)

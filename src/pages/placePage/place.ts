@@ -4,6 +4,7 @@ import placeTemplate from './place.hbs';
 import Router from '../../utils/Router';
 import deleteIcon from '../../static/delete.png';
 import header from '../../components/header';
+import footer from '../../components/footer';
 import mapMarkerIcon from '../../static/map marker.svg';
 import backButton from '../../static/back button white.svg';
 import L from 'leaflet';
@@ -14,10 +15,17 @@ export default {
         `${header.html}
         <main>
             <div class="place-block">
-                <div class="column1">
-                    <div class="place-image">
-                        <img src="img_1.png" alt="{{name}}" id="place-image">
-                    </div>
+                <img class="place-image grid-place-image" src="img_1.png" alt="{{name}}" id="place-image">
+                <div class="place-name grid-place-name" id="place-name">Название</div>
+                <div class="back-button-block grid-back-button">
+                    <img class="back-button" src="${backButton}" id="back-button">
+                </div>
+                <div class="place-info grid-place-info" id="description">Здесь будет описание</div>
+                <div class="map-container grid-map-container" id="map-container">
+                    <div class="map-class" id="map"></div>
+                </div>
+                
+                <div class="reviews grid-reviews">
                     <div class="leave-review" id="leave-review">
                         <div class="leave-review-header">
                             <div class="leave-review-header-text">Напишите отзыв</div>
@@ -50,24 +58,10 @@ export default {
                     <ul id="reviews">
                     </ul>
                 </div>
-                <div class="column2">
-                    <div class="place-header">
-                        <div class="place-name" id="place-name">
-                            Название
-                        </div>
-                        <div class="back-button-block">
-                            <img class="back-button" src="${backButton}" id="back-button">
-                        </div>
-                    </div>
-                    <div class="place-info">
-                        <div class="description" id="description">здесь будет описание</div>
-                    </div>
-                    <div class="map-container" id="map-container">
-                        <div class="map-class" id="map"></div>
-                    </div>
-                </div>
             </div>
-        </main>`,
+        </main>
+        ${footer.html}
+`,
     async mount(router: Router, params: any): Promise<void> {
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         const placeName = document.getElementById('place-name') as HTMLElement;
