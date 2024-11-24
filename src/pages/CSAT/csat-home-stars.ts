@@ -35,7 +35,6 @@ export default {
         const starContainer = document.getElementById('star-container') as HTMLElement;
         const starButton = document.getElementById('star-button') as HTMLButtonElement;
         let rating = 0;
-        User.id = (await Api.getUser()).data.id;
 
         starButton.addEventListener('click', async () => {
             if (rating !== 0) {
