@@ -12,8 +12,20 @@
     "e e e"\
     "f f f"
 
+    @media (max-width 700px)
+      grid-template-columns 1fr
+      grid-template-rows repeat(5, auto)
+      grid-template-areas "c"\
+      "b"\
+      "d"\
+      "e"\
+      "f"
+
     .grid-back-button
       grid-area a
+
+      @media (max-width 700px)
+        display none
 
     .grid-place-name
       grid-area b
@@ -125,9 +137,12 @@
   .reviews
     display flex
     flex-direction column
-    padding-left 20px
     overflow-x scroll
     scrollbar-width none
+
+    @media (max-width 700px)
+      flex-direction column
+      overflow-x visible
 
     .review-block
       mixinReviewBlock()
