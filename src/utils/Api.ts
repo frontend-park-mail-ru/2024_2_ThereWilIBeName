@@ -40,10 +40,12 @@ type User = {
 }
 
 type Login = {
-    id: string,
-    login: string,
-    email: string,
-    createdAt: string,
+    user: {id: string,
+        login: string,
+        email: string,
+        createdAt: string,
+    },
+    token: string,
 }
 
 type Logout = {
@@ -101,7 +103,7 @@ type SearchItem = {
 }
 
 type Survey = {
-
+    // ничего не возвращают
 }
 
 export default {
@@ -276,33 +278,6 @@ export default {
         };
     },
 
-    async postSearchCSAT(userId: string, rating: number): Promise<JsonResponse<Survey>> {
-        const res = await RESTApi.post('/api/v1/survey/2', {survey_id: 1, user_id: userId, rating});
-        return {
-            data: {},
-            status: res.status,
-            ok: res.ok,
-        };
-    },
-
-    async postTripsCSAT(userId: string, rating: number): Promise<JsonResponse<Survey>> {
-        const res = await RESTApi.post('/api/v1/survey/3', {survey_id: 1, user_id: userId, rating});
-        return {
-            data: {},
-            status: res.status,
-            ok: res.ok,
-        };
-    },
-
-    async postProfileCSAT(userId: string, rating: number): Promise<JsonResponse<Survey>> {
-        const res = await RESTApi.post('/api/v1/survey/4', {survey_id: 1, user_id: userId, rating});
-        return {
-            data: {},
-            status: res.status,
-            ok: res.ok,
-        };
-    },
-
     async postLogout(username: string, id: string): Promise<JsonResponse<Logout>> {
         const res = await RESTApi.post('/api/v1/auth/logout', {username, id});
         return {
@@ -323,10 +298,13 @@ export default {
         const res = await RESTApi.post('/api/v1/auth/login', {email, password});
         return {
             data: {
-                id: String(res.data.id),
-                login: String(res.data.login),
-                email: String(res.data.email),
-                createdAt: String(res.data.created_at),
+                user: {
+                    id: String(res.data.user.id),
+                    login: String(res.data.user.login),
+                    email: String(res.data.user.email),
+                    createdAt: String(res.data.user.created_at),
+                },
+                token: res.data.token,
             },
             status: res.status,
             ok: res.ok,
@@ -345,10 +323,13 @@ export default {
         const res = await RESTApi.post('/api/v1/auth/signup', {login: username, email, password});
         return {
             data: {
-                id: String(res.data.id),
-                login: String(res.data.login),
-                email: String(res.data.email),
-                createdAt: String(res.data.created_at),
+                user: {
+                    id: String(res.data.user.id),
+                    login: String(res.data.user.login),
+                    email: String(res.data.user.email),
+                    createdAt: String(res.data.user.created_at),
+                },
+                token: res.data.token,
             },
             status: res.status,
             ok: res.ok,

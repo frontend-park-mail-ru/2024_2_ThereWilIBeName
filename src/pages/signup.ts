@@ -107,6 +107,7 @@ export default {
                 return;
             }
 
+            localStorage.setItem('token', `${res.data.token}`);
             router.goto('/home');
         });
     },
