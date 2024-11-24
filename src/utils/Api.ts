@@ -7,6 +7,10 @@ type JsonResponse<T> = {
     ok: boolean,
 }
 
+type Trips = {
+    trips: Trip[],
+}
+
 type Trip = {
     id: string,
     userId: number,
@@ -237,19 +241,21 @@ export default {
         };
     },
 
-    async getUserTrips(id: string): Promise<JsonResponse<Trip[]>> {
+    async getUserTrips(id: string): Promise<JsonResponse<Trips>> {
         const res = await RESTApi.get(`/api/v1/users/${id}/trips`);
         return {
-            data: Array.isArray(res.data) ? res.data.map( (trip) => ({
-                userId: Number(trip.user_id),
-                id: String(trip.id),
-                name: String(trip.name),
-                cityId: Number(trip.city_id),
-                description: String(trip.description),
-                startDate: formatDate(trip.start_date),
-                endDate: formatDate(trip.end_date),
-                private: Boolean(trip.private),
-            })) : [],
+            data: {
+                trips: Array.isArray(res.data) ? res.data.map( (trip) => ({
+                    userId: Number(trip.user_id),
+                    id: String(trip.id),
+                    name: String(trip.name),
+                    cityId: Number(trip.city_id),
+                    description: String(trip.description),
+                    startDate: formatDate(trip.start_date),
+                    endDate: formatDate(trip.end_date),
+                    private: Boolean(trip.private),
+                })) : [],
+            },
             status: res.status,
             ok: res.ok,
         };
