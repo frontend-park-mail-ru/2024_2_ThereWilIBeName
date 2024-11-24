@@ -31,6 +31,7 @@ export default {
         <button class="csat-question-button" id="star-button">Далее</button>
     </div>
     `,
+
     async mount(): Promise<void> {
         const starContainer = document.getElementById('star-container') as HTMLElement;
         const starButton = document.getElementById('star-button') as HTMLButtonElement;

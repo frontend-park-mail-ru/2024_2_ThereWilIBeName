@@ -23,7 +23,7 @@ export default {
             </div>
         </main>
         ${footer.html}
-        ${csat.html}
+<!--        ${csat.html}-->
     `,
 
     /**
@@ -61,8 +61,8 @@ export default {
             console.log('Ошибка загрузки мест');
         }
 
-        CSAT.homeActiveQ = true;
-        await csat.mount();
+        // CSAT.homeActiveQ = true;
+        // await csat.mount();
 
     },
 
