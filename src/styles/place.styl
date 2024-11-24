@@ -3,13 +3,14 @@
 
   .place-block
     display grid
-    grid-template-rows 100px auto auto
+    grid-template-rows 100px 250px 300px 500px
     grid-template-columns 10% auto 30%
-    margin 0 20px
-    gap 10px 20px
+    margin 0 50px
+    gap 20px
     grid-template-areas "a b c"\
     "d d c"\
-    "f f e"
+    "e e e"\
+    "f f f"
 
     .grid-back-button
       grid-area a
@@ -68,14 +69,11 @@
     padding 0
     display block
     width 100%
-    max-width 400px
     border-radius 30px
-    min-width 200px
     aspect-ratio 1 / 1
 
   .place-image img
     object-fit cover
-    border-radius 20px
     height 100%
     width 100%
 
@@ -108,8 +106,9 @@
     padding 30px
     font-size 20px
     color myWhite
-    margin 30px 0
     position relative
+    overflow-y scroll
+    scrollbar-width none
 
     &::before
       content ''
@@ -122,10 +121,9 @@
 
   .reviews
     display flex
-    flex-direction row
+    flex-direction column
     padding-left 20px
     overflow-x scroll
-    overflow-y hidden
     scrollbar-width none
 
     .review-block
