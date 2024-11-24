@@ -212,9 +212,6 @@ export default {
 
         updateMenu(activeMenuButton);
 
-        CSAT.profileActiveQ = true;
-        csat.mount();
-
     },
 
     /**
@@ -222,6 +219,5 @@ export default {
      * Используется для очистки состояния или удаления обработчиков событий при переходе на другую страницу.
      */
     unmount() {
-        CSAT.profileActiveQ = false;
     },
 };

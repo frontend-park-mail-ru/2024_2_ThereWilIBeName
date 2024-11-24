@@ -39,8 +39,6 @@ export default {
                 const response = await Api.getSearch(query);
 
                 const results = response.data;
-                CSAT.searchActiveQ = true;
-                csat.mount();
                 for (const result of results) {
                     if (result.type === 'city') {
                         const city = {

@@ -17,18 +17,18 @@ export default {
             csatRoot.innerHTML = csatHomeQuestion.html;
             await csatHomeQuestion.mount();
         }
-        if (CSAT.searchActiveQ && !CSAT.homeActiveQ) {
-            csatRoot.innerHTML = csatSearchQuestion.html;
-            await csatSearchQuestion.mount();
-        }
-        if (CSAT.tripsActiveQ && !CSAT.tripsQ) {
-            csatRoot.innerHTML = csatTripsQuestion.html;
-            await csatTripsQuestion.mount();
-        }
-        if (CSAT.profileActiveQ && !CSAT.profileQ) {
-            csatRoot.innerHTML = csatProfileQuestion.html;
-            await csatProfileQuestion.mount();
-        }
+        // if (CSAT.searchActiveQ && !CSAT.homeActiveQ) {
+        //     csatRoot.innerHTML = csatSearchQuestion.html;
+        //     await csatSearchQuestion.mount();
+        // }
+        // if (CSAT.tripsActiveQ && !CSAT.tripsQ) {
+        //     csatRoot.innerHTML = csatTripsQuestion.html;
+        //     await csatTripsQuestion.mount();
+        // }
+        // if (CSAT.profileActiveQ && !CSAT.profileQ) {
+        //     csatRoot.innerHTML = csatProfileQuestion.html;
+        //     await csatProfileQuestion.mount();
+        // }
     },
 
     unmount(): void {}

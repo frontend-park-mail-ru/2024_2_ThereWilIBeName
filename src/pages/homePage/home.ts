@@ -62,7 +62,7 @@ export default {
         }
 
         CSAT.homeActiveQ = true;
-        csat.mount();
+        await csat.mount();
 
     },
 
@@ -72,6 +72,5 @@ export default {
      */
     unmount() {
         CSAT.homeActiveQ = false;
-        CSAT.searchActiveQ = false;
     },
 };
