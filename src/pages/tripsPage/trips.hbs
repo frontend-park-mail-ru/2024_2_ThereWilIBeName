@@ -11,9 +11,11 @@
         </div>
         <div class="gallery-item-trips-bottom-panel hidden hidden-animation" id="photo-gallery">
             <div class="add-photo-button">Добавить фото</div>
-            {{#each photos}}
-                <img class="added-photo" src="/photos/{{photoPath}}" alt="Фото поездки">
-            {{/each}}
+            <div class="trip-photos">
+                {{#each photos}}
+                    <img class="added-photo" src="/photos/{{photoPath}}" alt="Фото поездки">
+                {{/each}}
+            </div>
         </div>
     </li>
 {{/each}}

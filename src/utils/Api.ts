@@ -244,26 +244,23 @@ export default {
     async getUserTrips(id: string): Promise<JsonResponse<Trip[]>> {
         const res = await RESTApi.get(`/api/v1/users/${id}/trips`);
         return {
-            data: Array.isArray(res.data)
-                ? res.data.map((trip) => ({
-                    userId: Number(trip.user_id),
-                    id: String(trip.id),
-                    name: String(trip.name),
-                    cityId: Number(trip.city_id),
-                    description: String(trip.description),
-                    startDate: formatDate(trip.start_date),
-                    endDate: formatDate(trip.end_date),
-                    private: Boolean(trip.private),
-                    photos: Array.isArray(trip.photos)
-                        ? trip.photos.map((photo: any) => ({ photoPath: String(photo) }))
-                        : [],
-                }))
-                : [],
+            data: Array.isArray(res.data) ? res.data.map( (trip) => ({
+                userId: Number(trip.user_id),
+                id: String(trip.id),
+                name: String(trip.name),
+                cityId: Number(trip.city_id),
+                description: String(trip.description),
+                startDate: formatDate(trip.start_date),
+                endDate: formatDate(trip.end_date),
+                private: Boolean(trip.private),
+                photos: Array.isArray(trip.photos)
+                    ? trip.photos.map((photo: any) => ({ photoPath: String(photo) }))
+                    : [],
+            })) : [],
             status: res.status,
             ok: res.ok,
         };
     },
-
 
     async getUserReviews(id: string): Promise<JsonResponse<UserReview[]>> {
         const res = await RESTApi.get(`api/v1/users/${id}/reviews`);
