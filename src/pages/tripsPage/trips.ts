@@ -2,21 +2,16 @@ import Router from '../../utils/Router';
 import galleryTemplateTrips from './trips.hbs';
 import Api from '../../utils/Api';
 
-import logoImage from '../../static/logo.png';
 import openIcon from '../../static/open.png';
 import tripIcon from '../../static/trip_icon.png';
 import copyLinkIcon from '../../static/copylink.png';
 import deleteIcon from '../../static/delete.png';
-import myBlackIcon from '../../static/232323.png';
 import editIcon from '../../static/edit.png';
 import palmsImg from '../../static/please white.svg';
-import palmsImgB from '../../static/please black.svg';
 import User from '../../utils/user';
 import header from '../../components/header';
 import backButton from '../../static/back button white.svg';
 import footer from '../../components/footer';
-import CSAT from '../../utils/CSAT-memory';
-import csat from '../../components/csat-block';
 import galleryPhotosTemplate from './trips-photos.hbs';
 
 export default {
