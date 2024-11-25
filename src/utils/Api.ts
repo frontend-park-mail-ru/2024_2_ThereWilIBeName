@@ -29,7 +29,6 @@ type Attraction = {
     imagePath: string,
     description: string,
     rating: number,
-    numberOfReviews: number,
     address: string,
     cityID: number,
     phoneNumber: string,
@@ -73,10 +72,10 @@ type PostReview = {
 
 type GetReview = {
     id: number,
-    user_login: string,
-    avatar_path: string,
+    userLogin: string,
+    avatarPath: string,
     rating: number,
-    review_text: string,
+    reviewText: string,
 }
 
 type UserReview = {
@@ -185,7 +184,6 @@ export default {
                 imagePath: String(res.data.imagePath),
                 description: String(res.data.description),
                 rating: Number(res.data.rating),
-                numberOfReviews: Number(res.data.numberOfReviews),
                 address: String(res.data.address),
                 cityID: Number(res.data.cityID),
                 phoneNumber: String(res.data.phoneNumber),
@@ -231,10 +229,10 @@ export default {
             data: Array.isArray(res.data) ? res.data.map( (review: any) =>
                 ({
                     id: Number(review.id),
-                    user_login: String(review.user_login),
-                    avatar_path: String(review.avatar_path),
+                    userLogin: String(review.user_login),
+                    avatarPath: String(review.avatar_path),
                     rating: Number(review.rating),
-                    review_text: String(review.review_text),
+                    reviewText: String(review.review_text),
                 })) : [],
             status: res.status,
             ok: res.ok,

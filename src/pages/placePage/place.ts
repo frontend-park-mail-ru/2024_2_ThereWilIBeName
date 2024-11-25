@@ -1,6 +1,4 @@
 import Api from '../../utils/Api';
-import User from '../../utils/user';
-import placeTemplate from './place.hbs';
 import Router from '../../utils/Router';
 import deleteIcon from '../../static/delete.png';
 import header from '../../components/header';
@@ -9,6 +7,7 @@ import mapMarkerIcon from '../../static/map marker.svg';
 import backButton from '../../static/back button white.svg';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import reviewsLoad from './reviews-load';
 
 export default {
     html:
@@ -30,37 +29,15 @@ export default {
                 </div>
                 
                 <div class="reviews grid-reviews">
-                    <div class="leave-review" id="leave-review">
-                        <div class="leave-review-header">
-                            <div class="leave-review-header-text">Напишите отзыв</div>
-                            <div class="stars">
-                                <span class="star" data-value="1">&#9733;</span>
-                                <span class="star" data-value="2">&#9733;</span>
-                                <span class="star" data-value="3">&#9733;</span>
-                                <span class="star" data-value="4">&#9733;</span>
-                                <span class="star" data-value="5">&#9733;</span>
-                            </div>
-                        </div>
-                        <div>
-                            <form id="review-form">
-                                <textarea class="review-field" id="review-field" placeholder="Введите текст..." rows="3" cols="50"></textarea>
-                                <button class="review-button" id="review-button">Оставить отзыв</button>
-                            </form>
-                        </div>
+                    <div class="review-form">
+                        <div class="review-form-title grid-review-form-title">Были? Поделитесь!</div>
+                        <div class="rating grid-rating">
+                            <input class="rating-input" type="number" min="1" max="5" step="1" value="5" id="rating-input">из 5</div>
+                        <textarea class="review-text-area grid-review-text-area" id="review-text-area" placeholder="Напишите ваши впечатления"></textarea>
+                        <div class="review-form-button grid-review-form-button" id="review-form-button">Оставить отзыв</div>
                     </div>
-                    <div class="user-review" id="user-review">
-                        <div class="user-review-block">
-                            <div class="review-info">
-                                <div class="text-average">Ваш отзыв</div>
-                                <div class="rating" id="user-rating"><!-- оценка отзыва--><span>/5</span></div>
-                            </div>
-                            <div><hr class="solid"></div>
-                            <div class="review-text" id="user-text"><!-- текст отзыва--></div>
-                            <img src="${deleteIcon}" alt="Удалить" class="delete-review" id="delete-button">
-                        </div>
+                    <div class="reviews-gallery" id="reviews-gallery">
                     </div>
-                    <ul id="reviews">
-                    </ul>
                 </div>
             </div>
         </main>
@@ -68,29 +45,24 @@ export default {
 `,
     async mount(router: Router, params: any): Promise<void> {
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
-        const placeName = document.getElementById('place-name') as HTMLElement;
-        const placeDescription = document.getElementById('description') as HTMLElement;
-        const placeImage = document.getElementById('place-image') as HTMLImageElement;
-        const reviewsElement = document.getElementById('reviews') as HTMLElement;
-        const userRating = document.getElementById('user-rating') as HTMLElement;
-        const userText = document.getElementById('user-text') as HTMLElement;
-        const deleteButton = document.getElementById('delete-button') as HTMLButtonElement;
-        const reviewForm = document.getElementById('review-form') as HTMLElement;
-        const stars = Array.from(document.querySelectorAll('.star'));
-        const userReviewElement = document.getElementById('user-review') as HTMLElement;
-        const reviewElement = document.getElementById('leave-review') as HTMLElement;
-        const reviewTextArea = document.getElementById('review-field') as HTMLTextAreaElement;
-
-        // Монтирование хэдера
-        await header.mount(router);
-
         backButton.addEventListener('click', () => {
             router.goto('/home');
         });
 
+        // Монтирование хэдера
+        await header.mount(router);
+
         const itemId: number = Number(params);
         const attractionResponse = await Api.getAttraction(itemId);
         const attraction = attractionResponse.data;
+
+        const placeName = document.getElementById('place-name') as HTMLElement;
+        placeName.textContent = attraction.name;
+        const placeImage = document.getElementById('place-image') as HTMLImageElement;
+        placeImage.src = attraction.imagePath;
+        const placeDescription = document.getElementById('description') as HTMLElement;
+        placeDescription.textContent = attraction.description;
+
         const latitude = attraction.latitude;
         const longitude = attraction.longitude;
         const map = L.map('map', {attributionControl: false}).setView([latitude, longitude], 13);
@@ -113,68 +85,25 @@ export default {
             resizeObserver.observe(mapContainer);
         }
 
-        const reviewsResponse = await Api.getReviews(itemId);
-        let reviews = reviewsResponse.data;
-
-        let userReview: any;
-        if (User.id !== '') {
-            userReview = reviews.find(review => review.user_login === User.username);
-            if (userReview) {
-                reviews = reviews.filter(review => review.user_login !== User.username);
-                userRating.textContent = String(userReview.rating) + '/5';
-                userRating.style.setProperty('--progress', String(userReview.rating));
-                userText.textContent = userReview.review_text;
-                userReviewElement.classList.toggle('visible');
-
-            } else if (reviewElement) {
-                reviewElement.classList.toggle('visible');
-            }
-        }
-
-        reviewForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const star = stars.find(element => element.classList.contains('selected'));
-            if (!star) {
-                alert('Укажите рейтинг');
+        const reviewFormButton = document.getElementById('review-form-button') as HTMLButtonElement;
+        const reviewFormText = document.getElementById('review-text-area') as HTMLTextAreaElement;
+        const formRatingInput = document.getElementById('rating-input') as HTMLInputElement;
+        reviewFormButton.addEventListener('click', async () => {
+            if (!reviewFormText.value) {
                 return;
             }
-            const raiting = Number(star.getAttribute('data-value'));
-            const reviewText = (reviewTextArea).value;
-            const res = await Api.postReview(Number(User.id), itemId, reviewText, raiting);
-
-            (document.getElementById('review-field') as HTMLTextAreaElement).value = '';
-            stars.forEach(star => {
-                star.classList.remove('selected');
-            });
-            reviewElement.classList.remove('visible');
-
-            userReview = res.data;
-            userRating.textContent = String(userReview.rating);
-            userRating.style.setProperty('--progress', String(userReview.rating));
-            userText.textContent = userReview.review_text;
-            userReviewElement.classList.toggle('visible');
-            router.goto(`${window.location.pathname}`);
+            if (Number(formRatingInput.value) < 1 || Number(formRatingInput.value) > 5) {
+                alert('Некорректный рейтинг');
+                return;
+            }
+            const res = await Api.postReview(params, itemId, reviewFormText.value, Number(formRatingInput.value));
+            if (!res.ok) {
+                console.log('Ошибка отправки отзыва');
+            }
+            await reviewsLoad(itemId, router);
         });
 
-        deleteButton.addEventListener('click', async () => {
-            const res = await Api.deleteReview(userReview.id, itemId);
-            userReviewElement.classList.remove('visible');
-            reviewElement.classList.toggle('visible');
-        });
-
-        placeName.textContent = attraction.name;
-        placeDescription.textContent = attraction.description;
-        placeImage.src = attraction.imagePath;
-
-        reviewsElement.innerHTML = placeTemplate({reviews});
-
-        stars.forEach(star => {
-            star.addEventListener('click', () => {
-                stars.forEach(s => s.classList.remove('selected'));
-                star.classList.add('selected');
-            });
-        });
-
+        await reviewsLoad(itemId, router);
     },
 
     unmount(): void {}

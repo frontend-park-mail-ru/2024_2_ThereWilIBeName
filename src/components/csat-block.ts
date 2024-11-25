@@ -1,5 +1,4 @@
 import CSAT from '../utils/CSAT-memory';
-import csat from '../pages/CSAT/csat';
 import closeIcon from '../static/close icon.svg';
 import CSATPage from '../pages/CSAT/csat';
 
