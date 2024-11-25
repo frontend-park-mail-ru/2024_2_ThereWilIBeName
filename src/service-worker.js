@@ -8,52 +8,40 @@ const KEY = 'there-will-be-name';
 
 // Добавление в кэш статики через postMessage, отправленной из основного приложения
 self.addEventListener('message', async (event) => {
-    console.log(event);
     if (event.data.type === 'CACHE_URLS') {
+        if (!event.data.payload || !Array.isArray(event.data.payload)) {
+            console.error('Некорректное сообщение для кэширования');
+            return;
+        }
         try {
             const cache = await caches.open(KEY);
-            cache.addAll(event.data.payload);
-        }
-        catch (error) {
-            console.error(error);
+            await cache.addAll(event.data.payload);
+            console.log('Ресурсы добавлены в кэш:', event.data.payload);
+        } catch (error) {
+            console.error('Ошибка кэширования:', error);
         }
     }
 });
 
-self.addEventListener('fetch', async (event) => {
-    if (event.request.method !== 'GET') {
-        return;
-    }
-    event.respondWith( new Promise(async (resolve, reject) => {
-        console.log(navigator.onLine);
-        // Если онлайн, обновляем кэш
-        if (navigator.onLine) {
+self.addEventListener('fetch', (event) => {
+    if (event.request.method !== 'GET') return;
+
+    event.respondWith(
+        (async () => {
             try {
-                const res = await fetch(event.request);
-                const resClone = res.clone();
-                caches.open(KEY).then((cache) => cache.put(event.request, resClone));
+                const response = await fetch(event.request);
+                if (response.ok) {
+                    const cache = await caches.open(KEY);
+                    cache.put(event.request, response.clone());
+                }
+                return response;
+            } catch {
+                const cachedResponse = await caches.match(event.request);
+                return cachedResponse || new Response(
+                    JSON.stringify({ message: 'Ошибка, вы оффлайн и кэша нет' }),
+                    { status: 418, headers: { 'Content-Type': 'application/json' } }
+                );
             }
-            catch (error) {
-                reject(error);
-                return;
-            }
-        }
-
-        const cachedResponse = await caches.match(event.request);
-        console.log(cachedResponse);
-        // Если кэш есть, то его возвращаем
-        if (cachedResponse) {
-            resolve(cachedResponse);
-            return;
-        }
-
-        // Если его нет, и мы оффлайн, то сервер не может приготовить кофе, потому что он чайник
-        const init = {
-            status: 418,
-            statusText: 'Offline Mode'
-        };
-        const data = { message: 'Ошибка, так как вы офлайн и кэша нет' };
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        resolve(new Response(blob, init));
-    }))
+        })()
+    );
 });
