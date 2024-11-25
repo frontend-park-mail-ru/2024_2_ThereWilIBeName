@@ -1,7 +1,11 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
-import {emailRegex} from './validation';
-import {passwordRegex} from './validation';
+import {emailRegex} from '../components/validation';
+import {passwordRegex} from '../components/validation';
+
+import logoImage from '../static/logo trip.svg';
+import backButton from '../static/back button white.svg';
+import footer from '../components/footer';
 
 export default {
     /**
@@ -12,29 +16,26 @@ export default {
      */
     html:
         `
-        <header class="header">
-            <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image" id="home-logo">
-            </div>
-        </header>
+        <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
         <main>
             <div class="reg-block">
-                <div class="back-button" id ="back-button">←</div>
+                <img src="${backButton}" class="back-button" id="back-button">
                 <div class="auth-title">Регистрация</div>
                 <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
-                <form id="signup-form">
+                <form id="signup-form" class="signup-form">
                     <label class="reg-text">Логин</label>
                     <input class="border" id="login" name="login" >
                     <label class="reg-text">Email</label>
                     <input class="border" id="email" name="email" >
                     <label class="reg-text">Пароль</label>
-                    <input class="border" type="password" id="password" name="password">
+                    <input class="border" type="password" id="password" name="password" autocomplete="new-password">
                     <label class="reg-text">Подтверждение пароля</label>
                     <input class="border" type="password" id="confirm-password" name="confirm-password">
                     <button class="auth-button">Зарегистрироваться</button>
                 </form>
             </div>
         </main>
+        ${footer.html}
     `,
 
     /**
@@ -100,12 +101,13 @@ export default {
                 errorMessage.classList.add('visible');
                 return;
             }
-            if (res.ok!) {
+            if (!res.ok) {
                 errorMessage.textContent = 'Неизвестная ошибка';
                 errorMessage.classList.add('visible');
                 return;
             }
 
+            localStorage.setItem('token', `${res.data.token}`);
             router.goto('/home');
         });
     },

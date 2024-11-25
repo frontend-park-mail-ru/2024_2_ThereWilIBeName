@@ -1,0 +1,209 @@
+mixinButton(buttonColor, textColor)
+  padding 7px 25px
+  margin 15px 15px
+  background-color buttonColor
+  color textColor
+  border none
+  border-radius 15px
+  cursor pointer
+  font-size 20px
+  text-align center
+  transition all 0.3s ease
+
+  &:hover
+    transform scale(0.95)
+
+mixinTitleGradient()
+  margin-top 0
+  margin-bottom 0
+  font-weight bold
+  text-align center
+  background-clip text
+  color transparent
+  font-size 30px
+  background linearGradient() 50% 50% / 100vw 100vh
+  background-clip text
+
+mixinFormBlock()
+  display flex
+  flex-direction column
+  align-items center
+  background-color myBlack
+  padding 20px
+  border-radius 30px
+  width 400px
+  height fit-content
+  margin 40px auto
+
+mixinForm()
+  display grid
+  width 100%
+  row-gap 10px
+
+mixinBorder()
+  all unset
+  display block
+  height 30px
+  padding 10px
+  border-radius 10px
+  background myGrey
+  color myWhite
+
+mixinBackButton()
+  padding 5px
+  width 35px
+  cursor pointer
+  align-self normal
+  opacity 0.5
+  transition opacity 0.3s ease
+
+  &:hover
+    opacity 1
+
+mixinFormText()
+  padding-left 15px
+  color myWhite
+  font-size 17px
+
+mixinFormButton()
+  padding 10px
+  display block
+  font-weight normal
+  width 100%
+  background-color myGrey
+  color myWhite
+  border none
+  border-radius 15px
+  cursor pointer
+  font-size 17px
+  margin-top 15px
+  transition transform 0.3s ease
+
+  &:hover
+    transform scale(0.95)
+
+mixinBlock(blockColor)
+  background-color blockColor
+  border-radius 20px
+  max-width 100%
+  height fit-content
+  margin 20px 100px
+  padding 25px 25px
+  column-gap 25px
+  position relative
+
+  &::before
+    content ''
+    border-radius 30px
+    position absolute
+    inset 16px 16px -16px -16px
+    background myShadow
+    overflow auto
+    z-index -1
+
+mixinInformationText(textColor)
+  margin 15px 25px
+  color textColor
+  font-size 20px
+
+mixinRow()
+  display grid
+  align-items center
+  margin 0 20px
+
+mixinGalleryItem(galleryItemHeight, galleryItemWidth, backgroundColor)
+  margin 0
+  padding 15px
+  border-radius 20px
+  background backgroundColor
+  height galleryItemHeight
+  width galleryItemWidth
+  display grid
+  overflow hidden
+  border 2px solid myShadow
+  position relative
+
+  &::before
+    content ''
+    border-radius 30px
+    position absolute
+    inset 16px 16px -16px -16px
+    background myShadow
+    overflow auto
+    z-index -1
+
+  &::before
+    content ''
+
+
+
+mixinReviewBlock()
+  display flex
+  flex-direction column
+  background-color #f4f4f4
+  justify-content center
+  max-width 400px
+  border-radius 30px
+  margin 30px 0
+  filter drop-shadow(-16px 16px 0px #23232380)
+  padding 10px
+  gap 3px
+
+mixinSideMenu()
+  .menu-button
+    mixinButton(myBlack, myWhite)
+    margin 0
+    text-align left
+    transition transform  0.3s ease
+
+    &.hover
+      transform scale(1.05)
+
+  .side-menu
+    position fixed
+    top 0
+    right -350px
+    width 250px
+    height 100%
+    background-color myBlack
+    box-shadow -2px 0 5px rgba(0,0,0,0.5)
+    transition right 0.3s ease
+    padding 20px
+    z-index 1000
+
+    ul
+      list-style-type none
+      padding 0
+
+      li
+        margin 20px 0
+
+  .user-name
+    padding 7px
+    color myWhite
+    border none
+    font-size 30px
+
+  .menu-close-button
+    mixinButton(myRed, myWhite)
+    margin 0
+    transition transform  0.3s ease
+
+    &.hover
+      transform scale(1.05)
+
+  .side-menu.open
+    right 0
+
+  .background-menu
+    position fixed
+    pointer-events none
+    inset 0
+    background-color myBlackout
+    z-index -1
+    opacity 0
+    transition opacity 0.3s ease
+
+  .side-menu.open .background-menu
+    opacity 1
+    pointer-events auto

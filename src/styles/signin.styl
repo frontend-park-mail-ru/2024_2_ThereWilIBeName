@@ -1,0 +1,76 @@
+.auth-page
+    .auth-block
+        mixinFormBlock()
+
+    .signin-form
+        mixinForm()
+        padding 10px
+
+    .auth-signup-button
+    .auth-title
+        mixinTitleGradient()
+
+    .auth-title
+        font-size 35px
+
+    .auth-text
+    .back-button
+        mixinFormText()
+
+    .back-button
+        mixinBackButton()
+
+    .auth-buttons
+        margin-top 20px
+        display flex
+        flex-direction row
+        column-gap 10px
+
+    .auth-button
+        mixinFormButton()
+        padding 10px 0
+        background linearGradient()
+
+    .auth-signup-button
+        mixinFormButton()
+        color myWhite
+        border 2px solid myGrey
+        transition all 0.3s ease
+
+        &:hover
+            color myLightGrey
+
+    .border
+        mixinBorder()
+
+    .remember-me-container
+        display flex
+        justify-content flex-start
+        align-items center
+        color myWhite
+        padding 0 20px
+
+    .remember-me
+        margin 8px 5px
+        font-size 17px
+
+    .custom-check-icon
+        all unset
+        position relative
+        width 18px
+        height 18px
+        border 0
+        margin-right 8px
+        background-color myGrey
+        cursor pointer
+
+        &::after
+            position absolute
+            left 2px
+            top -3px
+            opacity 0
+            transition opacity 0.2s ease
+            content "✔"
+
+        &:checked::after
+            opacity 1

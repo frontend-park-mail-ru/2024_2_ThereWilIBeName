@@ -1,7 +1,11 @@
-import Api from '../../utils/Api';
-import User from '../../utils/user';
 import Router from '../../utils/Router';
-import galleryTemplate from './home.hbs';
+import header from '../../components/header';
+import footer from '../../components/footer';
+import Search from '../../utils/search-memory';
+import csat from '../../components/csat-block';
+import CSAT from '../../utils/CSAT-memory';
+import closeIcon from '../../static/close icon.svg';
+import attractionsLoad from './attractions-load';
 
 export default {
     /**
@@ -9,31 +13,27 @@ export default {
      *
      * @type {string}
      */
-    html: `
-        <header class="header">
-            <div class="logo">
-                <img src="/src/static/logo.png" alt="Логотип" class="logo-image">
-            </div>
-            <div class="header-menu">
-                <button class="header-button" id="signin-button">вход</button>
-                <button class="user-button" id="user-button"></button>
-                
-                <div id="side-menu" class="side-menu">
-                    <div class="background-menu" id="background-menu"></div>
-                    <div class="user-name" id="user-name"></div>
-                    <ul>
-                        <li><button class="menu-button" id="change-user-button">Сменить пользователя</button></li>
-                        <li><button class="menu-button" id="profile-button">Профиль</button></li>
-                        <li><button class="menu-button" id="logout-button">Выйти</button></li>
-                    </ul>
-                    <button id="close-button" class="close-button">Закрыть</button>
-                </div>
-            </div>
-        </header>
+    html: ` ${header.html}
         <main>
-            <div class="headline">Достопримечательности</div>
-            <ul class="gallery" id="gallery"></ul>
-        </main>`,
+            <div class="gallery-block">
+                <div class="headline">Интересные места</div>
+                <hr>
+                <div class="categories">
+                    <img src="${closeIcon}" class="category hidden" id="category-none">
+                    <div class="category" id="category-one">Исторические памятники</div>
+                    <div class="category" id="category-two">Соборы</div>
+                    <div class="category" id="category-three">Театры</div>
+                    <div class="category" id="category-four">Музеи</div>
+                    <div class="category" id="category-five">Мечети</div>
+                    <div class="category" id="category-six">Крепости</div>
+                    <div class="category" id="category-seven">Храмы</div>
+                </div>
+                <ul class="gallery" id="gallery"></ul>
+            </div>
+        </main>
+        ${footer.html}
+<!--        ${csat.html}-->
+    `,
 
     /**
      * Функция монтирования главной страницы.
@@ -44,72 +44,66 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после завершения монтирования страницы.
      */
     async mount(router: Router): Promise<void> {
-        const profileButton = document.getElementById('profile-button') as HTMLButtonElement;
-        const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
-        const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
-        const signinButton = document.getElementById('signin-button') as HTMLButtonElement;
+        const placeButton = document.getElementById('gallery') as HTMLButtonElement;
 
-        const userNameDiv = document.getElementById('user-name') as HTMLElement;
-        const userButton = document.getElementById('user-button') as HTMLButtonElement;
-        const sideMenu = document.getElementById('side-menu') as HTMLElement;
-        const closeButton = document.getElementById('close-button') as HTMLButtonElement;
-        const backgroundMenu = document.getElementById('background-menu') as HTMLElement;
-
-        // Открытие меню при клике на кнопку
-        userButton.addEventListener('click', () => {
-            sideMenu.classList.add('open');
+        const categoryNoneButton = document.getElementById('category-none') as HTMLButtonElement;
+        categoryNoneButton.addEventListener('click', async () => {
+            Search.categoryId = -1;
+            await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.add('hidden');
+        });
+        const categoryOneButton = document.getElementById('category-one') as HTMLButtonElement;
+        categoryOneButton.addEventListener('click', async () => {
+            Search.categoryId = 1;
+            await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
+        });
+        const categoryTwoButton = document.getElementById('category-two') as HTMLButtonElement;
+        categoryTwoButton.addEventListener('click', async () => {
+            Search.categoryId = 2;
+            await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
+        });
+        const categoryThreeButton = document.getElementById('category-three') as HTMLButtonElement;
+        categoryThreeButton.addEventListener('click', async () => {
+            Search.categoryId = 3;
+            await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
+        });
+        const categoryFourButton = document.getElementById('category-four') as HTMLButtonElement;
+        categoryFourButton.addEventListener('click', async () => {
+            Search.categoryId = 4;
+            await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
+        });
+        const categoryFiveButton = document.getElementById('category-five') as HTMLButtonElement;
+        categoryFiveButton.addEventListener('click', async () => {
+            Search.categoryId = 5;
+            await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
+        });
+        const categorySixButton = document.getElementById('category-six') as HTMLButtonElement;
+        categorySixButton.addEventListener('click', async () => {
+            Search.categoryId = 6;
+            await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
+        });
+        const categorySevenButton = document.getElementById('category-seven') as HTMLButtonElement;
+        categorySevenButton.addEventListener('click', async () => {
+            Search.categoryId = 7;
+            await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
         });
 
-        closeButton.addEventListener('click', () => {
-            sideMenu.classList.remove('open');
-        });
-        backgroundMenu.addEventListener('click', () => {
-            sideMenu.classList.remove('open');
-        });
+        // Монтирование хэдера
+        await header.mount(router);
 
-        profileButton.addEventListener('click', () => {
-            router.goto('/profile');
-        });
+        // Загрузка мест
+        await attractionsLoad(placeButton, router);
 
-        changeUserButton.addEventListener('click', () => {
-            router.goto('/signin');
-        });
+        // CSAT.homeActiveQ = true;
+        // await csat.mount();
 
-        logoutButton.addEventListener('click', async () => {
-            const resLogout = await Api.postLogout(User.username, User.id);
-            if (resLogout.ok) {
-                User.username = '';
-                User.id = '';
-                User.email = '';
-                userButton.classList.remove('show');
-                signinButton.classList.remove('hidden');
-            }
-        });
-
-        signinButton.addEventListener('click', () => {
-            router.goto('/signin');
-        });
-
-        // Загрузка достопримечательностей
-        const attractionsResponse = await Api.getAttractions();
-        const attractions = attractionsResponse.data;
-        const galleryElement = document.getElementById('gallery') as HTMLElement;
-        galleryElement.innerHTML = galleryTemplate({ attractions });
-
-        // Получение информации о текущем пользователе
-        const currentUser = await Api.getUser();
-
-        if (!currentUser.ok) {
-            console.log('Пользователь не авторизован');
-            return;
-        }
-        User.username = currentUser.data.username;
-        User.id = currentUser.data.id;
-        signinButton.textContent = 'Сменить пользователя';
-        userButton.textContent = User.username;
-        userNameDiv.textContent = User.username;
-        userButton.classList.add('show');
-        signinButton.classList.add('hidden');
     },
 
     /**
@@ -117,6 +111,6 @@ export default {
      * Используется для очистки состояния или удаления обработчиков событий при переходе на другую страницу.
      */
     unmount() {
-        // Оставлено пустым, так как текущая реализация не требует очистки обработчиков.
+        CSAT.homeActiveQ = false;
     },
 };

@@ -1,0 +1,8 @@
+{{#each reviews}}
+    <div class="review-item" id="{{ id }}">
+        <img src="../../static/please%20white.svg" alt="Аватарка" class="reviewers-avatar grid-reviewers-avatar">
+        <div class="reviewers-login grid-reviewers-login">{{userLogin}}</div>
+        <div class="review-rating grid-review-rating">{{rating}}/5</div>
+        <div class="review-text grid-review-text">{{reviewText}}</div>
+    </div>
+{{/each}}

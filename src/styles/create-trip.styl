@@ -1,0 +1,39 @@
+.create-trip-page
+  .create-trip-block
+    mixinFormBlock()
+
+  .create-trip-form
+    mixinForm()
+    padding 10px
+
+  .create-trip-title
+    mixinTitleGradient()
+
+  .create-trip-text, .back-button
+    mixinFormText()
+
+  .back-button
+    mixinBackButton()
+
+  .create-trip-button
+    mixinFormButton()
+    padding 10px 0
+    background linearGradient()
+
+  .border
+    mixinBorder()
+
+    &.description
+      height 60px
+
+    &:focus
+      background-position 0
+
+  textarea.border.description
+    height 100px
+
+    &:focus
+      background-position 0
+
+  .create-trip-text.checkbox-button
+    cursor pointer

@@ -1,0 +1,100 @@
+.search
+  position relative
+  padding 0 40px
+
+  ul
+    padding-inline-start 0
+
+  li
+    padding 20px 0
+    list-style-type none
+    padding-right 40px
+
+  @media (max-width 700px)
+    padding 0px
+    justify-self center
+    width 90%
+
+  .search-button
+    position absolute
+    height 42px
+    aspect-ratio 1 / 1
+    top 2px
+    right 105px
+    cursor pointer
+    transition all 0.3s ease
+
+    &:hover
+      transform scale(0.95)
+
+  .search-input
+    padding 15px
+    margin auto
+    width 100%
+    border 1px solid myWhite
+    background myBlack
+    border-radius 10px
+    outline none
+    color myWhite
+
+    &::placeholder
+      font-family 'Hero'
+      font-size 20px
+
+    @media (max-width 700px)
+      margin 0
+
+  .search-results
+    font-size 20px
+    padding 20px
+    max-height 80vh
+    display block
+    position absolute
+    overflow hidden
+    height fit-content
+    background-color myWhite
+    border-radius 20px
+    left 0
+    right 0
+    z-index 999
+    opacity 1
+    overflow-y scroll
+    scrollbar-width none
+    transition opacity 0.5s ease
+
+    &.hidden
+      opacity 0
+      display none
+
+  .search-city-item
+    padding 20px
+    border-bottom 1px solid myGrey
+    cursor pointer
+    transition background-color 0.3s ease
+
+    div
+      font-weight bold
+
+    city
+      display none
+
+    &:hover
+      background-color myPinkShadow
+
+  .search-place-item
+    padding 20px
+    display grid
+    grid-template-rows auto
+    grid-template-columns auto 30%
+    border-bottom 1px solid myGrey
+    cursor pointer
+    transition background-color 0.3s ease
+
+    a
+      display none
+
+    img
+      width 100%
+
+    &:hover
+      background-color myPinkShadow

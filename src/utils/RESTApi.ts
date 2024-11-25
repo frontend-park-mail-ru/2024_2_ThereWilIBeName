@@ -19,6 +19,7 @@ async function request(
             body: body ? JSON.stringify(body) : undefined,
             headers: {
                 'Content-Type': 'application/json',
+                'X-Access-Token': String(localStorage.getItem('token')),
             },
             mode: 'cors',
             credentials: 'include',

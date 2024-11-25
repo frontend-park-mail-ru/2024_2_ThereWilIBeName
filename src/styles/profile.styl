@@ -1,14 +1,465 @@
 .profile-page
-  .warning
-    padding 7px 25px
-    color myWhite
-    font-weight bold
-    font-size 45px
-    margin 50px auto
+  .logo-image
+      margin 20px auto
+      height 150px
 
-  .warn-message
+  .background-profile
+    position relative
+    overflow hidden
+    min-height 100vh
+    padding 0 150px
+
+    &::before
+      content ''
+      position absolute
+      top 100px
+      bottom 40px
+      left 0
+      width 100%
+      background-color myBlack
+      z-index -1
+
+    @media (max-width 700px)
+      padding 0 20px
+
+  .user-block
+    mixinBlock(myWhite)
+    display grid
+    grid-template-rows repeat(2, auto)
+    grid-template-columns 5% 30% auto
+    grid-template-areas "a b c"\
+    "a d e"
+    margin 0
+    gap 10px 10px
+    padding 20px
+
+    .back-button-grid
+      grid-area a
+      background-color myBlack
+      height 50%
+      justify-self center
+      align-self center
+      width 100%
+      border-radius 20px
+      transition all 0.3s ease
+      opacity 1
+
+      &:hover
+        transform scale(1.05)
+
+    .avatar-grid
+      grid-area b
+
+    .information-block-grid
+      grid-area c
+
+    .information-title-block-grid
+      grid-area d
+
+    .change-password-button-grid
+      grid-area e
+
+    @media (max-width 700px)
+      grid-template-columns auto
+      grid-template-areas "b"\
+      "d"\
+      "c"\
+      "e"
+      margin 0
+      width 100%
+
+  .profile-block
+    mixinBlock(myWhite)
+    margin 15px auto
+    margin-block-end 20px
+
+  .avatar
+    height 100%
+    width 100%
+    min-width 100px
+    min-height 100px
+    max-width 350px
+    max-height 350px
+    aspect-ratio 1 / 1
+    border-radius 20px
+    object-fit cover
+    background-color myBlack
+
+  .information-block
+    background-color myBlack
+    display grid
+    grid-template-columns auto auto auto
+    grid-template-rows repeat(3, auto)
+    grid-template-areas "a b e"\
+    "c d h"\
+    "f g ."
+    padding 20px
+    gap 40px 40px
+    align-content center
+    border-radius 20px
+
+    @media (max-width 700px)
+      height 350px
+      grid-template-columns 1fr 20%
+      grid-template-rows repeat(6, 16%)
+      row-gap 5px
+      column-gap 0
+      grid-template-areas "a e"\
+      "b h"\
+      "c ."\
+      "d ."\
+      "f ."\
+      "g ."
+
+    .username-grid
+      grid-area a
+    .username-input-grid
+      grid-area b
+    .email-grid
+      grid-area c
+    .email-input-grid
+      grid-area d
+    .edit-button-grid
+      grid-area e
+    .id-grid
+      grid-area f
+    .id-input-grid
+      grid-area g
+    .submit-button-grid
+      grid-area h
+
+  .information-title-block
+    background-color myBlack
+    heigth fit-content
+    border-radius 20px
+    max-width 350px
+    min
+
+  .information-user-row
+    mixinRow()
+    grid-template-columns 40% auto 10%
+    column-gap 10px
+
+  .profile-menu-row
+    mixinRow()
+    height fit-content
+    grid-template-columns 30% 40% 30%
+
+    @media (max-width 700px)
+      grid-template-rows auto auto auto
+      grid-template-columns auto
+      place-items flex-start
+      margin 0
+
+
+  .profile-menu-passive-left
+  .profile-menu-passive-right
+    font-size 27px
+    color myShadow
+    cursor pointer
+    transition transform 0.3s ease
+
+  .profile-menu-passive-left
+    text-align right
+
+    &:hover
+      transform scale(1.1)
+      color myRed
+
+  .profile-menu-passive-right
+    text-align left
+
+    &:hover
+      transform scale(1.05)
+      color myRed
+
+  .profile-menu-active
+    font-size 40px
+    color myBlack
+    font-weight bold
+    text-align center
+    transition transform 0.3s ease
+    cursor pointer
+
+    &:hover
+      transform scale(1.05)
+
+  .information-text
+    mixinInformationText(myWhite)
+
+    &.hidden
+      display none
+
+    @media (max-width 700px)
+      margin 15px 0
+      margin-inline-start 10px
+
+  .information-text-bold
+    mixinInformationText(myWhite)
+    font-weight bold
+    font-size 20px
+
+    @media (max-width 700px)
+      margin 15px 0
+      margin-inline-start 10px
+
+  .information-text-title
+    mixinInformationText(myWhite)
+    font-weight bold
+    font-size 27px
+    padding-left 10px
     text-align center
 
-  .unknown-page-button
-    simpleButton(myBlack, myWhite)
-    font-size 25px
+  .information-back-button
+    mixinBackButton()
+
+    @media (max-width 700px)
+      display none
+
+  .user-information
+    display grid
+    grid-template-rows auto 1fr
+    row-gap 20px
+
+  .edit-button
+    width 45px
+    height 45px
+    border-radius 10px
+    background myWhite
+    cursor pointer
+    transition transform 0.3s ease
+
+    &.active
+      background linearGradient()
+
+    &:hover
+      background linearGradient()
+      transform scale(1.1)
+
+  .submit-edit-button
+    width 45px
+    height 45px
+    border-radius 10px
+    background myWhite
+    padding 5px
+    cursor pointer
+    transition transform 0.3s ease
+
+    &.hidden
+      display none
+
+    &:hover
+      transform scale(1.1)
+      background myGreen
+
+  hr
+    border none
+    height 2px
+    background-color myShadow
+    margin 20px 30px
+
+  .gallery-profile
+    display flex
+    flex-wrap wrap
+    justify-content space-evenly
+    gap 50px 30px
+    padding 0
+
+  .gallery-item-profile-trips
+    mixinGalleryItem(250px, 250px, myWhite)
+    display grid
+    grid-template-rows repeat(4, 1fr)
+    grid-template-columns 1fr 1fr
+    grid-template-areas "a b"\
+    "c c"\
+    "d d"\
+    "d d"
+    cursor pointer
+    transition transform 0.3s ease
+
+    .trip-icon-grid
+      grid-area a
+    .gallery-profile-trip-name-grid
+      grid-area b
+    .gallery-profile-trip-date-grid
+      grid-area c
+    .gallery-item-profile-trips-img-trip
+      grid-area d
+
+    &:hover
+      transform scale(1.05)
+
+  .gallery-item-profile-trips-img
+    object-fit fill
+    background myBlack
+    width 100%
+    height 100%
+    margin auto
+    border-radius 20px
+
+  .trip-icon
+    width 40px
+    height 40px
+
+  .profile-trip-row-name
+    color myBlack
+    display grid
+    grid-template-columns auto 1fr
+    column-gap 20px
+    align-items center
+
+  .gallery-profile-trip-name
+    color myBlack
+    font-size 20px
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+  .gallery-profile-trip-date
+    color myBlack
+    text-align center
+
+  .gallery-item-achievements
+    mixinGalleryItem(250px, 200px, myBlack)
+    grid-template-rows auto auto auto
+    grid-template-columns 100%
+    row-gap 0
+    place-items center
+
+  .gallery-item-achievements-img
+    object-fit cover
+    width 90px
+    height 90px
+    border-radius 20px
+
+  .gallery-item-achievements-name
+    width 150px
+    font-size 20px
+    color myWhite
+    text-align center
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+  .gallery-item-achievements-progressbar
+    font-size 20px
+    color myWhite
+    padding 10px 40px
+    background linearGradient()
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+    border-radius 10px
+
+  .gallery-item-reviews
+    mixinGalleryItem(150px, 800px, myWhite)
+    grid-template-columns 1fr 1fr 1fr 1fr
+    grid-template-rows 1fr 1fr
+    grid-template-areas "a b d d"\
+    "a c d d"
+
+    @media (max-width 700px)
+      width 210px
+      height fit-content
+      gap 10px
+      grid-template-columns 1fr 1fr
+      grid-template-rows repeat(5, 1fr)
+      grid-template-areas "a a"\
+      "b b"\
+      "c c"\
+      "d d"\
+      "d d"
+
+    .img-grid
+      grid-area a
+    .name-grid
+      grid-area b
+    .rating-grid
+      grid-area c
+    .text-grid
+      grid-area d
+
+  .gallery-item-reviews-img
+    object-fit cover
+    background myBlack
+    width 120px
+    height 120px
+    border-radius 20px
+    border 2px solid myBlack
+
+  .gallery-item-reviews-column
+    display grid
+    grid-template-rows 20% 25% 25% 1fr
+    align-items center
+
+  .gallery-item-reviews-name
+    font-size 24px
+    font-weight bold
+    color myBlack
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+  .gallery-item-reviews-score
+    font-size 20px
+    color myBlack
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+  .gallery-item-reviews-text
+    font-size 20px
+    color myBlack
+    overflow hidden
+    height 110px
+    mask-image linear-gradient(180deg, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0))
+
+  .edit-profile-input
+    padding 10px
+    margin auto
+    border myShadow
+    border-radius 10px
+    outline none
+    background linearGradient() 50% 50% / 100vw 100vh
+
+    &:focus
+      background-position 0
+
+    &.hidden
+      display none
+
+    @media (max-width 700px)
+      width 90%
+      margin 0
+      font-size 20px
+
+  .change-password-button
+    mixinButton(myBlack, myWhite)
+    padding 10px
+    margin 0
+    font-size 20px
+    align-content center
+
+  .in-progress-img
+    width 550px
+    height 350px
+
+  .please-block
+    align-items center
+    display flex
+    flex-direction column
+
+    &.hidden
+      display none
+
+  .please-img
+    height 200px
+    width 200px
+
+  .auth-please
+    font-size 24px
+    font-weight bold
+    color myBlack
+    margin auto
+    text-align center
+    width fit-content

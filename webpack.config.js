@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: './src/index.ts',
@@ -8,20 +8,19 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'build'),
         clean: true,
+        publicPath: '/'
     },
     mode: 'development',
     plugins: [
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: path.resolve(__dirname, './src/static'),
-                },
-            ],
-        }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './index.html'),
             minify: true,
         }),
+        new CopyPlugin({
+            patterns: [
+                {from: "src/service-worker.js"},
+            ],
+        })
     ],
     module: {
         rules: [
@@ -33,6 +32,10 @@ module.exports = {
             {
                 test: /\.styl$/,
                 use: ['style-loader', 'css-loader', 'stylus-loader'],
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
             },
             {
                 test: /\.js$/,
@@ -47,6 +50,16 @@ module.exports = {
             {
                 test: /\.hbs$/,
                 loader: 'handlebars-loader',
+                options: {
+                    helperDirs: path.join(__dirname, 'src/helpers'),
+                    precompileOptions: {
+                        knownHelpersOnly: false,
+                    },
+                },
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
+                type: 'asset/resource',
             },
         ],
     },

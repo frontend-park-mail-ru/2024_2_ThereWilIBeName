@@ -1,0 +1,90 @@
+.home-page
+    mixinSideMenu()
+
+    hr
+        border 1px solid myWhite
+        width 20%
+
+    .headline
+        border 10px
+        margin-bottom 10px
+        text-align center
+        color myWhite
+        font-size 40px
+
+        @media (max-width 700px)
+            font-size 30px
+
+    .categories
+        display flex
+        width 90%
+        margin auto
+        flex-direction row
+        column-gap 10px
+        overflow-x scroll
+        scrollbar-width none
+
+        .category
+            display block
+            text-align center
+            padding 5px 20px
+            align-content center
+            background myGrey
+            color myWhite
+            border-radius 15px
+            cursor pointer
+            transition all 0.3s ease
+            min-width fit-content
+            height 30px
+
+            &:hover
+                background myPink
+                transform scale(0.98)
+
+            &.hidden
+                display none
+
+        img
+            padding 0
+
+    .gallery-block
+        mixinBlock(myBlack)
+
+        @media (max-width 700px)
+            margin 0
+            padding 15px 0px
+
+    .gallery
+        padding 20px
+        list-style none
+        columns 3 300px
+
+    .gallery-item
+        border-radius 20px
+        margin auto
+        width 300px
+        height 100%
+        cursor pointer
+        -webkit-column-break-inside avoid /* Chrome, Safari, Opera */
+        page-break-inside avoid /* Firefox */
+        break-inside avoid /* IE 10+ */
+
+        img
+            object-fit cover
+            width 100%
+            height 100%
+            border-radius 20px
+            transition transform 0.3s ease
+
+            &:hover
+                transform scale(1.02)
+
+        .gallery-name
+            text-align center
+            padding 10px
+            margin 0
+            color myWhite
+            width 100%
+
+    .profile-button
+        mixinButton(myBlack, myWhite)

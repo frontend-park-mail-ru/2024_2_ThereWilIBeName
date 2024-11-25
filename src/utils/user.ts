@@ -13,6 +13,7 @@ class User {
     username: string;
     email: string;
     id: string;
+    isSignedIn: boolean;
 
     /**
      * Приватный конструктор для предотвращения создания экземпляра извне.
@@ -22,6 +23,7 @@ class User {
         this.username = '';
         this.email = '';
         this.id = '';
+        this.isSignedIn = false;
     }
 
     /**
