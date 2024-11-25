@@ -90,7 +90,6 @@ export default {
         const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
         galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImg, editIcon });
 
-
         document.querySelectorAll('.trips-open-icon').forEach(icon => {
             icon.addEventListener('click', async () => {
                 icon.classList.toggle('open');
