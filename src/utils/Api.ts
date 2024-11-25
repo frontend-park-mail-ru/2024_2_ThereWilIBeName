@@ -444,4 +444,15 @@ export default {
             ok: res.ok,
         };
     },
+
+    async deletePhoto(tripId: string, photoPath: string): Promise<JsonResponse<Response>> {
+        const res = await RESTApi.delete(`/trips/${tripId}/photos`, {photo_path: photoPath});
+        return {
+            data: {
+                message: String(res.data.message),
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    }
 };

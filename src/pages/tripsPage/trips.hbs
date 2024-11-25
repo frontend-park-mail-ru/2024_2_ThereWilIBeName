@@ -13,7 +13,10 @@
             <div class="add-photo-button">Добавить фото</div>
             <div class="trip-photos">
                 {{#each photos}}
-                    <img class="added-photo" src="/photos/{{photoPath}}" alt="Фото поездки">
+                    <div class="delete-added-photo-block">
+                        <img class="added-photo" src="/photos/{{photoPath}}" alt="Фото поездки">
+                        <div class="photo-delete-button" photoPath="{{photoPath}}">удалить</div>
+                    </div>
                 {{/each}}
             </div>
         </div>

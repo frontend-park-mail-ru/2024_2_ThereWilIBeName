@@ -2,22 +2,18 @@ import Router from '../../utils/Router';
 import galleryTemplateTrips from './trips.hbs';
 import Api from '../../utils/Api';
 
-import logoImage from '../../static/logo.png';
 import openIcon from '../../static/open.png';
 import tripIcon from '../../static/trip_icon.png';
 import copyLinkIcon from '../../static/copylink.png';
 import deleteIcon from '../../static/delete.png';
-import myBlackIcon from '../../static/232323.png';
 import editIcon from '../../static/edit.png';
 import palmsImg from '../../static/please white.svg';
-import palmsImgB from '../../static/please black.svg';
 import User from '../../utils/user';
 import header from '../../components/header';
 import backButton from '../../static/back button white.svg';
 import footer from '../../components/footer';
-import CSAT from '../../utils/CSAT-memory';
-import csat from '../../components/csat-block';
 import galleryPhotosTemplate from './trips-photos.hbs';
+import deletePhotoButtonsMount from './mount-delete-photo-buttons';
 
 export default {
     /**
@@ -30,7 +26,7 @@ export default {
         <main>
             <div class="trips-block">
                 <div class="trips-title-row">
-                    <img src="${backButton}" class="trips-back-button" id="back-button">
+                    <img src="${backButton}" class="trips-back-button" alt="Назад" id="back-button">
                     <div class="trips-title">Поездки</div>
                 </div>
                 <hr>
@@ -39,7 +35,7 @@ export default {
                 </div>
                 <div id="trips-root">
                     <div class="please-block hidden" id="please-block">
-                        <img src="${palmsImg}" class="please-img">
+                        <img src="${palmsImg}" alt="Пожалуйста, авторизуйтесь" class="please-img">
                         <div class="auth-please" id="auth-please">Пожалуйста, авторизуйтесь</div>
                     </div>
                     <ul class="gallery-trips" id="gallery-trips"></ul>
@@ -101,6 +97,10 @@ export default {
                 console.log('Галерея не найден');
                 return;
             }
+
+            // Блок монтирования кнопок удаления фото
+            deletePhotoButtonsMount(parentItem);
+
             const addPhotoButton = bottomPanel.querySelector('.add-photo-button') as HTMLButtonElement;
             icon.addEventListener('click', async () => {
                 icon.classList.toggle('open');
@@ -159,7 +159,9 @@ export default {
                             if (trip.id === tempId) {
                                 const newTripPhotos = trip.photos;
                                 const newGallery = parentItem.querySelector('.trip-photos') as HTMLElement;
-                                newGallery.innerHTML = galleryPhotosTemplate({newTripPhotos});
+                                newGallery.innerHTML = galleryPhotosTemplate({ newTripPhotos, deleteIcon });
+                                // Блок монтирования кнопок удаления фото
+                                deletePhotoButtonsMount(parentItem);
                             }
                         });
                     }
@@ -177,7 +179,7 @@ export default {
                     const id = parentItem.id;
                     const res = await Api.deleteTrip(id);
                     if (res.ok) {
-                        router.goto('/trips');
+                        await router.goto('/trips');
                     }
                 }
             });

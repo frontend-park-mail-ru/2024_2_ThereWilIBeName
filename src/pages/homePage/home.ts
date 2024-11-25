@@ -101,9 +101,6 @@ export default {
         // Загрузка мест
         await attractionsLoad(placeButton, router);
 
-        // CSAT.homeActiveQ = true;
-        // await csat.mount();
-
     },
 
     /**
@@ -111,6 +108,7 @@ export default {
      * Используется для очистки состояния или удаления обработчиков событий при переходе на другую страницу.
      */
     unmount() {
-        CSAT.homeActiveQ = false;
+        Search.cityId = -1;
+        Search.categoryId = -1;
     },
 };
