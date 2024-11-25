@@ -140,6 +140,7 @@
       display flex
       flex-direction column
       overflow-x visible
+      row-gap 20px
 
     .review-form
       mixinBlock(myWhite)
@@ -154,6 +155,16 @@
       "c c"\
       "d d"
 
+      @media (max-width 700px)
+        height 500px
+        grid-template-rows 10% 10% auto 10%
+        grid-template-columns auto auto
+        row-gap 15px
+        grid-template-areas "a a"\
+        "b b"\
+        "c c"\
+        "d d"
+
       .grid-review-form-title
         grid-area a
 
@@ -161,6 +172,11 @@
         font-size 30px
         font-weight bold
         color myBlack
+        align-self center
+        text-align center
+
+        @media (max-width 700px)
+          font-size 25px
 
       .grid-rating
         grid-area b
@@ -173,6 +189,12 @@
         font-size 30px
         text-align center
         align-content center
+
+        @media (max-width 700px)
+          font-size 25px
+          padding 0
+          width 60%
+          justify-self center
 
         .rating-input
           background myBlack
@@ -187,6 +209,9 @@
 
           &::-webkit-inner-spin-button
             display none
+
+          @media (max-width 700px)
+            font-size 25px
 
 
       .grid-review-text-area
@@ -222,6 +247,12 @@
       width 100%
       padding-left 20px
       column-gap 20px
+
+      @media (max-width 700px)
+        display flex
+        flex-direction column
+        overflow-x visible
+        padding 0
 
 
     .review-item
