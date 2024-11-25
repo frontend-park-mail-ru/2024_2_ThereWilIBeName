@@ -1,7 +1,6 @@
 import Api from '../utils/Api';
 import Router from '../utils/Router';
 import User from '../utils/user';
-import Trip from '../utils/trip';
 
 import logoImage from '../static/logo trip.svg';
 import backButton from '../static/back button white.svg';
@@ -58,6 +57,8 @@ export default {
             router.goto('/home');
         });
 
+        const tripId = localStorage.getItem('tempTrip');
+
         const createTripForm = document.getElementById('create-trip-form') as HTMLElement;
         const errorMessage = document.getElementById('error-message') as HTMLElement;
 
@@ -71,8 +72,7 @@ export default {
             const formEndDate = (document.getElementById('endDate') as HTMLInputElement).value;
             const formPrivateTrip = (document.getElementById('private-trip') as HTMLInputElement).checked;
 
-
-            const res = await Api.putTrip(Trip.id, formUserId, formName, 1, formDescription, formStartDate, formEndDate, formPrivateTrip);
+            const res = await Api.putTrip(String(tripId), formUserId, formName, 1, formDescription, formStartDate, formEndDate, formPrivateTrip);
 
             // if (res.ok!) {
             //     errorMessage.textContent = 'Неизвестная ошибка';

@@ -59,9 +59,6 @@ export default {
             router.goto('/home');
         });
 
-        if (localStorage.getItem('tempTrip')) {
-            const tripId = localStorage.getItem('tempTrip');
-        }
         const formName = (document.getElementById('name') as HTMLInputElement);
         const formDescription = (document.getElementById('description') as HTMLInputElement);
         const formStartDate = (document.getElementById('startDate') as HTMLInputElement);
