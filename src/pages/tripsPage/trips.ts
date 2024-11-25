@@ -109,7 +109,7 @@ export default {
                         }
                         const addPhotoButton = bottomPanel.querySelector('.add-photo-button') as HTMLButtonElement;
 
-                        addPhotoButton.addEventListener('click', () => {
+                        addPhotoButton.addEventListener('click', async () => {
                             const tripPhotoInputElement = document.createElement('input') as HTMLInputElement;
                             tripPhotoInputElement.type = 'file';
                             tripPhotoInputElement.accept = 'image/*'; // Ограничиваем тип файлов на изображения
@@ -140,14 +140,13 @@ export default {
                                         alert('Ошибка загрузки фото');
                                         return;
                                     }
-
-                                    // Получаем список фотографий
-                                    const newTripPhotos = (await Api.getUserTrips(User.id)).data[Number(parentItem.id)].photos;
-                                    parentItem.innerHTML = galleryPhotosTemplate({ newTripPhotos });
                                 }
                             });
 
                             tripPhotoInputElement.click();
+                            // Получаем список фотографий
+                            const newTripPhotos = (await Api.getUserTrips(User.id)).data[Number(parentItem.id)].photos;
+                            parentItem.innerHTML = galleryPhotosTemplate({newTripPhotos});
                         });
                     }
                 }
