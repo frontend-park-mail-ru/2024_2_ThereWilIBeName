@@ -142,9 +142,14 @@ export default {
                                     }
 
                                     // Получаем список фотографий
-                                    // await router.goto('/trips');
-                                    const newTripPhotos = (await Api.getUserTrips(User.id)).data[Number(parentItem.id)].photos;
-                                    parentItem.innerHTML = galleryPhotosTemplate({newTripPhotos});
+                                    const tempId = parentItem.id;
+                                    const resPhotos = (await Api.getUserTrips(User.id)).data;
+                                    resPhotos.forEach((trip) => {
+                                        if (trip.id === tempId) {
+                                            const newTripPhotos = trip.photos;
+                                            parentItem.innerHTML = galleryPhotosTemplate({newTripPhotos});
+                                        }
+                                    });
                                 }
                             });
 
