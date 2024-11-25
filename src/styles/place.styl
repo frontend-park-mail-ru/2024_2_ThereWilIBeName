@@ -13,13 +13,8 @@
     "f f f"
 
     @media (max-width 700px)
-      grid-template-columns 1fr
-      grid-template-rows repeat(5, auto)
-      grid-template-areas "c"\
-      "b"\
-      "d"\
-      "e"\
-      "f"
+      display flex
+      flex-direction column
 
     .grid-back-button
       grid-area a

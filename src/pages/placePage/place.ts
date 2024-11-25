@@ -8,6 +8,7 @@ import backButton from '../../static/back button white.svg';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import reviewsLoad from './reviews-load';
+import User from '../../utils/user';
 
 export default {
     html:
@@ -96,7 +97,7 @@ export default {
                 alert('Некорректный рейтинг');
                 return;
             }
-            const res = await Api.postReview(params, itemId, reviewFormText.value, Number(formRatingInput.value));
+            const res = await Api.postReview(Number(User.id), itemId, reviewFormText.value, Number(formRatingInput.value));
             if (!res.ok) {
                 console.log('Ошибка отправки отзыва');
             }
