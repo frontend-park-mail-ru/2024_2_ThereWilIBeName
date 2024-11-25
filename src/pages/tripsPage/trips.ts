@@ -140,14 +140,15 @@ export default {
                                         alert('Ошибка загрузки фото');
                                         return;
                                     }
+
+                                    // Получаем список фотографий
+                                    await router.goto('/trips');
+                                    // const newTripPhotos = (await Api.getUserTrips(User.id)).data[Number(parentItem.id)].photos;
+                                    // parentItem.innerHTML = galleryPhotosTemplate({newTripPhotos});
                                 }
                             });
 
                             tripPhotoInputElement.click();
-                            // Получаем список фотографий
-                            await router.goto('/trips');
-                            // const newTripPhotos = (await Api.getUserTrips(User.id)).data[Number(parentItem.id)].photos;
-                            // parentItem.innerHTML = galleryPhotosTemplate({newTripPhotos});
                         });
                     }
                 }
