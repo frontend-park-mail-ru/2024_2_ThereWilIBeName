@@ -147,7 +147,8 @@ export default {
                                     resPhotos.forEach((trip) => {
                                         if (trip.id === tempId) {
                                             const newTripPhotos = trip.photos;
-                                            parentItem.innerHTML = galleryPhotosTemplate({newTripPhotos});
+                                            const newGallery = parentItem.querySelector('.gallery-item-trips-bottom-panel') as HTMLElement;
+                                            newGallery.innerHTML = galleryPhotosTemplate({newTripPhotos});
                                         }
                                     });
                                 }
