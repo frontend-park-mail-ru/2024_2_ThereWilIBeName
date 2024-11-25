@@ -4,6 +4,7 @@ import footer from '../../components/footer';
 import Search from '../../utils/search-memory';
 import csat from '../../components/csat-block';
 import CSAT from '../../utils/CSAT-memory';
+import closeIcon from '../../static/close icon.svg';
 import attractionsLoad from './attractions-load';
 
 export default {
@@ -18,13 +19,14 @@ export default {
                 <div class="headline">Интересные места</div>
                 <hr>
                 <div class="categories">
-                    <div class="category" categoryId="1" id="category-one">Исторические памятники</div>
-                    <div class="category" categoryId="2" id="category-two">Соборы</div>
-                    <div class="category" categoryId="3" id="category-three">Театры</div>
-                    <div class="category" categoryId="4" id="category-four">Музеи</div>
-                    <div class="category" categoryId="5" id="category-five">Мечети</div>
-                    <div class="category" categoryId="6" id="category-six">Крепости</div>
-                    <div class="category" categoryId="7" id="category-seven">Храмы</div>
+                    <div class="category" id="category-one">Исторические памятники</div>
+                    <div class="category" id="category-two">Соборы</div>
+                    <div class="category" id="category-three">Театры</div>
+                    <div class="category" id="category-four">Музеи</div>
+                    <div class="category" id="category-five">Мечети</div>
+                    <div class="category" id="category-six">Крепости</div>
+                    <div class="category" id="category-seven">Храмы</div>
+                    <img src="${closeIcon}" class="category" id="category-none">
                 </div>
                 <ul class="gallery" id="gallery"></ul>
             </div>
@@ -77,6 +79,11 @@ export default {
         const categorySevenButton = document.getElementById('category-seven') as HTMLButtonElement;
         categorySevenButton.addEventListener('click', async () => {
             Search.categoryId = 7;
+            await attractionsLoad(placeButton, router);
+        });
+        const categoryNoneButton = document.getElementById('category-none') as HTMLButtonElement;
+        categoryNoneButton.addEventListener('click', async () => {
+            Search.categoryId = -1;
             await attractionsLoad(placeButton, router);
         });
 
