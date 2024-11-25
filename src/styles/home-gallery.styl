@@ -25,6 +25,7 @@
         scrollbar-width none
 
         .category
+            display block
             text-align center
             padding 5px 20px
             align-content center
@@ -33,13 +34,18 @@
             border-radius 15px
             cursor pointer
             transition all 0.3s ease
+            min-width fit-content
+            height 30px
 
             &:hover
                 background myPink
                 transform scale(0.98)
 
+            &.hidden
+                display none
+
         img
-            height 50px
+            padding 0
 
     .gallery-block
         mixinBlock(myBlack)

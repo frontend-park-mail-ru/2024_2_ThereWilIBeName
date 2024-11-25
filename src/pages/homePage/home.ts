@@ -19,6 +19,7 @@ export default {
                 <div class="headline">Интересные места</div>
                 <hr>
                 <div class="categories">
+                    <img src="${closeIcon}" class="category hidden" id="category-none">
                     <div class="category" id="category-one">Исторические памятники</div>
                     <div class="category" id="category-two">Соборы</div>
                     <div class="category" id="category-three">Театры</div>
@@ -26,7 +27,6 @@ export default {
                     <div class="category" id="category-five">Мечети</div>
                     <div class="category" id="category-six">Крепости</div>
                     <div class="category" id="category-seven">Храмы</div>
-                    <img src="${closeIcon}" class="category" id="category-none">
                 </div>
                 <ul class="gallery" id="gallery"></ul>
             </div>
@@ -46,45 +46,53 @@ export default {
     async mount(router: Router): Promise<void> {
         const placeButton = document.getElementById('gallery') as HTMLButtonElement;
 
+        const categoryNoneButton = document.getElementById('category-none') as HTMLButtonElement;
+        categoryNoneButton.addEventListener('click', async () => {
+            Search.categoryId = -1;
+            await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.add('hidden');
+        });
         const categoryOneButton = document.getElementById('category-one') as HTMLButtonElement;
         categoryOneButton.addEventListener('click', async () => {
             Search.categoryId = 1;
             await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
         });
         const categoryTwoButton = document.getElementById('category-two') as HTMLButtonElement;
         categoryTwoButton.addEventListener('click', async () => {
             Search.categoryId = 2;
             await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
         });
         const categoryThreeButton = document.getElementById('category-three') as HTMLButtonElement;
         categoryThreeButton.addEventListener('click', async () => {
             Search.categoryId = 3;
             await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
         });
         const categoryFourButton = document.getElementById('category-four') as HTMLButtonElement;
         categoryFourButton.addEventListener('click', async () => {
             Search.categoryId = 4;
             await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
         });
         const categoryFiveButton = document.getElementById('category-five') as HTMLButtonElement;
         categoryFiveButton.addEventListener('click', async () => {
             Search.categoryId = 5;
             await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
         });
         const categorySixButton = document.getElementById('category-six') as HTMLButtonElement;
         categorySixButton.addEventListener('click', async () => {
             Search.categoryId = 6;
             await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
         });
         const categorySevenButton = document.getElementById('category-seven') as HTMLButtonElement;
         categorySevenButton.addEventListener('click', async () => {
             Search.categoryId = 7;
             await attractionsLoad(placeButton, router);
-        });
-        const categoryNoneButton = document.getElementById('category-none') as HTMLButtonElement;
-        categoryNoneButton.addEventListener('click', async () => {
-            Search.categoryId = -1;
-            await attractionsLoad(placeButton, router);
+            categoryNoneButton.classList.remove('hidden');
         });
 
         // Монтирование хэдера
