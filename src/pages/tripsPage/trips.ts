@@ -145,8 +145,9 @@ export default {
 
                             tripPhotoInputElement.click();
                             // Получаем список фотографий
-                            const newTripPhotos = (await Api.getUserTrips(User.id)).data[Number(parentItem.id)].photos;
-                            parentItem.innerHTML = galleryPhotosTemplate({newTripPhotos});
+                            await router.goto('/trips');
+                            // const newTripPhotos = (await Api.getUserTrips(User.id)).data[Number(parentItem.id)].photos;
+                            // parentItem.innerHTML = galleryPhotosTemplate({newTripPhotos});
                         });
                     }
                 }
