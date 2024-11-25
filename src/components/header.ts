@@ -105,7 +105,7 @@ export default {
             signinButton.textContent = 'Сменить пользователя';
             const avatarPath = (await Api.getProfile(User.id)).data.avatarPath;
             if (avatarPath) {
-                avatarImage.src = avatarPath;
+                avatarImage.src = `/avatars/${avatarPath}`;
             }
             userNameDiv.textContent = User.username;
             userButton.classList.add('show');
