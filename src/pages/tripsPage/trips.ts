@@ -91,12 +91,21 @@ export default {
         galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImg, editIcon });
 
         document.querySelectorAll('.trips-open-icon').forEach(icon => {
+            const parentItem = icon.closest('.gallery-item-trips');
+            if (!parentItem) {
+                console.log('Родитель не найден');
+                return;
+            }
+            const bottomPanel = parentItem.querySelector('.gallery-item-trips-bottom-panel');
+            if (!bottomPanel) {
+                console.log('Галерея не найден');
+                return;
+            }
+            const addPhotoButton = bottomPanel.querySelector('.add-photo-button') as HTMLButtonElement;
             icon.addEventListener('click', async () => {
                 icon.classList.toggle('open');
-                const parentItem = icon.closest('.gallery-item-trips');
                 if (parentItem) {
                     parentItem.classList.toggle('open');
-                    const bottomPanel = parentItem.querySelector('.gallery-item-trips-bottom-panel');
                     if (bottomPanel) {
                         if (!bottomPanel.classList.contains('open')) {
                             bottomPanel.classList.remove('hidden');
@@ -107,57 +116,56 @@ export default {
                             await new Promise(resolve => setTimeout(resolve, 200));
                             bottomPanel.classList.add('hidden');
                         }
-                        const addPhotoButton = bottomPanel.querySelector('.add-photo-button') as HTMLButtonElement;
-
-                        addPhotoButton.addEventListener('click', async () => {
-                            const tripPhotoInputElement = document.createElement('input') as HTMLInputElement;
-                            tripPhotoInputElement.type = 'file';
-                            tripPhotoInputElement.accept = 'image/*'; // Ограничиваем тип файлов на изображения
-                            tripPhotoInputElement.multiple = true; // Разрешаем выбирать несколько фото
-                            tripPhotoInputElement.style.display = 'none';
-
-                            tripPhotoInputElement.addEventListener('change', async () => {
-                                if (tripPhotoInputElement.files) {
-                                    const files = tripPhotoInputElement.files;
-                                    const base64Photos: string[] = [];
-
-                                    for (let i = 0; i < files.length; i++) {
-                                        const file = files[i];
-                                        const reader = new FileReader();
-
-                                        // Используем промисы для ожидания конвертации
-                                        const base64 = await new Promise<string>((resolve, reject) => {
-                                            reader.onload = () => resolve(String(reader.result));
-                                            reader.onerror = () => reject('Ошибка чтения файла');
-                                            reader.readAsDataURL(file);
-                                        });
-
-                                        base64Photos.push(base64);
-                                    }
-
-                                    const res = await Api.putPhotos(parentItem.id, base64Photos);
-                                    if (!res.ok) {
-                                        alert('Ошибка загрузки фото');
-                                        return;
-                                    }
-
-                                    // Получаем список фотографий
-                                    const tempId = parentItem.id;
-                                    const resPhotos = (await Api.getUserTrips(User.id)).data;
-                                    resPhotos.forEach((trip) => {
-                                        if (trip.id === tempId) {
-                                            const newTripPhotos = trip.photos;
-                                            const newGallery = parentItem.querySelector('.trip-photos') as HTMLElement;
-                                            newGallery.innerHTML = galleryPhotosTemplate({newTripPhotos});
-                                        }
-                                    });
-                                }
-                            });
-
-                            tripPhotoInputElement.click();
-                        });
                     }
                 }
+            });
+
+            addPhotoButton.addEventListener('click', async () => {
+                const tripPhotoInputElement = document.createElement('input') as HTMLInputElement;
+                tripPhotoInputElement.type = 'file';
+                tripPhotoInputElement.accept = 'image/*'; // Ограничиваем тип файлов на изображения
+                tripPhotoInputElement.multiple = true; // Разрешаем выбирать несколько фото
+                tripPhotoInputElement.style.display = 'none';
+
+                tripPhotoInputElement.addEventListener('change', async () => {
+                    if (tripPhotoInputElement.files) {
+                        const files = tripPhotoInputElement.files;
+                        const base64Photos: string[] = [];
+
+                        for (let i = 0; i < files.length; i++) {
+                            const file = files[i];
+                            const reader = new FileReader();
+
+                            // Используем промисы для ожидания конвертации
+                            const base64 = await new Promise<string>((resolve, reject) => {
+                                reader.onload = () => resolve(String(reader.result));
+                                reader.onerror = () => reject('Ошибка чтения файла');
+                                reader.readAsDataURL(file);
+                            });
+
+                            base64Photos.push(base64);
+                        }
+
+                        const res = await Api.putPhotos(parentItem.id, base64Photos);
+                        if (!res.ok) {
+                            alert('Ошибка загрузки фото');
+                            return;
+                        }
+
+                        // Получаем список фотографий
+                        const tempId = parentItem.id;
+                        const resPhotos = (await Api.getUserTrips(User.id)).data;
+                        resPhotos.forEach((trip) => {
+                            if (trip.id === tempId) {
+                                const newTripPhotos = trip.photos;
+                                const newGallery = parentItem.querySelector('.trip-photos') as HTMLElement;
+                                newGallery.innerHTML = galleryPhotosTemplate({newTripPhotos});
+                            }
+                        });
+                    }
+                });
+
+                tripPhotoInputElement.click();
             });
         });
 
