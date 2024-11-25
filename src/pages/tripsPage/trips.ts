@@ -12,7 +12,6 @@ import editIcon from '../../static/edit.png';
 import palmsImg from '../../static/please white.svg';
 import palmsImgB from '../../static/please black.svg';
 import User from '../../utils/user';
-import Trip from '../../utils/trip';
 import header from '../../components/header';
 import backButton from '../../static/back button white.svg';
 import footer from '../../components/footer';
@@ -175,7 +174,7 @@ export default {
                 icon.classList.toggle('open');
                 const parentItem = icon.closest('.gallery-item-trips');
                 if (parentItem) {
-                    Trip.id = parentItem.id;
+                    localStorage.setItem('tempTrip', parentItem.id);
                     router.goto('/edittrip');
                 }
             });

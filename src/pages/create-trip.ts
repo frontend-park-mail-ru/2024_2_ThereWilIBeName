@@ -59,21 +59,21 @@ export default {
             router.goto('/home');
         });
 
+        if (localStorage.getItem('tempTrip')) {
+            const tripId = localStorage.getItem('tempTrip');
+        }
+        const formName = (document.getElementById('name') as HTMLInputElement);
+        const formDescription = (document.getElementById('description') as HTMLInputElement);
+        const formStartDate = (document.getElementById('startDate') as HTMLInputElement);
+        const formEndDate = (document.getElementById('endDate') as HTMLInputElement);
+        const formPrivateTrip = (document.getElementById('private-trip') as HTMLInputElement);
         const createTripForm = document.getElementById('create-trip-form') as HTMLElement;
         const errorMessage = document.getElementById('error-message') as HTMLElement;
 
         createTripForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formUserId = Number(User.id);
-            const formName = (document.getElementById('name') as HTMLInputElement).value;
-            const formDescription = (document.getElementById('description') as HTMLInputElement).value;
-            const formStartDate = (document.getElementById('startDate') as HTMLInputElement).value;
-            const formEndDate = (document.getElementById('endDate') as HTMLInputElement).value;
-            const formPrivateTrip = (document.getElementById('private-trip') as HTMLInputElement).checked;
-
-
-            const res = await Api.postCreateTrip(formUserId, formName, 1, formDescription, formStartDate, formEndDate, formPrivateTrip);
+            const res = await Api.postCreateTrip(Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, formPrivateTrip.checked);
 
             // if (res.ok!) {
             //     errorMessage.textContent = 'Неизвестная ошибка';
