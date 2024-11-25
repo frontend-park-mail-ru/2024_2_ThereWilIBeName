@@ -5,8 +5,8 @@ export default function deletePhotoButtonsMount(parentItem: Element) {
     deleteButtons.forEach(deleteButton => {
         const deleteButtonElement = deleteButton as HTMLButtonElement;
         deleteButtonElement.addEventListener('click', async () => {
-            const photoPathData = deleteButtonElement.dataset.photoPath;
-            const resDeletePhoto = await Api.deletePhoto(parentItem.id, String(photoPathData));
+            const photoPath = deleteButtonElement.id;
+            const resDeletePhoto = await Api.deletePhoto(parentItem.id, String(photoPath));
             if (!resDeletePhoto.ok) {
                 console.log('Ошибка удаления фото');
             }
