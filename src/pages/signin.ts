@@ -73,14 +73,14 @@ export default {
 
             const res = await Api.postSignin(formEmail, formPassword);
 
-            if (res.status >= 400) {
+            if (res.status === 401) {
                 errorMessage.textContent = 'Неверный email или пароль';
                 errorMessage.classList.add('visible');
                 return;
             }
 
             localStorage.setItem('token', `${res.data.token}`);
-            router.goto('/home');
+            await router.goto('/home');
         });
     },
 
