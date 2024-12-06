@@ -73,7 +73,7 @@ export default {
 
             const res = await Api.postSignin(formEmail, formPassword);
 
-            if (!res.ok) {
+            if (res.status >= 400) {
                 errorMessage.textContent = 'Неверный email или пароль';
                 errorMessage.classList.add('visible');
                 return;
