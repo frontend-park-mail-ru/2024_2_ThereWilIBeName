@@ -93,22 +93,26 @@ export default {
             }
 
 
-
-            const res = await Api.postSignup(formUsername, formEmail, formPassword);
-
-            if (res.status === 409) {
-                errorMessage.textContent = 'Логин уже занят';
+            try {
+                const res = await Api.postSignup(formUsername, formEmail, formPassword);
+                localStorage.setItem('token', `${res.data.token}`);
+                router.goto('/home');
+            } catch (e) {
+                errorMessage.textContent = 'Ошибка регистрации';
                 errorMessage.classList.add('visible');
-                return;
             }
-            if (!res.ok) {
-                errorMessage.textContent = 'Неизвестная ошибка';
-                errorMessage.classList.add('visible');
-                return;
-            }
+            
+            // if (res.status === 409) {
+            //     errorMessage.textContent = 'Логин уже занят';
+            //     errorMessage.classList.add('visible');
+            //     return;
+            // }
+            // if (!res.ok) {
+            //     errorMessage.textContent = 'Неизвестная ошибка';
+            //     errorMessage.classList.add('visible');
+            //     return;
+            // }
 
-            localStorage.setItem('token', `${res.data.token}`);
-            router.goto('/home');
         });
     },
 
