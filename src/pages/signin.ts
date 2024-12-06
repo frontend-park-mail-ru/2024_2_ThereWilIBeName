@@ -78,9 +78,7 @@ export default {
             } catch (e) {
                 errorMessage.textContent = 'Неверный email или пароль';
                 errorMessage.classList.add('visible');
-                return;
             }
-
         });
     },
 
