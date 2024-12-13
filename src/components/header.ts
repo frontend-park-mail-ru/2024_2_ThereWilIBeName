@@ -84,6 +84,7 @@ export default {
                 User.username = '';
                 User.id = '';
                 User.email = '';
+                User.avatarPath = '';
                 User.isSignedIn = false;
                 userButton.classList.remove('show');
                 signinButton.classList.remove('hidden');

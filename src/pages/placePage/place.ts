@@ -1,6 +1,5 @@
 import Api from '../../utils/Api';
 import Router from '../../utils/Router';
-import deleteIcon from '../../static/delete.png';
 import header from '../../components/header';
 import footer from '../../components/footer';
 import mapMarkerIcon from '../../static/map marker.svg';
