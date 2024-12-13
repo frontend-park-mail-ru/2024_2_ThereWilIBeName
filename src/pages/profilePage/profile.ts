@@ -5,8 +5,8 @@ import updateMenu from './profileMenu';
 
 import logoImage from '../../static/logo trip.svg';
 import defaultAvatar from '../../static/avatar.png';
-import editButton from '../../static/edit.png';
-import confirmIcon from '../../static/confirm.png';
+import editButton from '../../static/edit.svg';
+import confirmIcon from '../../static/confirm.svg';
 import {emailRegex} from '../../components/validation';
 import footer from '../../components/footer';
 import backButton from '../../static/back button white.svg';
