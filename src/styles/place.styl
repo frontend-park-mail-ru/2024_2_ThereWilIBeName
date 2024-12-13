@@ -3,7 +3,7 @@
 
   .place-block
     display grid
-    grid-template-rows 100px 100px 250px 300px 450px
+    grid-template-rows 100px 100px auto 300px 450px
     grid-template-columns 10% auto 30%
     margin 0 50px
     gap 30px
@@ -40,6 +40,13 @@
 
     .grid-categories
       grid-area k
+
+  .categories
+    display flex
+    flex-direction row
+
+    .category
+      mixinButton(myPink, myWhite)
 
   .place-name
     background-color myBlack

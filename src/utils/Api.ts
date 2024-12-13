@@ -189,7 +189,7 @@ export default {
                 address: String(res.data.address),
                 city: String(res.data.city),
                 phoneNumber: String(res.data.phoneNumber),
-                categories: res.data.categoriesId as string[],
+                categories: res.data.categories as string[],
                 latitude: Number(res.data.latitude),
                 longitude: Number(res.data.longitude),
             },
