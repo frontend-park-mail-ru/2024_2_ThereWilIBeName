@@ -101,10 +101,10 @@ export default {
             if (!res.ok) {
                 console.log('Ошибка отправки отзыва');
             }
-            await reviewsLoad(itemId, router);
+            await reviewsLoad(itemId);
         });
 
-        await reviewsLoad(itemId, router);
+        await reviewsLoad(itemId);
     },
 
     unmount(): void {}
