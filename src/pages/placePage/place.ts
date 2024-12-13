@@ -22,6 +22,7 @@ export default {
                 <div class="back-button-block grid-back-button">
                     <img class="back-button" src="${backButton}" id="back-button">
                 </div>
+                <div class="categories grid-categories" id="categories"></div>
                 <div class="place-info grid-place-info">
                     <div class="description" id="description">Здесь будет описание</div>
                 </div>
@@ -63,6 +64,13 @@ export default {
         placeImage.src = attraction.imagePath;
         const placeDescription = document.getElementById('description') as HTMLElement;
         placeDescription.textContent = attraction.description;
+
+        const categories = attraction.categories;
+        const categoriesRoot = document.getElementById('categories') as HTMLElement;
+
+        for (const category in categories) {
+            categoriesRoot.innerHTML = `<div class="category">${category}</div>`;
+        }
 
         const latitude = attraction.latitude;
         const longitude = attraction.longitude;
