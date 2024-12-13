@@ -25,7 +25,7 @@ export default {
                         <li><button class="menu-button" id="profile-button">Профиль</button></li>
                         <li><button class="menu-button" id="logout-button">Выйти</button></li>
                     </ul>
-                    <button id="menu-close-button" class="menu-close-button">Закрыть</button>
+                    <button id="menu-close-button" class="menu-close-button">←</button>
                 </div>
             </header>`,
 

@@ -23,10 +23,10 @@ export default {
                 <div class="auth-title">Регистрация</div>
                 <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
                 <form id="signup-form" class="signup-form">
-                    <label class="reg-text">Логин</label>
-                    <input class="border" id="login" name="login" >
+                    <label class="reg-text">Имя</label>
+                    <input class="border" placeholder="example" id="login" name="login" >
                     <label class="reg-text">Email</label>
-                    <input class="border" id="email" name="email" >
+                    <input class="border" placeholder="example@mail.ru" id="email" name="email" >
                     <label class="reg-text">Пароль</label>
                     <input class="border" type="password" id="password" name="password" autocomplete="new-password">
                     <label class="reg-text">Подтверждение пароля</label>
