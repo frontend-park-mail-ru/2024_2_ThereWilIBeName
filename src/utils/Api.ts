@@ -455,8 +455,8 @@ export default {
         };
     },
 
-    async deleteReview(review_id: number, place_id: number): Promise<JsonResponse<Response>> {
-        const res = await RESTApi.delete(`/api/v1/places/${place_id}/reviews/${review_id}`);
+    async deleteReview(reviewId: string, placeId: number): Promise<JsonResponse<Response>> {
+        const res = await RESTApi.delete(`/api/v1/places/${placeId}/reviews/${reviewId}`);
         return {
             data: {
                 message: String(res.data.message),

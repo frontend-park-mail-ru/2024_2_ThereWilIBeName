@@ -288,7 +288,7 @@
       row-gap 10px
       position relative
 
-      .delete-review
+      .delete-review-button
         display block
         position absolute
         width 100%
@@ -300,7 +300,11 @@
         align-content center
         text-align center
         opacity 0
+        cursor pointer
         transition opacity 0.2s ease
+
+        &.hidden
+          display none
 
         &:hover
           opacity 1
