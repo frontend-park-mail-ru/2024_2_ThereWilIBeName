@@ -289,11 +289,20 @@
       position relative
 
       .delete-review
+        display block
         position absolute
         width 100%
         height 100%
         background myRed
         color myWhite
+        font-size 27px
+        border-radius 20px
+        align-content center
+        text-align center
+        opacity 0
+
+        &.hover
+          opacity 1
 
       .grid-reviewers-avatar
         grid-area a
