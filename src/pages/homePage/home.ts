@@ -3,7 +3,6 @@ import header from '../../components/header';
 import footer from '../../components/footer';
 import Search from '../../utils/search-memory';
 import csat from '../../components/csat-block';
-import CSAT from '../../utils/CSAT-memory';
 import closeIcon from '../../static/close icon.svg';
 import attractionsLoad from './attractions-load';
 

@@ -10,8 +10,7 @@ import confirmIcon from '../../static/confirm.png';
 import {emailRegex} from '../../components/validation';
 import footer from '../../components/footer';
 import backButton from '../../static/back button white.svg';
-import CSAT from '../../utils/CSAT-memory';
-import csat from '../../components/csat-block';
+import userMount from '../user-mount';
 
 export default {
     /**
@@ -145,7 +144,6 @@ export default {
         const submitEditButton = document.getElementById('submit-edit-button') as HTMLButtonElement;
         const usernameInput = document.getElementById('username-input') as HTMLInputElement;
 
-
         if (userUserName.textContent) {
             usernameInput.value = userUserName.textContent;
         }
@@ -179,7 +177,8 @@ export default {
                 console.log('Ошибка изменения данных пользователя');
             }
 
-            router.goto('/profile');
+            await userMount();
+            await router.goto('/profile');
 
         });
 
