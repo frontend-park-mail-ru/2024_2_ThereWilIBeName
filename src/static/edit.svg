@@ -1,8 +1,8 @@
 <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M13.286 36.2917L42.8693 6.7085" stroke="#232323" stroke-width="5" stroke-linecap="round"/>
-<path d="M54.5208 17.5208L43.2778 6.27775" stroke="#232323" stroke-width="5" stroke-linecap="round"/>
-<path d="M13.286 36.2917L25 46" stroke="#232323" stroke-width="5" stroke-linecap="round"/>
-<path d="M13.286 36.2917L9 52" stroke="#232323" stroke-width="5" stroke-linecap="round"/>
-<path d="M24 48L9 52" stroke="#232323" stroke-width="5" stroke-linecap="round"/>
-<path d="M25 47.5833L54.5832 18" stroke="#232323" stroke-width="5" stroke-linecap="round"/>
+<path d="M13.286 36.2917L42.8693 6.7085" stroke="#232323" stroke-width="4" stroke-linecap="round"/>
+<path d="M54.5208 17.5208L43.2778 6.27775" stroke="#232323" stroke-width="4" stroke-linecap="round"/>
+<path d="M13.286 36.2917L25 46" stroke="#232323" stroke-width="4" stroke-linecap="round"/>
+<path d="M13.286 36.2917L9 52" stroke="#232323" stroke-width="4" stroke-linecap="round"/>
+<path d="M24 48L9 52" stroke="#232323" stroke-width="4" stroke-linecap="round"/>
+<path d="M25 47.5833L54.5832 18" stroke="#232323" stroke-width="4" stroke-linecap="round"/>
 </svg>
