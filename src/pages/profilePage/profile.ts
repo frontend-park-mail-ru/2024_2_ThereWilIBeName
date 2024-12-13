@@ -156,10 +156,10 @@ export default {
         editButton.addEventListener('click', () => {
             editButton.classList.toggle('active');
             submitEditButton.classList.toggle('hidden');
-            usernameInput.classList.toggle('hidden');
+            // usernameInput.classList.toggle('hidden');
             emailInput.classList.toggle('hidden');
             userUserName.classList.toggle('hidden');
-            userEmail.classList.toggle('hidden');
+            // userEmail.classList.toggle('hidden');
         });
 
         submitEditButton.addEventListener('click', async () => {
