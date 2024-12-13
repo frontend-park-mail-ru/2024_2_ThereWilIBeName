@@ -34,6 +34,22 @@ type Attraction = {
     address: string,
     city: string,
     phoneNumber: string,
+    categories: {
+        categoryName: string,
+    }[],
+    latitude: number,
+    longitude: number,
+}
+
+type Attractions = {
+    id: string,
+    name: string,
+    imagePath: string,
+    description: string,
+    rating: number,
+    address: string,
+    city: string,
+    phoneNumber: string,
     categories: string[],
     latitude: number,
     longitude: number,
@@ -147,7 +163,7 @@ export default {
      *
      * @returns {Promise<{data: Object[], status: number, ok: boolean}>} Ответ сервера с данными достопримечательностей, статусом и флагом успеха.
      */
-    async getAttractions(limit: number, offset:number, cityId: number, categoryId: number): Promise<JsonResponse<Attraction[]>> {
+    async getAttractions(limit: number, offset:number, cityId: number, categoryId: number): Promise<JsonResponse<Attractions[]>> {
         let getAttracionsURL = `/api/v1/places/search?limit=${limit}&offset=${offset}`;
         if (cityId !== -1) {
             getAttracionsURL = getAttracionsURL + `&city=${cityId}`;
@@ -189,7 +205,9 @@ export default {
                 address: String(res.data.address),
                 city: String(res.data.city),
                 phoneNumber: String(res.data.phoneNumber),
-                categories: res.data.categories as string[],
+                categories: Array.isArray(res.data.categories)
+                    ? res.data.categories.map((category: any) => ({ categoryName: String(category) }))
+                    : [],
                 latitude: Number(res.data.latitude),
                 longitude: Number(res.data.longitude),
             },

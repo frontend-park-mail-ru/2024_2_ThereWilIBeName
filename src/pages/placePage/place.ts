@@ -9,6 +9,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import reviewsLoad from './reviews-load';
 import User from '../../utils/user';
+import galleryCategoriesTemplate from './categories.hbs';
 
 export default {
     html:
@@ -66,11 +67,9 @@ export default {
         placeDescription.textContent = attraction.description;
 
         const categories = attraction.categories;
-        const categoriesRoot = document.getElementById('categories') as HTMLElement;
+        const galleryCategories = document.getElementById('categories') as HTMLElement;
 
-        for (const category in categories) {
-            categoriesRoot.innerHTML = `<div class="category">${category}</div>`;
-        }
+        galleryCategories.innerHTML = galleryCategoriesTemplate({ categories });
 
         const latitude = attraction.latitude;
         const longitude = attraction.longitude;
