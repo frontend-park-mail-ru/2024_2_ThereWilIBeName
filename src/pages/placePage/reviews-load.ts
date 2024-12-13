@@ -23,7 +23,8 @@ export default async function reviewsLoad(itemId: number, router: Router) {
             if (!resDeleteReview.ok) {
                 console.log('Ошибка удаления отзыва');
             }
-            await router.goto(`/places/${itemId}`);
+            await reviewsLoad(itemId, router);
+            // await router.goto(`/places/${itemId}`);
         });
     });
 };
