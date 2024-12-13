@@ -1,4 +1,5 @@
 import Api from '../../utils/Api';
+import mountPhotos from './mountPhotos';
 
 export default function deletePhotoButtonsMount(parentItem: Element) {
     let deleteButtons = parentItem.querySelectorAll('.photo-delete-button');
@@ -10,7 +11,7 @@ export default function deletePhotoButtonsMount(parentItem: Element) {
             if (!resDeletePhoto.ok) {
                 console.log('Ошибка удаления фото');
             }
-            deletePhotoButtonsMount(parentItem);
+            await mountPhotos(parentItem);
         });
     });
 };

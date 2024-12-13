@@ -12,8 +12,8 @@ import User from '../../utils/user';
 import header from '../../components/header';
 import backButton from '../../static/back button white.svg';
 import footer from '../../components/footer';
-import galleryPhotosTemplate from './trips-photos.hbs';
 import deletePhotoButtonsMount from './mount-delete-photo-buttons';
+import mountPhotos from './mountPhotos';
 
 export default {
     /**
@@ -153,17 +153,7 @@ export default {
                         }
 
                         // Получаем список фотографий
-                        const tempId = parentItem.id;
-                        const resPhotos = (await Api.getUserTrips(User.id)).data;
-                        resPhotos.forEach((trip) => {
-                            if (trip.id === tempId) {
-                                const newTripPhotos = trip.photos;
-                                const newGallery = parentItem.querySelector('.trip-photos') as HTMLElement;
-                                newGallery.innerHTML = galleryPhotosTemplate({ newTripPhotos, deleteIcon });
-                                // Блок монтирования кнопок удаления фото
-                                deletePhotoButtonsMount(parentItem);
-                            }
-                        });
+                        await mountPhotos(parentItem);
                     }
                 });
 
