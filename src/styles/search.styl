@@ -68,9 +68,12 @@
 
   .search-city-item
     padding 20px
-    border-bottom 1px solid myGrey
+    border-top 1px solid myGrey
     cursor pointer
     transition background-color 0.3s ease
+
+    &.first
+      border none
 
     div
       font-weight bold
@@ -86,9 +89,12 @@
     display grid
     grid-template-rows auto
     grid-template-columns auto 30%
-    border-bottom 1px solid myGrey
+    border-top 1px solid myGrey
     cursor pointer
     transition background-color 0.3s ease
+
+    &.first
+      border none
 
     a
       display none
