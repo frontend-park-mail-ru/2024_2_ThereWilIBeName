@@ -24,7 +24,6 @@ export default async function reviewsLoad(itemId: number, router: Router) {
                 console.log('Ошибка удаления отзыва');
             }
             await reviewsLoad(itemId, router);
-            // await router.goto(`/places/${itemId}`);
         });
     });
 };

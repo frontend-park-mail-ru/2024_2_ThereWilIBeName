@@ -10,6 +10,7 @@ export default function deletePhotoButtonsMount(parentItem: Element) {
             if (!resDeletePhoto.ok) {
                 console.log('Ошибка удаления фото');
             }
+            deletePhotoButtonsMount(parentItem);
         });
     });
 };
