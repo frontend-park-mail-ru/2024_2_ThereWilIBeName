@@ -1,7 +1,7 @@
 import Router from '../../utils/Router';
 import galleryReviewsTemplate from './reviews.hbs';
 import Api from '../../utils/Api';
-import avatarPng from '../static/avatar.png';
+import avatarPng from '../../static/avatar.png';
 
 export default async function reviewsLoad(itemId: number, router: Router) {
     const reviewsResponse = await Api.getReviews(itemId);
