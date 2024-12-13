@@ -1,6 +1,5 @@
 import Router from '../../utils/Router';
 import Api from '../../utils/Api';
-
 // import searchButton from '../../static/search button.svg';
 import searchCitiesTemplate from './searchCities.hbs';
 import searchPlacesTemplate from './searchPlaces.hbs';
@@ -41,6 +40,11 @@ export default {
                 const response = await Api.getSearch(query);
 
                 const results = response.data;
+
+                if (results.length === 0) {
+                    searchResultsCities.innerHTML = '<div>Нет результатов</div>';
+                }
+
                 for (const result of results) {
                     resultCount++;
                     if (result.type === 'city') {
