@@ -1,10 +1,11 @@
 import galleryReviewsTemplate from './reviews.hbs';
 import User from '../../utils/user';
 import Api from '../../utils/Api';
+import Router from '../../utils/Router';
 import avatarPng from '../../static/avatar.png';
 import deleteIcon from '../../static/delete.png';
 
-export default async function reviewsLoad(itemId: number) {
+export default async function reviewsLoad(itemId: number, router: Router) {
     const reviewsResponse = await Api.getReviews(itemId);
     const reviews = reviewsResponse.data;
     const galleryReviews = document.getElementById('reviews-gallery') as HTMLElement;
@@ -22,6 +23,7 @@ export default async function reviewsLoad(itemId: number) {
             if (!resDeleteReview.ok) {
                 console.log('Ошибка удаления отзыва');
             }
+            await router.goto(`/places/${itemId}`);
         });
     });
 };
