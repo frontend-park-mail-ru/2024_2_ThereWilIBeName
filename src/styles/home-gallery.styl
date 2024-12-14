@@ -15,6 +15,47 @@
         @media (max-width 700px)
             font-size 30px
 
+    .filters
+        display flex
+        flex-direction row
+        padding 0px 10px
+        margin auto
+        margin-top 10px
+        justify-self start
+        background none
+        color myWhite
+        border-radius 10px
+        width 50px
+        opacity 0.5
+        overflow hidden
+        transition all 0.5s ease
+
+        .filter-icon
+            height 30px
+            justify-self center
+            align-self center
+            margin-right 15px
+            transition rotate 0.5s ease
+
+            &:hover
+                rotate 180deg
+
+        &:hover
+            background myGrey
+            width 480px
+            opacity 1
+
+        .filter
+            margin-right 20px
+            cursor pointer
+            white-space nowrap
+            width fit-content
+            justify-content center
+            padding 10px 0
+
+            &:hover
+                color myPink
+
     .categories
         display flex
         width 90%
@@ -34,16 +75,18 @@
             color myWhite
             border-radius 15px
             cursor pointer
-            transition all 0.3s ease
             min-width fit-content
             height 30px
+            opacity 0.5
+            transition all 0.3s ease
 
             &:hover
-                background myPink
-                transform scale(0.98)
+                opacity 1
+                transform scale(1.05)
 
-            &.hidden
-                display none
+            &.active
+                opacity 1
+                background myPink
 
         img
             padding 0
