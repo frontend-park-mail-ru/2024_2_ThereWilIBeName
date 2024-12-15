@@ -282,6 +282,27 @@ export default {
         };
     },
 
+    async getTrip(tripId: number): Promise<JsonResponse<Trip>> {
+        const res = await RESTApi.get(`/api/v1/trips/${tripId}`);
+        return {
+            data: {
+                userId: Number(res.data.user_id),
+                id: String(res.data.id),
+                name: String(res.data.name),
+                cityId: Number(res.data.city_id),
+                description: String(res.data.description),
+                startDate: formatDate(res.data.start_date),
+                endDate: formatDate(res.data.end_date),
+                private: Boolean(res.data.private),
+                photos: Array.isArray(res.data.photos)
+                    ? res.data.photos.map((photo: any) => ({ photoPath: String(photo) }))
+                    : [],
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
     async getUserReviews(id: string): Promise<JsonResponse<UserReview[]>> {
         const res = await RESTApi.get(`api/v1/users/${id}/reviews`);
         return {

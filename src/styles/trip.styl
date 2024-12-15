@@ -3,3 +3,161 @@
 
   main
     mixinBlock(myWhite)
+    display grid
+    grid-template-columns 10% 1fr 1fr 1fr 1fr 4% 4%
+    grid-template-rows 70px 70px auto auto
+    grid-template-areas "a b b b b c d"\
+    "g g g g e e e"\
+    "g g g g . . ."\
+    "f f f f f f f"
+    row-gap 20px
+    column-gap 10px
+    align-items center
+    justify-content center
+    padding 30px 50px
+
+    .grid-trip-back-button
+      grid-area a
+
+    .grid-trip-title
+      grid-area b
+
+    .grid-trip-edit-icon
+      grid-area c
+
+    .grid-trip-share-icon
+      grid-area d
+
+    .grid-trip-date
+      grid-area e
+
+    .grid-trip-gallery-photos
+      grid-area f
+
+    .grid-trip-description
+      grid-area g
+
+    .trip-edit-icon
+      width 100%
+      padding 5px
+      background myBlack
+      border-radius 10px
+      cursor pointer
+      transition all 0.3s ease
+
+      &:hover
+        transform scale(1.05)
+        background myPink
+
+    .trip-share-icon
+      width 100%
+      padding 5px
+      background-color myBlack
+      border-radius 10px
+      cursor pointer
+      transition all 0.3s ease
+
+      &:hover
+        transform scale(1.05)
+        background myPink
+
+    .trip-back-button
+      cursor pointer
+      width 40px
+      border-radius 10px
+      transition transform 0.3s ease
+
+      &:hover
+        transform scale(1.05)
+
+    .trip-title
+      background myBlack
+      color myWhite
+      font-size 27px
+      width 90%
+      justify-self center
+      height 100%
+      text-align center
+      align-content center
+      border-radius 10px
+
+    .trip-date
+      background myBlack
+      color myWhite
+      font-size 20px
+      height 100%
+      width 100%
+      padding 20px
+      text-align center
+      justify-self center
+      border-radius 10px
+
+    .trip-description
+      color myBlack
+      font-size 20px
+      border-radius 10px
+      padding 20px
+      width 100%
+      min-height 70px
+      align-self normal
+      height fit-content
+      border 2px solid myLightGrey
+
+    .trip-gallery-photos
+      display flex
+      flex-direction row
+      column-gap 20px
+
+    .add-photo-button
+      color myWhite
+      background myBlack
+      align-content center
+      text-align center
+      border-radius 20px
+      min-width 150px
+      min-height 150px
+      cursor pointer
+      transition background 0.3s ease
+
+      &:hover
+        background myPinkShadow
+
+      @media (max-width 700px)
+        min-width 100px
+
+    .delete-added-photo-block
+      position relative
+      min-width 150px
+      width 150px
+      min-height 150px
+      height 150px
+
+      .photo-delete-button
+        color myWhite
+        display block
+        position absolute
+        border-radius 0 0 20px 20px
+        bottom 0
+        width 100%
+        background myRed
+        text-align center
+        align-content center
+        object-fit cover
+        height 40px
+        opacity 0
+        cursor pointer
+        transition opacity 0.3s ease
+
+        &:hover
+          opacity 1
+
+      .added-photo
+        position absolute
+        color myWhite
+        background myPinkShadow
+        align-content center
+        text-align center
+        border-radius 20px
+        width 100%
+        height 100%
+        object-fit cover
