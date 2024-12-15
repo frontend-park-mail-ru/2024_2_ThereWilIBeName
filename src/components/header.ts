@@ -88,22 +88,24 @@ export default {
                 User.isSignedIn = false;
                 userButton.classList.remove('show');
                 signinButton.classList.remove('hidden');
-                await this.mount(router);
+                await router.goto('/home');
             }
         });
 
         try {
             await userMount();
 
-            signinButton.textContent = 'Сменить пользователя';
-
-            User.avatarPath = (await Api.getProfile(User.id)).data.avatarPath!;
-            if (User.avatarPath) {
-                avatarImage.src = `/avatars/${User.avatarPath}`;
+            if (User.isSignedIn) {
+                if ((await Api.getProfile(User.id)).data.avatarPath) {
+                    User.avatarPath = String((await Api.getProfile(User.id)).data.avatarPath);
+                    avatarImage.src = `/avatars/${User.avatarPath}`;
+                }
+                userNameDiv.textContent = User.username;
+                userButton.classList.add('show');
+                signinButton.classList.add('hidden');
             }
-            userNameDiv.textContent = User.username;
-            userButton.classList.add('show');
-            signinButton.classList.add('hidden');
+
+
         } catch (error) {
             console.log('Пользователь не авторизован');
         }
