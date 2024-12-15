@@ -1,5 +1,5 @@
 import Api from '../../utils/Api';
-import galleryPhotosTemplate from '../tripPage/trips-photos.hbs';
+import galleryPhotosTemplate from '../tripsPage/trips-photos.hbs';
 import deleteIcon from '../../static/delete.png';
 import deletePhotoButtonsMount from './mount-delete-photo-buttons';
 

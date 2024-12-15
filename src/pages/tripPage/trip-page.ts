@@ -5,8 +5,6 @@ import footer from '../../components/footer';
 import backButtonIcon from '../../static/back button.svg';
 import editIcon from '../../static/edit white.svg';
 import shareIcon from '../../static/share.svg';
-import User from '../../utils/user';
-import deletePhotoButtonsMount from './mount-delete-photo-buttons';
 import mountPhotos from './mountPhotos';
 
 export default {
