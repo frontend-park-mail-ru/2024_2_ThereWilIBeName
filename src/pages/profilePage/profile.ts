@@ -11,6 +11,7 @@ import {emailRegex} from '../../components/validation';
 import footer from '../../components/footer';
 import backButton from '../../static/back button white.svg';
 import userMount from '../user-mount';
+import closeButton from '../../static/close icon.svg';
 
 export default {
     /**
@@ -21,6 +22,9 @@ export default {
      */
     html: `
         <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
+        <div class="error-window-message hidden hidden-animation" id="error-window-message">Ошибка загрузки аватарки
+            <img src="${closeButton}" class="error-close-button" id="error-close-button">
+        </div>
         <main>
             <div class="background-profile">
                 <div class="user-block">
@@ -110,6 +114,14 @@ export default {
         avatar.src = resProfile.data.avatarPath ?
             `/avatars/${resProfile.data.avatarPath}` : defaultAvatar;
 
+        const errorWindowMessage = document.getElementById('error-window-message') as HTMLElement;
+        const errorCloseButton = document.getElementById('error-close-button') as HTMLButtonElement;
+
+        errorCloseButton.addEventListener('click', () => {
+            errorWindowMessage.classList.add('hidden-animation');
+            errorCloseButton.classList.add('hidden');
+        });
+
         avatar.addEventListener('click', () => {
             const avatarInputElement = document.createElement('input') as HTMLInputElement;
             avatarInputElement.type = 'file';
@@ -123,15 +135,16 @@ export default {
                     reader.addEventListener('load', async () => {
                         const basedAvatar = String(reader.result ? reader.result : '');
                         if (!basedAvatar) {
-                            alert('Ошибка загрузки аватарки');
+                            errorCloseButton.classList.remove('hidden');
+                            errorWindowMessage.classList.remove('hidden-animation');
                         }
-                        const res = await Api.putAvatar(User.id, basedAvatar);
-                        if (!res.ok) {
-                            alert('Ошибка загрузки аватарки');
+                        try {
+                            const res = await Api.putAvatar(User.id, basedAvatar);
+                            await this.mount(router);
+                        } catch (err) {
+                            errorCloseButton.classList.remove('hidden');
+                            errorWindowMessage.classList.remove('hidden-animation');
                         }
-
-                        avatar.src = basedAvatar;
-
                     });
                     reader.readAsDataURL(newAvatar);
                 }

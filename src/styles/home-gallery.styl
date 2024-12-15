@@ -30,12 +30,20 @@
         overflow hidden
         transition all 0.5s ease
 
+        @media (max-width 700px)
+            flex-direction column
+            height 40px
+            align-items center
+
         .filter-icon
             height 30px
             justify-self center
             align-self center
             margin-right 15px
             transition rotate 0.5s ease
+
+            @media (max-width 700px)
+                margin 0
 
             &:hover
                 rotate 180deg
@@ -45,6 +53,10 @@
             width 480px
             opacity 1
 
+            @media (max-width 700px)
+                width fit-content
+                height fit-content
+
         .filter
             margin-right 20px
             cursor pointer
@@ -52,6 +64,9 @@
             width fit-content
             justify-content center
             padding 10px 0
+
+            @media (max-width 700px)
+                margin 0
 
             &:hover
                 color myPink
@@ -88,8 +103,14 @@
                 opacity 1
                 background myPink
 
+        @media (max-width 700px)
+            overflow-x scroll
+            scrollbar-width none
+            justify-content start
+
         img
             padding 0
+
 
     .gallery-block
         mixinBlock(myBlack)
