@@ -53,7 +53,7 @@ export default {
             return;
         }
         
-        const galleryPhoto = document.getElementById('trip-gallery-photos') as HTMLElement;
+        const galleryPhoto = document.getElementById('trip-photos') as HTMLElement;
         if (!galleryPhoto) {
             console.log('Блок фото не найден');
             return;
