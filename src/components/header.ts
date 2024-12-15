@@ -88,7 +88,7 @@ export default {
                 User.isSignedIn = false;
                 userButton.classList.remove('show');
                 signinButton.classList.remove('hidden');
-                await router.goto('/home');
+                await this.mount(router);
             }
         });
 
@@ -96,9 +96,10 @@ export default {
             await userMount();
 
             signinButton.textContent = 'Сменить пользователя';
-            const avatarPath = (await Api.getProfile(User.id)).data.avatarPath;
-            if (avatarPath) {
-                avatarImage.src = `/avatars/${avatarPath}`;
+
+            User.avatarPath = (await Api.getProfile(User.id)).data.avatarPath!;
+            if (User.avatarPath) {
+                avatarImage.src = `/avatars/${User.avatarPath}`;
             }
             userNameDiv.textContent = User.username;
             userButton.classList.add('show');
