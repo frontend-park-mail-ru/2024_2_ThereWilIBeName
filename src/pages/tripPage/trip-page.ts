@@ -19,7 +19,7 @@ export default {
             <div class="trip-description grid-trip-description">Описание</div>
             <div class="trip-gallery-photos grid-trip-gallery-photos">
                 <div class="add-photo-button" id="add-photo-button">Добавить фото</div>
-                <div class="trip-photos">
+                <div class="trip-photos" id="trip-photos">
 
                 </div>
             </div>
