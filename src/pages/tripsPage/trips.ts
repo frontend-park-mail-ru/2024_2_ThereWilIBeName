@@ -6,6 +6,7 @@ import openIcon from '../../static/open.png';
 import tripIcon from '../../static/trip_icon.png';
 import copyLinkIcon from '../../static/copylink.png';
 import deleteIcon from '../../static/delete.svg';
+import deleteIconWhite from '../../static/delete white.svg';
 import editIcon from '../../static/edit.svg';
 import palmsImg from '../../static/please white.svg';
 import User from '../../utils/user';
@@ -84,7 +85,7 @@ export default {
         }
         const trips = tripsResponse.data;
         const galleryProfileElement = document.getElementById('gallery-trips') as HTMLElement;
-        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIcon, palmsImg, editIcon });
+        galleryProfileElement.innerHTML = galleryTemplateTrips({ trips, openIcon, tripIcon, copyLinkIcon, deleteIconWhite, palmsImg, editIcon });
 
         document.querySelectorAll('.trips-open-icon').forEach(icon => {
             const parentItem = icon.closest('.gallery-item-trips');
@@ -163,7 +164,6 @@ export default {
 
         document.querySelectorAll('.trips-delete-icon').forEach(icon => {
             icon.addEventListener('click', async () => {
-                icon.classList.toggle('open');
                 const parentItem = icon.closest('.gallery-item-trips');
                 if (parentItem) {
                     const id = parentItem.id;
@@ -175,13 +175,11 @@ export default {
             });
         });
 
-        document.querySelectorAll('.trips-edit-icon').forEach(icon => {
-            icon.addEventListener('click', async () => {
-                icon.classList.toggle('open');
-                const parentItem = icon.closest('.gallery-item-trips');
+        document.querySelectorAll('.gallery-trips-name').forEach(name => {
+            name.addEventListener('click', async () => {
+                const parentItem = name.closest('.gallery-item-trips');
                 if (parentItem) {
-                    localStorage.setItem('tempTrip', parentItem.id);
-                    router.goto('/edittrip');
+                    await router.goto(`/trip/${parentItem.id}`);
                 }
             });
         });

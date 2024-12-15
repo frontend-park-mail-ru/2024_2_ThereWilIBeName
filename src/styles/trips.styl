@@ -84,12 +84,12 @@
       align-items center
       grid-template-columns 10% 10% 50% 20% 5%
       grid-template-rows 1fr 1fr
-      grid-template-areas "a b c e f"\
+      grid-template-areas "a b c e g"\
       "a b d e g"
 
       @media (max-width 700px)
         grid-template-columns 15% 70% 15%
-        grid-template-areas "a c f"\
+        grid-template-areas "a c g"\
         "a d g"
 
 
@@ -199,7 +199,7 @@
     height 100%
     width 100%
     background myBlack
-    border-radius 20px
+    border-radius 10px
 
     @media (max-width 700px)
       display none
@@ -215,10 +215,16 @@
     &.open
       transform rotate(90deg)
 
-  .trips-edit-icon, .trips-delete-icon
-    width 30px
-    height 30px
+  .trips-delete-icon
     cursor pointer
+    border-radius 10px
+    height 100%
+    width 100%
+    background myBlack
+    transition background 0.3s ease
+
+    &:hover
+      background myRed
 
   .trips-column-open
     display grid
@@ -235,11 +241,16 @@
     row-gap 10px
 
   .gallery-trips-name
+    cursor pointer
     font-size 20px
     font-weight bold
     overflow hidden
     white-space nowrap
     text-overflow ellipsis
+    transition font-weight 0.3s ease
+
+    &:hover
+      font-weight bolder
 
   .gallery-trips-date
     font-size 17px
