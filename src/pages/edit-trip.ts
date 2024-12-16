@@ -69,9 +69,9 @@ export default {
         const formDescription = (document.getElementById('description') as HTMLInputElement);
         formDescription.value = resTrip.data.description;
         const formStartDate = (document.getElementById('startDate') as HTMLInputElement);
-        formStartDate.value = resTrip.data.startDate;
+        formStartDate.valueAsDate = new Date(resTrip.data.startDate);
         const formEndDate = (document.getElementById('endDate') as HTMLInputElement);
-        formEndDate.value = resTrip.data.endDate;
+        formEndDate.valueAsDate = new Date(resTrip.data.endDate);
         const formPrivateTrip = (document.getElementById('private-trip') as HTMLInputElement);
         formPrivateTrip.checked = resTrip.data.private;
         const createTripForm = document.getElementById('create-trip-form') as HTMLElement;
