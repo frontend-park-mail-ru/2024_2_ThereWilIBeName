@@ -50,48 +50,68 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после завершения монтирования страницы.
      */
     async mount(router: Router): Promise<void> {
-        const placeButton = document.getElementById('gallery') as HTMLButtonElement;
+        const placeGallery = document.getElementById('gallery') as HTMLButtonElement;
 
         const categoryOneButton = document.getElementById('category-one') as HTMLButtonElement;
         categoryOneButton.addEventListener('click', async () => {
-            await categoryButtonMount(1, placeButton, router, categoryOneButton);
+            await categoryButtonMount(1, placeGallery, router, categoryOneButton);
         });
 
         const categoryTwoButton = document.getElementById('category-two') as HTMLButtonElement;
         categoryTwoButton.addEventListener('click', async () => {
-            await categoryButtonMount(2, placeButton, router, categoryTwoButton);
+            await categoryButtonMount(2, placeGallery, router, categoryTwoButton);
         });
 
         const categoryThreeButton = document.getElementById('category-three') as HTMLButtonElement;
         categoryThreeButton.addEventListener('click', async () => {
-            await categoryButtonMount(3, placeButton, router, categoryThreeButton);
+            await categoryButtonMount(3, placeGallery, router, categoryThreeButton);
         });
 
         const categoryFourButton = document.getElementById('category-four') as HTMLButtonElement;
         categoryFourButton.addEventListener('click', async () => {
-            await categoryButtonMount(4, placeButton, router, categoryFourButton);
+            await categoryButtonMount(4, placeGallery, router, categoryFourButton);
         });
 
         const categoryFiveButton = document.getElementById('category-five') as HTMLButtonElement;
         categoryFiveButton.addEventListener('click', async () => {
-            await categoryButtonMount(5, placeButton, router, categoryFiveButton);
+            await categoryButtonMount(5, placeGallery, router, categoryFiveButton);
         });
 
         const categorySixButton = document.getElementById('category-six') as HTMLButtonElement;
         categorySixButton.addEventListener('click', async () => {
-            await categoryButtonMount(6, placeButton, router, categorySixButton);
+            await categoryButtonMount(6, placeGallery, router, categorySixButton);
         });
 
         const categorySevenButton = document.getElementById('category-seven') as HTMLButtonElement;
         categorySevenButton.addEventListener('click', async () => {
-            await categoryButtonMount(7, placeButton, router, categorySevenButton);
+            await categoryButtonMount(7, placeGallery, router, categorySevenButton);
         });
+
+        const noFilterButton = document.getElementById('normal-filter') as HTMLButtonElement;
+        noFilterButton.addEventListener('click', async () => {
+            Search.filterId = -1;
+            await attractionsLoad(placeGallery, router);
+        });
+
+        const ratingFilterButton = document.getElementById('rating-filter') as HTMLButtonElement;
+        ratingFilterButton.addEventListener('click', async () => {
+            Search.filterId = 1;
+            await attractionsLoad(placeGallery, router);
+        });
+
+        const popularityFilterButton = document.getElementById('popularity-filter') as HTMLButtonElement;
+        popularityFilterButton.addEventListener('click', async () => {
+            Search.filterId = 2;
+            await attractionsLoad(placeGallery, router);
+        });
+
+
 
         // Монтирование хэдера
         await header.mount(router);
 
         // Загрузка мест
-        await attractionsLoad(placeButton, router);
+        await attractionsLoad(placeGallery, router);
 
     },
 

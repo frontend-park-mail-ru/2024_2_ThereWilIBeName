@@ -164,13 +164,16 @@ export default {
      *
      * @returns {Promise<{data: Object[], status: number, ok: boolean}>} Ответ сервера с данными достопримечательностей, статусом и флагом успеха.
      */
-    async getAttractions(limit: number, offset:number, cityId: number, categoryId: number): Promise<JsonResponse<Attractions[]>> {
+    async getAttractions(limit: number, offset:number, cityId: number, categoryId: number, filterId: number): Promise<JsonResponse<Attractions[]>> {
         let getAttracionsURL = `/api/v1/places/search?limit=${limit}&offset=${offset}`;
         if (cityId !== -1) {
             getAttracionsURL = getAttracionsURL + `&city=${cityId}`;
         }
         if (categoryId !== -1) {
             getAttracionsURL = getAttracionsURL + `&category=${categoryId}`;
+        }
+        if (filterId !== -1) {
+            getAttracionsURL = getAttracionsURL + `&filter=${filterId}`;
         }
         const res = await RESTApi.get(getAttracionsURL);
         return {
