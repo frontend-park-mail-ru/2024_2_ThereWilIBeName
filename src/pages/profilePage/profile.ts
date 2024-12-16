@@ -137,14 +137,15 @@ export default {
                         if (!basedAvatar) {
                             errorCloseButton.classList.remove('hidden');
                             errorWindowMessage.classList.remove('hidden-animation');
+                            return;
                         }
-                        try {
-                            const res = await Api.putAvatar(User.id, basedAvatar);
-                            await this.mount(router);
-                        } catch (err) {
+                        const res = await Api.putAvatar(User.id, basedAvatar);
+                        if (!res.ok) {
                             errorCloseButton.classList.remove('hidden');
                             errorWindowMessage.classList.remove('hidden-animation');
+                            return;
                         }
+                        await this.mount(router);
                     });
                     reader.readAsDataURL(newAvatar);
                 }
