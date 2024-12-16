@@ -246,9 +246,9 @@ export default {
             data: {
                 id: String(res.data.id),
                 profile: {
-                    username: String(res.data.login),
-                    email: String(res.data.email),
-                    avatarPath: String(res.data.avatar_path),
+                    username: String(res.data.profile.login),
+                    email: String(res.data.profile.email),
+                    avatarPath: String(res.data.profile.avatar_path),
                 }
             },
             status: res.status,
@@ -458,9 +458,9 @@ export default {
             data: {
                 id: String(res.data.id),
                 profile: {
-                    username: String(res.data.username),
-                    email: String(res.data.email),
-                    avatarPath: String(res.data.avatar_path),
+                    username: String(res.data.profile.username),
+                    email: String(res.data.profile.email),
+                    avatarPath: String(res.data.profile.avatar_path),
                 }
             },
             status: res.status,
