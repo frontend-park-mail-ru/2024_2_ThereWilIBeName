@@ -4,7 +4,7 @@ import User from '../utils/user';
 import logoImage from '../static/logo trip black.svg';
 import avatarPng from '../static/avatar.png';
 import search from './search/search';
-import userMount from '../pages/user-mount';
+import userMount from './user-mount';
 
 export default {
     html: `<header class="header">

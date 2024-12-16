@@ -129,6 +129,10 @@ type Survey = {
     // ничего не возвращают
 }
 
+type Link = {
+    link: string,
+}
+
 export default {
 
     async getStat(surveyId: string) {
@@ -300,6 +304,17 @@ export default {
                 photos: Array.isArray(res.data.photos)
                     ? res.data.photos.map((photo: any) => ({ photoPath: String(photo) }))
                     : [],
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async getTripLink(tripId: number, option: string): Promise<JsonResponse<Link>> {
+        const res = await RESTApi.get(`/api/v1/trip/${tripId}?sharing_option=${option}`)
+        return {
+            data: {
+                link: res.data.link,
             },
             status: res.status,
             ok: res.ok,

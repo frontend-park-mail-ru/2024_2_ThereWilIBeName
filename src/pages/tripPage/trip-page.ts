@@ -6,15 +6,25 @@ import backButtonIcon from '../../static/back button.svg';
 import editIcon from '../../static/edit white.svg';
 import shareIcon from '../../static/share.svg';
 import mountPhotos from './mountPhotos';
+import copyIcon from '../../static/copy.svg';
 
 export default {
     html:`
         ${header.html}
         <main>
+            <div class="copy-message hidden hidden-animation" id="copy-message">Ссылка скопирована</div>
+            <div class="share-block hidden hidden-animation" id="share-block">
+                <div class="share-block-title grid-share-block-title">Поделиться поездкой</div>
+                <div class="share-link grid-share-link" id="share-link"></div>
+                <img src="${copyIcon}" class="copy-link-button grid-copy-link-button">
+                <div class="read-mode grid-read-mode" id="read-mode-button">Чтение</div>
+                <div class="edit-mode grid-edit-mode" id="edit-mode-button">Редактирование</div>
+            </div>
+            <div class="blur-element hidden hidden-animation" id="blur-element"></div>
             <img src="${backButtonIcon}" alt="назад" class="trip-back-button grid-trip-back-button" id="trip-back-button">
             <div class="trip-title grid-trip-title">Поездка</div>
             <img src="${editIcon}" alt="редактировать" class="trip-edit-icon grid-trip-edit-icon">
-            <img src="${shareIcon}" alt="поделиться" class="trip-share-icon grid-trip-share-icon">
+            <img src="${shareIcon}" alt="поделиться" class="trip-share-icon grid-trip-share-icon" id="trip-share-button">
             <div class="trip-date grid-trip-date">01.12.2024 - 08.12.2024</div>
             <div class="trip-description grid-trip-description">Описание</div>
             <div class="trip-gallery-photos grid-trip-gallery-photos">
@@ -100,6 +110,49 @@ export default {
             tripPhotoInputElement.click();
         });
 
+        const shareButton = document.getElementById('trip-share-button') as HTMLButtonElement;
+        const shareBlock = document.getElementById('share-block') as HTMLElement;
+        const blurElement = document.getElementById('blur-element') as HTMLElement;
+        shareButton.addEventListener('click', () => {
+            shareBlock.classList.remove('hidden');
+            shareBlock.classList.remove('hidden-animation');
+            blurElement.classList.remove('hidden');
+            blurElement.classList.remove('hidden-animation');
+        });
+        blurElement.addEventListener('click', () => {
+            shareBlock.classList.add('hidden-animation');
+            shareBlock.classList.add('hidden');
+            blurElement.classList.add('hidden-animation');
+            blurElement.classList.add('hidden');
+        });
+
+        const copyLinkButton = document.getElementById('copy-link-button') as HTMLButtonElement;
+        const shareLinkElement = document.createElement('share-link') as HTMLElement;
+        const copyMessage = document.getElementById('copy-message') as HTMLElement;
+        copyLinkButton.addEventListener('click', () => {
+            if (shareLinkElement.textContent) {
+                navigator.clipboard.writeText(shareLinkElement.textContent);
+                copyMessage.classList.remove('hidden');
+                copyMessage.classList.remove('hidden-animation');
+                setTimeout(() => {
+                    copyMessage.classList.add('hidden-animation');
+                    copyMessage.classList.add('hidden');
+                }, 3000);
+                return;
+            }
+        });
+
+        const readModeButton = document.getElementById('read-mode-button') as HTMLButtonElement;
+        readModeButton.addEventListener('click', async () => {
+            const resReadMode = await Api.getTripLink(itemId, 'reading');
+            shareLinkElement.textContent = resReadMode.data.link;
+        });
+
+        const editModeButton = document.getElementById('edit-mode-button') as HTMLButtonElement;
+        editModeButton.addEventListener('click', async () => {
+            const resEditMode = await Api.getTripLink(itemId, 'editing');
+            shareLinkElement.textContent = resEditMode.data.link;
+        });
     },
 
     unmount(): void {}

@@ -10,7 +10,7 @@ import confirmIcon from '../../static/confirm.svg';
 import {emailRegex} from '../../components/validation';
 import footer from '../../components/footer';
 import backButton from '../../static/back button white.svg';
-import userMount from '../user-mount';
+import userMount from '../../components/user-mount';
 import closeButton from '../../static/close icon.svg';
 
 export default {
