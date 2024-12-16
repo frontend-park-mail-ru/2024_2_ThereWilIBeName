@@ -119,7 +119,7 @@ export default {
 
         errorCloseButton.addEventListener('click', () => {
             errorWindowMessage.classList.add('hidden-animation');
-            errorCloseButton.classList.add('hidden');
+            errorWindowMessage.classList.add('hidden');
         });
 
         avatar.addEventListener('click', () => {
@@ -135,13 +135,13 @@ export default {
                     reader.addEventListener('load', async () => {
                         const basedAvatar = String(reader.result ? reader.result : '');
                         if (!basedAvatar) {
-                            errorCloseButton.classList.remove('hidden');
+                            errorWindowMessage.classList.remove('hidden');
                             errorWindowMessage.classList.remove('hidden-animation');
                             return;
                         }
                         const res = await Api.putAvatar(User.id, basedAvatar);
                         if (!res.ok) {
-                            errorCloseButton.classList.remove('hidden');
+                            errorWindowMessage.classList.remove('hidden');
                             errorWindowMessage.classList.remove('hidden-animation');
                             return;
                         }
