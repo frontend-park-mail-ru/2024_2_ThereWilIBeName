@@ -96,9 +96,7 @@ export default {
             await userMount();
 
             if (User.isSignedIn) {
-                if (User.avatarPath !== '') {
-                    avatarImage.src = `/avatars/${User.avatarPath}`;
-                }
+                avatarImage.src = User.avatarPath ? `/avatars/${User.avatarPath}` : `${avatarPng}`;
                 userNameDiv.textContent = User.username;
                 userButton.classList.add('show');
                 signinButton.classList.add('hidden');
