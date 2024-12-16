@@ -95,9 +95,9 @@ export default {
 
         if (User.username === '') {
             const currentUser = await Api.getUser();
-            User.username = currentUser.data.username;
+            User.username = currentUser.data.profile.username;
             User.id = currentUser.data.id;
-            User.email = currentUser.data.email;
+            User.email = currentUser.data.profile.email;
         }
 
         const userTitle = document.getElementById('user-title') as HTMLElement;

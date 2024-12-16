@@ -57,9 +57,11 @@ type Attractions = {
 
 type User = {
     id: string,
-    username: string,
-    email: string,
-    avatarPath: string,
+    profile: {
+        username: string,
+        email: string,
+        avatarPath: string,
+    }
 }
 
 type Login = {
@@ -243,9 +245,11 @@ export default {
         return {
             data: {
                 id: String(res.data.id),
-                username: String(res.data.login),
-                email: String(res.data.email),
-                avatarPath: String(res.data.avatar_path),
+                profile: {
+                    username: String(res.data.login),
+                    email: String(res.data.email),
+                    avatarPath: String(res.data.avatar_path),
+                }
             },
             status: res.status,
             ok: res.ok,
@@ -453,9 +457,11 @@ export default {
         return {
             data: {
                 id: String(res.data.id),
-                username: String(res.data.username),
-                email: String(res.data.email),
-                avatarPath: String(res.data.avatarPath),
+                profile: {
+                    username: String(res.data.username),
+                    email: String(res.data.email),
+                    avatarPath: String(res.data.avatarPath),
+                }
             },
             status: res.status,
             ok: res.ok,

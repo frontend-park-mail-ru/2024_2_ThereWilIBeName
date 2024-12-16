@@ -10,8 +10,9 @@ export default async function userMount() {
         return;
     }
 
-    User.username = currentUser.data.username;
+    User.username = currentUser.data.profile.username;
     User.id = currentUser.data.id;
-    User.email = currentUser.data.email;
+    User.email = currentUser.data.profile.email;
+    User.avatarPath = currentUser.data.profile.avatarPath ? currentUser.data.profile.avatarPath : '';
     User.isSignedIn = true;
 };
