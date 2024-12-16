@@ -13,6 +13,7 @@ class User {
     username: string;
     email: string;
     id: string;
+    avatarPath: string;
     isSignedIn: boolean;
 
     /**
@@ -23,6 +24,7 @@ class User {
         this.username = '';
         this.email = '';
         this.id = '';
+        this.avatarPath = '';
         this.isSignedIn = false;
     }
 

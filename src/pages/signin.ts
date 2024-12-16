@@ -71,16 +71,14 @@ export default {
             const formEmail = (formEmailElement).value.trim().toLowerCase();
             const formPassword = (formPasswordElement).value;
 
-            const res = await Api.postSignin(formEmail, formPassword);
-
-            if (!res.ok) {
+            try {
+                const res = await Api.postSignin(formEmail, formPassword);
+                localStorage.setItem('token', `${res.data.token}`);
+                await router.goto('/home');
+            } catch (e) {
                 errorMessage.textContent = 'Неверный email или пароль';
                 errorMessage.classList.add('visible');
-                return;
             }
-
-            localStorage.setItem('token', `${res.data.token}`);
-            router.goto('/home');
         });
     },
 

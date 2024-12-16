@@ -6,6 +6,7 @@ class Search {
     offset: number;
     cityId: number;
     categoryId: number;
+    filterId: number;
 
 
     private constructor() {
@@ -14,6 +15,7 @@ class Search {
         this.offset = 0;
         this.cityId = -1;
         this.categoryId = -1;
+        this.filterId = -1;
     }
 
     public static getInstance(): Search {

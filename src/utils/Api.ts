@@ -32,17 +32,36 @@ type Attraction = {
     description: string,
     rating: number,
     address: string,
-    cityID: number,
+    city: string,
     phoneNumber: string,
-    categoriesId: number[],
+    categories: {
+        categoryName: string,
+    }[],
+    latitude: number,
+    longitude: number,
+}
+
+type Attractions = {
+    id: string,
+    name: string,
+    imagePath: string,
+    description: string,
+    rating: number,
+    address: string,
+    city: string,
+    phoneNumber: string,
+    categories: string[],
     latitude: number,
     longitude: number,
 }
 
 type User = {
     id: string,
-    username: string,
-    email: string,
+    profile: {
+        username: string,
+        email: string,
+        avatarPath: string,
+    }
 }
 
 type Login = {
@@ -112,6 +131,10 @@ type Survey = {
     // ничего не возвращают
 }
 
+type Link = {
+    link: string,
+}
+
 export default {
 
     async getStat(surveyId: string) {
@@ -147,13 +170,16 @@ export default {
      *
      * @returns {Promise<{data: Object[], status: number, ok: boolean}>} Ответ сервера с данными достопримечательностей, статусом и флагом успеха.
      */
-    async getAttractions(limit: number, offset:number, cityId: number, categoryId: number): Promise<JsonResponse<Attraction[]>> {
+    async getAttractions(limit: number, offset:number, cityId: number, categoryId: number, filterId: number): Promise<JsonResponse<Attractions[]>> {
         let getAttracionsURL = `/api/v1/places/search?limit=${limit}&offset=${offset}`;
         if (cityId !== -1) {
             getAttracionsURL = getAttracionsURL + `&city=${cityId}`;
         }
         if (categoryId !== -1) {
             getAttracionsURL = getAttracionsURL + `&category=${categoryId}`;
+        }
+        if (filterId !== -1) {
+            getAttracionsURL = getAttracionsURL + `&filter=${filterId}`;
         }
         const res = await RESTApi.get(getAttracionsURL);
         return {
@@ -166,9 +192,9 @@ export default {
                     rating: Number(attraction.rating),
                     numberOfReviews: Number(attraction.numberOfReviews),
                     address: String(attraction.address),
-                    cityID: Number(attraction.cityID),
+                    city: String(attraction.city),
                     phoneNumber: String(attraction.phoneNumber),
-                    categoriesId: attraction.categoriesId as number[],
+                    categories: attraction.categoriesId as string[],
                     latitude: Number(res.data.latitude),
                     longitude: Number(res.data.longitude),
                 })) : [],
@@ -187,9 +213,11 @@ export default {
                 description: String(res.data.description),
                 rating: Number(res.data.rating),
                 address: String(res.data.address),
-                cityID: Number(res.data.cityID),
+                city: String(res.data.city),
                 phoneNumber: String(res.data.phoneNumber),
-                categoriesId: res.data.categoriesId as number[],
+                categories: Array.isArray(res.data.categories)
+                    ? res.data.categories.map((category: any) => ({ categoryName: String(category) }))
+                    : [],
                 latitude: Number(res.data.latitude),
                 longitude: Number(res.data.longitude),
             },
@@ -199,7 +227,7 @@ export default {
     },
 
     async getProfile(id: string): Promise<JsonResponse<Profile>> {
-        const res = await RESTApi.get(`api/v1/users/${id}/profile`);
+        const res = await RESTApi.get(`/api/v1/users/${id}/profile`);
         return {
             data: {
                 username: String(res.data.login),
@@ -217,8 +245,11 @@ export default {
         return {
             data: {
                 id: String(res.data.id),
-                username: String(res.data.login),
-                email: String(res.data.email),
+                profile: {
+                    username: String(res.data.profile.login),
+                    email: String(res.data.profile.email),
+                    avatarPath: String(res.data.profile.avatar_path),
+                }
             },
             status: res.status,
             ok: res.ok,
@@ -262,8 +293,40 @@ export default {
         };
     },
 
+    async getTrip(tripId: number): Promise<JsonResponse<Trip>> {
+        const res = await RESTApi.get(`/api/v1/trips/${tripId}`);
+        return {
+            data: {
+                userId: Number(res.data.user_id),
+                id: String(res.data.id),
+                name: String(res.data.name),
+                cityId: Number(res.data.city_id),
+                description: String(res.data.description),
+                startDate: formatDate(res.data.start_date),
+                endDate: formatDate(res.data.end_date),
+                private: Boolean(res.data.private),
+                photos: Array.isArray(res.data.photos)
+                    ? res.data.photos.map((photo: any) => ({ photoPath: String(photo) }))
+                    : [],
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
+    async postTripLink(tripId: number, option: string): Promise<JsonResponse<Link>> {
+        const res = await RESTApi.post(`/api/v1/trips/${tripId}/share?sharing_option=${option}`, {});
+        return {
+            data: {
+                link: String(res.data.url),
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
     async getUserReviews(id: string): Promise<JsonResponse<UserReview[]>> {
-        const res = await RESTApi.get(`api/v1/users/${id}/reviews`);
+        const res = await RESTApi.get(`/api/v1/users/${id}/reviews`);
         return {
             data: Array.isArray(res.data) ? res.data.map( (review) => ({
                 id: Number(review.id),
@@ -368,8 +431,8 @@ export default {
         };
     },
 
-    async putTrip(id: string, userId:number, name: string, cityId: number, description: string, startDate: string, endDate: string, privateTrip: boolean): Promise<JsonResponse<Trip>> {
-        const res = await RESTApi.put(`api/v1/trips/${id}`, {user_id: userId, name, city_id: cityId, description: description, start_date: startDate, end_date: endDate, private_trip: privateTrip });
+    async putTrip(tripId: number, userId:number, name: string, cityId: number, description: string, startDate: string, endDate: string, privateTrip: boolean): Promise<JsonResponse<Trip>> {
+        const res = await RESTApi.put(`/api/v1/trips/${tripId}`, {user_id: userId, name, city_id: cityId, description: description, start_date: startDate, end_date: endDate, private_trip: privateTrip });
         return {
             data: res.data,
             status: res.status,
@@ -394,8 +457,11 @@ export default {
         return {
             data: {
                 id: String(res.data.id),
-                username: String(res.data.username),
-                email: String(res.data.email),
+                profile: {
+                    username: String(res.data.profile.username),
+                    email: String(res.data.profile.email),
+                    avatarPath: String(res.data.profile.avatar_path),
+                }
             },
             status: res.status,
             ok: res.ok,
@@ -403,7 +469,7 @@ export default {
     },
 
     async putAvatar(id: string, avatar: string): Promise<JsonResponse<Avatar>> {
-        const res = await RESTApi.put(`api/v1/users/${id}/avatars`, {avatar});
+        const res = await RESTApi.put(`/api/v1/users/${id}/avatars`, {avatar});
         return {
             data: {
                 message: String(res.data.message),
@@ -415,7 +481,7 @@ export default {
     },
 
     async putPhotos(tripId: string, newPhotos: string[]): Promise<JsonResponse<TripPhoto[]>> {
-        const res = await RESTApi.put(`api/v1/trips/${tripId}/photos`, {photos: newPhotos});
+        const res = await RESTApi.put(`/api/v1/trips/${tripId}/photos`, {photos: newPhotos});
         return {
             data: Array.isArray(res.data) ? res.data.map( (photo) => ({
                 photoPath: String(photo.photoPath),
@@ -434,8 +500,8 @@ export default {
         };
     },
 
-    async deleteReview(review_id: number, place_id: number): Promise<JsonResponse<Response>> {
-        const res = await RESTApi.delete(`/api/v1/places/${place_id}/reviews/${review_id}`);
+    async deleteReview(reviewId: string, placeId: number): Promise<JsonResponse<Response>> {
+        const res = await RESTApi.delete(`/api/v1/places/${placeId}/reviews/${reviewId}`);
         return {
             data: {
                 message: String(res.data.message),
@@ -444,4 +510,15 @@ export default {
             ok: res.ok,
         };
     },
+
+    async deletePhoto(tripId: string, photoPath: string): Promise<JsonResponse<Response>> {
+        const res = await RESTApi.delete(`/api/v1/trips/${tripId}/photos`, {photo_path: photoPath});
+        return {
+            data: {
+                message: String(res.data.message),
+            },
+            status: res.status,
+            ok: res.ok,
+        };
+    }
 };

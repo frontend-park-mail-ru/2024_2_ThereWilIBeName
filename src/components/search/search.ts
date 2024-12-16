@@ -1,13 +1,12 @@
 import Router from '../../utils/Router';
 import Api from '../../utils/Api';
-
 // import searchButton from '../../static/search button.svg';
 import searchCitiesTemplate from './searchCities.hbs';
 import searchPlacesTemplate from './searchPlaces.hbs';
+import searchCitiesFirstTemplate from './searchCitiesFirst.hbs';
+import searchPlacesFirstTemplate from './searchPlacesFirst.hbs';
 import Search from '../../utils/search-memory';
 import debounce from '../debounce';
-import CSAT from '../../utils/CSAT-memory';
-import csat from '../csat-block';
 
 export default {
     html: `
@@ -24,6 +23,7 @@ export default {
         const inputSearch = document.getElementById('search-input') as HTMLInputElement;
         const searchResultsCities = document.getElementById('search-results-cities') as HTMLElement;
         const searchResultsPlaces = document.getElementById('search-results-places') as HTMLElement;
+        let resultCount: number = 0 ;
 
         if (!inputSearch || !searchResultsCities || !searchResultsPlaces) return;
 
@@ -32,6 +32,7 @@ export default {
             // Очистим предыдущие результаты
             searchResultsCities.innerHTML = '';
             searchResultsPlaces.innerHTML = '';
+            resultCount = 0;
 
             if (!query) return;
 
@@ -39,17 +40,31 @@ export default {
                 const response = await Api.getSearch(query);
 
                 const results = response.data;
+
+                if (results.length === 0) {
+                    searchResultsCities.innerHTML = '<div>Нет результатов</div>';
+                }
+
                 for (const result of results) {
+                    resultCount++;
                     if (result.type === 'city') {
                         const city = {
                             name: result.name,
                             id: result.id,
                         };
-                        searchResultsCities.insertAdjacentHTML('beforeend', searchCitiesTemplate({ city }));
+                        if (resultCount === 1) {
+                            searchResultsCities.insertAdjacentHTML('beforeend', searchCitiesFirstTemplate({ city }));
+                        } else {
+                            searchResultsCities.insertAdjacentHTML('beforeend', searchCitiesTemplate({ city }));
+                        }
                     }
                     if (result.type === 'place') {
                         const place = (await Api.getAttraction(result.id)).data;
-                        searchResultsPlaces.insertAdjacentHTML('beforeend', searchPlacesTemplate({ place }));
+                        if (resultCount === 1) {
+                            searchResultsPlaces.insertAdjacentHTML('beforeend', searchPlacesFirstTemplate({ place }));
+                        } else {
+                            searchResultsPlaces.insertAdjacentHTML('beforeend', searchPlacesTemplate({ place }));
+                        }
                     }
                 }
 

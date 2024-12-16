@@ -4,6 +4,7 @@ import User from '../utils/user';
 import logoImage from '../static/logo trip black.svg';
 import avatarPng from '../static/avatar.png';
 import search from './search/search';
+import userMount from './user-mount';
 
 export default {
     html: `<header class="header">
@@ -14,7 +15,7 @@ export default {
                 <button class="trips-button trips-grid" id="trips-button">Поездки</button>
                 <button class="header-button user-grid" id="signin-button">Вход</button>
                 <div class="user-button user-grid" id="user-button">
-                    <img src="${avatarPng}" class="avatar" alt="Аватарка" id="avatar">
+                    <img src="${avatarPng}" onerror="this.src='${avatarPng}';" class="avatar" alt="Аватарка" id="avatar">
                 </div>
                 <div id="side-menu" class="side-menu">
                     <div class="background-menu" id="background-menu"></div>
@@ -24,7 +25,7 @@ export default {
                         <li><button class="menu-button" id="profile-button">Профиль</button></li>
                         <li><button class="menu-button" id="logout-button">Выйти</button></li>
                     </ul>
-                    <button id="menu-close-button" class="menu-close-button">Закрыть</button>
+                    <button id="menu-close-button" class="menu-close-button">←</button>
                 </div>
             </header>`,
 
@@ -42,10 +43,10 @@ export default {
         const changeUserButton = document.getElementById('change-user-button') as HTMLButtonElement;
         const tripsButton = document.getElementById('trips-button') as HTMLButtonElement;
 
-        search.mount(router);
+        await search.mount(router);
 
         tripsButton.addEventListener('click', () => {
-            router.goto('/trips');
+            router.goto('/mytrips');
         });
 
         homeLogo.addEventListener('click', () => {
@@ -83,6 +84,7 @@ export default {
                 User.username = '';
                 User.id = '';
                 User.email = '';
+                User.avatarPath = '';
                 User.isSignedIn = false;
                 userButton.classList.remove('show');
                 signinButton.classList.remove('hidden');
@@ -91,25 +93,18 @@ export default {
         });
 
         try {
-            // Получение информации о текущем пользователе
-            const currentUser = await Api.getUser();
+            await userMount();
 
-            if (!currentUser.ok) {
-                console.log('Пользователь не авторизован');
-                return;
+            if (User.isSignedIn) {
+                if (User.avatarPath !== '') {
+                    avatarImage.src = `/avatars/${User.avatarPath}`;
+                }
+                userNameDiv.textContent = User.username;
+                userButton.classList.add('show');
+                signinButton.classList.add('hidden');
             }
-            User.username = currentUser.data.username;
-            User.id = currentUser.data.id;
-            User.email = currentUser.data.email;
-            User.isSignedIn = true;
-            signinButton.textContent = 'Сменить пользователя';
-            const avatarPath = (await Api.getProfile(User.id)).data.avatarPath;
-            if (avatarPath) {
-                avatarImage.src = `/avatars/${avatarPath}`;
-            }
-            userNameDiv.textContent = User.username;
-            userButton.classList.add('show');
-            signinButton.classList.add('hidden');
+
+
         } catch (error) {
             console.log('Пользователь не авторизован');
         }
