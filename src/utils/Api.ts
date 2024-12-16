@@ -311,7 +311,7 @@ export default {
     },
 
     async getTripLink(tripId: number, option: string): Promise<JsonResponse<Link>> {
-        const res = await RESTApi.get(`/api/v1/trips/${tripId}?sharing_option=${option}`);
+        const res = await RESTApi.get(`/api/v1/trip/${tripId}/share?sharing_option=${option}`);
         return {
             data: {
                 link: res.data.link,
