@@ -33,7 +33,7 @@ export default {
                 </div>
                 
                 <div class="reviews grid-reviews">
-                    <div class="review-form">
+                    <div class="review-form hidden" id="review-form">
                         <div class="review-form-title grid-review-form-title">Были? Поделитесь!</div>
                         <div class="rating grid-rating">
                             <input class="rating-input" type="number" min="1" max="5" step="1" value="5" id="rating-input">из 5</div>
@@ -129,9 +129,15 @@ export default {
             resizeObserver.observe(mapContainer);
         }
 
+        const reviewFrom = document.getElementById('review-form') as HTMLElement;
         const reviewFormButton = document.getElementById('review-form-button') as HTMLButtonElement;
         const reviewFormText = document.getElementById('review-text-area') as HTMLTextAreaElement;
         const formRatingInput = document.getElementById('rating-input') as HTMLInputElement;
+
+        if (User.isSignedIn) {
+            reviewFrom.classList.remove('hidden');
+        }
+
         reviewFormButton.addEventListener('click', async () => {
             if (!reviewFormText.value) {
                 return;
