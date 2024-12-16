@@ -1,8 +1,9 @@
 {{#each reviews}}
     <div class="review-item" id="{{ id }}">
-        <img src="../../static/please%20white.svg" alt="Аватарка" class="reviewers-avatar grid-reviewers-avatar">
-        <div class="reviewers-login grid-reviewers-login">{{userLogin}}</div>
+        <img src="/avatars/{{avatarPath}}" onerror="this.src='{{../avatarPng}}';" alt="Аватарка" class="reviewers-avatar grid-reviewers-avatar">
+        <div class="reviewers-login grid-reviewers-login" id="user-{{id}}">{{userLogin}}</div>
         <div class="review-rating grid-review-rating">{{rating}}/5</div>
         <div class="review-text grid-review-text">{{reviewText}}</div>
+        <div class="delete-review-button hidden" id="{{ id }}">Удалить</div>
     </div>
 {{/each}}

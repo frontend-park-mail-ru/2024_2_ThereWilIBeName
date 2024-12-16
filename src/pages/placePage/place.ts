@@ -1,6 +1,5 @@
 import Api from '../../utils/Api';
 import Router from '../../utils/Router';
-import deleteIcon from '../../static/delete.png';
 import header from '../../components/header';
 import footer from '../../components/footer';
 import mapMarkerIcon from '../../static/map marker.svg';
@@ -9,6 +8,8 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import reviewsLoad from './reviews-load';
 import User from '../../utils/user';
+import galleryCategoriesTemplate from './categories.hbs';
+import Search from '../../utils/search-memory';
 
 export default {
     html:
@@ -16,12 +17,14 @@ export default {
         <main>
             <div class="place-block">
                 <div class="place-image grid-place-image">
-                    <img src="img_1.png" alt="{{name}}" id="place-image">
+                    <div class="avg-place-rating" id="avg-place-rating"></div>
+                    <img src="img_1.png" alt="Картинка поездки" id="place-image">
                 </div>
                 <div class="place-name grid-place-name" id="place-name">Название</div>
                 <div class="back-button-block grid-back-button">
                     <img class="back-button" src="${backButton}" id="back-button">
                 </div>
+                <div class="categories grid-categories" id="categories"></div>
                 <div class="place-info grid-place-info">
                     <div class="description" id="description">Здесь будет описание</div>
                 </div>
@@ -30,7 +33,7 @@ export default {
                 </div>
                 
                 <div class="reviews grid-reviews">
-                    <div class="review-form">
+                    <div class="review-form hidden" id="review-form">
                         <div class="review-form-title grid-review-form-title">Были? Поделитесь!</div>
                         <div class="rating grid-rating">
                             <input class="rating-input" type="number" min="1" max="5" step="1" value="5" id="rating-input">из 5</div>
@@ -63,6 +66,46 @@ export default {
         placeImage.src = attraction.imagePath;
         const placeDescription = document.getElementById('description') as HTMLElement;
         placeDescription.textContent = attraction.description;
+        const avgPlaceRating = document.getElementById('avg-place-rating') as HTMLElement;
+        avgPlaceRating.textContent = String(attraction.rating);
+
+        const categories = attraction.categories;
+        const galleryCategories = document.getElementById('categories') as HTMLElement;
+
+        galleryCategories.innerHTML = galleryCategoriesTemplate({ categories });
+
+        const categoryButtons = document.querySelectorAll('.category');
+
+        categoryButtons.forEach((category) => {
+            const categoryButton = category as HTMLButtonElement;
+            categoryButton.addEventListener('click', async () => {
+                switch (category.textContent) {
+                case 'исторические памятники':
+                    Search.categoryId = 1;
+                    break;
+                case 'собор':
+                    Search.categoryId = 2;
+                    break;
+                case 'театр':
+                    Search.categoryId = 3;
+                    break;
+                case 'музей':
+                    Search.categoryId = 4;
+                    break;
+                case 'мечеть':
+                    Search.categoryId = 5;
+                    break;
+                case 'крепость':
+                    Search.categoryId = 6;
+                    break;
+                case 'храм':
+                    Search.categoryId = 7;
+                    break;
+                }
+                await router.goto('/home');
+            });
+        });
+
 
         const latitude = attraction.latitude;
         const longitude = attraction.longitude;
@@ -86,9 +129,15 @@ export default {
             resizeObserver.observe(mapContainer);
         }
 
+        const reviewFrom = document.getElementById('review-form') as HTMLElement;
         const reviewFormButton = document.getElementById('review-form-button') as HTMLButtonElement;
         const reviewFormText = document.getElementById('review-text-area') as HTMLTextAreaElement;
         const formRatingInput = document.getElementById('rating-input') as HTMLInputElement;
+
+        if (User.isSignedIn) {
+            reviewFrom.classList.remove('hidden');
+        }
+
         reviewFormButton.addEventListener('click', async () => {
             if (!reviewFormText.value) {
                 return;

@@ -7,6 +7,7 @@ import PageTrips from './pages/tripsPage/trips';
 import PagePLace from './pages/placePage/place';
 import PageCreateTrip from './pages/create-trip';
 import PageChangePassword from './pages/change-password';
+import PageTrip from './pages/tripPage/trip-page';
 import PageEditTrip from './pages/edit-trip';
 import PageHello from './pages/hello';
 import PageCSAT from './pages/CSAT/csat';
@@ -80,7 +81,7 @@ const routes: Route[] = [
         cssClass: 'registration-page',
     },
     {
-        path: /^\/trips/,
+        path: /^\/mytrips/,
         title: 'Поездки',
         html: PageTrips.html,
         mount: PageTrips.mount,
@@ -96,7 +97,7 @@ const routes: Route[] = [
         cssClass: 'create-trip-page',
     },
     {
-        path: /^\/edittrip/,
+        path: /^\/edittrip\/(\d+)$/,
         title: 'Редактирование поездки',
         html: PageEditTrip.html,
         mount: PageEditTrip.mount,
@@ -118,6 +119,14 @@ const routes: Route[] = [
         mount: PagePLace.mount,
         unmount: PagePLace.unmount,
         cssClass: 'place-page',
+    },
+    {
+        path: /^\/trips\/(.+)$/,
+        title: 'Страница поездки',
+        html: PageTrip.html,
+        mount: PageTrip.mount,
+        unmount: PageTrip.unmount,
+        cssClass: 'trip-page',
     },
     {
         path: /^\/csat/,

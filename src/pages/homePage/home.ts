@@ -3,9 +3,10 @@ import header from '../../components/header';
 import footer from '../../components/footer';
 import Search from '../../utils/search-memory';
 import csat from '../../components/csat-block';
-import CSAT from '../../utils/CSAT-memory';
+import filtersIcon from '../../static/filters.svg';
 import closeIcon from '../../static/close icon.svg';
 import attractionsLoad from './attractions-load';
+import categoryButtonMount from './categoryButtonMount';
 
 export default {
     /**
@@ -19,7 +20,6 @@ export default {
                 <div class="headline">Интересные места</div>
                 <hr>
                 <div class="categories">
-                    <img src="${closeIcon}" class="category hidden" id="category-none">
                     <div class="category" id="category-one">Исторические памятники</div>
                     <div class="category" id="category-two">Соборы</div>
                     <div class="category" id="category-three">Театры</div>
@@ -27,6 +27,12 @@ export default {
                     <div class="category" id="category-five">Мечети</div>
                     <div class="category" id="category-six">Крепости</div>
                     <div class="category" id="category-seven">Храмы</div>
+                </div>
+                <div class="filters">
+                    <img class="filter-icon" src="${filtersIcon}" alt="фильтры">
+                    <div class="filter" id="normal-filter">по умолчанию</div>
+                    <div class="filter" id="rating-filter">по рейтингу</div>
+                    <div class="filter" id="popularity-filter">по популярности</div>
                 </div>
                 <ul class="gallery" id="gallery"></ul>
             </div>
@@ -44,65 +50,90 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после завершения монтирования страницы.
      */
     async mount(router: Router): Promise<void> {
-        const placeButton = document.getElementById('gallery') as HTMLButtonElement;
+        const placeGallery = document.getElementById('gallery') as HTMLButtonElement;
 
-        const categoryNoneButton = document.getElementById('category-none') as HTMLButtonElement;
-        categoryNoneButton.addEventListener('click', async () => {
-            Search.categoryId = -1;
-            await attractionsLoad(placeButton, router);
-            categoryNoneButton.classList.add('hidden');
-        });
         const categoryOneButton = document.getElementById('category-one') as HTMLButtonElement;
         categoryOneButton.addEventListener('click', async () => {
-            Search.categoryId = 1;
-            await attractionsLoad(placeButton, router);
-            categoryNoneButton.classList.remove('hidden');
+            await categoryButtonMount(1, placeGallery, router, categoryOneButton);
         });
+
         const categoryTwoButton = document.getElementById('category-two') as HTMLButtonElement;
         categoryTwoButton.addEventListener('click', async () => {
-            Search.categoryId = 2;
-            await attractionsLoad(placeButton, router);
-            categoryNoneButton.classList.remove('hidden');
+            await categoryButtonMount(2, placeGallery, router, categoryTwoButton);
         });
+
         const categoryThreeButton = document.getElementById('category-three') as HTMLButtonElement;
         categoryThreeButton.addEventListener('click', async () => {
-            Search.categoryId = 3;
-            await attractionsLoad(placeButton, router);
-            categoryNoneButton.classList.remove('hidden');
+            await categoryButtonMount(3, placeGallery, router, categoryThreeButton);
         });
+
         const categoryFourButton = document.getElementById('category-four') as HTMLButtonElement;
         categoryFourButton.addEventListener('click', async () => {
-            Search.categoryId = 4;
-            await attractionsLoad(placeButton, router);
-            categoryNoneButton.classList.remove('hidden');
+            await categoryButtonMount(4, placeGallery, router, categoryFourButton);
         });
+
         const categoryFiveButton = document.getElementById('category-five') as HTMLButtonElement;
         categoryFiveButton.addEventListener('click', async () => {
-            Search.categoryId = 5;
-            await attractionsLoad(placeButton, router);
-            categoryNoneButton.classList.remove('hidden');
+            await categoryButtonMount(5, placeGallery, router, categoryFiveButton);
         });
+
         const categorySixButton = document.getElementById('category-six') as HTMLButtonElement;
         categorySixButton.addEventListener('click', async () => {
-            Search.categoryId = 6;
-            await attractionsLoad(placeButton, router);
-            categoryNoneButton.classList.remove('hidden');
+            await categoryButtonMount(6, placeGallery, router, categorySixButton);
         });
+
         const categorySevenButton = document.getElementById('category-seven') as HTMLButtonElement;
         categorySevenButton.addEventListener('click', async () => {
-            Search.categoryId = 7;
-            await attractionsLoad(placeButton, router);
-            categoryNoneButton.classList.remove('hidden');
+            await categoryButtonMount(7, placeGallery, router, categorySevenButton);
+        });
+
+        const noFilterButton = document.getElementById('normal-filter') as HTMLButtonElement;
+        noFilterButton.addEventListener('click', async () => {
+            Search.filterId = -1;
+            await attractionsLoad(placeGallery, router);
+        });
+
+        const ratingFilterButton = document.getElementById('rating-filter') as HTMLButtonElement;
+        ratingFilterButton.addEventListener('click', async () => {
+            Search.filterId = 1;
+            await attractionsLoad(placeGallery, router);
+        });
+
+        const popularityFilterButton = document.getElementById('popularity-filter') as HTMLButtonElement;
+        popularityFilterButton.addEventListener('click', async () => {
+            Search.filterId = 2;
+            await attractionsLoad(placeGallery, router);
         });
 
         // Монтирование хэдера
         await header.mount(router);
 
-        // Загрузка мест
-        await attractionsLoad(placeButton, router);
+        switch (Search.categoryId) {
+        case 1:
+            categoryOneButton.classList.add('active');
+            break;
+        case 2:
+            categoryTwoButton.classList.add('active');
+            break;
+        case 3:
+            categoryThreeButton.classList.add('active');
+            break;
+        case 4:
+            categoryFourButton.classList.add('active');
+            break;
+        case 5:
+            categoryFiveButton.classList.add('active');
+            break;
+        case 6:
+            categorySixButton.classList.add('active');
+            break;
+        case 7:
+            categorySevenButton.classList.add('active');
+            break;
+        }
 
-        // CSAT.homeActiveQ = true;
-        // await csat.mount();
+        // Загрузка мест
+        await attractionsLoad(placeGallery, router);
 
     },
 
@@ -111,6 +142,6 @@ export default {
      * Используется для очистки состояния или удаления обработчиков событий при переходе на другую страницу.
      */
     unmount() {
-        CSAT.homeActiveQ = false;
+        Search.categoryId = -1;
     },
 };

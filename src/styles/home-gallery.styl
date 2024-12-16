@@ -15,6 +15,62 @@
         @media (max-width 700px)
             font-size 30px
 
+    .filters
+        display flex
+        flex-direction row
+        padding 0px 10px
+        margin auto
+        margin-top 10px
+        justify-self start
+        background none
+        color myWhite
+        border-radius 10px
+        width 50px
+        opacity 0.5
+        overflow hidden
+        transition all 0.5s ease
+
+        @media (max-width 700px)
+            flex-direction column
+            height 40px
+            align-items center
+
+        .filter-icon
+            height 30px
+            justify-self center
+            align-self center
+            margin-right 15px
+            transition rotate 0.5s ease
+
+            @media (max-width 700px)
+                margin 0
+
+            &:hover
+                rotate 180deg
+
+        &:hover
+            background myGrey
+            width 480px
+            opacity 1
+
+            @media (max-width 700px)
+                width fit-content
+                height fit-content
+
+        .filter
+            margin-right 20px
+            cursor pointer
+            white-space nowrap
+            width fit-content
+            justify-content center
+            padding 10px 0
+
+            @media (max-width 700px)
+                margin 0
+
+            &:hover
+                color myPink
+
     .categories
         display flex
         width 90%
@@ -23,6 +79,7 @@
         column-gap 10px
         overflow-x scroll
         scrollbar-width none
+        justify-content center
 
         .category
             display block
@@ -33,19 +90,27 @@
             color myWhite
             border-radius 15px
             cursor pointer
-            transition all 0.3s ease
             min-width fit-content
             height 30px
+            opacity 0.5
+            transition all 0.3s ease
 
             &:hover
-                background myPink
-                transform scale(0.98)
+                opacity 1
+                transform scale(1.05)
 
-            &.hidden
-                display none
+            &.active
+                opacity 1
+                background myPink
+
+        @media (max-width 700px)
+            overflow-x scroll
+            scrollbar-width none
+            justify-content start
 
         img
             padding 0
+
 
     .gallery-block
         mixinBlock(myBlack)
@@ -58,9 +123,11 @@
         padding 20px
         list-style none
         columns 3 300px
+        margin-top 0
 
     .gallery-item
         border-radius 20px
+        position relative
         margin auto
         width 300px
         height 100%
@@ -85,6 +152,16 @@
             margin 0
             color myWhite
             width 100%
+            margin-bottom 20px
+
+        .avg-rating
+            background myShadow
+            color myWhite
+            position absolute
+            padding 5px 10px
+            right 15px
+            top 15px
+            border-radius 10px
 
     .profile-button
         mixinButton(myBlack, myWhite)

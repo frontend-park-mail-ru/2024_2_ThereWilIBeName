@@ -5,13 +5,13 @@ import updateMenu from './profileMenu';
 
 import logoImage from '../../static/logo trip.svg';
 import defaultAvatar from '../../static/avatar.png';
-import editButton from '../../static/edit.png';
-import confirmIcon from '../../static/confirm.png';
+import editButton from '../../static/edit.svg';
+import confirmIcon from '../../static/confirm.svg';
 import {emailRegex} from '../../components/validation';
 import footer from '../../components/footer';
 import backButton from '../../static/back button white.svg';
-import CSAT from '../../utils/CSAT-memory';
-import csat from '../../components/csat-block';
+import userMount from '../../components/user-mount';
+import closeButton from '../../static/close icon.svg';
 
 export default {
     /**
@@ -22,6 +22,9 @@ export default {
      */
     html: `
         <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
+        <div class="error-window-message hidden hidden-animation" id="error-window-message">Ошибка загрузки аватарки
+            <img src="${closeButton}" class="error-close-button" id="error-close-button">
+        </div>
         <main>
             <div class="background-profile">
                 <div class="user-block">
@@ -92,9 +95,9 @@ export default {
 
         if (User.username === '') {
             const currentUser = await Api.getUser();
-            User.username = currentUser.data.username;
+            User.username = currentUser.data.profile.username;
             User.id = currentUser.data.id;
-            User.email = currentUser.data.email;
+            User.email = currentUser.data.profile.email;
         }
 
         const userTitle = document.getElementById('user-title') as HTMLElement;
@@ -111,6 +114,14 @@ export default {
         avatar.src = resProfile.data.avatarPath ?
             `/avatars/${resProfile.data.avatarPath}` : defaultAvatar;
 
+        const errorWindowMessage = document.getElementById('error-window-message') as HTMLElement;
+        const errorCloseButton = document.getElementById('error-close-button') as HTMLButtonElement;
+
+        errorCloseButton.addEventListener('click', () => {
+            errorWindowMessage.classList.add('hidden-animation');
+            setTimeout(() => errorWindowMessage.classList.add('hidden'), 300);
+        });
+
         avatar.addEventListener('click', () => {
             const avatarInputElement = document.createElement('input') as HTMLInputElement;
             avatarInputElement.type = 'file';
@@ -124,15 +135,17 @@ export default {
                     reader.addEventListener('load', async () => {
                         const basedAvatar = String(reader.result ? reader.result : '');
                         if (!basedAvatar) {
-                            alert('Ошибка загрузки аватарки');
+                            errorWindowMessage.classList.remove('hidden');
+                            setTimeout(() => errorWindowMessage.classList.remove('hidden-animation'), 100);
+                            return;
                         }
                         const res = await Api.putAvatar(User.id, basedAvatar);
                         if (!res.ok) {
-                            alert('Ошибка загрузки аватарки');
+                            errorWindowMessage.classList.remove('hidden');
+                            setTimeout(() => errorWindowMessage.classList.remove('hidden-animation'), 100);
+                            return;
                         }
-
-                        avatar.src = basedAvatar;
-
+                        await this.mount(router);
                     });
                     reader.readAsDataURL(newAvatar);
                 }
@@ -144,7 +157,6 @@ export default {
         const editButton = document.getElementById('edit-button') as HTMLButtonElement;
         const submitEditButton = document.getElementById('submit-edit-button') as HTMLButtonElement;
         const usernameInput = document.getElementById('username-input') as HTMLInputElement;
-
 
         if (userUserName.textContent) {
             usernameInput.value = userUserName.textContent;
@@ -159,9 +171,7 @@ export default {
             editButton.classList.toggle('active');
             submitEditButton.classList.toggle('hidden');
             usernameInput.classList.toggle('hidden');
-            emailInput.classList.toggle('hidden');
             userUserName.classList.toggle('hidden');
-            userEmail.classList.toggle('hidden');
         });
 
         submitEditButton.addEventListener('click', async () => {
@@ -179,7 +189,8 @@ export default {
                 console.log('Ошибка изменения данных пользователя');
             }
 
-            router.goto('/profile');
+            await userMount();
+            await router.goto('/profile');
 
         });
 
@@ -210,7 +221,7 @@ export default {
             centerMenuText = activeMenuButton.textContent;
         });
 
-        updateMenu(activeMenuButton);
+        await updateMenu(activeMenuButton);
 
     },
 

@@ -23,10 +23,10 @@ export default {
                 <div class="auth-title">Регистрация</div>
                 <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
                 <form id="signup-form" class="signup-form">
-                    <label class="reg-text">Логин</label>
-                    <input class="border" id="login" name="login" >
+                    <label class="reg-text">Имя</label>
+                    <input class="border" placeholder="example" id="login" name="login" >
                     <label class="reg-text">Email</label>
-                    <input class="border" id="email" name="email" >
+                    <input class="border" placeholder="example@mail.ru" id="email" name="email" >
                     <label class="reg-text">Пароль</label>
                     <input class="border" type="password" id="password" name="password" autocomplete="new-password">
                     <label class="reg-text">Подтверждение пароля</label>
@@ -93,22 +93,26 @@ export default {
             }
 
 
-
-            const res = await Api.postSignup(formUsername, formEmail, formPassword);
-
-            if (res.status === 409) {
-                errorMessage.textContent = 'Логин уже занят';
+            try {
+                const res = await Api.postSignup(formUsername, formEmail, formPassword);
+                localStorage.setItem('token', `${res.data.token}`);
+                router.goto('/home');
+            } catch (e) {
+                errorMessage.textContent = 'Ошибка регистрации';
                 errorMessage.classList.add('visible');
-                return;
             }
-            if (!res.ok) {
-                errorMessage.textContent = 'Неизвестная ошибка';
-                errorMessage.classList.add('visible');
-                return;
-            }
+            
+            // if (res.status === 409) {
+            //     errorMessage.textContent = 'Логин уже занят';
+            //     errorMessage.classList.add('visible');
+            //     return;
+            // }
+            // if (!res.ok) {
+            //     errorMessage.textContent = 'Неизвестная ошибка';
+            //     errorMessage.classList.add('visible');
+            //     return;
+            // }
 
-            localStorage.setItem('token', `${res.data.token}`);
-            router.goto('/home');
         });
     },
 

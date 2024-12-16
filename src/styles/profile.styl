@@ -1,4 +1,6 @@
 .profile-page
+  position relative
+
   .logo-image
       margin 20px auto
       height 150px
@@ -84,6 +86,10 @@
     border-radius 20px
     object-fit cover
     background-color myBlack
+    transition transform 0.3s ease
+
+    &:hover
+      transform scale(0.95)
 
   .information-block
     background-color myBlack
@@ -250,7 +256,7 @@
 
     &:hover
       transform scale(1.1)
-      background myGreen
+      background myPink
 
   hr
     border none
@@ -415,12 +421,13 @@
     mask-image linear-gradient(180deg, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0))
 
   .edit-profile-input
-    padding 10px
-    margin auto
+    font-size 20px
+    padding 15px 25px
     border myShadow
     border-radius 10px
     outline none
-    background linearGradient() 50% 50% / 100vw 100vh
+    background myGrey
+    color myWhite
 
     &:focus
       background-position 0
