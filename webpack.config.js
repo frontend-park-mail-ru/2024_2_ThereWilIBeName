@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     entry: './src/index.ts',
@@ -18,9 +20,9 @@ module.exports = {
         }),
         new CopyPlugin({
             patterns: [
-                {from: "src/service-worker.js"},
+                { from: "src/service-worker.js" },
             ],
-        })
+        }),
     ],
     module: {
         rules: [
@@ -31,7 +33,18 @@ module.exports = {
             },
             {
                 test: /\.styl$/,
-                use: ['style-loader', 'css-loader', 'stylus-loader'],
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'stylus-loader',
+                        options: {
+                            stylusOptions: {
+                                compress: true,
+                            },
+                        },
+                    },
+                ],
             },
             {
                 test: /\.css$/,
@@ -41,9 +54,9 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules|build/,
                 use: {
-                    loader: 'babel-loader', // Используем Babel для обработки JS файлов
+                    loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env'], // Пресет для преобразования ES6+
+                        presets: ['@babel/preset-env'],
                     },
                 },
             },
@@ -65,5 +78,18 @@ module.exports = {
     },
     resolve: {
         extensions: ['.ts', '.js', '.hbs'],
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({
+                terserOptions: {
+                    compress: {
+                        drop_console: true, //удаляет консоль логи из финального кода
+                    },
+                },
+            }),
+            new CssMinimizerPlugin(),
+        ],
     },
 };
