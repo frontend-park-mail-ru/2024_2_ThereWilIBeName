@@ -70,15 +70,13 @@ export default {
         createTripForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const res = await Api.postCreateTrip(Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, formPrivateTrip.checked);
-
-            if (res.ok!) {
-                errorMessage.textContent = 'Неизвестная ошибка';
+            try {
+                const res = await Api.postCreateTrip(Number(User.id),formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, formPrivateTrip.checked);
+                await router.goto('/trips');
+            } catch (e) {
+                errorMessage.textContent = 'Ошибка создания поездки';
                 errorMessage.classList.add('visible');
-                return;
             }
-
-            await router.goto('/trips');
         });
     },
 
