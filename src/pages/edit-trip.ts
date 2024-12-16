@@ -54,7 +54,7 @@ export default {
 
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         backButton.addEventListener('click', () => {
-            router.goto('/mytrips');
+            router.goto(`/trips/${itemId}`);
         });
 
         const homeLogo = document.getElementById('home-logo') as HTMLElement;

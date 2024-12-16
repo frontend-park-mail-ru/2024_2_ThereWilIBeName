@@ -56,7 +56,7 @@
     border-radius 20px
     z-index 998
     display grid
-    grid-template-rows 70px 40px 40px
+    grid-template-rows 60px 40px 40px
     grid-template-columns auto auto auto auto
     grid-template-areas "a a a a"\
     "b b b c"\
@@ -145,6 +145,16 @@
     justify-content center
     padding 30px 50px
 
+    @media (max-width 700px)
+      margin 15px
+      grid-template-rows auto auto auto auto auto
+      grid-template-columns 15% auto 15%
+      grid-template-areas "b b b"\
+      "a c d"\
+      "e e e"\
+      "g g g"\
+      "f f f"
+
     .grid-trip-back-button
       grid-area a
 
@@ -174,8 +184,11 @@
       cursor pointer
       transition all 0.3s ease
 
+      @media (max-width 700px)
+        justify-self center
+        width 40px
+
       &:hover
-        transform scale(1.05)
         background myPink
 
     .trip-share-icon
@@ -186,8 +199,10 @@
       cursor pointer
       transition all 0.3s ease
 
+      @media (max-width 700px)
+        width 40px
+
       &:hover
-        transform scale(1.05)
         background myPink
 
     .trip-back-button
