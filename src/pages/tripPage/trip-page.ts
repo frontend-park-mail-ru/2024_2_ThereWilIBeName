@@ -148,13 +148,13 @@ export default {
 
         const readModeButton = document.getElementById('read-mode-button') as HTMLButtonElement;
         readModeButton.addEventListener('click', async () => {
-            const resReadMode = await Api.getTripLink(itemId, 'reading');
+            const resReadMode = await Api.postTripLink(itemId, 'reading');
             shareLinkElement.textContent = resReadMode.data.link;
         });
 
         const editModeButton = document.getElementById('edit-mode-button') as HTMLButtonElement;
         editModeButton.addEventListener('click', async () => {
-            const resEditMode = await Api.getTripLink(itemId, 'editing');
+            const resEditMode = await Api.postTripLink(itemId, 'editing');
             shareLinkElement.textContent = resEditMode.data.link;
         });
     },
