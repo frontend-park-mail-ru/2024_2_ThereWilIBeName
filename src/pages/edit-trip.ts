@@ -3,6 +3,7 @@ import Router from '../utils/Router';
 import User from '../utils/user';
 
 import logoImage from '../static/logo trip.svg';
+import footer from '../components/footer';
 import backButton from '../static/back button white.svg';
 
 export default {
@@ -18,9 +19,9 @@ export default {
         <main>
             <div class="create-trip-block">
                 <img src="${backButton}" class="back-button" id="back-button">
-                <div class="create-trip-title">Редактирование поездки</div>
+                <div class="create-trip-title">Редактирование</div>
                 <div class="error-message" id="error-message">ЗДЕСЬ БУДЕТ ОШИБКА</div>
-                <form class="create-trip-form" id="create-trip-form">
+                <form id="create-trip-form" class="create-trip-form">
                     <label class="create-trip-text">Название</label>
                     <input class="border" id="name" name="name" >
                     <label class="create-trip-text">Описание</label>
@@ -32,11 +33,12 @@ export default {
                     <label class="create-trip-text checkbox-button">
                         <input type="checkbox" id="private-trip" name="private-trip"> Приватная поездка
                     </label>
-                    <button class="create-trip-button">Подтвердить изменения</button>
+                    <button class="create-trip-button">Изменить поездку</button>
                 </form>
             </div>
         </main>
-    `,
+        ${footer.html}    
+`,
 
     /**
      * Функция для монтирования страницы регистрации.
@@ -44,9 +46,12 @@ export default {
      *
      * @async
      * @param {Router} router - Экземпляр класса Router для навигации между страницами.
+     * @param params
      * @returns {Promise<void>} Промис, который выполняется после установки всех обработчиков событий на странице.
      */
-    async mount(router: Router): Promise<void> {
+    async mount(router: Router, params: number): Promise<void> {
+        const itemId: number = params;
+
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         backButton.addEventListener('click', () => {
             router.goto('/trips');
@@ -57,30 +62,30 @@ export default {
             router.goto('/home');
         });
 
-        const tripId = localStorage.getItem('tempTrip');
+        const resTrip = await Api.getTrip(itemId);
 
+        const formName = (document.getElementById('name') as HTMLInputElement);
+        formName.value = resTrip.data.name;
+        const formDescription = (document.getElementById('description') as HTMLInputElement);
+        formDescription.value = resTrip.data.description;
+        const formStartDate = (document.getElementById('startDate') as HTMLInputElement);
+        formStartDate.value = resTrip.data.startDate;
+        const formEndDate = (document.getElementById('endDate') as HTMLInputElement);
+        formEndDate.value = resTrip.data.endDate;
+        const formPrivateTrip = (document.getElementById('private-trip') as HTMLInputElement);
+        formPrivateTrip.checked = resTrip.data.private;
         const createTripForm = document.getElementById('create-trip-form') as HTMLElement;
         const errorMessage = document.getElementById('error-message') as HTMLElement;
 
         createTripForm.addEventListener('submit', async (event) => {
             event.preventDefault();
-
-            const formUserId = Number(User.id);
-            const formName = (document.getElementById('name') as HTMLInputElement).value;
-            const formDescription = (document.getElementById('description') as HTMLInputElement).value;
-            const formStartDate = (document.getElementById('startDate') as HTMLInputElement).value;
-            const formEndDate = (document.getElementById('endDate') as HTMLInputElement).value;
-            const formPrivateTrip = (document.getElementById('private-trip') as HTMLInputElement).checked;
-
-            const res = await Api.putTrip(String(tripId), formUserId, formName, 1, formDescription, formStartDate, formEndDate, formPrivateTrip);
-
-            // if (res.ok!) {
-            //     errorMessage.textContent = 'Неизвестная ошибка';
-            //     errorMessage.classList.add('visible');
-            //     return;
-            // }
-
-            await router.goto('/trips');
+            try {
+                const res = await Api.putTrip(itemId, Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, formPrivateTrip.checked);
+                await router.goto(`/trip/${itemId}`);
+            } catch (e) {
+                errorMessage.textContent = 'Ошибка создания поездки';
+                errorMessage.classList.add('visible');
+            }
         });
     },
 

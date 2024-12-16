@@ -23,7 +23,7 @@ export default {
             <div class="blur-element hidden hidden-animation" id="blur-element"></div>
             <img src="${backButtonIcon}" alt="назад" class="trip-back-button grid-trip-back-button" id="trip-back-button">
             <div class="trip-title grid-trip-title">Поездка</div>
-            <img src="${editIcon}" alt="редактировать" class="trip-edit-icon grid-trip-edit-icon">
+            <img src="${editIcon}" alt="редактировать" class="trip-edit-icon grid-trip-edit-icon" id="trip-edit-button">
             <img src="${shareIcon}" alt="поделиться" class="trip-share-icon grid-trip-share-icon" id="trip-share-button">
             <div class="trip-date grid-trip-date">01.12.2024 - 08.12.2024</div>
             <div class="trip-description grid-trip-description">Описание</div>
@@ -36,7 +36,7 @@ export default {
         </main>
         ${footer.html}
 `,
-    async mount(router: Router, params: any): Promise<void> {
+    async mount(router: Router, params: number): Promise<void> {
 
         // Монтирование хэдера
         await header.mount(router);
@@ -46,7 +46,7 @@ export default {
             router.goto('/trips');
         });
 
-        const itemId: number = Number(params);
+        const itemId: number = params;
 
         const tripTitle = document.getElementById('trip-title') as HTMLElement;
         const tripDate = document.getElementById('trip-date') as HTMLElement;
@@ -124,6 +124,11 @@ export default {
             shareBlock.classList.add('hidden');
             blurElement.classList.add('hidden-animation');
             blurElement.classList.add('hidden');
+        });
+
+        const editTripButton = document.getElementById('trip-edit-button') as HTMLButtonElement;
+        editTripButton.addEventListener('click', async () => {
+            await router.goto(`/edittrip/${itemId}`);
         });
 
         const copyLinkButton = document.getElementById('copy-link-button') as HTMLButtonElement;

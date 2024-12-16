@@ -46,9 +46,11 @@ export default {
      *
      * @async
      * @param {Router} router - Экземпляр класса Router для навигации между страницами.
+     * @param params
      * @returns {Promise<void>} Промис, который выполняется после установки всех обработчиков событий на странице.
      */
     async mount(router: Router): Promise<void> {
+
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         backButton.addEventListener('click', () => {
             router.goto('/trips');
@@ -69,9 +71,8 @@ export default {
 
         createTripForm.addEventListener('submit', async (event) => {
             event.preventDefault();
-
             try {
-                const res = await Api.postCreateTrip(Number(User.id),formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, formPrivateTrip.checked);
+                const res = await Api.postCreateTrip(Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, formPrivateTrip.checked);
                 await router.goto('/trips');
             } catch (e) {
                 errorMessage.textContent = 'Ошибка создания поездки';

@@ -97,7 +97,7 @@ const routes: Route[] = [
         cssClass: 'create-trip-page',
     },
     {
-        path: /^\/edittrip/,
+        path: /^\/edittrip\/(\d+)$/,
         title: 'Редактирование поездки',
         html: PageEditTrip.html,
         mount: PageEditTrip.mount,
