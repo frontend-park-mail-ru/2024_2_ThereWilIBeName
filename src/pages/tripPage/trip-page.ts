@@ -141,8 +141,8 @@ export default {
                 copyMessage.classList.remove('hidden-animation');
                 setTimeout(() => {
                     copyMessage.classList.add('hidden-animation');
-                    copyMessage.classList.add('hidden');
-                }, 3000);
+                    setTimeout (()=> copyMessage.classList.add('hidden'), 300);
+                }, 2000);
             }
         });
 
