@@ -121,7 +121,7 @@ const routes: Route[] = [
         cssClass: 'place-page',
     },
     {
-        path: /^\/trips\/(\d+)$/,
+        path: /^\/trips\/(.+)$/,
         title: 'Страница поездки',
         html: PageTrip.html,
         mount: PageTrip.mount,
