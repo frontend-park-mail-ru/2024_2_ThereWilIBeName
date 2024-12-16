@@ -108,6 +108,30 @@ export default {
         // Монтирование хэдера
         await header.mount(router);
 
+        switch (Search.categoryId) {
+        case 1:
+            categoryOneButton.classList.add('active');
+            break;
+        case 2:
+            categoryTwoButton.classList.add('active');
+            break;
+        case 3:
+            categoryThreeButton.classList.add('active');
+            break;
+        case 4:
+            categoryFourButton.classList.add('active');
+            break;
+        case 5:
+            categoryFiveButton.classList.add('active');
+            break;
+        case 6:
+            categorySixButton.classList.add('active');
+            break;
+        case 7:
+            categorySevenButton.classList.add('active');
+            break;
+        }
+
         // Загрузка мест
         await attractionsLoad(placeGallery, router);
 
