@@ -16,7 +16,7 @@ export default {
             <div class="share-block hidden hidden-animation" id="share-block">
                 <div class="share-block-title grid-share-block-title">Поделиться поездкой</div>
                 <div class="share-link grid-share-link" id="share-link"></div>
-                <img src="${copyIcon}" class="copy-link-button grid-copy-link-button">
+                <img src="${copyIcon}" class="copy-link-button grid-copy-link-button" id="copy-link-button">
                 <div class="read-mode grid-read-mode" id="read-mode-button">Чтение</div>
                 <div class="edit-mode grid-edit-mode" id="edit-mode-button">Редактирование</div>
             </div>
