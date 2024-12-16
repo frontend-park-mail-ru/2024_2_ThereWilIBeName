@@ -10,7 +10,7 @@ module.exports = {
         clean: true,
         publicPath: '/'
     },
-    mode: 'development',
+    mode: 'production',
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './index.html'),
