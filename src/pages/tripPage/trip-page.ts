@@ -138,7 +138,6 @@ export default {
                     copyMessage.classList.add('hidden-animation');
                     copyMessage.classList.add('hidden');
                 }, 3000);
-                return;
             }
         });
 
