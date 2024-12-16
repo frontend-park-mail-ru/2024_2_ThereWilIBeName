@@ -15,7 +15,7 @@ export default {
                 <button class="trips-button trips-grid" id="trips-button">Поездки</button>
                 <button class="header-button user-grid" id="signin-button">Вход</button>
                 <div class="user-button user-grid" id="user-button">
-                    <img src="${avatarPng}" class="avatar" alt="Аватарка" id="avatar">
+                    <img src="${avatarPng}" onerror="this.src='${avatarPng}';" class="avatar" alt="Аватарка" id="avatar">
                 </div>
                 <div id="side-menu" class="side-menu">
                     <div class="background-menu" id="background-menu"></div>
