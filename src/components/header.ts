@@ -96,7 +96,7 @@ export default {
             await userMount();
 
             if (User.isSignedIn) {
-                if (User.avatarPath) {
+                if (User.avatarPath !== '') {
                     avatarImage.src = `/avatars/${User.avatarPath}`;
                 }
                 userNameDiv.textContent = User.username;

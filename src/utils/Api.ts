@@ -460,7 +460,7 @@ export default {
                 profile: {
                     username: String(res.data.username),
                     email: String(res.data.email),
-                    avatarPath: String(res.data.avatarPath),
+                    avatarPath: String(res.data.avatar_path),
                 }
             },
             status: res.status,
