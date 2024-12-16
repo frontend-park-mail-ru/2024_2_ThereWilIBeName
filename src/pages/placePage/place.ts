@@ -17,6 +17,7 @@ export default {
         <main>
             <div class="place-block">
                 <div class="place-image grid-place-image">
+                    <div class="avg-place-rating" id="avg-place-rating"></div>
                     <img src="img_1.png" alt="{{name}}" id="place-image">
                 </div>
                 <div class="place-name grid-place-name" id="place-name">Название</div>
@@ -65,6 +66,8 @@ export default {
         placeImage.src = attraction.imagePath;
         const placeDescription = document.getElementById('description') as HTMLElement;
         placeDescription.textContent = attraction.description;
+        const avgPlaceRating = document.getElementById('avg-place-rating') as HTMLElement;
+        avgPlaceRating.textContent = String(attraction.rating);
 
         const categories = attraction.categories;
         const galleryCategories = document.getElementById('categories') as HTMLElement;
