@@ -43,7 +43,7 @@ export default {
 
         const backButton = document.getElementById('trip-back-button') as HTMLButtonElement;
         backButton.addEventListener('click', () => {
-            router.goto('/trips');
+            router.goto('/mytrips');
         });
 
         const itemId: number = params;

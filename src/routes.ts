@@ -81,7 +81,7 @@ const routes: Route[] = [
         cssClass: 'registration-page',
     },
     {
-        path: /^\/trips/,
+        path: /^\/mytrips/,
         title: 'Поездки',
         html: PageTrips.html,
         mount: PageTrips.mount,
@@ -121,7 +121,7 @@ const routes: Route[] = [
         cssClass: 'place-page',
     },
     {
-        path: /^\/trip\/(\d+)$/,
+        path: /^\/trips\/(\d+)$/,
         title: 'Страница поездки',
         html: PageTrip.html,
         mount: PageTrip.mount,

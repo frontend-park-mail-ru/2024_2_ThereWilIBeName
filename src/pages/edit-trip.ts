@@ -54,7 +54,7 @@ export default {
 
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         backButton.addEventListener('click', () => {
-            router.goto('/trips');
+            router.goto('/mytrips');
         });
 
         const homeLogo = document.getElementById('home-logo') as HTMLElement;
@@ -81,7 +81,7 @@ export default {
             event.preventDefault();
             try {
                 const res = await Api.putTrip(itemId, Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, formPrivateTrip.checked);
-                await router.goto(`/trip/${itemId}`);
+                await router.goto(`/trips/${itemId}`);
             } catch (e) {
                 errorMessage.textContent = 'Ошибка создания поездки';
                 errorMessage.classList.add('visible');

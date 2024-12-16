@@ -169,7 +169,7 @@ export default {
                     const id = parentItem.id;
                     const res = await Api.deleteTrip(id);
                     if (res.ok) {
-                        await router.goto('/trips');
+                        await router.goto('/mytrips');
                     }
                 }
             });
@@ -179,7 +179,7 @@ export default {
             name.addEventListener('click', async () => {
                 const parentItem = name.closest('.gallery-item-trips');
                 if (parentItem) {
-                    await router.goto(`/trip/${parentItem.id}`);
+                    await router.goto(`/trips/${parentItem.id}`);
                 }
             });
         });

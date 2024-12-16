@@ -46,7 +46,7 @@ export default {
         await search.mount(router);
 
         tripsButton.addEventListener('click', () => {
-            router.goto('/trips');
+            router.goto('/mytrips');
         });
 
         homeLogo.addEventListener('click', () => {
