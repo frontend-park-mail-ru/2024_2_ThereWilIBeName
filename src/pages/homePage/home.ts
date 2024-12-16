@@ -105,8 +105,6 @@ export default {
             await attractionsLoad(placeGallery, router);
         });
 
-
-
         // Монтирование хэдера
         await header.mount(router);
 
