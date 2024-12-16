@@ -18,7 +18,7 @@ export default {
             <div class="place-block">
                 <div class="place-image grid-place-image">
                     <div class="avg-place-rating" id="avg-place-rating"></div>
-                    <img src="img_1.png" alt="{{name}}" id="place-image">
+                    <img src="img_1.png" alt="Картинка поездки" id="place-image">
                 </div>
                 <div class="place-name grid-place-name" id="place-name">Название</div>
                 <div class="back-button-block grid-back-button">
