@@ -86,6 +86,7 @@ module.exports = {
                 terserOptions: {
                     format: {
                         comments: false, // Удаляет комментарии из кода
+                        beautify: false, // Отключает форматирование выходного файла.
                     },
                     compress: {
                         drop_console: true, // Удаляет все console.log
@@ -94,9 +95,6 @@ module.exports = {
                     },
                     mangle: {
                         properties: false, // Минификация свойств объектов (по умолчанию выключена)
-                    },
-                    output: {
-                        beautify: false, // Отключает форматирование выходного файла.
                     },
                 },
                 parallel: true, // Включает параллельную обработку для ускорения
