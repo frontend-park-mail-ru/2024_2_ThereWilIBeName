@@ -84,10 +84,22 @@ module.exports = {
         minimizer: [
             new TerserPlugin({
                 terserOptions: {
+                    format: {
+                        comments: false, // Удаляет комментарии из кода
+                    },
                     compress: {
-                        drop_console: true, //удаляет консоль логи из финального кода
+                        drop_console: true, // Удаляет все console.log
+                        drop_debugger: true, // Удаляет все debugger
+                        ecma: 2020, // Указывает стандарт ECMAScript для оптимизации
+                    },
+                    mangle: {
+                        properties: false, // Минификация свойств объектов (по умолчанию выключена)
+                    },
+                    output: {
+                        beautify: false, // Отключает форматирование выходного файла.
                     },
                 },
+                parallel: true, // Включает параллельную обработку для ускорения
             }),
             new CssMinimizerPlugin(),
         ],
