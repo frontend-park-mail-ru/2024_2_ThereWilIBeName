@@ -138,7 +138,7 @@ export default {
             if (shareLinkElement.textContent) {
                 navigator.clipboard.writeText(shareLinkElement.textContent);
                 copyMessage.classList.remove('hidden');
-                copyMessage.classList.remove('hidden-animation');
+                setTimeout(() => copyMessage.classList.remove('hidden-animation'), 0);
                 setTimeout(() => {
                     copyMessage.classList.add('hidden-animation');
                     setTimeout (()=> copyMessage.classList.add('hidden'), 300);

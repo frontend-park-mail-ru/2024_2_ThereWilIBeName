@@ -119,7 +119,7 @@ export default {
 
         errorCloseButton.addEventListener('click', () => {
             errorWindowMessage.classList.add('hidden-animation');
-            errorWindowMessage.classList.add('hidden');
+            setTimeout(() => errorWindowMessage.classList.add('hidden'), 300);
         });
 
         avatar.addEventListener('click', () => {
@@ -136,13 +136,13 @@ export default {
                         const basedAvatar = String(reader.result ? reader.result : '');
                         if (!basedAvatar) {
                             errorWindowMessage.classList.remove('hidden');
-                            errorWindowMessage.classList.remove('hidden-animation');
+                            setTimeout(() => errorWindowMessage.classList.remove('hidden-animation'), 0);
                             return;
                         }
                         const res = await Api.putAvatar(User.id, basedAvatar);
                         if (!res.ok) {
                             errorWindowMessage.classList.remove('hidden');
-                            errorWindowMessage.classList.remove('hidden-animation');
+                            setTimeout(() => errorWindowMessage.classList.remove('hidden-animation'), 0);
                             return;
                         }
                         await this.mount(router);
@@ -171,9 +171,7 @@ export default {
             editButton.classList.toggle('active');
             submitEditButton.classList.toggle('hidden');
             usernameInput.classList.toggle('hidden');
-            // emailInput.classList.toggle('hidden');
             userUserName.classList.toggle('hidden');
-            // userEmail.classList.toggle('hidden');
         });
 
         submitEditButton.addEventListener('click', async () => {
@@ -223,7 +221,7 @@ export default {
             centerMenuText = activeMenuButton.textContent;
         });
 
-        updateMenu(activeMenuButton);
+        await updateMenu(activeMenuButton);
 
     },
 
