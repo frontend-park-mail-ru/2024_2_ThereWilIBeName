@@ -22,11 +22,11 @@ export default {
             </div>
             <div class="blur-element hidden hidden-animation" id="blur-element"></div>
             <img src="${backButtonIcon}" alt="назад" class="trip-back-button grid-trip-back-button" id="trip-back-button">
-            <div class="trip-title grid-trip-title">Поездка</div>
+            <div class="trip-title grid-trip-title" id="trip-title">Поездка</div>
             <img src="${editIcon}" alt="редактировать" class="trip-edit-icon grid-trip-edit-icon" id="trip-edit-button">
             <img src="${shareIcon}" alt="поделиться" class="trip-share-icon grid-trip-share-icon" id="trip-share-button">
-            <div class="trip-date grid-trip-date">01.12.2024 - 08.12.2024</div>
-            <div class="trip-description grid-trip-description">Описание</div>
+            <div class="trip-date grid-trip-date" id="trip-date">01.12.2024 - 08.12.2024</div>
+            <div class="trip-description grid-trip-description" id="trip-description">Описание</div>
             <div class="trip-gallery-photos grid-trip-gallery-photos">
                 <div class="add-photo-button" id="add-photo-button">Добавить фото</div>
                 <div class="trip-photos" id="trip-photos">
