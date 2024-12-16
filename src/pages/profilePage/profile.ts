@@ -136,13 +136,13 @@ export default {
                         const basedAvatar = String(reader.result ? reader.result : '');
                         if (!basedAvatar) {
                             errorWindowMessage.classList.remove('hidden');
-                            setTimeout(() => errorWindowMessage.classList.remove('hidden-animation'), 0);
+                            setTimeout(() => errorWindowMessage.classList.remove('hidden-animation'), 100);
                             return;
                         }
                         const res = await Api.putAvatar(User.id, basedAvatar);
                         if (!res.ok) {
                             errorWindowMessage.classList.remove('hidden');
-                            setTimeout(() => errorWindowMessage.classList.remove('hidden-animation'), 0);
+                            setTimeout(() => errorWindowMessage.classList.remove('hidden-animation'), 100);
                             return;
                         }
                         await this.mount(router);
