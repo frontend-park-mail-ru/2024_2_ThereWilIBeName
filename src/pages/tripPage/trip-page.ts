@@ -37,20 +37,18 @@ export default {
         });
 
         const itemId: number = Number(params);
-        const tripResponse = await Api.getTrip(itemId);
 
         const tripTitle = document.getElementById('trip-title') as HTMLElement;
-        tripTitle.textContent = tripResponse.data.name;
-
         const tripDate = document.getElementById('trip-date') as HTMLElement;
-        tripDate.textContent = `${tripResponse.data.startDate} - ${tripResponse.data.endDate}`;
-
         const tripDescription = document.getElementById('trip-description') as HTMLElement;
-        tripDescription.textContent = tripResponse.data.description;
 
-        if (!tripResponse.ok) {
+        try {
+            const tripResponse = await Api.getTrip(itemId);
+            tripTitle.textContent = tripResponse.data.name;
+            tripDate.textContent = `${tripResponse.data.startDate} - ${tripResponse.data.endDate}`;
+            tripDescription.textContent = tripResponse.data.description;
+        } catch (e) {
             console.log('Ошибка получения поездки');
-            return;
         }
         
         const galleryPhoto = document.getElementById('trip-photos') as HTMLElement;
