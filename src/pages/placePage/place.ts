@@ -9,6 +9,7 @@ import 'leaflet/dist/leaflet.css';
 import reviewsLoad from './reviews-load';
 import User from '../../utils/user';
 import galleryCategoriesTemplate from './categories.hbs';
+import Search from '../../utils/search-memory';
 
 export default {
     html:
@@ -69,6 +70,39 @@ export default {
         const galleryCategories = document.getElementById('categories') as HTMLElement;
 
         galleryCategories.innerHTML = galleryCategoriesTemplate({ categories });
+
+        const categoryButtons = document.querySelectorAll('.category');
+
+        categoryButtons.forEach((category) => {
+            const categoryButton = category as HTMLButtonElement;
+            categoryButton.addEventListener('click', async () => {
+                switch (category.textContent) {
+                case 'исторические памятники':
+                    Search.categoryId = 1;
+                    break;
+                case 'собор':
+                    Search.categoryId = 2;
+                    break;
+                case 'театр':
+                    Search.categoryId = 3;
+                    break;
+                case 'музей':
+                    Search.categoryId = 4;
+                    break;
+                case 'мечеть':
+                    Search.categoryId = 5;
+                    break;
+                case 'крепость':
+                    Search.categoryId = 6;
+                    break;
+                case 'храм':
+                    Search.categoryId = 7;
+                    break;
+                }
+                await router.goto('/home');
+            });
+        });
+
 
         const latitude = attraction.latitude;
         const longitude = attraction.longitude;
