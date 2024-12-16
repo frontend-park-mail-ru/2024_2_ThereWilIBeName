@@ -221,7 +221,7 @@ export default {
     },
 
     async getProfile(id: string): Promise<JsonResponse<Profile>> {
-        const res = await RESTApi.get(`api/v1/users/${id}/profile`);
+        const res = await RESTApi.get(`/api/v1/users/${id}/profile`);
         return {
             data: {
                 username: String(res.data.login),
@@ -307,7 +307,7 @@ export default {
     },
 
     async getUserReviews(id: string): Promise<JsonResponse<UserReview[]>> {
-        const res = await RESTApi.get(`api/v1/users/${id}/reviews`);
+        const res = await RESTApi.get(`/api/v1/users/${id}/reviews`);
         return {
             data: Array.isArray(res.data) ? res.data.map( (review) => ({
                 id: Number(review.id),
@@ -413,7 +413,7 @@ export default {
     },
 
     async putTrip(id: string, userId:number, name: string, cityId: number, description: string, startDate: string, endDate: string, privateTrip: boolean): Promise<JsonResponse<Trip>> {
-        const res = await RESTApi.put(`api/v1/trips/${id}`, {user_id: userId, name, city_id: cityId, description: description, start_date: startDate, end_date: endDate, private_trip: privateTrip });
+        const res = await RESTApi.put(`/api/v1/trips/${id}`, {user_id: userId, name, city_id: cityId, description: description, start_date: startDate, end_date: endDate, private_trip: privateTrip });
         return {
             data: res.data,
             status: res.status,
@@ -448,7 +448,7 @@ export default {
     },
 
     async putAvatar(id: string, avatar: string): Promise<JsonResponse<Avatar>> {
-        const res = await RESTApi.put(`api/v1/users/${id}/avatars`, {avatar});
+        const res = await RESTApi.put(`/api/v1/users/${id}/avatars`, {avatar});
         return {
             data: {
                 message: String(res.data.message),
@@ -460,7 +460,7 @@ export default {
     },
 
     async putPhotos(tripId: string, newPhotos: string[]): Promise<JsonResponse<TripPhoto[]>> {
-        const res = await RESTApi.put(`api/v1/trips/${tripId}/photos`, {photos: newPhotos});
+        const res = await RESTApi.put(`/api/v1/trips/${tripId}/photos`, {photos: newPhotos});
         return {
             data: Array.isArray(res.data) ? res.data.map( (photo) => ({
                 photoPath: String(photo.photoPath),
