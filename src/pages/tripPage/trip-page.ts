@@ -132,7 +132,7 @@ export default {
         });
 
         const copyLinkButton = document.getElementById('copy-link-button') as HTMLButtonElement;
-        const shareLinkElement = document.createElement('share-link') as HTMLElement;
+        const shareLinkElement = document.getElementById('share-link') as HTMLElement;
         const copyMessage = document.getElementById('copy-message') as HTMLElement;
         copyLinkButton.addEventListener('click', () => {
             if (shareLinkElement.textContent) {
