@@ -318,7 +318,7 @@ export default {
         const res = await RESTApi.post(`/api/v1/trips/${tripId}/share?sharing_option=${option}`, {});
         return {
             data: {
-                link: res.data.link,
+                link: res.data.url,
             },
             status: res.status,
             ok: res.ok,
