@@ -11,18 +11,18 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
 
         // Логика построчного разбиения на три колонки
         const columns = 3;
-        const result = [];
+        const columnsResult = [];
 
         for (let i = 0; i < attractions.length / columns; i++) {
             const row = [];
             for (let j = 0; j < attractions.length; j += attractions.length / columns) {
                 row.push(attractions[j]);
             }
-            result.push(row);
+            columnsResult.push(row);
         }
 
         const galleryElement = document.getElementById('gallery') as HTMLElement;
-        galleryElement.innerHTML = galleryTemplate({ attractions });
+        galleryElement.innerHTML = galleryTemplate({ columnsResult });
 
         placeGallery.addEventListener('click', (event) => {
             const target = event.target as HTMLElement;
