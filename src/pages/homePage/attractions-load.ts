@@ -18,10 +18,10 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
             for (let j = 0; j < attractions.length; j += attractions.length / columns) {
                 row.push(attractions[j]);
             }
-            columnsResult.push(row);
+            for (let j = 0; j < row.length; j++) {
+                columnsResult.push(row[j]);
+            }
         }
-
-        console.log(columnsResult);
 
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ columnsResult });
