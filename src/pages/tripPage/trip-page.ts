@@ -7,6 +7,7 @@ import editIcon from '../../static/edit white.svg';
 import shareIcon from '../../static/share.svg';
 import mountPhotos from './mountPhotos';
 import copyIcon from '../../static/copy.svg';
+import deletePhotoButtonsMount from "./mount-delete-photo-buttons";
 
 export default {
     html:`

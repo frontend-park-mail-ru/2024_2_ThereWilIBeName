@@ -74,6 +74,8 @@ export default {
                         const listItem = target.closest('LI');
                         if (listItem) {
                             Search.cityId = Number(listItem.querySelector('city')!.textContent);
+                            searchResultsCities.innerHTML = '';
+                            searchResultsPlaces.innerHTML = '';
                             router.goto('/home');
                         }
                     }
@@ -84,6 +86,8 @@ export default {
                         const listItem = target.closest('LI');
                         if (listItem) {
                             const itemId = listItem.querySelector('a')!.href.split('/').pop();
+                            searchResultsCities.innerHTML = '';
+                            searchResultsPlaces.innerHTML = '';
                             router.goto(`/places/${itemId}`);
                         }
                     }
