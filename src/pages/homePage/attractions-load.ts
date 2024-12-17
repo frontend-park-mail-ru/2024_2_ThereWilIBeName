@@ -8,6 +8,19 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
         // Загрузка достопримечательностей
         const attractionsResponse = await Api.getAttractions(Search.limit, Search.offset, Search.cityId, Search.categoryId, Search.filterId);
         const attractions = attractionsResponse.data;
+
+        // Логика построчного разбиения на три колонки
+        const columns = 3;
+        const result = [];
+
+        for (let i = 0; i < attractions.length / columns; i++) {
+            const row = [];
+            for (let j = 0; j < attractions.length; j += attractions.length / columns) {
+                row.push(attractions[j]);
+            }
+            result.push(row);
+        }
+
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ attractions });
 
