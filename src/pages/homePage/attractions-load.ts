@@ -23,6 +23,8 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
             }
         }
 
+        console.log(columnsResult);
+
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ columnsResult });
 
