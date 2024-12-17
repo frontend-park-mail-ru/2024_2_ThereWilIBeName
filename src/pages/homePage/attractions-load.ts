@@ -15,7 +15,7 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
 
         for (let i = 0; i < attractions.length / columns; i++) {
             const row = [];
-            for (let j = 0; j < attractions.length; j += attractions.length / columns) {
+            for (let j = i; j < attractions.length; j += attractions.length / columns) {
                 row.push(attractions[j]);
             }
             for (let j = 0; j < row.length; j++) {
