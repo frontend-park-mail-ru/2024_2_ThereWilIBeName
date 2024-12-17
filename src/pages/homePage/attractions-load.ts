@@ -13,9 +13,26 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
         const columns = 3;
         const columnsResult = [];
 
-        for (let i = 0; i < Math.floor(attractions.length / columns); i++) {
+        // Дополняем массив до кратности 3
+        while (attractions.length % columns !== 0) {
+            attractions.push({
+                address: '',
+                categories: [],
+                city: '',
+                description: '',
+                imagePath: '',
+                latitude: 0,
+                longitude: 0,
+                name: '',
+                phoneNumber: '',
+                rating: 0,
+                id: '-1'
+            }); // добавляем объект-маркер
+        }
+
+        for (let i = 0; i < attractions.length / columns; i++) {
             const row = [];
-            for (let j = i; j < attractions.length; j += Math.floor(attractions.length / columns)) {
+            for (let j = i; j < attractions.length; j += attractions.length / columns) {
                 console.log(j);
                 row.push(attractions[j]);
                 console.log(row);
@@ -25,10 +42,12 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
             }
         }
 
-        console.log(columnsResult);
+        const finalResultAttractions = columnsResult.filter(attraction => attraction.id !== '-1');
+
+        console.log(finalResultAttractions);
 
         const galleryElement = document.getElementById('gallery') as HTMLElement;
-        galleryElement.innerHTML = galleryTemplate({ columnsResult });
+        galleryElement.innerHTML = galleryTemplate({ finalResultAttractions });
 
         placeGallery.addEventListener('click', (event) => {
             const target = event.target as HTMLElement;
