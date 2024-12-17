@@ -74,8 +74,14 @@ export default {
                         const listItem = target.closest('LI');
                         if (listItem) {
                             Search.cityId = Number(listItem.querySelector('city')!.textContent);
-                            searchResultsCities.innerHTML = '';
-                            searchResultsPlaces.innerHTML = '';
+                            inputSearch.removeEventListener('input', () => {
+                                searchResults.classList.add('hidden');
+                                const query = inputSearch.value.trim();
+                                if (query) {
+                                    searchResults.classList.remove('hidden');
+                                }
+                                debouncedSearch(query);
+                            });
                             router.goto('/home');
                         }
                     }
@@ -86,8 +92,14 @@ export default {
                         const listItem = target.closest('LI');
                         if (listItem) {
                             const itemId = listItem.querySelector('a')!.href.split('/').pop();
-                            searchResultsCities.innerHTML = '';
-                            searchResultsPlaces.innerHTML = '';
+                            inputSearch.removeEventListener('input', () => {
+                                searchResults.classList.add('hidden');
+                                const query = inputSearch.value.trim();
+                                if (query) {
+                                    searchResults.classList.remove('hidden');
+                                }
+                                debouncedSearch(query);
+                            });
                             router.goto(`/places/${itemId}`);
                         }
                     }
@@ -101,7 +113,7 @@ export default {
         const debouncedSearch = debounce(search, 300);
 
         const searchResults = document.getElementById('search-results') as HTMLElement;
-        inputSearch.addEventListener('input', (event) => {
+        inputSearch.addEventListener('input', () => {
             searchResults.classList.add('hidden');
             const query = inputSearch.value.trim();
             if (query) {
