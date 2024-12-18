@@ -5,6 +5,8 @@ export default async function mountPhotos(galleryItem: Element, itemId: number) 
     const resTrip = await Api.getTrip(itemId);
     if (resTrip) {
         const newTripPhotos = resTrip.data.trip.photos;
-        galleryItem.innerHTML = galleryPhotosTemplate({newTripPhotos});
+        if (newTripPhotos) {
+            galleryItem.innerHTML = galleryPhotosTemplate({newTripPhotos});
+        }
     }
 };
