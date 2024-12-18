@@ -129,6 +129,10 @@ export default {
                             return;
                         }
                         const res = await Api.putAvatar(User.id, basedAvatar);
+                        if (res.status === 413) {
+                            popUpMessage.showMessage('Слишком большое фото!');
+                            return;
+                        }
                         if (!res.ok) {
                             popUpMessage.showMessage('Ошибка загрузки аватарки');
                             return;

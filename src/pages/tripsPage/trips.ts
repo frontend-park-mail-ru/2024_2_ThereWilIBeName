@@ -159,7 +159,7 @@ export default {
 
                         const res = await Api.postPhotos(parentItem.id, base64Photos);
                         if (res.status === 413) {
-                            popUpMessage.showMessage('Фото слишком большое');
+                            popUpMessage.showMessage('Слишком большое фото!');
                             return;
                         }
 
