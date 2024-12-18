@@ -112,14 +112,6 @@ export default {
         avatar.src = resProfile.data.avatarPath ?
             `/avatars/${resProfile.data.avatarPath}` : defaultAvatar;
 
-        const errorWindowMessage = document.getElementById('error-window-message') as HTMLElement;
-        const errorCloseButton = document.getElementById('error-close-button') as HTMLButtonElement;
-
-        errorCloseButton.addEventListener('click', () => {
-            errorWindowMessage.classList.add('hidden-animation');
-            setTimeout(() => errorWindowMessage.classList.add('hidden'), 300);
-        });
-
         avatar.addEventListener('click', () => {
             const avatarInputElement = document.createElement('input') as HTMLInputElement;
             avatarInputElement.type = 'file';
@@ -133,8 +125,7 @@ export default {
                     reader.addEventListener('load', async () => {
                         const basedAvatar = String(reader.result ? reader.result : '');
                         if (!basedAvatar) {
-                            errorWindowMessage.classList.remove('hidden');
-                            setTimeout(() => errorWindowMessage.classList.remove('hidden-animation'), 100);
+                            popUpMessage.showMessage('Ошибка загрузки аватарки');
                             return;
                         }
                         const res = await Api.putAvatar(User.id, basedAvatar);
