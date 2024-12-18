@@ -340,8 +340,12 @@ export default {
         };
     },
 
-    async getTrip(tripId: number): Promise<JsonResponse<Trip>> {
-        const res = await RESTApi.get(`/api/v1/trips/${tripId}`);
+    async getTrip(tripId: number, userId: string | undefined = undefined): Promise<JsonResponse<Trip>> {
+        let reqUrl = `/api/v1/trips/${tripId}`;
+        if (userId) {
+            reqUrl = reqUrl + `&user_id=${userId}`;
+        }
+        const res = await RESTApi.get(reqUrl);
         return {
             data: {
                 trip: {

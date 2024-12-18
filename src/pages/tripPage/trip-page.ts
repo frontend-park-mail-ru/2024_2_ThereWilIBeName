@@ -48,7 +48,7 @@ export default {
         const tripAuthorsGallery = document.getElementById('trip-authors-gallery') as HTMLElement;
 
         try {
-            const tripResponse = await Api.getTrip(itemId);
+            const tripResponse = await Api.getTrip(itemId, User.id);
             tripTitle.textContent = tripResponse.data.trip.name;
             tripDate.textContent = `${tripResponse.data.trip.startDate} - ${tripResponse.data.trip.endDate}`;
             tripDescription.textContent = tripResponse.data.trip.description;
