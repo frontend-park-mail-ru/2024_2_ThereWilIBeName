@@ -36,10 +36,10 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
                 <div class="auth-please" id="auth-please">У вас пока нет достижений</div>
             </div>`;
         const achievementsResponse = await Api.getAchievements(User.id);
-        console.log(achievementsResponse);
-        const achievements = achievementsResponse.data;
-        console.log(achievements);
-        galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements });
+        if (achievementsResponse.ok) {
+            const achievements = achievementsResponse.data;
+            galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements });
+        }
     }
 
 
