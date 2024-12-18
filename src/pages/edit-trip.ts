@@ -63,6 +63,7 @@ export default {
         });
 
         const resTrip = await Api.getTrip(itemId);
+        console.log(resTrip);
 
         const formName = (document.getElementById('name') as HTMLInputElement);
         formName.value = resTrip.data.trip.name;

@@ -206,6 +206,17 @@ export default {
             });
         });
 
+
+        document.querySelectorAll('.trips-edit-icon').forEach(icon => {
+            icon.addEventListener('click', async () => {
+                const parentItem = icon.closest('.gallery-item-trips');
+                if (parentItem) {
+                    const id = parentItem.id;
+                    await router.goto(`/edittrip/${id}`);
+                }
+            });
+        });
+
         document.querySelectorAll('.gallery-trips-name').forEach(name => {
             name.addEventListener('click', async () => {
                 const parentItem = name.closest('.gallery-item-trips');
