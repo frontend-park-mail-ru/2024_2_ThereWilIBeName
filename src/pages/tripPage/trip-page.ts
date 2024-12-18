@@ -58,7 +58,9 @@ export default {
             tripDate.textContent = `${tripResponse.data.trip.startDate} - ${tripResponse.data.trip.endDate}`;
             tripDescription.textContent = tripResponse.data.trip.description;
             const authors = tripResponse.data.users;
-            tripAuthorsGallery.innerHTML = galleryAuthorsTemplate({ authors });
+            if (authors.length !== 0) {
+                tripAuthorsGallery.innerHTML = galleryAuthorsTemplate({ authors });
+            }
 
             const photos = tripResponse.data.trip.photos;
             const galleryPhoto = document.getElementById('trip-photos') as HTMLElement;
