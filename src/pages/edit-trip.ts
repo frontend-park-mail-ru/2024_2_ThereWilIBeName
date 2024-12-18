@@ -71,15 +71,13 @@ export default {
         const formEndDate = (document.getElementById('endDate') as HTMLInputElement);
         tempDate = resTrip.data.trip.endDate.split('.');
         formEndDate.value = `${tempDate[2]}-${tempDate[1]}-${tempDate[0]}`;
-        const formPrivateTrip = (document.getElementById('private-trip') as HTMLInputElement);
-        formPrivateTrip.checked = resTrip.data.trip.private;
         const createTripForm = document.getElementById('create-trip-form') as HTMLElement;
         const errorMessage = document.getElementById('error-message') as HTMLElement;
 
         createTripForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             try {
-                const res = await Api.putTrip(itemId, Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, formPrivateTrip.checked);
+                const res = await Api.putTrip(itemId, Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, false);
                 await router.goto(`/trips/${itemId}`);
             } catch (e) {
                 errorMessage.textContent = 'Ошибка создания поездки';
