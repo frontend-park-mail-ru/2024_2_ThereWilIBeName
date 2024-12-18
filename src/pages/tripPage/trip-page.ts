@@ -45,7 +45,6 @@ export default {
         });
 
         const itemId: number = params;
-        const popUpMessageElement = document.getElementById('pop-up-message') as HTMLElement;
 
         const tripTitle = document.getElementById('trip-title') as HTMLElement;
         const tripDate = document.getElementById('trip-date') as HTMLElement;
@@ -54,6 +53,7 @@ export default {
 
         try {
             const tripResponse = await Api.getTrip(itemId, User.id);
+            console.log(tripResponse);
             tripTitle.textContent = tripResponse.data.trip.name;
             tripDate.textContent = `${tripResponse.data.trip.startDate} - ${tripResponse.data.trip.endDate}`;
             tripDescription.textContent = tripResponse.data.trip.description;
