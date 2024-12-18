@@ -490,6 +490,17 @@ export default {
         };
     },
 
+    async postPhotos(tripId: string, newPhotos: string[]): Promise<JsonResponse<TripPhoto[]>> {
+        const res = await RESTApi.post(`/api/v1/trips/${tripId}/photos`, {photos: newPhotos});
+        return {
+            data: Array.isArray(res.data) ? res.data.map( (photo) => ({
+                photoPath: String(photo.photoPath),
+            })) : [],
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
     async putTrip(tripId: number, userId:number, name: string, cityId: number, description: string, startDate: string, endDate: string, privateTrip: boolean): Promise<JsonResponse<Trip>> {
         const res = await RESTApi.put(`/api/v1/trips/${tripId}`, {user_id: userId, name, city_id: cityId, description: description, start_date: startDate, end_date: endDate, private_trip: privateTrip });
         return {
@@ -534,17 +545,6 @@ export default {
                 message: String(res.data.message),
                 avatarPath: String(res.data.avatarPath)
             },
-            status: res.status,
-            ok: res.ok,
-        };
-    },
-
-    async putPhotos(tripId: string, newPhotos: string[]): Promise<JsonResponse<TripPhoto[]>> {
-        const res = await RESTApi.put(`/api/v1/trips/${tripId}/photos`, {photos: newPhotos});
-        return {
-            data: Array.isArray(res.data) ? res.data.map( (photo) => ({
-                photoPath: String(photo.photoPath),
-            })) : [],
             status: res.status,
             ok: res.ok,
         };

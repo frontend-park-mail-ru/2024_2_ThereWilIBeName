@@ -157,7 +157,7 @@ export default {
                             base64Photos.push(base64);
                         }
 
-                        const res = await Api.putPhotos(parentItem.id, base64Photos);
+                        const res = await Api.postPhotos(parentItem.id, base64Photos);
                         if (!res.ok) {
                             alert('Ошибка загрузки фото');
                             return;
