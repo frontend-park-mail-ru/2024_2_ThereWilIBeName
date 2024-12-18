@@ -30,9 +30,6 @@ export default {
                     <input class="border" type="date" id="startDate" name="startDate">
                     <label class="create-trip-text">Дата конца</label>
                     <input class="border" type="date" id="endDate" name="endDate">
-                    <label class="create-trip-text checkbox-button">
-                        <input type="checkbox" id="private-trip" name="private-trip"> Приватная поездка
-                    </label>
                     <button class="create-trip-button">Изменить поездку</button>
                 </form>
             </div>
@@ -63,14 +60,18 @@ export default {
         });
 
         const resTrip = await Api.getTrip(itemId);
-        console.log(resTrip);
 
         const formName = (document.getElementById('name') as HTMLInputElement);
         formName.value = resTrip.data.trip.name;
         const formDescription = (document.getElementById('description') as HTMLInputElement);
         formDescription.value = resTrip.data.trip.description;
         const formStartDate = (document.getElementById('startDate') as HTMLInputElement);
-        formStartDate.value = resTrip.data.trip.startDate;
+        console.log(resTrip.data.trip.startDate);
+        let tempDate = resTrip.data.trip.startDate.split('.');
+        console.log(tempDate);
+        let finalDate = `${tempDate[2]}-${tempDate[1]}-${tempDate[0]}`;
+        console.log(finalDate);
+        formStartDate.value = finalDate;
         const formEndDate = (document.getElementById('endDate') as HTMLInputElement);
         formEndDate.value = resTrip.data.trip.endDate;
         const formPrivateTrip = (document.getElementById('private-trip') as HTMLInputElement);
