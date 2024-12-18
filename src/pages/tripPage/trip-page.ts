@@ -6,7 +6,6 @@ import footer from '../../components/footer';
 import backButtonIcon from '../../static/back button.svg';
 import shareIcon from '../../static/share.svg';
 import mountPhotos from './mountPhotos';
-import showMessage from '../../components/pop-up-message';
 import galleryAuthorsTemplate from './authors.hbs';
 import palmsImgB from '../../static/please black.svg';
 import popUpMessage from '../../components/pop-up-message';
@@ -70,11 +69,11 @@ export default {
             await mountPhotos(galleryPhoto, photos);
 
             if (tripResponse.data.userAdded) {
-                popUpMessage.showMessage('Поездка добавлена', popUpMessageElement);
+                popUpMessage.showMessage('Поездка добавлена');
             }
 
             if (window.location.pathname !== `trips/${itemId}` && User.id === '') {
-                popUpMessage.showMessage('Авторизуйтесь для добавления поездки', popUpMessageElement);
+                popUpMessage.showMessage('Авторизуйтесь для добавления поездки');
             }
 
 
@@ -86,7 +85,7 @@ export default {
 
         shareButton.addEventListener('click', () => {
             navigator.clipboard.writeText(`https://therewillbetrip.ru/trips/${itemId}`);
-            popUpMessage.showMessage('Ссылка скопирована', popUpMessageElement);
+            popUpMessage.showMessage('Ссылка скопирована');
         });
     },
 

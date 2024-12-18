@@ -4,7 +4,8 @@ export default {
         <div class="pop-up-message hidden hidden-animation" id="pop-up-message">Текст уведомления</div>
     `,
 
-    showMessage(messageText: string, messageElement: HTMLElement) {
+    showMessage(messageText: string) {
+        const messageElement = document.getElementById('pop-up-message') as HTMLElement;
         messageElement.textContent = messageText;
         messageElement.classList.remove('hidden');
         setTimeout(() => messageElement.classList.remove('hidden-animation'), 100);
