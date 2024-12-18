@@ -21,13 +21,14 @@ export default {
             <div class="trip-date grid-trip-date" id="trip-date">01.12.2024 - 08.12.2024</div>
             <div class="trip-description grid-trip-description" id="trip-description">Описание</div>
             <div class="trip-authors-gallery grid-trip-authors-gallery" id="trip-authors-gallery">
-                <div class="please-block">
-                    <img src="${palmsImgB}" class="please-img" alt="Пальма">
-                    <div class="please-no-photo">Здесь будут фото</div>
-                </div>
+
             </div>
             <div class="trip-gallery-photos grid-trip-gallery-photos">
                 <div class="trip-photos" id="trip-photos">
+                    <div class="please-block">
+                        <img src="${palmsImgB}" class="please-img" alt="Пальма">
+                        <div class="please-no-photo">Здесь будут фото</div>
+                    </div>
                 </div>
             </div>
         </main>
