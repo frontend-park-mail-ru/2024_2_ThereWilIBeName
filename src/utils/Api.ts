@@ -7,7 +7,7 @@ type JsonResponse<T> = {
     ok: boolean,
 }
 
-type Trip = {
+type Trips = {
     id: string,
     userId: number,
     name: string,
@@ -19,6 +19,28 @@ type Trip = {
     photos: {
         photoPath: string
     }[],
+}
+
+type Trip = {
+    trip: {
+        id: string,
+        userId: number,
+        name: string,
+        cityId: number,
+        description: string,
+        startDate: string,
+        endDate: string,
+        private: boolean,
+        photos: {
+            photoPath: string
+        }[],
+    },
+    users: {
+        username: string,
+        avatarPath: string,
+        email: string,
+    }[],
+    userAdded: boolean,
 }
 
 type TripPhoto = {
@@ -109,6 +131,12 @@ type UserReview = {
 type Avatar = {
     message: string,
     avatarPath: string,
+}
+
+type Author = {
+    login: string,
+    avatar_path: string | null,
+    email: string,
 }
 
 type Profile = {
@@ -291,7 +319,7 @@ export default {
         };
     },
 
-    async getUserTrips(id: string): Promise<JsonResponse<Trip[]>> {
+    async getUserTrips(id: string): Promise<JsonResponse<Trips[]>> {
         const res = await RESTApi.get(`/api/v1/users/${id}/trips`);
         return {
             data: Array.isArray(res.data) ? res.data.map( (trip) => ({
@@ -316,17 +344,25 @@ export default {
         const res = await RESTApi.get(`/api/v1/trips/${tripId}`);
         return {
             data: {
-                userId: Number(res.data.user_id),
-                id: String(res.data.id),
-                name: String(res.data.name),
-                cityId: Number(res.data.city_id),
-                description: String(res.data.description),
-                startDate: formatDate(res.data.start_date),
-                endDate: formatDate(res.data.end_date),
-                private: Boolean(res.data.private),
-                photos: Array.isArray(res.data.photos)
-                    ? res.data.photos.map((photo: any) => ({ photoPath: String(photo) }))
-                    : [],
+                trip: {
+                    userId: Number(res.data.trip.user_id),
+                    id: String(res.data.trip.id),
+                    name: String(res.data.trip.name),
+                    cityId: Number(res.data.trip.city_id),
+                    description: String(res.data.trip.description),
+                    startDate: formatDate(res.data.trip.start_date),
+                    endDate: formatDate(res.data.trip.end_date),
+                    private: Boolean(res.data.trip.private),
+                    photos: Array.isArray(res.data.trip.photos)
+                        ? res.data.photos.map((photo: any) => ({ photoPath: String(photo) }))
+                        : [],
+                },
+                users: Array.isArray(res.data.users) ? res.data.users.map( (user: Author) => ({
+                    username: String(user.login),
+                    avatarPath: String(user.avatar_path),
+                    email: String(user.email),
+                })) : [],
+                userAdded: Boolean(res.data.user_added),
             },
             status: res.status,
             ok: res.ok,

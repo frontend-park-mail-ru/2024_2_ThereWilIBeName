@@ -65,15 +65,15 @@ export default {
         const resTrip = await Api.getTrip(itemId);
 
         const formName = (document.getElementById('name') as HTMLInputElement);
-        formName.value = resTrip.data.name;
+        formName.value = resTrip.data.trip.name;
         const formDescription = (document.getElementById('description') as HTMLInputElement);
-        formDescription.value = resTrip.data.description;
+        formDescription.value = resTrip.data.trip.description;
         const formStartDate = (document.getElementById('startDate') as HTMLInputElement);
-        formStartDate.value = resTrip.data.startDate;
+        formStartDate.value = resTrip.data.trip.startDate;
         const formEndDate = (document.getElementById('endDate') as HTMLInputElement);
-        formEndDate.value = resTrip.data.endDate;
+        formEndDate.value = resTrip.data.trip.endDate;
         const formPrivateTrip = (document.getElementById('private-trip') as HTMLInputElement);
-        formPrivateTrip.checked = resTrip.data.private;
+        formPrivateTrip.checked = resTrip.data.trip.private;
         const createTripForm = document.getElementById('create-trip-form') as HTMLElement;
         const errorMessage = document.getElementById('error-message') as HTMLElement;
 

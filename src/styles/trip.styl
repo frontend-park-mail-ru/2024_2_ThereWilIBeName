@@ -137,9 +137,9 @@
     display grid
     grid-template-columns 10% 1fr 1fr 1fr 1fr 4% 4%
     grid-template-rows 70px 70px auto auto
-    grid-template-areas "a b b b b c d"\
-    "g g g g e e e"\
-    "g g g g . . ."\
+    grid-template-areas "a b b b b . d"\
+    "c c c c e e e"\
+    "g g g g g g g"\
     "f f f f f f f"
     row-gap 20px
     column-gap 10px
@@ -163,7 +163,7 @@
     .grid-trip-title
       grid-area b
 
-    .grid-trip-edit-icon
+    .grid-trip-authors-gallery
       grid-area c
 
     .grid-trip-share-icon
@@ -178,20 +178,33 @@
     .grid-trip-description
       grid-area g
 
-    .trip-edit-icon
+    .trip-authors-gallery
+      display flex
+      flex-direction row
+      overflow-x scroll
+      scrollbar-width none
       width 100%
-      padding 5px
-      background myBlack
-      border-radius 10px
-      cursor pointer
-      transition all 0.3s ease
+      height 100%
 
-      @media (max-width 700px)
-        justify-self center
-        width 40px
+      .authors-block
+        background myBlack
+        padding 20px
+        border-radius 10px
+        display grid
+        grid-template-columns 30% auto
 
-      &:hover
-        background myPink
+        .author-avatar
+          width 50px
+          height 50px
+          background myBlack
+          border-radius 50%
+
+        .author-username
+          font-size 27px
+          color myWhite
+          white-space nowrap
+          overflow hidden
+          text-overflow ellipsis
 
     .trip-share-icon
       width 100%
@@ -226,6 +239,9 @@
       text-align center
       align-content center
       border-radius 10px
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
 
     .trip-date
       background myBlack

@@ -24,6 +24,15 @@ export default {
      * @type {string}
      */
     html: `${header.html}
+
+        // <div class="share-block hidden hidden-animation" id="share-block">
+        //     <div class="share-block-title grid-share-block-title">Поделиться поездкой</div>
+        //     <div class="share-link grid-share-link" id="share-link"></div>
+        //     <img src="" class="copy-link-button grid-copy-link-button" id="copy-link-button">
+        //     <div class="read-mode grid-read-mode" id="read-mode-button">Чтение</div>
+        //     <div class="edit-mode grid-edit-mode" id="edit-mode-button">Редактирование</div>
+        // </div>
+        // <div class="blur-element hidden hidden-animation" id="blur-element"></div>
         <main>
             <div class="trips-block">
                 <div class="trips-title-row">
@@ -55,6 +64,25 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после установки обработчика события.
      */
     async mount(router: Router): Promise<void> {
+
+
+        // const shareBlock = document.getElementById('share-block') as HTMLElement;
+        // const blurElement = document.getElementById('blur-element') as HTMLElement;
+        // shareButton.addEventListener('click', () => {
+        //     shareBlock.classList.remove('hidden');
+        //     shareBlock.classList.remove('hidden-animation');
+        //     blurElement.classList.remove('hidden');
+        //     blurElement.classList.remove('hidden-animation');
+        // });
+        // blurElement.addEventListener('click', () => {
+        //     shareBlock.classList.add('hidden-animation');
+        //     shareBlock.classList.add('hidden');
+        //     blurElement.classList.add('hidden-animation');
+        //     blurElement.classList.add('hidden');
+        // });
+
+
+
 
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         const createTripButton = document.getElementById('trip-create-button') as HTMLButtonElement;
