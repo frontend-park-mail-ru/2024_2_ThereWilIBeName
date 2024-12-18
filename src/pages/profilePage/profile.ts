@@ -11,7 +11,7 @@ import {emailRegex} from '../../components/validation';
 import footer from '../../components/footer';
 import backButton from '../../static/back button white.svg';
 import userMount from '../../components/user-mount';
-import closeButton from '../../static/close icon.svg';
+import popUpMessage from '../../components/pop-up-message';
 
 export default {
     /**
@@ -22,9 +22,7 @@ export default {
      */
     html: `
         <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
-        <div class="error-window-message hidden hidden-animation" id="error-window-message">Ошибка загрузки аватарки
-            <img src="${closeButton}" class="error-close-button" id="error-close-button">
-        </div>
+        ${popUpMessage.html}
         <main>
             <div class="background-profile">
                 <div class="user-block">
@@ -141,8 +139,7 @@ export default {
                         }
                         const res = await Api.putAvatar(User.id, basedAvatar);
                         if (!res.ok) {
-                            errorWindowMessage.classList.remove('hidden');
-                            setTimeout(() => errorWindowMessage.classList.remove('hidden-animation'), 100);
+                            popUpMessage.showMessage('Ошибка загрузки аватарки');
                             return;
                         }
                         await this.mount(router);

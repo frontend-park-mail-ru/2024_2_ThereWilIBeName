@@ -10,10 +10,12 @@ import reviewsLoad from './reviews-load';
 import User from '../../utils/user';
 import galleryCategoriesTemplate from './categories.hbs';
 import Search from '../../utils/search-memory';
+import popUpMessage from '../../components/pop-up-message';
 
 export default {
     html:
         `${header.html}
+        ${popUpMessage.html}
         <main>
             <div class="place-block">
                 <div class="place-image grid-place-image">
@@ -140,15 +142,16 @@ export default {
 
         reviewFormButton.addEventListener('click', async () => {
             if (!reviewFormText.value) {
+                popUpMessage.showMessage('Пустой отзыв - не круто. Напишите о своих впечатлениях!');
                 return;
             }
             if (Number(formRatingInput.value) < 1 || Number(formRatingInput.value) > 5) {
-                alert('Некорректный рейтинг');
+                popUpMessage.showMessage('Введите оценку от 1 до 5');
                 return;
             }
             const res = await Api.postReview(Number(User.id), itemId, reviewFormText.value, Number(formRatingInput.value));
             if (!res.ok) {
-                console.log('Ошибка отправки отзыва');
+                popUpMessage.showMessage('Вы уже оставили отзыв!');
             }
             await reviewsLoad(itemId, router);
         });
