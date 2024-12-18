@@ -202,8 +202,8 @@ export default {
         const editModeButton = document.getElementById('edit-mode-button') as HTMLButtonElement;
         let id = '';
         readModeButton.addEventListener('click', () => {
-            shareLink.textContent = `https://therewillbetrip.ru/trips/${id}`;
-            navigator.clipboard.writeText(`https://therewillbetrip.ru/trips/${id}`);
+            shareLink.textContent = `therewillbetrip.ru/trips/${id}`;
+            navigator.clipboard.writeText(`therewillbetrip.ru/trips/${id}`);
             popUpMessage.showMessage('Ссылка скопирована');
         });
         editModeButton.addEventListener('click', async () => {
@@ -230,8 +230,8 @@ export default {
                     setTimeout(() => blurElement.classList.remove('hidden-animation'), 100);
                     shareBlock.classList.remove('hidden');
                     setTimeout(() => shareBlock.classList.remove('hidden-animation'), 100);
-                    shareLink.textContent = `https://therewillbetrip.ru/trips/${id}`;
-                    navigator.clipboard.writeText(`https://therewillbetrip.ru/trips/${id}`);
+                    shareLink.textContent = `therewillbetrip.ru/trips/${id}`;
+                    navigator.clipboard.writeText(`therewillbetrip.ru/trips/${id}`);
                     popUpMessage.showMessage('Ссылка скопирована');
                 }
             });
