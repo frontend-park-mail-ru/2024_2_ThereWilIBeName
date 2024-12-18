@@ -5,6 +5,7 @@ import User from '../utils/user';
 import logoImage from '../static/logo trip.svg';
 import footer from '../components/footer';
 import backButton from '../static/back button white.svg';
+import popUpMessage from '../components/pop-up-message';
 
 export default {
     /**
@@ -15,6 +16,7 @@ export default {
      */
     html:
         `
+        ${popUpMessage.html}
         <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
         <main>
             <div class="create-trip-block">
@@ -68,7 +70,20 @@ export default {
         createTripForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             try {
-                const res = await Api.postCreateTrip(Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, false);
+                if (formStartDate.value === '' || formEndDate.value === '' || formName.value === '' || formDescription.value === '') {
+                    popUpMessage.showMessage('Заполните поля');
+                    return;
+                }
+                if (formStartDate.value < formEndDate.value) {
+                    popUpMessage.showMessage('Некорректная дата');
+                    return;
+                }
+
+                const tripRes = await Api.postCreateTrip(Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, false);
+                if (!tripRes.ok) {
+                    popUpMessage.showMessage('Ошибка создания поездки');
+                    return;
+                }
                 await router.goto('/mytrips');
             } catch (e) {
                 errorMessage.textContent = 'Ошибка создания поездки';
