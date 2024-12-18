@@ -60,6 +60,13 @@ export default {
             const authors = tripResponse.data.users;
             tripAuthorsGallery.innerHTML = galleryAuthorsTemplate({ authors });
 
+            const photos = tripResponse.data.trip.photos;
+            const galleryPhoto = document.getElementById('trip-photos') as HTMLElement;
+            if (!galleryPhoto) {
+                console.log('Блок фото не найден');
+                return;
+            }
+            await mountPhotos(galleryPhoto, photos);
 
             if (tripResponse.data.userAdded) {
                 showMessage('Поездка добавлена', copyMessage);
@@ -73,14 +80,6 @@ export default {
         } catch (e) {
             console.log('Ошибка получения поездки');
         }
-        
-        const galleryPhoto = document.getElementById('trip-photos') as HTMLElement;
-        if (!galleryPhoto) {
-            console.log('Блок фото не найден');
-            return;
-        }
-
-        await mountPhotos(galleryPhoto, itemId);
 
         const shareButton = document.getElementById('trip-share-button') as HTMLButtonElement;
 
