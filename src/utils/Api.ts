@@ -143,7 +143,7 @@ type Achievements = {
 
 export default {
     async getAchievements(userId: string): Promise<JsonResponse<Achievements[]>> {
-        const res = await RESTApi.get(`api/v1/users/${userId}/achievements`)
+        const res = await RESTApi.get(`api/v1/users/${userId}/achievements`);
         return {
             data: Array.isArray(res.data) ? res.data.map( (achievement: any) =>
                 ({
