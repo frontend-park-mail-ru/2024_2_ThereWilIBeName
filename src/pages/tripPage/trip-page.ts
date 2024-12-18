@@ -6,15 +6,16 @@ import footer from '../../components/footer';
 import backButtonIcon from '../../static/back button.svg';
 import shareIcon from '../../static/share.svg';
 import mountPhotos from './mountPhotos';
-import showMessage from '../../components/message';
+import showMessage from '../../components/pop-up-message';
 import galleryAuthorsTemplate from './authors.hbs';
 import palmsImgB from '../../static/please black.svg';
+import popUpMessage from '../../components/pop-up-message';
 
 export default {
     html:`
         ${header.html}
         <main>
-            <div class="copy-message hidden hidden-animation" id="copy-message">Ссылка скопирована</div>
+            ${popUpMessage.html}
             <img src="${backButtonIcon}" alt="назад" class="trip-back-button grid-trip-back-button" id="trip-back-button">
             <div class="trip-title grid-trip-title" id="trip-title">Поездка</div>
             <img src="${shareIcon}" alt="поделиться" class="trip-share-icon grid-trip-share-icon" id="trip-share-button">
@@ -45,7 +46,7 @@ export default {
         });
 
         const itemId: number = params;
-        const copyMessage = document.getElementById('copy-message') as HTMLElement;
+        const popUpMessageElement = document.getElementById('pop-up-message') as HTMLElement;
 
         const tripTitle = document.getElementById('trip-title') as HTMLElement;
         const tripDate = document.getElementById('trip-date') as HTMLElement;
@@ -69,11 +70,11 @@ export default {
             await mountPhotos(galleryPhoto, photos);
 
             if (tripResponse.data.userAdded) {
-                showMessage('Поездка добавлена', copyMessage);
+                popUpMessage.showMessage('Поездка добавлена', popUpMessageElement);
             }
 
             if (window.location.pathname !== `trips/${itemId}` && User.id === '') {
-                showMessage('Авторизуйтесь для добавления поездки', copyMessage);
+                popUpMessage.showMessage('Авторизуйтесь для добавления поездки', popUpMessageElement);
             }
 
 
@@ -85,7 +86,7 @@ export default {
 
         shareButton.addEventListener('click', () => {
             navigator.clipboard.writeText(`https://therewillbetrip.ru/trips/${itemId}`);
-            showMessage('Ссылка скопирована', copyMessage);
+            popUpMessage.showMessage('Ссылка скопирована', popUpMessageElement);
         });
     },
 

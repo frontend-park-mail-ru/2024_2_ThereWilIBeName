@@ -24,7 +24,8 @@ export default {
      * @type {string}
      */
     html: `${header.html}
-
+        <div class="copy-message hidden hidden-animation" id="copy-message">Ссылка скопирована</div>
+            
         // <div class="share-block hidden hidden-animation" id="share-block">
         //     <div class="share-block-title grid-share-block-title">Поделиться поездкой</div>
         //     <div class="share-link grid-share-link" id="share-link"></div>
