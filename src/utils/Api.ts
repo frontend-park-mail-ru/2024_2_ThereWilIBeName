@@ -358,7 +358,7 @@ export default {
                     endDate: formatDate(res.data.trip.end_date),
                     private: Boolean(res.data.trip.private),
                     photos: Array.isArray(res.data.trip.photos)
-                        ? res.data.photos.map((photo: any) => ({ photoPath: String(photo) }))
+                        ? res.data.trip.photos.map((photo: any) => ({ photoPath: String(photo) }))
                         : [],
                 },
                 users: Array.isArray(res.data.users) ? res.data.users.map( (user: Author) => ({
