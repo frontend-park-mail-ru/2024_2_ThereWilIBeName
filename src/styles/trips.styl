@@ -1,6 +1,104 @@
 .trips-page
   mixinSideMenu()
 
+  .blur-element
+    position fixed
+    inset 0
+    width 100%
+    height 100%
+    backdrop-filter blur(5px)
+    background myShadow
+    display block
+    opacity 1
+    transition opacity 0.3s ease
+    z-index 990
+
+    &.hidden
+      display none
+
+    &.hidden-animation
+      opacity 1
+
+  .share-block
+    position fixed
+    left 50%
+    top 50%
+    transform translate(-50%, -50%)
+    background myWhite
+    width fit-content
+    height fit-content
+    padding 40px
+    justify-content center
+    align-content center
+    border-radius 20px
+    z-index 998
+    display grid
+    grid-template-rows 50px 40px 40px
+    grid-template-columns 1fr 1fr
+    grid-template-areas "a a"\
+    "b b"\
+    "c d"
+    row-gap 20px
+    column-gap 10px
+    opacity 1
+    transition opacity 0.3s ease
+
+    .grid-share-block-title
+      grid-area a
+
+    .grid-share-link
+      grid-area b
+
+    .grid-read-mode
+      grid-area c
+
+    .grid-edit-mode
+      grid-area d
+
+
+    &.hidden
+      display none
+
+    &.hidden-animation
+      opacity 1
+
+    .share-link
+      border 2px solid myLightGrey
+      border-radius 10px
+      width 100%
+      padding 10px
+      overflow-x scroll
+      scrollbar-width none
+      white-space nowrap
+      height 100%
+
+    .share-block-title
+      color myBlack
+      font-size 27px
+      justify-self center
+
+    .read-mode
+      background myGrey
+      color myWhite
+      padding 5px 20px
+      cursor pointer
+      justify-self center
+      text-align center
+      align-content center
+      border-radius 10px
+      width 100%
+
+    .edit-mode
+      background myGrey
+      color myWhite
+      padding 5px 20px
+      cursor pointer
+      justify-self center
+      text-align center
+      align-content center
+      border-radius 10px
+      width 100%
+
   .trips-block
     mixinBlock(myBlack)
     display flex

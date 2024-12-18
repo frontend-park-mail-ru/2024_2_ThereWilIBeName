@@ -27,14 +27,13 @@ export default {
         ${header.html}
         ${popUpMessage.html}
             
-<!--        <div class="share-block hidden hidden-animation" id="share-block">-->
-<!--            <div class="share-block-title grid-share-block-title">Поделиться поездкой</div>-->
-<!--            <div class="share-link grid-share-link" id="share-link"></div>-->
-<!--            <img src="" class="copy-link-button grid-copy-link-button" id="copy-link-button">-->
-<!--            <div class="read-mode grid-read-mode" id="read-mode-button">Чтение</div>-->
-<!--            <div class="edit-mode grid-edit-mode" id="edit-mode-button">Редактирование</div>-->
-<!--        </div>-->
-<!--        <div class="blur-element hidden hidden-animation" id="blur-element"></div>-->
+        <div class="share-block hidden hidden-animation" id="share-block">
+            <div class="share-block-title grid-share-block-title">Поделиться поездкой</div>
+            <div class="share-link grid-share-link" id="share-link"></div>
+            <div class="read-mode grid-read-mode" id="read-mode-button">Чтение</div>
+            <div class="edit-mode grid-edit-mode" id="edit-mode-button">Редактирование</div>
+        </div>
+        <div class="blur-element hidden hidden-animation" id="blur-element"></div>
         
         <main>
             <div class="trips-block">
@@ -67,26 +66,6 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после установки обработчика события.
      */
     async mount(router: Router): Promise<void> {
-
-
-        // const shareBlock = document.getElementById('share-block') as HTMLElement;
-        // const blurElement = document.getElementById('blur-element') as HTMLElement;
-        // shareButton.addEventListener('click', () => {
-        //     shareBlock.classList.remove('hidden');
-        //     shareBlock.classList.remove('hidden-animation');
-        //     blurElement.classList.remove('hidden');
-        //     blurElement.classList.remove('hidden-animation');
-        // });
-        // blurElement.addEventListener('click', () => {
-        //     shareBlock.classList.add('hidden-animation');
-        //     shareBlock.classList.add('hidden');
-        //     blurElement.classList.add('hidden-animation');
-        //     blurElement.classList.add('hidden');
-        // });
-
-
-
-
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         const createTripButton = document.getElementById('trip-create-button') as HTMLButtonElement;
         const authPleaseBlock = document.getElementById('please-block') as HTMLElement;
@@ -213,6 +192,47 @@ export default {
                 if (parentItem) {
                     const id = parentItem.id;
                     await router.goto(`/edittrip/${id}`);
+                }
+            });
+        });
+
+        const shareBlock = document.getElementById('share-block') as HTMLElement;
+        const shareLink = document.getElementById('share-link') as HTMLElement;
+        const readModeButton = document.getElementById('read-mode-button') as HTMLButtonElement;
+        const editModeButton = document.getElementById('edit-mode-button') as HTMLButtonElement;
+        let id = '';
+        readModeButton.addEventListener('click', () => {
+            shareLink.textContent = `https://therewillbetrip.ru/trips/${id}`;
+            navigator.clipboard.writeText(`https://therewillbetrip.ru/trips/${id}`);
+            popUpMessage.showMessage('Ссылка скопирована');
+        });
+        editModeButton.addEventListener('click', async () => {
+            const resLink = await Api.postTripLink(id, 'editing');
+            shareLink.textContent = resLink.data.link;
+            navigator.clipboard.writeText(resLink.data.link);
+            popUpMessage.showMessage('Ссылка скопирована');
+        });
+
+        const blurElement = document.getElementById('blur-element') as HTMLElement;
+        blurElement.addEventListener('click', () => {
+            shareBlock.classList.add('hidden-animation');
+            shareBlock.classList.add('hidden');
+            blurElement.classList.add('hidden-animation');
+            blurElement.classList.add('hidden');
+        });
+
+        document.querySelectorAll('.trips-share-icon').forEach(icon => {
+            icon.addEventListener('click', async () => {
+                const parentItem = icon.closest('.gallery-item-trips');
+                if (parentItem) {
+                    id = parentItem.id;
+                    blurElement.classList.remove('hidden');
+                    setTimeout(() => blurElement.classList.remove('hidden-animation'), 100);
+                    shareBlock.classList.remove('hidden');
+                    setTimeout(() => shareBlock.classList.remove('hidden-animation'), 100);
+                    shareLink.textContent = `https://therewillbetrip.ru/trips/${id}`;
+                    navigator.clipboard.writeText(`https://therewillbetrip.ru/trips/${id}`);
+                    popUpMessage.showMessage('Ссылка скопирована');
                 }
             });
         });

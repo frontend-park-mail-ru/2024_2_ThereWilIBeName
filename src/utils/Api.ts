@@ -373,7 +373,7 @@ export default {
         };
     },
 
-    async postTripLink(tripId: number, option: string): Promise<JsonResponse<Link>> {
+    async postTripLink(tripId: string, option: string): Promise<JsonResponse<Link>> {
         const res = await RESTApi.post(`/api/v1/trips/${tripId}/share?sharing_option=${option}`, {});
         return {
             data: {
