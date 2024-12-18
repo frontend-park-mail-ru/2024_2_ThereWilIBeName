@@ -158,8 +158,13 @@ export default {
                         }
 
                         const res = await Api.postPhotos(parentItem.id, base64Photos);
+                        if (res.status === 413) {
+                            popUpMessage.showMessage('Фото слишком большое');
+                            return;
+                        }
+
                         if (!res.ok) {
-                            alert('Ошибка загрузки фото');
+                            popUpMessage.showMessage('Ошибка загрузки фото');
                             return;
                         }
 
