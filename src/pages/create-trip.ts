@@ -74,13 +74,13 @@ export default {
                     popUpMessage.showMessage('Заполните поля');
                     return;
                 }
-                if (formStartDate.value < formEndDate.value) {
+                if (formStartDate.value > formEndDate.value) {
                     popUpMessage.showMessage('Некорректная дата');
                     return;
                 }
 
-                const tripRes = await Api.postCreateTrip(Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, false);
-                if (!tripRes.ok) {
+                const tripsRes = await Api.postCreateTrip(Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, false);
+                if (!tripsRes.ok) {
                     popUpMessage.showMessage('Ошибка создания поездки');
                     return;
                 }
