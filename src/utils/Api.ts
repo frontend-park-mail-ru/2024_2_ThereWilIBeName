@@ -138,7 +138,7 @@ type Link = {
 type Achievements = {
         id: number,
         name: string,
-        imageUrl: string,
+        iconPath: string,
 }
 
 export default {
@@ -149,7 +149,7 @@ export default {
                 ({
                     id: Number(achievement.id),
                     name: String(achievement.name),
-                    imageUrl: String(achievement.image_url),
+                    iconPath: String(achievement.icon_path),
                 })) : [],
             status: res.status,
             ok: res.ok,
