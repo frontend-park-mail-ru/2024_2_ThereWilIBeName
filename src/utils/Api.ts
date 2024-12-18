@@ -135,8 +135,27 @@ type Link = {
     link: string,
 }
 
-export default {
+type Achievements = {
+        id: number,
+        name: string,
+        imageUrl: string,
+}
 
+export default {
+    async getAchievements(userId: string): Promise<JsonResponse<Achievements[]>> {
+        const res = await RESTApi.get(`api/v1/users/${userId}/achievements`)
+        return {
+            data: Array.isArray(res.data) ? res.data.map( (achievement: any) =>
+                ({
+                    id: Number(achievement.id),
+                    name: String(achievement.name),
+                    imageUrl: String(achievement.image_url),
+                })) : [],
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+    
     async getStat(surveyId: string) {
         const res = await RESTApi.get(`/api/v1/survey/stats/${surveyId}`);
         return {

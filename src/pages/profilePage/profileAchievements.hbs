@@ -1,7 +1,7 @@
 {{#each achievements}}
-    <li class="gallery-item-achievements">
-        <img src="{{../defaultAchievementIcon}}" alt="Значок достижения" class="gallery-item-achievements-img">
-        <div class="gallery-item-achievements-name">Название</div>
-        <div class="gallery-item-achievements-progressbar">54/10</div>
+    <li class="gallery-item-achievements" id="achievement-{{id}}">
+        <img src="/achievements/{{ imageUrl }}" alt="Значок достижения" class="gallery-item-achievements-img">
+        <div class="gallery-item-achievements-name">{{ name }}</div>
+<!--        <div class="gallery-item-achievements-progressbar"></div>-->
     </li>
 {{/each}}
