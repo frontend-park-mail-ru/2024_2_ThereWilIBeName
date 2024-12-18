@@ -7,7 +7,7 @@ class Search {
     cityId: number;
     categoryId: number;
     filterId: number;
-    categoryActiveElement: string;
+    categoryActiveElement: HTMLButtonElement | null;
 
 
     private constructor() {
@@ -16,7 +16,7 @@ class Search {
         this.offset = 0;
         this.cityId = -1;
         this.categoryId = -1;
-        this.categoryActiveElement = '';
+        this.categoryActiveElement = null;
         this.filterId = -1;
     }
 

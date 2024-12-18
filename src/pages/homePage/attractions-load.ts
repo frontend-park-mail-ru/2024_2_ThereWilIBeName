@@ -52,8 +52,6 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
         // @ts-ignore
         const finalResultAttractions = columnsResult.filter(attraction => attraction.id !== '-1');
 
-        console.log(finalResultAttractions);
-
         const galleryElement = document.getElementById('gallery') as HTMLElement;
         galleryElement.innerHTML = galleryTemplate({ finalResultAttractions });
 
