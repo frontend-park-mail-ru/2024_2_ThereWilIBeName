@@ -82,10 +82,10 @@
       display grid
       gap 10px
       align-items center
-      grid-template-columns 10% 10% 50% 20% 5%
+      grid-template-columns 10% 10% 50% 15% 5% 5%
       grid-template-rows 1fr 1fr
-      grid-template-areas "a b c e g"\
-      "a b d e g"
+      grid-template-areas "a b c e f h"\
+      "a b d e g h"
 
       @media (max-width 700px)
         grid-template-columns 15% 70% 15%
@@ -184,8 +184,10 @@
       grid-area e
     .trips-edit-icon-grid
       grid-area f
-    .trips-delete-icon-grid
+    .trips-share-icon-grid
       grid-area g
+    .trips-delete-icon-grid
+      grid-area h
 
   .trips-trip-icon
     width 65px
@@ -225,6 +227,17 @@
 
     &:hover
       background myRed
+
+  .trips-edit-icon .trips-share-icon
+    cursor pointer
+    border-radius 10px
+    height 100%
+    width 100%
+    background myBlack
+    transition background 0.3s ease
+
+    &:hover
+      background myPink
 
   .trips-column-open
     display grid
