@@ -32,13 +32,13 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
             }); // добавляем объект-маркер
         }
 
-        for (let i = 0; i < attractions.length / columns; i++) {
-            const row = [];
-            for (let j = i; j < attractions.length; j += attractions.length / columns) {
-                row.push(attractions[j]);
+        for (let i = 0; i < columns; i++) {
+            const column = [];
+            for (let j = i; j < attractions.length; j += columns) {
+                column.push(attractions[j]);
             }
-            for (let j = 0; j < row.length; j++) {
-                columnsResult.push(row[j]);
+            for (let j = 0; j < column.length; j++) {
+                columnsResult.push(column[j]);
             }
         }
 
