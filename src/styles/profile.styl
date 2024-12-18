@@ -327,9 +327,7 @@
 
   .gallery-item-achievements
     mixinGalleryItem(250px, 200px, myBlack)
-    grid-template-rows auto auto auto
-    grid-template-columns 100%
-    row-gap 0
+    height fit-content
     place-items center
 
   .gallery-item-achievements-img
@@ -343,9 +341,6 @@
     font-size 20px
     color myWhite
     text-align center
-    overflow hidden
-    white-space nowrap
-    text-overflow ellipsis
 
   .gallery-item-achievements-progressbar
     font-size 20px

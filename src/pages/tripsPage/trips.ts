@@ -15,6 +15,7 @@ import backButton from '../../static/back button white.svg';
 import footer from '../../components/footer';
 import deletePhotoButtonsMount from './mount-delete-photo-buttons';
 import mountPhotos from './mountPhotos';
+import popUpMessage from '../../components/pop-up-message';
 
 export default {
     /**
@@ -23,17 +24,19 @@ export default {
      *
      * @type {string}
      */
-    html: `${header.html}
-        <div class="copy-message hidden hidden-animation" id="copy-message">Ссылка скопирована</div>
+    html: `
+        ${header.html}
+        ${popUpMessage.html}
             
-        // <div class="share-block hidden hidden-animation" id="share-block">
-        //     <div class="share-block-title grid-share-block-title">Поделиться поездкой</div>
-        //     <div class="share-link grid-share-link" id="share-link"></div>
-        //     <img src="" class="copy-link-button grid-copy-link-button" id="copy-link-button">
-        //     <div class="read-mode grid-read-mode" id="read-mode-button">Чтение</div>
-        //     <div class="edit-mode grid-edit-mode" id="edit-mode-button">Редактирование</div>
-        // </div>
-        // <div class="blur-element hidden hidden-animation" id="blur-element"></div>
+<!--        <div class="share-block hidden hidden-animation" id="share-block">-->
+<!--            <div class="share-block-title grid-share-block-title">Поделиться поездкой</div>-->
+<!--            <div class="share-link grid-share-link" id="share-link"></div>-->
+<!--            <img src="" class="copy-link-button grid-copy-link-button" id="copy-link-button">-->
+<!--            <div class="read-mode grid-read-mode" id="read-mode-button">Чтение</div>-->
+<!--            <div class="edit-mode grid-edit-mode" id="edit-mode-button">Редактирование</div>-->
+<!--        </div>-->
+<!--        <div class="blur-element hidden hidden-animation" id="blur-element"></div>-->
+        
         <main>
             <div class="trips-block">
                 <div class="trips-title-row">
