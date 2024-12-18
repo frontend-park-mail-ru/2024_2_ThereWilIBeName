@@ -11,10 +11,12 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
 
         // Логика построчного разбиения на три колонки
         const columns = 3;
-        const columnsResult = [];
+        let columnsResult = [];
+        let countOffNull = 0;
 
         // Дополняем массив до кратности 3
         while (attractions.length % columns !== 0) {
+            countOffNull++;
             attractions.push({
                 address: '',
                 categories: [],
@@ -40,6 +42,14 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
             }
         }
 
+        for (let i = 0; i < (columnsResult.length - countOffNull); i++) {
+            // @ts-ignore
+            if (columnsResult[i].id === '-1') {
+                columnsResult[i] = columnsResult.pop();
+            }
+        }
+
+        // @ts-ignore
         const finalResultAttractions = columnsResult.filter(attraction => attraction.id !== '-1');
 
         console.log(finalResultAttractions);
