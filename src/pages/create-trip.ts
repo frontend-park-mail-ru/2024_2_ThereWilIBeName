@@ -30,9 +30,6 @@ export default {
                     <input class="border" type="date" id="startDate" name="startDate">
                     <label class="create-trip-text">Дата конца</label>
                     <input class="border" type="date" id="endDate" name="endDate">
-                    <label class="create-trip-text checkbox-button">
-                        <input type="checkbox" id="private-trip" name="private-trip"> Приватная поездка
-                    </label>
                     <button class="create-trip-button">Создать поездку</button>
                 </form>
             </div>
@@ -65,14 +62,13 @@ export default {
         const formDescription = (document.getElementById('description') as HTMLInputElement);
         const formStartDate = (document.getElementById('startDate') as HTMLInputElement);
         const formEndDate = (document.getElementById('endDate') as HTMLInputElement);
-        const formPrivateTrip = (document.getElementById('private-trip') as HTMLInputElement);
         const createTripForm = document.getElementById('create-trip-form') as HTMLElement;
         const errorMessage = document.getElementById('error-message') as HTMLElement;
 
         createTripForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             try {
-                const res = await Api.postCreateTrip(Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, formPrivateTrip.checked);
+                const res = await Api.postCreateTrip(Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, false);
                 await router.goto('/mytrips');
             } catch (e) {
                 errorMessage.textContent = 'Ошибка создания поездки';
