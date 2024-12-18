@@ -165,7 +165,6 @@ export default {
 
                         // Получаем список фотографий
                         await mountPhotos(parentItem);
-                        deletePhotoButtonsMount(parentItem);
                     }
                 });
 
