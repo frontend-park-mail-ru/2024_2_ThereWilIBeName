@@ -78,7 +78,7 @@ export default {
             event.preventDefault();
             try {
                 const res = await Api.putTrip(itemId, Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, false);
-                await router.goto(`/trips/${itemId}`);
+                await router.goto(`/mytrips`);
             } catch (e) {
                 errorMessage.textContent = 'Ошибка создания поездки';
                 errorMessage.classList.add('visible');
