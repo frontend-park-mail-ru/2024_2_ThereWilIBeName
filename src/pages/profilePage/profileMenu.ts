@@ -35,10 +35,12 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
                 <img src="${palmsImgB}" class="please-img">
                 <div class="auth-please" id="auth-please">У вас пока нет достижений</div>
             </div>`;
-        const achievementsResponse = await Api.getAchievements(User.id);
-        const achievements = achievementsResponse.data;
-        if (achievements) {
+        try {
+            const achievementsResponse = await Api.getAchievements(User.id);
+            const achievements = achievementsResponse.data;
             galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements });
+        } catch (error) {
+            console.log(error);
         }
     }
 
