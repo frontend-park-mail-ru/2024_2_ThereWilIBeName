@@ -216,9 +216,9 @@ export default {
         const blurElement = document.getElementById('blur-element') as HTMLElement;
         blurElement.addEventListener('click', () => {
             shareBlock.classList.add('hidden-animation');
-            shareBlock.classList.add('hidden');
+            setTimeout(() => shareBlock.classList.add('hidden'), 300);
             blurElement.classList.add('hidden-animation');
-            blurElement.classList.add('hidden');
+            setTimeout(() => blurElement.classList.add('hidden'), 300);
         });
 
         document.querySelectorAll('.trips-share-icon').forEach(icon => {
