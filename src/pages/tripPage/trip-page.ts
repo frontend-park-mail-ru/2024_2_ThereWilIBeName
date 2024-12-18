@@ -51,36 +51,29 @@ export default {
         const tripDescription = document.getElementById('trip-description') as HTMLElement;
         const tripAuthorsGallery = document.getElementById('trip-authors-gallery') as HTMLElement;
 
-        try {
-            const tripResponse = await Api.getTrip(itemId, User.id);
-            console.log(tripResponse);
-            tripTitle.textContent = tripResponse.data.trip.name;
-            tripDate.textContent = `${tripResponse.data.trip.startDate} - ${tripResponse.data.trip.endDate}`;
-            tripDescription.textContent = tripResponse.data.trip.description;
-            const authors = tripResponse.data.users;
-            if (authors.length !== 0) {
-                tripAuthorsGallery.innerHTML = galleryAuthorsTemplate({ authors });
-            }
+        const tripResponse = await Api.getTrip(itemId, User.id);
+        tripTitle.textContent = tripResponse.data.trip.name;
+        tripDate.textContent = `${tripResponse.data.trip.startDate} - ${tripResponse.data.trip.endDate}`;
+        tripDescription.textContent = tripResponse.data.trip.description;
+        const authors = tripResponse.data.users;
+        if (authors.length !== 0) {
+            tripAuthorsGallery.innerHTML = galleryAuthorsTemplate({ authors });
+        }
 
-            const photos = tripResponse.data.trip.photos;
-            const galleryPhoto = document.getElementById('trip-photos') as HTMLElement;
-            if (!galleryPhoto) {
-                console.log('Блок фото не найден');
-                return;
-            }
-            await mountPhotos(galleryPhoto, photos);
+        const photos = tripResponse.data.trip.photos;
+        const galleryPhoto = document.getElementById('trip-photos') as HTMLElement;
+        if (!galleryPhoto) {
+            console.log('Блок фото не найден');
+            return;
+        }
+        await mountPhotos(galleryPhoto, photos);
 
-            if (tripResponse.data.userAdded) {
-                popUpMessage.showMessage('Поездка добавлена');
-            }
+        if (tripResponse.data.userAdded) {
+            popUpMessage.showMessage('Поездка добавлена');
+        }
 
-            if (window.location.pathname !== `trips/${itemId}` && User.id === '') {
-                popUpMessage.showMessage('Авторизуйтесь для добавления поездки');
-            }
-
-
-        } catch (e) {
-            console.log('Ошибка получения поездки');
+        if (window.location.pathname !== `trips/${itemId}` && User.id === '') {
+            popUpMessage.showMessage('Авторизуйтесь для добавления поездки');
         }
 
         const shareButton = document.getElementById('trip-share-button') as HTMLButtonElement;
