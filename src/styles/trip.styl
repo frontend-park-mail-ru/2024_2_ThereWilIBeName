@@ -54,8 +54,8 @@
       scrollbar-width none
       width 100%
       height 100%
-      justify-content center
       align-items center
+      column-gap 10px
 
       .please-no-authors
         font-size 27px
@@ -63,10 +63,15 @@
 
       .authors-block
         background myBlack
-        padding 20px
-        border-radius 10px
+        align-content center
+        justify-content center
+        border-radius 15px
+        height 100%
+        width fit-content
         display grid
-        grid-template-columns 30% auto
+        grid-template-columns auto auto
+        padding 0 10px
+        column-gap 10px
 
         .author-avatar
           width 50px
@@ -80,6 +85,7 @@
           white-space nowrap
           overflow hidden
           text-overflow ellipsis
+          text-align center
 
     .trip-share-icon
       width 100%
