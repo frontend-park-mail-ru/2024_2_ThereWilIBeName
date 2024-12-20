@@ -73,6 +73,11 @@
         padding 0 10px
         column-gap 10px
 
+        @media (max-width 700px)
+          background none
+          padding 0
+          grid-template-columns auto
+
         .author-avatar
           width 50px
           height 50px
@@ -87,6 +92,9 @@
           text-overflow ellipsis
           text-align center
           align-self center
+
+          @media (max-width 700px)
+            display none
 
     .trip-share-icon
       width 100%
