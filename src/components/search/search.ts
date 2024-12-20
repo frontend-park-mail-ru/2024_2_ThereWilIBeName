@@ -11,7 +11,7 @@ import debounce from '../debounce';
 export default {
     html: `
         <div class="search search-grid">
-            <input type="text" placeholder="Здесь будет поиск" class="search-input" id="search-input">
+            <input type="text" placeholder="Поиск" class="search-input" id="search-input">
             <ul class="search-results hidden" id="search-results">
                 <ul class="search-results-cities" id="search-results-cities"></ul>
                 <ul class="search-results-places" id="search-results-places"></ul>

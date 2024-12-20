@@ -196,10 +196,11 @@
       "a b d e g h"
 
       @media (max-width 700px)
+        grid-template-rows 1fr 1fr 1fr
         grid-template-columns 15% 70% 15%
-        grid-template-areas "a c g"\
-        "a d g"
-
+        grid-template-areas "a c c"\
+        "a d d"\
+        "f g h"
 
     .gallery-item-trips-bottom-panel
       display flex
