@@ -31,9 +31,12 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
         const column1 = document.getElementById('place-column-1') as HTMLElement;
         const column2 = document.getElementById('place-column-2') as HTMLElement;
         const column3 = document.getElementById('place-column-3') as HTMLElement;
-        column1.innerHTML = galleryTemplate({ columnPlaces1 });
-        column2.innerHTML = galleryTemplate({ columnPlaces2 });
-        column3.innerHTML = galleryTemplate({ columnPlaces3 });
+        let finalResultAttractions = columnPlaces1;
+        column1.innerHTML = galleryTemplate({ finalResultAttractions });
+        finalResultAttractions = columnPlaces2;
+        column2.innerHTML = galleryTemplate({ finalResultAttractions });
+        finalResultAttractions = columnPlaces3;
+        column3.innerHTML = galleryTemplate({ finalResultAttractions });
 
         placeGallery.addEventListener('click', (event) => {
             const target = event.target as HTMLElement;
