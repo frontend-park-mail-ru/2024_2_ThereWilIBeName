@@ -121,13 +121,20 @@
 
     .gallery
         padding 20px
-        list-style none
-        columns 3 auto
+        display grid
+        grid-template-columns 1fr 1fr 1fr
         margin-top 0
 
         @media (max-width 700px)
             display flex
             flex-direction column
+
+        .place-column
+            list-style none
+            display flex
+            flex-direction column
+            height 100%
+            width 100%
 
     .gallery-item
         border-radius 20px

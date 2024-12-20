@@ -34,7 +34,11 @@ export default {
                     <div class="filter" id="rating-filter">по рейтингу</div>
                     <div class="filter" id="popularity-filter">по популярности</div>
                 </div>
-                <ul class="gallery" id="gallery"></ul>
+                <div class="gallery" id="gallery">
+                    <ul class="place-column" id="place-column-1"></ul>
+                    <ul class="place-column" id="place-column-2"></ul>
+                    <ul class="place-column" id="place-column-3"></ul>
+                </div>
             </div>
         </main>
         ${footer.html}

@@ -10,50 +10,30 @@ export default async function attractionsLoad(placeGallery: HTMLButtonElement, r
         const attractions = attractionsResponse.data;
 
         // Логика построчного разбиения на три колонки
-        const columns = 3;
-        let columnsResult = [];
-        let countOffNull = 0;
+        let columnPlaces1 = [];
+        let columnPlaces2 = [];
+        let columnPlaces3 = [];
 
-        // Дополняем массив до кратности 3
-        while (attractions.length % columns !== 0) {
-            countOffNull++;
-            attractions.push({
-                address: '',
-                categories: [],
-                city: '',
-                description: '',
-                imagePath: '',
-                latitude: 0,
-                longitude: 0,
-                name: '',
-                phoneNumber: '',
-                rating: 0,
-                id: '-1'
-            }); // добавляем объект-маркер
-        }
-
-        for (let i = 0; i < columns; i++) {
-            const column = [];
-            for (let j = i; j < attractions.length; j += columns) {
-                column.push(attractions[j]);
-            }
-            for (let j = 0; j < column.length; j++) {
-                columnsResult.push(column[j]);
+        for (let i = 0; i < attractions.length - 1; i++) {
+            switch (i % 3) {
+            case 0:
+                columnPlaces1.push(attractions[i]);
+                break;
+            case 1:
+                columnPlaces2.push(attractions[i]);
+                break;
+            case 2:
+                columnPlaces3.push(attractions[i]);
+                break;
             }
         }
 
-        for (let i = 0; i < (columnsResult.length - countOffNull); i++) {
-            // @ts-ignore
-            if (columnsResult[i].id === '-1') {
-                columnsResult[i] = columnsResult.pop();
-            }
-        }
-
-        // @ts-ignore
-        const finalResultAttractions = columnsResult.filter(attraction => attraction.id !== '-1');
-
-        const galleryElement = document.getElementById('gallery') as HTMLElement;
-        galleryElement.innerHTML = galleryTemplate({ finalResultAttractions });
+        const column1 = document.getElementById('place-column-1') as HTMLElement;
+        const column2 = document.getElementById('place-column-2') as HTMLElement;
+        const column3 = document.getElementById('place-column-3') as HTMLElement;
+        column1.innerHTML = galleryTemplate({ columnPlaces1 });
+        column2.innerHTML = galleryTemplate({ columnPlaces2 });
+        column3.innerHTML = galleryTemplate({ columnPlaces3 });
 
         placeGallery.addEventListener('click', (event) => {
             const target = event.target as HTMLElement;
