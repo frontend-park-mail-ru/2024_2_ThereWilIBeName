@@ -272,10 +272,17 @@
     padding 0
 
   .gallery-item-profile-trips
-    mixinGalleryItem(250px, 250px, myWhite)
+    margin 0
+    padding 15px
+    border-radius 20px
+    background myWhite
+    height 250px
+    width 250px
+    overflow hidden
+    border 2px solid myShadow
     display grid
     grid-template-rows repeat(4, 1fr)
-    grid-template-columns 1fr 1fr
+    grid-template-columns 25% 75%
     grid-template-areas "a b"\
     "c c"\
     "d d"\
