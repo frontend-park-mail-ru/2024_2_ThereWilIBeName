@@ -1,0 +1,6 @@
+{{#each authors}}
+    <div class="authors-block">
+        <img src="/avatars/{{avatarPath}}" onerror="this.src='{{../avatarPng}}';" alt="Аватарка" class="author-avatar">
+        <div class="author-username">{{username}}</div>
+    </div>
+{{/each}}

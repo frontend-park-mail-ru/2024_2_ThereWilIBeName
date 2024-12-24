@@ -7,7 +7,7 @@ type JsonResponse<T> = {
     ok: boolean,
 }
 
-type Trip = {
+type Trips = {
     id: string,
     userId: number,
     name: string,
@@ -19,6 +19,28 @@ type Trip = {
     photos: {
         photoPath: string
     }[],
+}
+
+type Trip = {
+    trip: {
+        id: string,
+        userId: number,
+        name: string,
+        cityId: number,
+        description: string,
+        startDate: string,
+        endDate: string,
+        private: boolean,
+        photos: {
+            photoPath: string
+        }[],
+    },
+    users: {
+        username: string,
+        avatarPath: string,
+        email: string,
+    }[],
+    userAdded: boolean,
 }
 
 type TripPhoto = {
@@ -111,6 +133,12 @@ type Avatar = {
     avatarPath: string,
 }
 
+type Author = {
+    login: string,
+    avatar_path: string | null,
+    email: string,
+}
+
 type Profile = {
     username: string,
     avatarPath: string | null,
@@ -135,8 +163,27 @@ type Link = {
     link: string,
 }
 
-export default {
+type Achievements = {
+        id: number,
+        name: string,
+        iconPath: string,
+}
 
+export default {
+    async getAchievements(userId: string): Promise<JsonResponse<Achievements[]>> {
+        const res = await RESTApi.get(`api/v1/users/${userId}/achievements`);
+        return {
+            data: Array.isArray(res.data) ? res.data.map( (achievement: any) =>
+                ({
+                    id: Number(achievement.id),
+                    name: String(achievement.name),
+                    iconPath: String(achievement.icon_path),
+                })) : [],
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+    
     async getStat(surveyId: string) {
         const res = await RESTApi.get(`/api/v1/survey/stats/${surveyId}`);
         return {
@@ -272,7 +319,7 @@ export default {
         };
     },
 
-    async getUserTrips(id: string): Promise<JsonResponse<Trip[]>> {
+    async getUserTrips(id: string): Promise<JsonResponse<Trips[]>> {
         const res = await RESTApi.get(`/api/v1/users/${id}/trips`);
         return {
             data: Array.isArray(res.data) ? res.data.map( (trip) => ({
@@ -293,28 +340,40 @@ export default {
         };
     },
 
-    async getTrip(tripId: number): Promise<JsonResponse<Trip>> {
-        const res = await RESTApi.get(`/api/v1/trips/${tripId}`);
+    async getTrip(tripId: number, userId: string | undefined = undefined): Promise<JsonResponse<Trip>> {
+        let reqUrl = `/api/v1/trips/${tripId}`;
+        if (userId) {
+            reqUrl = reqUrl + `?user_id=${userId}`;
+        }
+        const res = await RESTApi.get(reqUrl);
         return {
             data: {
-                userId: Number(res.data.user_id),
-                id: String(res.data.id),
-                name: String(res.data.name),
-                cityId: Number(res.data.city_id),
-                description: String(res.data.description),
-                startDate: formatDate(res.data.start_date),
-                endDate: formatDate(res.data.end_date),
-                private: Boolean(res.data.private),
-                photos: Array.isArray(res.data.photos)
-                    ? res.data.photos.map((photo: any) => ({ photoPath: String(photo) }))
-                    : [],
+                trip: {
+                    userId: Number(res.data.trip.user_id),
+                    id: String(res.data.trip.id),
+                    name: String(res.data.trip.name),
+                    cityId: Number(res.data.trip.city_id),
+                    description: String(res.data.trip.description),
+                    startDate: formatDate(res.data.trip.start_date),
+                    endDate: formatDate(res.data.trip.end_date),
+                    private: Boolean(res.data.trip.private),
+                    photos: Array.isArray(res.data.trip.photos)
+                        ? res.data.trip.photos.map((photo: any) => ({ photoPath: String(photo) }))
+                        : [],
+                },
+                users: Array.isArray(res.data.users) ? res.data.users.map( (user: Author) => ({
+                    username: String(user.login),
+                    avatarPath: String(user.avatar_path),
+                    email: String(user.email),
+                })) : [],
+                userAdded: Boolean(res.data.user_added),
             },
             status: res.status,
             ok: res.ok,
         };
     },
 
-    async postTripLink(tripId: number, option: string): Promise<JsonResponse<Link>> {
+    async postTripLink(tripId: string, option: string): Promise<JsonResponse<Link>> {
         const res = await RESTApi.post(`/api/v1/trips/${tripId}/share?sharing_option=${option}`, {});
         return {
             data: {
@@ -431,6 +490,17 @@ export default {
         };
     },
 
+    async postPhotos(tripId: string, newPhotos: string[]): Promise<JsonResponse<TripPhoto[]>> {
+        const res = await RESTApi.post(`/api/v1/trips/${tripId}/photos`, {photos: newPhotos});
+        return {
+            data: Array.isArray(res.data) ? res.data.map( (photo) => ({
+                photoPath: String(photo.photoPath),
+            })) : [],
+            status: res.status,
+            ok: res.ok,
+        };
+    },
+
     async putTrip(tripId: number, userId:number, name: string, cityId: number, description: string, startDate: string, endDate: string, privateTrip: boolean): Promise<JsonResponse<Trip>> {
         const res = await RESTApi.put(`/api/v1/trips/${tripId}`, {user_id: userId, name, city_id: cityId, description: description, start_date: startDate, end_date: endDate, private_trip: privateTrip });
         return {
@@ -475,17 +545,6 @@ export default {
                 message: String(res.data.message),
                 avatarPath: String(res.data.avatarPath)
             },
-            status: res.status,
-            ok: res.ok,
-        };
-    },
-
-    async putPhotos(tripId: string, newPhotos: string[]): Promise<JsonResponse<TripPhoto[]>> {
-        const res = await RESTApi.put(`/api/v1/trips/${tripId}/photos`, {photos: newPhotos});
-        return {
-            data: Array.isArray(res.data) ? res.data.map( (photo) => ({
-                photoPath: String(photo.photoPath),
-            })) : [],
             status: res.status,
             ok: res.ok,
         };

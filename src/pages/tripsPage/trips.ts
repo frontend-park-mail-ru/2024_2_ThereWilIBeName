@@ -4,10 +4,9 @@ import Api from '../../utils/Api';
 
 import openIcon from '../../static/open.png';
 import tripIcon from '../../static/trip_icon.png';
-import copyLinkIcon from '../../static/copylink.png';
-import deleteIcon from '../../static/delete.svg';
+import copyLinkIcon from '../../static/copy.svg';
 import deleteIconWhite from '../../static/delete white.svg';
-import editIcon from '../../static/edit.svg';
+import editIcon from '../../static/edit white.svg';
 import palmsImg from '../../static/please white.svg';
 import User from '../../utils/user';
 import header from '../../components/header';
@@ -15,6 +14,7 @@ import backButton from '../../static/back button white.svg';
 import footer from '../../components/footer';
 import deletePhotoButtonsMount from './mount-delete-photo-buttons';
 import mountPhotos from './mountPhotos';
+import popUpMessage from '../../components/pop-up-message';
 
 export default {
     /**
@@ -23,7 +23,18 @@ export default {
      *
      * @type {string}
      */
-    html: `${header.html}
+    html: `
+        ${header.html}
+        ${popUpMessage.html}
+            
+        <div class="share-block hidden hidden-animation" id="share-block">
+            <div class="share-block-title grid-share-block-title">Поделиться поездкой</div>
+            <div class="share-link grid-share-link" id="share-link"></div>
+            <div class="read-mode grid-read-mode" id="read-mode-button">Чтение</div>
+            <div class="edit-mode grid-edit-mode" id="edit-mode-button">Редактирование</div>
+        </div>
+        <div class="blur-element hidden hidden-animation" id="blur-element"></div>
+        
         <main>
             <div class="trips-block">
                 <div class="trips-title-row">
@@ -55,7 +66,6 @@ export default {
      * @returns {Promise<void>} Промис, который выполняется после установки обработчика события.
      */
     async mount(router: Router): Promise<void> {
-
         const backButton = document.getElementById('back-button') as HTMLButtonElement;
         const createTripButton = document.getElementById('trip-create-button') as HTMLButtonElement;
         const authPleaseBlock = document.getElementById('please-block') as HTMLElement;
@@ -147,9 +157,14 @@ export default {
                             base64Photos.push(base64);
                         }
 
-                        const res = await Api.putPhotos(parentItem.id, base64Photos);
+                        const res = await Api.postPhotos(parentItem.id, base64Photos);
+                        if (res.status === 413) {
+                            popUpMessage.showMessage('Слишком большое фото');
+                            return;
+                        }
+
                         if (!res.ok) {
-                            alert('Ошибка загрузки фото');
+                            popUpMessage.showMessage('Ошибка загрузки фото');
                             return;
                         }
 
@@ -171,6 +186,58 @@ export default {
                     if (res.ok) {
                         await router.goto('/mytrips');
                     }
+                }
+            });
+        });
+
+
+        document.querySelectorAll('.trips-edit-icon').forEach(icon => {
+            icon.addEventListener('click', async () => {
+                const parentItem = icon.closest('.gallery-item-trips');
+                if (parentItem) {
+                    const id = parentItem.id;
+                    await router.goto(`/edittrip/${id}`);
+                }
+            });
+        });
+
+        const shareBlock = document.getElementById('share-block') as HTMLElement;
+        const shareLink = document.getElementById('share-link') as HTMLElement;
+        const readModeButton = document.getElementById('read-mode-button') as HTMLButtonElement;
+        const editModeButton = document.getElementById('edit-mode-button') as HTMLButtonElement;
+        let id = '';
+        readModeButton.addEventListener('click', () => {
+            shareLink.textContent = `therewillbetrip.ru/trips/${id}`;
+            navigator.clipboard.writeText(`therewillbetrip.ru/trips/${id}`);
+            popUpMessage.showMessage('Ссылка скопирована');
+        });
+        editModeButton.addEventListener('click', async () => {
+            const resLink = await Api.postTripLink(id, 'editing');
+            shareLink.textContent = resLink.data.link;
+            navigator.clipboard.writeText(resLink.data.link);
+            popUpMessage.showMessage('Ссылка скопирована');
+        });
+
+        const blurElement = document.getElementById('blur-element') as HTMLElement;
+        blurElement.addEventListener('click', () => {
+            shareBlock.classList.add('hidden-animation');
+            setTimeout(() => shareBlock.classList.add('hidden'), 300);
+            blurElement.classList.add('hidden-animation');
+            setTimeout(() => blurElement.classList.add('hidden'), 300);
+        });
+
+        document.querySelectorAll('.trips-share-icon').forEach(icon => {
+            icon.addEventListener('click', async () => {
+                const parentItem = icon.closest('.gallery-item-trips');
+                if (parentItem) {
+                    id = parentItem.id;
+                    blurElement.classList.remove('hidden');
+                    setTimeout(() => blurElement.classList.remove('hidden-animation'), 100);
+                    shareBlock.classList.remove('hidden');
+                    setTimeout(() => shareBlock.classList.remove('hidden-animation'), 100);
+                    shareLink.textContent = `therewillbetrip.ru/trips/${id}`;
+                    navigator.clipboard.writeText(`therewillbetrip.ru/trips/${id}`);
+                    popUpMessage.showMessage('Ссылка скопирована');
                 }
             });
         });
