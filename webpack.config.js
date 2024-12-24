@@ -89,7 +89,7 @@ module.exports = {
                         beautify: false, // Отключает форматирование выходного файла.
                     },
                     compress: {
-                        drop_console: true, // Удаляет все console.log
+                        // drop_console: true, // Удаляет все console.log
                         drop_debugger: true, // Удаляет все debugger
                         ecma: 2020, // Указывает стандарт ECMAScript для оптимизации
                     },

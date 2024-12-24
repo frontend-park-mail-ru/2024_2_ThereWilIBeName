@@ -5,6 +5,7 @@ import User from '../utils/user';
 import logoImage from '../static/logo trip.svg';
 import footer from '../components/footer';
 import backButton from '../static/back button white.svg';
+import popUpMessage from '../components/pop-up-message';
 
 export default {
     /**
@@ -15,6 +16,7 @@ export default {
      */
     html:
         `
+        ${popUpMessage.html}
         <img src="${logoImage}" alt="Логотип" class="logo-image" id="home-logo">
         <main>
             <div class="create-trip-block">
@@ -30,9 +32,6 @@ export default {
                     <input class="border" type="date" id="startDate" name="startDate">
                     <label class="create-trip-text">Дата конца</label>
                     <input class="border" type="date" id="endDate" name="endDate">
-                    <label class="create-trip-text checkbox-button">
-                        <input type="checkbox" id="private-trip" name="private-trip"> Приватная поездка
-                    </label>
                     <button class="create-trip-button">Изменить поездку</button>
                 </form>
             </div>
@@ -65,23 +64,36 @@ export default {
         const resTrip = await Api.getTrip(itemId);
 
         const formName = (document.getElementById('name') as HTMLInputElement);
-        formName.value = resTrip.data.name;
+        formName.value = resTrip.data.trip.name;
         const formDescription = (document.getElementById('description') as HTMLInputElement);
-        formDescription.value = resTrip.data.description;
+        formDescription.value = resTrip.data.trip.description;
         const formStartDate = (document.getElementById('startDate') as HTMLInputElement);
-        formStartDate.value = resTrip.data.startDate;
+        let tempDate = resTrip.data.trip.startDate.split('.');
+        formStartDate.value = `${tempDate[2]}-${tempDate[1]}-${tempDate[0]}`;
         const formEndDate = (document.getElementById('endDate') as HTMLInputElement);
-        formEndDate.value = resTrip.data.endDate;
-        const formPrivateTrip = (document.getElementById('private-trip') as HTMLInputElement);
-        formPrivateTrip.checked = resTrip.data.private;
+        tempDate = resTrip.data.trip.endDate.split('.');
+        formEndDate.value = `${tempDate[2]}-${tempDate[1]}-${tempDate[0]}`;
         const createTripForm = document.getElementById('create-trip-form') as HTMLElement;
         const errorMessage = document.getElementById('error-message') as HTMLElement;
 
         createTripForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             try {
-                const res = await Api.putTrip(itemId, Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, formPrivateTrip.checked);
-                await router.goto(`/trips/${itemId}`);
+                if (formStartDate.value === '' || formEndDate.value === '' || formName.value === '' || formDescription.value === '') {
+                    popUpMessage.showMessage('Заполните поля');
+                    return;
+                }
+                if (formStartDate.value > formEndDate.value) {
+                    popUpMessage.showMessage('Некорректная дата');
+                    return;
+                }
+
+                const tripsRes = await Api.putTrip(itemId, Number(User.id), formName.value, 1, formDescription.value, formStartDate.value, formEndDate.value, false);
+                if (!tripsRes.ok) {
+                    popUpMessage.showMessage('Ошибка редактирования поездки');
+                    return;
+                }
+                await router.goto('/mytrips');
             } catch (e) {
                 errorMessage.textContent = 'Ошибка создания поездки';
                 errorMessage.classList.add('visible');

@@ -34,7 +34,11 @@ export default {
                     <div class="filter" id="rating-filter">по рейтингу</div>
                     <div class="filter" id="popularity-filter">по популярности</div>
                 </div>
-                <ul class="gallery" id="gallery"></ul>
+                <div class="gallery" id="gallery">
+                    <ul class="place-column" id="place-column-1"></ul>
+                    <ul class="place-column" id="place-column-2"></ul>
+                    <ul class="place-column" id="place-column-3"></ul>
+                </div>
             </div>
         </main>
         ${footer.html}
@@ -111,24 +115,31 @@ export default {
         switch (Search.categoryId) {
         case 1:
             categoryOneButton.classList.add('active');
+            Search.categoryActiveElement = categoryOneButton;
             break;
         case 2:
             categoryTwoButton.classList.add('active');
+            Search.categoryActiveElement = categoryTwoButton;
             break;
         case 3:
             categoryThreeButton.classList.add('active');
+            Search.categoryActiveElement = categoryThreeButton;
             break;
         case 4:
             categoryFourButton.classList.add('active');
+            Search.categoryActiveElement = categoryFourButton;
             break;
         case 5:
             categoryFiveButton.classList.add('active');
+            Search.categoryActiveElement = categoryFiveButton;
             break;
         case 6:
             categorySixButton.classList.add('active');
+            Search.categoryActiveElement = categorySixButton;
             break;
         case 7:
             categorySevenButton.classList.add('active');
+            Search.categoryActiveElement = categorySevenButton;
             break;
         }
 

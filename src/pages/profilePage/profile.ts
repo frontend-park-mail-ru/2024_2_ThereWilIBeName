@@ -11,7 +11,7 @@ import {emailRegex} from '../../components/validation';
 import footer from '../../components/footer';
 import backButton from '../../static/back button white.svg';
 import userMount from '../../components/user-mount';
-import closeButton from '../../static/close icon.svg';
+import popUpMessage from '../../components/pop-up-message';
 
 export default {
     /**
@@ -22,9 +22,7 @@ export default {
      */
     html: `
         <img src="${logoImage}" alt="Логотип" class="logo-image" id="logo-image">
-        <div class="error-window-message hidden hidden-animation" id="error-window-message">Ошибка загрузки аватарки
-            <img src="${closeButton}" class="error-close-button" id="error-close-button">
-        </div>
+        ${popUpMessage.html}
         <main>
             <div class="background-profile">
                 <div class="user-block">
@@ -114,14 +112,6 @@ export default {
         avatar.src = resProfile.data.avatarPath ?
             `/avatars/${resProfile.data.avatarPath}` : defaultAvatar;
 
-        const errorWindowMessage = document.getElementById('error-window-message') as HTMLElement;
-        const errorCloseButton = document.getElementById('error-close-button') as HTMLButtonElement;
-
-        errorCloseButton.addEventListener('click', () => {
-            errorWindowMessage.classList.add('hidden-animation');
-            setTimeout(() => errorWindowMessage.classList.add('hidden'), 300);
-        });
-
         avatar.addEventListener('click', () => {
             const avatarInputElement = document.createElement('input') as HTMLInputElement;
             avatarInputElement.type = 'file';
@@ -135,14 +125,16 @@ export default {
                     reader.addEventListener('load', async () => {
                         const basedAvatar = String(reader.result ? reader.result : '');
                         if (!basedAvatar) {
-                            errorWindowMessage.classList.remove('hidden');
-                            setTimeout(() => errorWindowMessage.classList.remove('hidden-animation'), 100);
+                            popUpMessage.showMessage('Ошибка загрузки аватарки');
                             return;
                         }
                         const res = await Api.putAvatar(User.id, basedAvatar);
+                        if (res.status === 413) {
+                            popUpMessage.showMessage('Слишком большое фото');
+                            return;
+                        }
                         if (!res.ok) {
-                            errorWindowMessage.classList.remove('hidden');
-                            setTimeout(() => errorWindowMessage.classList.remove('hidden-animation'), 100);
+                            popUpMessage.showMessage('Ошибка загрузки аватарки');
                             return;
                         }
                         await this.mount(router);

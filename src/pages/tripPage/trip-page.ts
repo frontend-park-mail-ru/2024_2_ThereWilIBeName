@@ -1,36 +1,34 @@
 import Api from '../../utils/Api';
+import User from '../../utils/user';
 import Router from '../../utils/Router';
 import header from '../../components/header';
 import footer from '../../components/footer';
 import backButtonIcon from '../../static/back button.svg';
-import editIcon from '../../static/edit white.svg';
 import shareIcon from '../../static/share.svg';
 import mountPhotos from './mountPhotos';
-import copyIcon from '../../static/copy.svg';
+import galleryAuthorsTemplate from './authors.hbs';
+import palmsImgB from '../../static/please black.svg';
+import popUpMessage from '../../components/pop-up-message';
 
 export default {
     html:`
         ${header.html}
         <main>
-            <div class="copy-message hidden hidden-animation" id="copy-message">Ссылка скопирована</div>
-            <div class="share-block hidden hidden-animation" id="share-block">
-                <div class="share-block-title grid-share-block-title">Поделиться поездкой</div>
-                <div class="share-link grid-share-link" id="share-link"></div>
-                <img src="${copyIcon}" class="copy-link-button grid-copy-link-button" id="copy-link-button">
-                <div class="read-mode grid-read-mode" id="read-mode-button">Чтение</div>
-                <div class="edit-mode grid-edit-mode" id="edit-mode-button">Редактирование</div>
-            </div>
-            <div class="blur-element hidden hidden-animation" id="blur-element"></div>
+            ${popUpMessage.html}
             <img src="${backButtonIcon}" alt="назад" class="trip-back-button grid-trip-back-button" id="trip-back-button">
             <div class="trip-title grid-trip-title" id="trip-title">Поездка</div>
-            <img src="${editIcon}" alt="редактировать" class="trip-edit-icon grid-trip-edit-icon" id="trip-edit-button">
             <img src="${shareIcon}" alt="поделиться" class="trip-share-icon grid-trip-share-icon" id="trip-share-button">
             <div class="trip-date grid-trip-date" id="trip-date">01.12.2024 - 08.12.2024</div>
             <div class="trip-description grid-trip-description" id="trip-description">Описание</div>
+            <div class="trip-authors-gallery grid-trip-authors-gallery" id="trip-authors-gallery">
+                    <div class="please-no-authors">Здесь будут ваши компаньоны</div>
+            </div>
             <div class="trip-gallery-photos grid-trip-gallery-photos">
-                <div class="add-photo-button" id="add-photo-button">Добавить фото</div>
                 <div class="trip-photos" id="trip-photos">
-
+                    <div class="please-block">
+                        <img src="${palmsImgB}" class="please-img" alt="Пальма">
+                        <div class="please-no-photo">Здесь будут фото</div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -51,111 +49,38 @@ export default {
         const tripTitle = document.getElementById('trip-title') as HTMLElement;
         const tripDate = document.getElementById('trip-date') as HTMLElement;
         const tripDescription = document.getElementById('trip-description') as HTMLElement;
+        const tripAuthorsGallery = document.getElementById('trip-authors-gallery') as HTMLElement;
 
-        try {
-            const tripResponse = await Api.getTrip(itemId);
-            tripTitle.textContent = tripResponse.data.name;
-            tripDate.textContent = `${tripResponse.data.startDate} - ${tripResponse.data.endDate}`;
-            tripDescription.textContent = tripResponse.data.description;
-        } catch (e) {
-            console.log('Ошибка получения поездки');
+        const tripResponse = await Api.getTrip(itemId, User.id);
+        tripTitle.textContent = tripResponse.data.trip.name;
+        tripDate.textContent = `${tripResponse.data.trip.startDate} - ${tripResponse.data.trip.endDate}`;
+        tripDescription.textContent = tripResponse.data.trip.description;
+        const authors = tripResponse.data.users;
+        if (authors.length !== 0) {
+            tripAuthorsGallery.innerHTML = galleryAuthorsTemplate({ authors });
         }
-        
+
+        const photos = tripResponse.data.trip.photos;
         const galleryPhoto = document.getElementById('trip-photos') as HTMLElement;
         if (!galleryPhoto) {
             console.log('Блок фото не найден');
             return;
         }
+        await mountPhotos(galleryPhoto, photos);
 
-        await mountPhotos(galleryPhoto, itemId);
+        if (tripResponse.data.userAdded) {
+            popUpMessage.showMessage('Поездка добавлена');
+        }
 
-        const addPhotoButton = document.getElementById('add-photo-button') as HTMLButtonElement;
-        addPhotoButton.addEventListener('click', async () => {
-            const tripPhotoInputElement = document.createElement('input') as HTMLInputElement;
-            tripPhotoInputElement.type = 'file';
-            tripPhotoInputElement.accept = 'image/*'; // Ограничиваем тип файлов на изображения
-            tripPhotoInputElement.multiple = true; // Разрешаем выбирать несколько фото
-            tripPhotoInputElement.style.display = 'none';
-
-            tripPhotoInputElement.addEventListener('change', async () => {
-                if (tripPhotoInputElement.files) {
-                    const files = tripPhotoInputElement.files;
-                    const base64Photos: string[] = [];
-
-                    for (let i = 0; i < files.length; i++) {
-                        const file = files[i];
-                        const reader = new FileReader();
-
-                        // Используем промисы для ожидания конвертации
-                        const base64 = await new Promise<string>((resolve, reject) => {
-                            reader.onload = () => resolve(String(reader.result));
-                            reader.onerror = () => reject('Ошибка чтения файла');
-                            reader.readAsDataURL(file);
-                        });
-
-                        base64Photos.push(base64);
-                    }
-
-                    const res = await Api.putPhotos(String(itemId), base64Photos);
-                    if (!res.ok) {
-                        alert('Ошибка загрузки фото');
-                        return;
-                    }
-
-                    // Получаем список фотографий
-                    await mountPhotos(galleryPhoto, itemId);
-                }
-            });
-
-            tripPhotoInputElement.click();
-        });
+        if (window.location.pathname !== `trips/${itemId}` && User.id === '') {
+            popUpMessage.showMessage('Авторизуйтесь для добавления поездки');
+        }
 
         const shareButton = document.getElementById('trip-share-button') as HTMLButtonElement;
-        const shareBlock = document.getElementById('share-block') as HTMLElement;
-        const blurElement = document.getElementById('blur-element') as HTMLElement;
+
         shareButton.addEventListener('click', () => {
-            shareBlock.classList.remove('hidden');
-            shareBlock.classList.remove('hidden-animation');
-            blurElement.classList.remove('hidden');
-            blurElement.classList.remove('hidden-animation');
-        });
-        blurElement.addEventListener('click', () => {
-            shareBlock.classList.add('hidden-animation');
-            shareBlock.classList.add('hidden');
-            blurElement.classList.add('hidden-animation');
-            blurElement.classList.add('hidden');
-        });
-
-        const editTripButton = document.getElementById('trip-edit-button') as HTMLButtonElement;
-        editTripButton.addEventListener('click', async () => {
-            await router.goto(`/edittrip/${itemId}`);
-        });
-
-        const copyLinkButton = document.getElementById('copy-link-button') as HTMLButtonElement;
-        const shareLinkElement = document.getElementById('share-link') as HTMLElement;
-        const copyMessage = document.getElementById('copy-message') as HTMLElement;
-        copyLinkButton.addEventListener('click', () => {
-            if (shareLinkElement.textContent) {
-                navigator.clipboard.writeText(shareLinkElement.textContent);
-                copyMessage.classList.remove('hidden');
-                setTimeout(() => copyMessage.classList.remove('hidden-animation'), 100);
-                setTimeout(() => {
-                    copyMessage.classList.add('hidden-animation');
-                    setTimeout (()=> copyMessage.classList.add('hidden'), 300);
-                }, 2000);
-            }
-        });
-
-        const readModeButton = document.getElementById('read-mode-button') as HTMLButtonElement;
-        readModeButton.addEventListener('click', async () => {
-            const resReadMode = await Api.postTripLink(itemId, 'reading');
-            shareLinkElement.textContent = resReadMode.data.link;
-        });
-
-        const editModeButton = document.getElementById('edit-mode-button') as HTMLButtonElement;
-        editModeButton.addEventListener('click', async () => {
-            const resEditMode = await Api.postTripLink(itemId, 'editing');
-            shareLinkElement.textContent = resEditMode.data.link;
+            navigator.clipboard.writeText(`https://therewillbetrip.ru/trips/${itemId}`);
+            popUpMessage.showMessage('Ссылка скопирована');
         });
     },
 

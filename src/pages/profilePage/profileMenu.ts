@@ -33,11 +33,13 @@ export default async function updateMenu(activeMenuButton: HTMLElement) {
         galleryProfileElement.innerHTML =
             `<div class="please-block">
                 <img src="${palmsImgB}" class="please-img">
-                <div class="auth-please" id="auth-please">Достижения в разработке</div>
+                <div class="auth-please" id="auth-please">У вас пока нет достижений</div>
             </div>`;
-        // const achievementsResponse = await Api.getAchievements();
-        // const achievements = achievementsResponse.data;
-        // galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements, defaultAchievementIcon });
+        const achievementsResponse = await Api.getAchievements(User.id);
+        if (achievementsResponse.ok) {
+            const achievements = achievementsResponse.data;
+            galleryProfileElement.innerHTML = galleryTemplateAchievements({ achievements });
+        }
     }
 
 
